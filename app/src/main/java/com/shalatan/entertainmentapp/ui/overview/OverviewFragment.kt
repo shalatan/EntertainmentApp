@@ -24,6 +24,6 @@ class OverviewFragment : Fragment() {
         val binding = FragmentOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        return inflater.inflate(R.layout.fragment_overview, container, false)
+        return binding.root
     }
 }
