@@ -1,17 +1,27 @@
 package com.shalatan.entertainmentapp.network
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.shalatan.entertainmentapp.model.MovieResponse
 import com.shalatan.entertainmentapp.utils.Constants
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val BASE_URL = "https://api.themoviedb.org/"
+//https://api.themoviedb.org/3/movie/popular?api_key=ea9a49ebf2b74721a75aae271ebd3036
+
+private val moshi = Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
+    .build()
 
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(ScalarsConverterFactory.create())
-    .baseUrl(BASE_URL)
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+    .baseUrl(Constants.BASE_URL)
     .build()
 
 
@@ -19,7 +29,7 @@ interface LmdbApiService {
     @GET("3/movie/popular")
     fun getProperties(
         @Query("api_key") apiKey: String = Constants.API_KEY
-    ): Call<String>
+    ): Deferred<MovieResponse>
 }
 
 object LmdbApi{

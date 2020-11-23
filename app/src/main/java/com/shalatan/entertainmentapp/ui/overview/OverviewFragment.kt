@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
+import com.shalatan.entertainmentapp.databinding.MovieItemBinding
 
 
 class OverviewFragment : Fragment() {
@@ -21,7 +22,7 @@ class OverviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val binding = FragmentOverviewBinding.inflate(inflater)
+        val binding = MovieItemBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         return binding.root
