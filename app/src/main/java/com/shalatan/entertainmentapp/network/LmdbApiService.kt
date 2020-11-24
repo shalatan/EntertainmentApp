@@ -27,7 +27,12 @@ private val retrofit = Retrofit.Builder()
 
 interface LmdbApiService {
     @GET("3/movie/popular")
-    fun getProperties(
+    fun getPopularMovies(
+        @Query("api_key") apiKey: String = Constants.API_KEY
+    ): Deferred<MovieResponse>
+
+    @GET("3/movie/top_rated")
+    fun getTopRatedMovies(
         @Query("api_key") apiKey: String = Constants.API_KEY
     ): Deferred<MovieResponse>
 }

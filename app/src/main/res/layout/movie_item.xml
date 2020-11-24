@@ -6,17 +6,25 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.shalatan.entertainmentapp.ui.overview.OverviewViewModel" />
+            name="movie"
+            type="com.shalatan.entertainmentapp.model.Movie" />
     </data>
 
-    <ImageView
-        android:id="@+id/mars_image"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:adjustViewBounds="true"
-        android:padding="2dp"
-        android:scaleType="centerCrop"
-        app:imageUrl="@{viewModel.singleMovie.posterPath}"
-        tools:src="@tools:sample/backgrounds/scenic" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/mars_image"
+            android:layout_width="130dp"
+            android:layout_height="200dp"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{movie.posterPath}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

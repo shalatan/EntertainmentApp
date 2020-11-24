@@ -22,13 +22,13 @@ class OverviewViewModel : ViewModel() {
     val status: LiveData<String>
         get() = _status
 
-    private val _popularMovies = MutableLiveData<MovieResponse>()
-    val popularMovies: LiveData<MovieResponse>
+    private val _popularMovies = MutableLiveData<List<Movie>>()
+    val popularMovies: LiveData<List<Movie>>
         get() = _popularMovies
 
-    private val _singleMovie = MutableLiveData<Movie>()
-    val singleMovie: LiveData<Movie>
-        get() = _singleMovie
+    private val _topRatedMovies = MutableLiveData<List<Movie>>()
+    val topRatedMovies: LiveData<List<Movie>>
+        get() = _topRatedMovies
 
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -40,10 +40,18 @@ class OverviewViewModel : ViewModel() {
 
     private fun fetchJSON() {
         coroutineScope.launch {
-            var getPropertiesDeferred = LmdbApi.retrofitService.getProperties()
+            var getPopularMoviesDeferred = LmdbApi.retrofitService.getPopularMovies()
+            var getTopRatedMoviesDeferred = LmdbApi.retrofitService.getTopRatedMovies()
             try {
-                var listResult = getPropertiesDeferred.await()
-                _singleMovie.value = listResult.movies[0]
+                var popularMoviesList = getPopularMoviesDeferred.await()
+                _popularMovies.value = popularMoviesList.movies
+
+                var topRatedMoviesList = getTopRatedMoviesDeferred.await()
+                _topRatedMovies.value = topRatedMoviesList.movies
+
+                _status.value = "Fetched " + _popularMovies.value!!.size + " result"
+                Log.e("Popular Movie = ","Fetched " + _popularMovies.value!!.size + " result")
+                Log.e("Top Rated Movie = ","Fetched " + _topRatedMovies.value!!.size + " result")
             } catch (t: Throwable) {
                 _status.value = "Failure" + t.message
 
