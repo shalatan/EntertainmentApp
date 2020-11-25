@@ -30,6 +30,10 @@ class OverviewViewModel : ViewModel() {
     val topRatedMovies: LiveData<List<Movie>>
         get() = _topRatedMovies
 
+    private val _navigateToSelectedMovie = MutableLiveData<Movie>()
+    val navigateToSelectedMovie: LiveData<Movie>
+        get() = _navigateToSelectedMovie
+
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -58,6 +62,22 @@ class OverviewViewModel : ViewModel() {
             }
         }
     }
+
+    /**
+     * When the property is clicked, set the [_navigateToSelectedProperty] [MutableLiveData]
+     * @param marsProperty The [MarsProperty] that was clicked on.
+     */
+    fun displayMovieDetails(movie: Movie) {
+        _navigateToSelectedMovie.value = movie
+    }
+
+    /**
+     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
+     */
+    fun displayMovieDetailsComplete() {
+        _navigateToSelectedMovie.value = null
+    }
+
 
     override fun onCleared() {
         super.onCleared()

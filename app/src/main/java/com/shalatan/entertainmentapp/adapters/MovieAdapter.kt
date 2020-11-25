@@ -12,10 +12,12 @@ import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.MovieItemBinding
 import com.shalatan.entertainmentapp.model.Movie
 
-class MovieAdapter : ListAdapter<Movie,MovieAdapter.MovieViewHolder> (DiffCallBack) {
+class MovieAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(DiffCallBack) {
 
-    class MovieViewHolder(private val binding : MovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie){
+    class MovieViewHolder(private val binding: MovieItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(movie: Movie) {
             binding.movie = movie
             binding.executePendingBindings()
         }
@@ -31,12 +33,22 @@ class MovieAdapter : ListAdapter<Movie,MovieAdapter.MovieViewHolder> (DiffCallBa
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.MovieViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MovieViewHolder {
         return MovieViewHolder(MovieItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: MovieAdapter.MovieViewHolder, position: Int) {
         val movie = getItem(position)
+        holder.itemView.setOnClickListener {
+            (onClickListener.onClick(movie))
+        }
         holder.bind(movie)
+    }
+
+    class OnClickListener(val clickListener: (movie: Movie) -> Unit) {
+        fun onClick(movie: Movie) = clickListener(movie)
     }
 }

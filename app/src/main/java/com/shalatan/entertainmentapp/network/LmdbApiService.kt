@@ -24,7 +24,6 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(Constants.BASE_URL)
     .build()
 
-
 interface LmdbApiService {
     @GET("3/movie/popular")
     fun getPopularMovies(

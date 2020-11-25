@@ -1,7 +1,10 @@
 package com.shalatan.entertainmentapp.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Movie(
     val adult: Boolean,
     val backdrop_path: String,
@@ -17,4 +20,4 @@ data class Movie(
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int
-)
+) : Parcelable

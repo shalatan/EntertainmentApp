@@ -9,5 +9,18 @@
         android:id="@+id/overviewFragment"
         android:name="com.shalatan.entertainmentapp.ui.overview.OverviewFragment"
         android:label="fragment_overview"
-        tools:layout="@layout/fragment_overview" />
+        tools:layout="@layout/fragment_overview">
+        <action
+            android:id="@+id/action_showDetail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.shalatan.entertainmentapp.ui.moviedetail.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="selectedMovie"
+            app:argType="com.shalatan.entertainmentapp.model.Movie" />
+    </fragment>
 </navigation>
