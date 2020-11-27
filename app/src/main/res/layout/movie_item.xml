@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/mars_image"
-            android:layout_width="130dp"
-            android:layout_height="200dp"
+            android:layout_width="120dp"
+            android:layout_height="180dp"
             android:padding="2dp"
             android:scaleType="centerCrop"
             android:transitionName="main_transition"

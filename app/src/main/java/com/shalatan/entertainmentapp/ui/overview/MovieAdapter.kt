@@ -1,14 +1,10 @@
-package com.shalatan.entertainmentapp.adapters
+package com.shalatan.entertainmentapp.ui.overview
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.MovieItemBinding
 import com.shalatan.entertainmentapp.model.Movie
 
@@ -40,7 +36,7 @@ class MovieAdapter(private val onClickListener: OnClickListener) :
         return MovieViewHolder(MovieItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: MovieAdapter.MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
         holder.itemView.setOnClickListener {
             (onClickListener.onClick(movie))

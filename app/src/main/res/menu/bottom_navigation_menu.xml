@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/overviewFragment"
+        android:icon="@android:drawable/ic_menu_month"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/movieFragment"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="Movies" />
+
+    <item
+        android:id="@+id/tvSeriesFragment"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="TV Series" />
+</menu>
