@@ -2,4 +2,8 @@
     <string name="app_name">Entertainment App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cd_movie_poster">Movie Poster</string>
+    <string name="overview">Overview</string>
+    <string name="cd_add_to_watch_later">Add to Watch Later</string>
+    <string name="cd_add_to_watched">Add to Watched</string>
 </resources>
