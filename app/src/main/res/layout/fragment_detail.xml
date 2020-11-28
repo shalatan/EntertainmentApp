@@ -45,26 +45,25 @@
                 tools:text="Movie Title" />
 
             <TextView
-                android:id="@+id/movie_release_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@{viewModel.selectedMovie.release_date}"
-                app:layout_constraintStart_toStartOf="@+id/movie_name"
-                app:layout_constraintTop_toBottomOf="@+id/movie_name"
-                tools:text="Release Date" />
-
-            <TextView
+                android:textSize="18sp"
                 android:id="@+id/movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginTop="4dp"
                 android:text="@{String.valueOf(viewModel.selectedMovie.vote_average)}"
-                app:layout_constraintBottom_toBottomOf="@+id/movie_release_date"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.921"
-                app:layout_constraintStart_toEndOf="@+id/movie_release_date"
+                app:layout_constraintStart_toStartOf="@+id/movie_name"
+                app:layout_constraintTop_toBottomOf="@+id/movie_name"
                 tools:text="Rating" />
+
+            <TextView
+                android:id="@+id/movie_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.selectedMovie.release_date}"
+                app:layout_constraintBottom_toBottomOf="@+id/movie_rating"
+                app:layout_constraintStart_toEndOf="@+id/movie_rating"
+                tools:text="Release Date" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -73,8 +72,8 @@
                 android:layout_marginTop="8dp"
                 android:text="Overview"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/movie_release_date"
-                app:layout_constraintTop_toBottomOf="@+id/movie_release_date" />
+                app:layout_constraintStart_toStartOf="@+id/movie_rating"
+                app:layout_constraintTop_toBottomOf="@+id/movie_rating" />
 
             <TextView
                 android:id="@+id/movie_overview"
@@ -88,6 +87,26 @@
                 app:layout_constraintStart_toStartOf="@+id/textView6"
                 app:layout_constraintTop_toBottomOf="@+id/textView6"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper volutpat libero at pharetra. Praesent eros purus, tempor non sodales sed, feugiat vitae massa. Ut id commodo metus, sit amet dapibus purus. Nam ligula metus, tincidunt non magna at, cursus tempor ligula." />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="45dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                app:srcCompat="@drawable/ic_baseline_bookmark_border" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="44dp"
+                android:layout_height="41dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/movie_rating"
+                app:srcCompat="@drawable/ic_baseline_check" />
 
             <!--            <TextView-->
             <!--                android:id="@+id/textView8"-->

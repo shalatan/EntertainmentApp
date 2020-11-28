@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.shalatan.entertainmentapp.model.Movie
-import com.shalatan.entertainmentapp.model.MovieResponse
 import com.shalatan.entertainmentapp.network.LmdbApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,10 +42,10 @@ class OverviewViewModel : ViewModel() {
 
     init {
         Log.d("OverviewViewModel : ", "Created")
-        fetchJSON()
+        fetchMoviesLists()
     }
 
-    private fun fetchJSON() {
+    private fun fetchMoviesLists() {
         coroutineScope.launch {
             val getPopularMoviesDeferred = LmdbApi.retrofitService.getPopularMovies()
             val getTopRatedMoviesDeferred = LmdbApi.retrofitService.getTopRatedMovies()
