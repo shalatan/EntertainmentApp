@@ -16,12 +16,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:ignore="ScrollViewSize">
 
             <ImageView
                 android:id="@+id/movie_poster"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
+                android:contentDescription="@string/cd_movie_poster"
                 android:scaleType="centerCrop"
                 android:transitionName="main_transition"
                 app:imageUrl="@{viewModel.selectedMovie.posterPath}"
@@ -45,12 +47,12 @@
                 tools:text="Movie Title" />
 
             <TextView
-                android:textSize="18sp"
                 android:id="@+id/movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@{String.valueOf(viewModel.selectedMovie.vote_average)}"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/movie_name"
                 app:layout_constraintTop_toBottomOf="@+id/movie_name"
                 tools:text="Rating" />
@@ -70,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Overview"
+                android:text="@string/overview"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/movie_rating"
                 app:layout_constraintTop_toBottomOf="@+id/movie_rating" />
@@ -93,6 +95,7 @@
                 android:layout_width="45dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="@string/cd_add_to_watch_later"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView2"
@@ -104,6 +107,7 @@
                 android:layout_height="41dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="12dp"
+                android:contentDescription="@string/cd_add_to_watched"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="@+id/movie_rating"
                 app:srcCompat="@drawable/ic_baseline_check" />
