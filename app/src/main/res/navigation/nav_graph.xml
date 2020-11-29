@@ -27,4 +27,9 @@
             android:name="selectedMovie"
             app:argType="com.shalatan.entertainmentapp.model.Movie" />
     </fragment>
+    <fragment
+        android:id="@+id/watchedMoviesFragment"
+        android:name="com.shalatan.entertainmentapp.ui.savedmovies.WatchedMoviesFragment"
+        android:label="fragment_watched_movies"
+        tools:layout="@layout/fragment_watched_movies" />
 </navigation>
