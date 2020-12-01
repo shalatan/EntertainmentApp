@@ -23,7 +23,8 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Movie>?){
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {
     val fullUrl = Constants.IMG_BASE_URL+imgUrl
-    fullUrl?.let {
+//    fullUrl?.let{
+    fullUrl.let {
         val imgUri = it.toUri().buildUpon().scheme("https").build()
         val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
         Glide.with(imageView.context)

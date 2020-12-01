@@ -1,12 +1,14 @@
 package com.shalatan.entertainmentapp.ui.moviedetail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
+
 
 class DetailFragment : Fragment() {
 
@@ -26,4 +28,14 @@ class DetailFragment : Fragment() {
             ViewModelProvider(this, viewModelFactory).get(DetailVIewModel::class.java)
         return binding.root
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+//    }
 }

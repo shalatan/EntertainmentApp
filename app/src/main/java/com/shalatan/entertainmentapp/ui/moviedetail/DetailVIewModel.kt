@@ -21,9 +21,9 @@ class DetailVIewModel(movie: Movie,app: Application) : AndroidViewModel(app) {
     val status: LiveData<String>
         get() = _status
 
-    private val _selectedMovie = MutableLiveData<Movie>()
-    val selectedMovie: LiveData<Movie>
-        get() = _selectedMovie
+    private val _selectedMovieDetail = MutableLiveData<Movie>()
+    val selectedMovieDetail: LiveData<Movie>
+        get() = _selectedMovieDetail
 
     private val _completeMovieDetail = MutableLiveData<CompleteMovieDetail>()
 
@@ -32,26 +32,23 @@ class DetailVIewModel(movie: Movie,app: Application) : AndroidViewModel(app) {
 
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private val uiScope = CoroutineScope(Dispatchers.Main+viewModelJob)
 
     // Initialize the _selectedProperty MutableLiveData
     init {
-        _selectedMovie.value = movie
+        _selectedMovieDetail.value = movie
         fetchCurrentMovieDetails()
+
     }
 
     private fun fetchCurrentMovieDetails() {
         coroutineScope.launch {
-            Log.e("Calling Coroutine with ID : ",_selectedMovie.value!!.id.toString())
-            val getCompleteMovieDetail = LmdbApi.retrofitService.getCompleteMovieDetail(_selectedMovie.value!!.id)
-            Log.e("Deferred : ",getCompleteMovieDetail.toString())
+            val getCompleteMovieDetail = LmdbApi.retrofitService.getCompleteMovieDetail(_selectedMovieDetail.value!!.id)
             try {
                 val completeMovie = getCompleteMovieDetail.await()
-                Log.e("Deferred : ",getCompleteMovieDetail.toString())
-                Log.e("Deferred : ",completeMovie.toString())
                 _completeMovieDetail.value = completeMovie
             }catch (t: Throwable){
-                Log.e("Deferred : ",getCompleteMovieDetail.toString())
-                Log.e("Deferred : ",t.message.toString())
+                Log.e("Error fetching complete detail : ",t.message.toString())
                 _status.value = t.message
             }
         }

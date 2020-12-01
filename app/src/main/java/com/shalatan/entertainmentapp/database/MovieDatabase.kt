@@ -9,7 +9,7 @@ import com.shalatan.entertainmentapp.model.Movie
 @Database(entities = [Movie::class], version = 1)
 abstract class MovieDatabase : RoomDatabase() {
 
-    abstract fun getMovieDao(): MovieDAO
+    abstract fun movieDao(): MovieDAO
 
     companion object {
         @Volatile
@@ -26,7 +26,7 @@ abstract class MovieDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                             context.applicationContext,
                             MovieDatabase::class.java,
-                            "sleep_history_database"
+                            "saved_movies_database"
                     ).fallbackToDestructiveMigration()
                             .build()
 

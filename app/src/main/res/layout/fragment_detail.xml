@@ -26,7 +26,7 @@
                 android:contentDescription="@string/cd_movie_poster"
                 android:scaleType="centerCrop"
                 android:transitionName="main_transition"
-                app:imageUrl="@{viewModel.selectedMovie.posterPath}"
+                app:imageUrl="@{viewModel.selectedMovieDetail.posterPath}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="@{viewModel.selectedMovie.original_title}"
+                android:text="@{viewModel.selectedMovieDetail.original_title}"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@{String.valueOf(viewModel.selectedMovie.vote_average)}"
+                android:text="@{String.valueOf(viewModel.completeMovieDetail.vote_average)}"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/movie_name"
                 app:layout_constraintTop_toBottomOf="@+id/movie_name"
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@{viewModel.selectedMovie.release_date}"
+                android:text="@{viewModel.completeMovieDetail.title}"
                 app:layout_constraintBottom_toBottomOf="@+id/movie_rating"
                 app:layout_constraintStart_toEndOf="@+id/movie_rating"
                 tools:text="Release Date" />
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{viewModel.selectedMovie.overview}"
+                android:text="@{viewModel.completeMovieDetail.overview}"
                 android:textAlignment="viewStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
@@ -91,24 +91,24 @@
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper volutpat libero at pharetra. Praesent eros purus, tempor non sodales sed, feugiat vitae massa. Ut id commodo metus, sit amet dapibus purus. Nam ligula metus, tincidunt non magna at, cursus tempor ligula." />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/add_to_watched"
                 android:layout_width="45dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/cd_add_to_watch_later"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintBottom_toBottomOf="@+id/add_to_watch_later"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/add_to_watch_later"
                 app:srcCompat="@drawable/ic_baseline_bookmark_border" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/add_to_watch_later"
                 android:layout_width="44dp"
                 android:layout_height="41dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="12dp"
                 android:contentDescription="@string/cd_add_to_watched"
-                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintEnd_toStartOf="@+id/add_to_watched"
                 app:layout_constraintTop_toTopOf="@+id/movie_rating"
                 app:srcCompat="@drawable/ic_baseline_check" />
 

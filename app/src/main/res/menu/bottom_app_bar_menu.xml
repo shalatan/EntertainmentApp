@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        app:showAsAction="always"
         android:id="@+id/watchedMoviesFragment"
         android:icon="@drawable/ic_movie_white_24dp"
-        android:title="Watched" />
+        android:title="Movies"
+        app:showAsAction="ifRoom" />
 
     <item
-        app:showAsAction="always"
-        android:id="@+id/watchLaterMoviesFragment"
+        android:id="@+id/watchedSeriesFragment"
         android:icon="@drawable/ic_tv_white_24dp"
-        android:title="Watch Later" />
+        android:title="Series"
+        app:showAsAction="ifRoom" />
 </menu>

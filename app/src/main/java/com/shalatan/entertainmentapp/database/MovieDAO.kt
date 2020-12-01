@@ -7,10 +7,13 @@ import com.shalatan.entertainmentapp.model.Movie
 @Dao
 interface MovieDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(movie: Movie): Long
+    @Insert
+    suspend fun insert(movie: Movie)
 
-    @Query("SELECT * FROM movies")
+    @Update
+    suspend fun update(movie: Movie)
+
+    @Query("SELECT * FROM saved_movies_table")
     fun getAllMovies(): LiveData<List<Movie>>
 
     @Delete
