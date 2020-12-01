@@ -2,20 +2,19 @@ package com.shalatan.entertainmentapp.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.shalatan.entertainmentapp.model.Movie
 
 @Dao
 interface MovieDAO {
 
     @Insert
-    suspend fun insert(movie: Movie)
+    suspend fun insert(savedMovie: SavedMovie)
 
     @Update
-    suspend fun update(movie: Movie)
+    suspend fun update(savedMovie: SavedMovie)
 
     @Query("SELECT * FROM saved_movies_table")
-    fun getAllMovies(): LiveData<List<Movie>>
+    fun getAllMovies(): LiveData<List<SavedMovie>>
 
     @Delete
-    suspend fun deleteMovie(movie: Movie)
+    suspend fun delete(savedMovie: SavedMovie)
 }

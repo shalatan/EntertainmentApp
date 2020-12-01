@@ -18,7 +18,7 @@ class WatchedMoviesFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dataSource = MovieDatabase.getInstance(application).movieDao()
+        val dataSource = MovieDatabase.getInstance(application).movieDAO
 
         val viewModelFactory = WatchedMoviesViewModelFactory(dataSource, application)
 

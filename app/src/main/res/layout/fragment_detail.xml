@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.shalatan.entertainmentapp.ui.moviedetail.DetailVIewModel" />
+            type="com.shalatan.entertainmentapp.ui.moviedetail.DetailViewModel" />
     </data>
 
     <ScrollView
@@ -92,25 +92,27 @@
 
             <ImageView
                 android:id="@+id/add_to_watched"
-                android:layout_width="45dp"
-                android:layout_height="42dp"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/cd_add_to_watch_later"
-                app:layout_constraintBottom_toBottomOf="@+id/add_to_watch_later"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/add_to_watch_later"
-                app:srcCompat="@drawable/ic_baseline_bookmark_border" />
-
-            <ImageView
-                android:id="@+id/add_to_watch_later"
                 android:layout_width="44dp"
                 android:layout_height="41dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="12dp"
+                android:onClick="@{() -> viewModel.addMovieToWatched()}"
                 android:contentDescription="@string/cd_add_to_watched"
-                app:layout_constraintEnd_toStartOf="@+id/add_to_watched"
+                app:layout_constraintEnd_toStartOf="@+id/add_to_watch_later"
                 app:layout_constraintTop_toTopOf="@+id/movie_rating"
                 app:srcCompat="@drawable/ic_baseline_check" />
+
+            <ImageView
+                android:id="@+id/add_to_watch_later"
+                android:layout_width="45dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/cd_add_to_watch_later"
+                app:layout_constraintBottom_toBottomOf="@+id/add_to_watched"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/add_to_watched"
+                app:srcCompat="@drawable/ic_baseline_bookmark_border" />
+
 
             <!--            <TextView-->
             <!--                android:id="@+id/textView8"-->

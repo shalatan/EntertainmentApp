@@ -48,7 +48,7 @@ import java.io.IOException
 //    fun insertAndGetNight() {
 //        val movie = Movie()
 //        movieDAO.insert(movie)
-//        val tonight = movieDAO.getTonight()
-//        assertEquals(tonight?.sleepQuality, -1)
+//        val tonight = movieDAO.getAllMovies()
+//        assertEquals(tonight?.vote_count, -1)
 //    }
 //}

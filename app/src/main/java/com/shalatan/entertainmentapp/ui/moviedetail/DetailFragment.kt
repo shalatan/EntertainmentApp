@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
+import com.shalatan.entertainmentapp.database.MovieDatabase
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
+import kotlinx.android.synthetic.main.fragment_detail.*
 
 
 class DetailFragment : Fragment() {
@@ -20,12 +22,16 @@ class DetailFragment : Fragment() {
         // Inflate the layout for this fragment
         val application = requireNotNull(activity).application
         val binding = FragmentDetailBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        val dataSource = MovieDatabase.getInstance(application).movieDAO
 
         val movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie
-        val viewModelFactory = DetailViewModelFactory(movie, application)
-        binding.viewModel =
-            ViewModelProvider(this, viewModelFactory).get(DetailVIewModel::class.java)
+        val detailViewModelFactory = DetailViewModelFactory(dataSource, movie, application)
+        val detailViewModel =
+            ViewModelProvider(this, detailViewModelFactory).get(DetailViewModel::class.java)
+
+        binding.viewModel = detailViewModel
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 
