@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface MovieDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(savedMovie: SavedMovie)
 
     @Update

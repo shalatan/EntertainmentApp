@@ -9,5 +9,5 @@ data class SavedMovie(
     var Id: Int = -1,
     var movieTitle: String = "",
     var isWatched: Boolean = false,
-    var isWatchLater : Boolean = false
+    var isWatchLater: Boolean = false
 )

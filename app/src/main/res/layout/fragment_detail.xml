@@ -90,24 +90,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper volutpat libero at pharetra. Praesent eros purus, tempor non sodales sed, feugiat vitae massa. Ut id commodo metus, sit amet dapibus purus. Nam ligula metus, tincidunt non magna at, cursus tempor ligula." />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/add_to_watched"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="44dp"
                 android:layout_height="41dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="12dp"
-                android:onClick="@{() -> viewModel.addMovieToWatched()}"
                 android:contentDescription="@string/cd_add_to_watched"
+                android:onClick="@{() -> viewModel.addMovieToWatched()}"
                 app:layout_constraintEnd_toStartOf="@+id/add_to_watch_later"
                 app:layout_constraintTop_toTopOf="@+id/movie_rating"
                 app:srcCompat="@drawable/ic_baseline_check" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/add_to_watch_later"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="45dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="16dp"
                 android:contentDescription="@string/cd_add_to_watch_later"
+                android:onClick="@{() -> viewModel.addMovieToWatchLater()}"
                 app:layout_constraintBottom_toBottomOf="@+id/add_to_watched"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/add_to_watched"

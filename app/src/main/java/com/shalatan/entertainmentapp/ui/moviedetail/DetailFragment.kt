@@ -1,10 +1,14 @@
 package com.shalatan.entertainmentapp.ui.moviedetail
 
+import android.R
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.database.MovieDatabase
@@ -19,7 +23,7 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val application = requireNotNull(activity).application
         val binding = FragmentDetailBinding.inflate(inflater)
         val dataSource = MovieDatabase.getInstance(application).movieDAO
@@ -32,6 +36,31 @@ class DetailFragment : Fragment() {
         binding.viewModel = detailViewModel
         binding.lifecycleOwner = this
 
+        detailViewModel.showAddedToWatchedSnackbarEvent.observe(viewLifecycleOwner, Observer {
+            Log.d("ENTERED VIEW MODEL", it.toString())
+            if (it == true) { // Observed state is true.
+                Log.d("ENTERED VIEW MODEL", it.toString())
+                Snackbar.make(
+                    requireActivity().findViewById(R.id.content),
+                    "ADDED TO WATCHED MOVIES",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                // Reset state to make sure the snackbar is only shown once, even if the device
+                // has a configuration change.
+                detailViewModel.doneShowingSnackbar()
+            }
+        })
+
+        detailViewModel.showAddedToWatchLaterSnackbarEvent.observe(viewLifecycleOwner, Observer {
+            if (it == true) { // Observed state is true.
+                Snackbar.make(
+                    requireActivity().findViewById(R.id.content),
+                    "ADDED TO WATCH LATER MOVIES",
+                    Snackbar.LENGTH_SHORT // How long to display the message.
+                ).show()
+                detailViewModel.doneShowingSnackbar()
+            }
+        })
         return binding.root
     }
 

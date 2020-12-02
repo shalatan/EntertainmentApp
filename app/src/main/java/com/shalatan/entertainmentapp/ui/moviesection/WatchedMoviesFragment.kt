@@ -12,7 +12,8 @@ import com.shalatan.entertainmentapp.databinding.FragmentWatchedMoviesBinding
 
 class WatchedMoviesFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentWatchedMoviesBinding.inflate(inflater)
 
@@ -23,7 +24,8 @@ class WatchedMoviesFragment : Fragment() {
         val viewModelFactory = WatchedMoviesViewModelFactory(dataSource, application)
 
         val watchedMoviesViewModel = ViewModelProvider(
-                this, viewModelFactory).get(WatchedMoviesViewModel::class.java)
+            this, viewModelFactory
+        ).get(WatchedMoviesViewModel::class.java)
 
         binding.viewModel = watchedMoviesViewModel
         binding.lifecycleOwner = this

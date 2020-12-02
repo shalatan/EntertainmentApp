@@ -6,4 +6,8 @@
     <string name="overview">Overview</string>
     <string name="cd_add_to_watch_later">Add to Watch Later</string>
     <string name="cd_add_to_watched">Add to Watched</string>
+
+    //DetailFragment
+    <string name="added_to_watch_later_message">Added to Watch Later Movies</string>
+    <string name="added_to_watched_message">Added to Watched Movies</string>
 </resources>

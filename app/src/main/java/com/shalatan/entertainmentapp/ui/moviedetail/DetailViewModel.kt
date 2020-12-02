@@ -37,17 +37,45 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     val completeMovieDetail: LiveData<CompleteMovieDetail>
         get() = _completeMovieDetail
 
+    /**
+     * Request a toast by setting this value to true.
+     */
+    private var _showAddedToWatchedSnackbarEvent = MutableLiveData<Boolean>()
+    private var _showAddedToWatchLaterSnackbarEvent = MutableLiveData<Boolean>()
+
+    /**
+     * If this is true, immediately `show()` a toast and call `doneShowingSnackbar()`.
+     */
+    val showAddedToWatchedSnackbarEvent: LiveData<Boolean>
+        get() = _showAddedToWatchedSnackbarEvent
+    val showAddedToWatchLaterSnackbarEvent: LiveData<Boolean>
+        get() = _showAddedToWatchLaterSnackbarEvent
+
+    /**
+     * Call this immediately after calling `show()` on a toast.
+     *
+     * It will clear the toast request, so if the user rotates their phone it won't show a duplicate
+     * toast.
+     */
+    fun doneShowingSnackbar() {
+        _showAddedToWatchedSnackbarEvent.value = false
+        _showAddedToWatchLaterSnackbarEvent.value = false
+    }
+
+
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    // Initialize the _selectedProperty MutableLiveData
+
     init {
         _selectedMovieDetail.value = movie
         fetchCurrentMovieDetails()
-
     }
 
+    /**
+     * fetch complete movie details with retrofit
+     */
     private fun fetchCurrentMovieDetails() {
         coroutineScope.launch {
             val getCompleteMovieDetail =
@@ -62,16 +90,38 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
         }
     }
 
+    /**
+     * add or replace existing data of movie to database with isWatched value true
+     */
     fun addMovieToWatched() {
         viewModelScope.launch {
             Log.e("CLICKED", "ADDED TO WATCHED")
             val id = _selectedMovieDetail.value!!.id
             val name = _selectedMovieDetail.value!!.original_title
-            val savedMovie = name?.let { SavedMovie(id, it,true,false) }
+            val savedMovie =
+                name?.let { SavedMovie(id, it, isWatched = true, isWatchLater = false) }
             if (savedMovie != null) {
                 insert(savedMovie)
             }
         }
+        _showAddedToWatchedSnackbarEvent.value = true
+    }
+
+    /**
+     * add or replace existing data of movie to database with isWatchlater value true
+     */
+    fun addMovieToWatchLater() {
+        viewModelScope.launch {
+            Log.e("CLICKED", "ADDED TO WATCH LATER")
+            val id = _selectedMovieDetail.value!!.id
+            val name = _selectedMovieDetail.value!!.original_title
+            val savedMovie =
+                name?.let { SavedMovie(id, it, isWatched = false, isWatchLater = true) }
+            if (savedMovie != null) {
+                insert(savedMovie)
+            }
+        }
+        _showAddedToWatchLaterSnackbarEvent.value = true
     }
 
     private suspend fun insert(savedMovie: SavedMovie) {
