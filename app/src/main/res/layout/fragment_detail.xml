@@ -97,11 +97,12 @@
                 android:layout_height="41dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="12dp"
+                android:background="@color/background_light"
                 android:contentDescription="@string/cd_add_to_watched"
                 android:onClick="@{() -> viewModel.addMovieToWatched()}"
+                android:src="@drawable/custom_watched_button_default"
                 app:layout_constraintEnd_toStartOf="@+id/add_to_watch_later"
-                app:layout_constraintTop_toTopOf="@+id/movie_rating"
-                app:srcCompat="@drawable/ic_baseline_check" />
+                app:layout_constraintTop_toTopOf="@+id/movie_rating" />
 
             <ImageButton
                 android:id="@+id/add_to_watch_later"
@@ -109,12 +110,13 @@
                 android:layout_width="45dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="16dp"
+                android:background="@color/background_light"
                 android:contentDescription="@string/cd_add_to_watch_later"
                 android:onClick="@{() -> viewModel.addMovieToWatchLater()}"
                 app:layout_constraintBottom_toBottomOf="@+id/add_to_watched"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/add_to_watched"
-                app:srcCompat="@drawable/ic_baseline_bookmark_border" />
+                app:srcCompat="@drawable/custom_watch_later_button_default" />
 
 
             <!--            <TextView-->

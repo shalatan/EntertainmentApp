@@ -2,9 +2,12 @@ package com.shalatan.entertainmentapp.ui.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.MovieItemBinding
 import com.shalatan.entertainmentapp.model.Movie
 
@@ -13,8 +16,10 @@ class MovieAdapter(private val onClickListener: OnClickListener) :
 
     class MovieViewHolder(private val binding: MovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        val image = binding.root.findViewById<ImageView>(R.id.movie_item)
         fun bind(movie: Movie) {
             binding.movie = movie
+            ViewCompat.setTransitionName(image,movie.id.toString())
             binding.executePendingBindings()
         }
     }

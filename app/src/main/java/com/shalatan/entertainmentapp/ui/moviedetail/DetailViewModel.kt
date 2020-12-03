@@ -21,6 +21,9 @@ import java.time.Month
 class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     AndroidViewModel(app) {
 
+    //fetch all movies to check if current movie already exist in table
+    private val databaseMovies = database.getAllMovies()
+
     // The internal MutableLiveData String that stores the most recent response status
     private val _status = MutableLiveData<String>()
 
@@ -33,7 +36,6 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
         get() = _selectedMovieDetail
 
     private val _completeMovieDetail = MutableLiveData<CompleteMovieDetail>()
-
     val completeMovieDetail: LiveData<CompleteMovieDetail>
         get() = _completeMovieDetail
 
@@ -71,6 +73,7 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     init {
         _selectedMovieDetail.value = movie
         fetchCurrentMovieDetails()
+        Log.e("EMPTY",databaseMovies.value?.isEmpty().toString())
     }
 
     /**

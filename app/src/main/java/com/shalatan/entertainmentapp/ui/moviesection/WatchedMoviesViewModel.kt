@@ -8,4 +8,6 @@ import com.shalatan.entertainmentapp.database.MovieDAO
 class WatchedMoviesViewModel(val database: MovieDAO, application: Application) :
     AndroidViewModel(application) {
 
+    val savedMovies = database.getAllMovies()
+
 }

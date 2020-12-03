@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/mars_image"
+            android:id="@+id/movie_item"
             android:layout_width="130dp"
             android:layout_height="200dp"
             android:padding="2dp"

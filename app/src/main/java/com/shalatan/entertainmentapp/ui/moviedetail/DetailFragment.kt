@@ -1,12 +1,15 @@
 package com.shalatan.entertainmentapp.ui.moviedetail
 
 import android.R
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.ImageButton
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -33,6 +36,8 @@ class DetailFragment : Fragment() {
         val detailViewModel =
             ViewModelProvider(this, detailViewModelFactory).get(DetailViewModel::class.java)
 
+        ViewCompat.setTransitionName(binding.moviePoster, movie.id.toString())
+
         binding.viewModel = detailViewModel
         binding.lifecycleOwner = this
 
@@ -45,8 +50,8 @@ class DetailFragment : Fragment() {
                     "ADDED TO WATCHED MOVIES",
                     Snackbar.LENGTH_SHORT
                 ).show()
-                // Reset state to make sure the snackbar is only shown once, even if the device
-                // has a configuration change.
+                makeButtonUiChanges(application, binding.addToWatched, binding.addToWatchLater)
+                binding.addToWatched.setBackgroundColor(application.getColor(R.color.holo_red_dark))
                 detailViewModel.doneShowingSnackbar()
             }
         })
@@ -58,10 +63,18 @@ class DetailFragment : Fragment() {
                     "ADDED TO WATCH LATER MOVIES",
                     Snackbar.LENGTH_SHORT // How long to display the message.
                 ).show()
+                makeButtonUiChanges(application, binding.addToWatchLater, binding.addToWatched)
                 detailViewModel.doneShowingSnackbar()
             }
         })
         return binding.root
+    }
+
+    private fun makeButtonUiChanges(application: Application, imageButton1: ImageButton, imageButton2: ImageButton) {
+        imageButton1.isEnabled = false
+        imageButton2.isEnabled = true
+        imageButton1.setBackgroundColor(application.getColor(R.color.holo_blue_dark))
+        imageButton2.setBackgroundColor(application.getColor(R.color.background_light))
     }
 
 //    override fun onResume() {
