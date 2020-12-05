@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearanceOverlay.MyTheme.Image" parent="">
+        <item name="cornerSizeBottomRight">20%</item>
+        <item name="cornerSizeTopLeft">20%</item>
+        <item name="cornerSizeTopRight">20%</item>
+        <item name="cornerSizeBottomLeft">20%</item>
+    </style>
+</resources>

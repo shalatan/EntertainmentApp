@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.database.MovieDAO
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.CompleteMovieDetail
@@ -16,13 +15,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.time.Month
 
 class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     AndroidViewModel(app) {
 
-    //fetch all movies to check if current movie already exist in table
-    private val databaseMovies = database.getAllMovies()
+    //fetch all movies from database to check if current movie already exist in table
+    val databaseMovies = database.getAllWatchedMovies()
 
     // The internal MutableLiveData String that stores the most recent response status
     private val _status = MutableLiveData<String>()
@@ -73,7 +71,6 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     init {
         _selectedMovieDetail.value = movie
         fetchCurrentMovieDetails()
-        Log.e("EMPTY",databaseMovies.value?.isEmpty().toString())
     }
 
     /**
@@ -100,9 +97,9 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
         viewModelScope.launch {
             Log.e("CLICKED", "ADDED TO WATCHED")
             val id = _selectedMovieDetail.value!!.id
-            val name = _selectedMovieDetail.value!!.original_title
-            val savedMovie =
-                name?.let { SavedMovie(id, it, isWatched = true, isWatchLater = false) }
+            val poster = _selectedMovieDetail.value?.posterPath
+            val name = _selectedMovieDetail.value?.original_title
+            val savedMovie = SavedMovie(id, name, poster, isWatched = true, isWatchLater = false)
             if (savedMovie != null) {
                 insert(savedMovie)
             }
@@ -117,14 +114,25 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
         viewModelScope.launch {
             Log.e("CLICKED", "ADDED TO WATCH LATER")
             val id = _selectedMovieDetail.value!!.id
-            val name = _selectedMovieDetail.value!!.original_title
-            val savedMovie =
-                name?.let { SavedMovie(id, it, isWatched = false, isWatchLater = true) }
+            val poster = _selectedMovieDetail.value?.posterPath
+            val name = _selectedMovieDetail.value?.original_title
+            val savedMovie = SavedMovie(id, name, poster, isWatched = false, isWatchLater = true)
             if (savedMovie != null) {
                 insert(savedMovie)
             }
         }
         _showAddedToWatchLaterSnackbarEvent.value = true
+    }
+
+
+    fun clearDatabase() {
+        viewModelScope.launch {
+            delete()
+        }
+    }
+
+    private suspend fun delete() {
+        database.clear()
     }
 
     private suspend fun insert(savedMovie: SavedMovie) {

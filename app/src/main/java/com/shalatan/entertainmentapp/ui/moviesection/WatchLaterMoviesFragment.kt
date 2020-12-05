@@ -7,15 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.shalatan.entertainmentapp.database.MovieDatabase
-import com.shalatan.entertainmentapp.databinding.FragmentWatchedMoviesBinding
+import com.shalatan.entertainmentapp.databinding.FragmentWatchLaterMoviesBinding
 
-class WatchedMoviesFragment : Fragment() {
+class WatchLaterMoviesFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        val binding = FragmentWatchedMoviesBinding.inflate(inflater)
+        val binding = FragmentWatchLaterMoviesBinding.inflate(inflater)
         val application = requireNotNull(this.activity).application
         val dataSource = MovieDatabase.getInstance(application).movieDAO
         val viewModelFactory = SavedContentViewModelFactory(dataSource, application)
@@ -31,5 +31,4 @@ class WatchedMoviesFragment : Fragment() {
 
         return binding.root
     }
-
 }

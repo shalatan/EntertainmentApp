@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.shalatan.entertainmentapp.database.MovieDAO
 
-class WatchedMoviesViewModelFactory(
+class SavedContentViewModelFactory(
     private val dataSource: MovieDAO,
     private val application: Application
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(WatchedMoviesViewModel::class.java)) {
-            return WatchedMoviesViewModel(dataSource, application) as T
+        if (modelClass.isAssignableFrom(SavedContentViewModel::class.java)) {
+            return SavedContentViewModel(dataSource, application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

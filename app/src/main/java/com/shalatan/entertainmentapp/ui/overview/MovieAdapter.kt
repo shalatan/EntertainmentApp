@@ -19,7 +19,7 @@ class MovieAdapter(private val onClickListener: OnClickListener) :
         val image = binding.root.findViewById<ImageView>(R.id.movie_item)
         fun bind(movie: Movie) {
             binding.movie = movie
-            ViewCompat.setTransitionName(image,movie.id.toString())
+//            ViewCompat.setTransitionName(image,movie.id.toString())
             binding.executePendingBindings()
         }
     }

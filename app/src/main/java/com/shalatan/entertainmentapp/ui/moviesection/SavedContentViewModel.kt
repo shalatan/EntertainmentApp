@@ -2,12 +2,12 @@ package com.shalatan.entertainmentapp.ui.moviesection
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import com.shalatan.entertainmentapp.database.MovieDAO
 
-class WatchedMoviesViewModel(val database: MovieDAO, application: Application) :
+class SavedContentViewModel(val database: MovieDAO, application: Application) :
     AndroidViewModel(application) {
 
-    val savedMovies = database.getAllMovies()
+    val watchedMovies = database.getAllWatchedMovies()
+    val watchLaterMovies = database.getAllWatchLaterMovies()
 
 }

@@ -8,15 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.database.MovieDatabase
+import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
-import kotlinx.android.synthetic.main.fragment_detail.*
+import com.shalatan.entertainmentapp.model.Movie
 
 
 class DetailFragment : Fragment() {
@@ -26,6 +27,13 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+//        sharedElementEnterTransition = MaterialContainerTransform().apply {
+//            // Scope the transition to a view in the hierarchy so we know it will be added under
+//            // the bottom app bar but over the elevation scale of the exiting HomeFragment.
+//            duration = 300.toLong()
+//            scrimColor = Color.TRANSPARENT
+//        }
 
         val application = requireNotNull(activity).application
         val binding = FragmentDetailBinding.inflate(inflater)
@@ -70,7 +78,11 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-    private fun makeButtonUiChanges(application: Application, imageButton1: ImageButton, imageButton2: ImageButton) {
+    private fun makeButtonUiChanges(
+        application: Application,
+        imageButton1: ImageButton,
+        imageButton2: ImageButton
+    ) {
         imageButton1.isEnabled = false
         imageButton2.isEnabled = true
         imageButton1.setBackgroundColor(application.getColor(R.color.holo_blue_dark))

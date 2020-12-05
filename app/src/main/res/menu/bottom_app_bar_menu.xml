@@ -5,13 +5,13 @@
 
     <item
         android:id="@+id/watchedMoviesFragment"
-        android:icon="@drawable/ic_movie_white_24dp"
-        android:title="Movies"
+        android:icon="@drawable/custom_watched_button_default"
+        android:title="Watched"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/watchedSeriesFragment"
-        android:icon="@drawable/ic_tv_white_24dp"
-        android:title="Series"
+        android:id="@+id/watchLaterMoviesFragment"
+        android:icon="@drawable/custom_watch_later_button_default"
+        android:title="Watch Later"
         app:showAsAction="ifRoom" />
 </menu>

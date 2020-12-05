@@ -10,4 +10,9 @@
     //DetailFragment
     <string name="added_to_watch_later_message">Added to Watch Later Movies</string>
     <string name="added_to_watched_message">Added to Watched Movies</string>
+
+    <string name="movie_card_transition_name">movie_card_%1$s</string>
+    <string name="movie_card_detail_transition_name">movie_card_detail</string>
+    <integer name="reply_motion_duration_large">300</integer>
+
 </resources>

@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 data class SavedMovie(
     @PrimaryKey
     var Id: Int = -1,
-    var movieTitle: String = "",
+    var movieTitle: String? = "",
+    var moviePoster: String? = "",
     var isWatched: Boolean = false,
     var isWatchLater: Boolean = false
 )
