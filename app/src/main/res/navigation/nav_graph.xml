@@ -33,18 +33,27 @@
         android:id="@+id/watchedMoviesFragment"
         android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchedMoviesFragment"
         android:label="Watched Movies"
-        tools:layout="@layout/fragment_watched_movies" />
+        tools:layout="@layout/fragment_watched_movies" >
+        <action
+            android:id="@+id/action_showDetail"
+            app:destination="@id/detailFragment" />
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
+    </fragment>
 
     <fragment
         android:id="@+id/watchLaterMoviesFragment"
         android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchLaterMoviesFragment"
-        android:label="Watch Later Movies" />
-
-    <fragment
-        android:id="@+id/watchedSeriesFragment"
-        android:name="com.shalatan.entertainmentapp.ui.seriessection.WatchedSeriesFragment"
-        android:label="Watched Series"
-        tools:layout="@layout/fragment_watched_series" />
-
+        android:label="Watch Later Movies">
+        <action
+            android:id="@+id/action_showDetail"
+            app:destination="@id/detailFragment" />
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
+    </fragment>
 
 </navigation>

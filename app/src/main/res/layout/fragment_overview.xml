@@ -24,15 +24,18 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="2dp"
                 android:text="Popular Movies"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/popular_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:orientation="horizontal"
-                android:padding="6dp"
+                android:paddingBottom="2dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:listData="@{viewModel.popularMovies}"
                 app:spanCount="3"
@@ -42,15 +45,19 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:paddingBottom="2dp"
                 android:text="Top Rated Movies"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/top_rated_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:orientation="horizontal"
-                android:padding="6dp"
+                android:paddingBottom="2dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:listData="@{viewModel.topRatedMovies}"
                 tools:listitem="@layout/movie_item" />
@@ -59,15 +66,19 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:paddingBottom="2dp"
                 android:text="Upcoming Movies"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/upcoming_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:orientation="horizontal"
-                android:padding="6dp"
+                android:paddingBottom="2dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:listData="@{viewModel.upcomingMovies}"
                 app:spanCount="3"

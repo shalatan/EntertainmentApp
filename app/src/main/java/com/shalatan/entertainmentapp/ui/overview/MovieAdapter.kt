@@ -16,10 +16,8 @@ class MovieAdapter(private val onClickListener: OnClickListener) :
 
     class MovieViewHolder(private val binding: MovieItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val image = binding.root.findViewById<ImageView>(R.id.movie_item)
         fun bind(movie: Movie) {
             binding.movie = movie
-//            ViewCompat.setTransitionName(image,movie.id.toString())
             binding.executePendingBindings()
         }
     }

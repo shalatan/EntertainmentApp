@@ -1,5 +1,6 @@
 package com.shalatan.entertainmentapp.ui.moviesection
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,14 +12,14 @@ import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.databinding.FavouriteItemBinding
 import com.shalatan.entertainmentapp.databinding.MovieItemBinding
+import com.shalatan.entertainmentapp.generated.callback.OnClickListener
 import com.shalatan.entertainmentapp.model.Movie
 
-class SavedContentAdapter :
+class SavedContentAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<SavedMovie, SavedContentAdapter.SavedContentViewHolder>(DiffCallBack) {
 
     class SavedContentViewHolder(private val binding: FavouriteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val image = binding.root.findViewById<ImageView>(R.id.saved_movie_poster)
         fun bind(savedMovie: SavedMovie) {
             binding.savedMovie = savedMovie
         }
@@ -43,6 +44,16 @@ class SavedContentAdapter :
 
     override fun onBindViewHolder(holder: SavedContentViewHolder, position: Int) {
         val savedMovie = getItem(position)
+        holder.itemView.setOnClickListener{
+            Log.e("ITEMMMMM","CLICKEDDDDDD")
+            val movie = Movie(id = savedMovie.Id,posterPath = savedMovie.moviePoster!!,title = savedMovie.movieTitle!!)
+            Log.e("MOVIE DETAIL",movie.toString())
+            (onClickListener.onClick(movie))
+        }
         holder.bind(savedMovie)
+    }
+
+    class OnClickListener(val clickListener: (movie: Movie) -> Unit) {
+        fun onClick(movie: Movie) = clickListener(movie)
     }
 }
