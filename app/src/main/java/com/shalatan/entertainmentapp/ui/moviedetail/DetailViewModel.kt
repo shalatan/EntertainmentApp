@@ -10,14 +10,17 @@ import com.shalatan.entertainmentapp.database.MovieDAO
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.CompleteMovieDetail
 import com.shalatan.entertainmentapp.model.Movie
+import com.shalatan.entertainmentapp.model.Poster
 import com.shalatan.entertainmentapp.network.LmdbApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import retrofit2.http.POST
 
 class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     AndroidViewModel(app) {
+
 
     // The internal MutableLiveData String that stores the most recent response status
     private val _status = MutableLiveData<String>()
@@ -33,6 +36,10 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     private val _completeMovieDetail = MutableLiveData<CompleteMovieDetail>()
     val completeMovieDetail: LiveData<CompleteMovieDetail>
         get() = _completeMovieDetail
+
+    private val _posters = MutableLiveData<List<Poster>>()
+    val posters: LiveData<List<Poster>>
+        get() = _posters
 
     /**
      * Request a toast by setting this value to true.
@@ -80,6 +87,7 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
             try {
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie
+                _posters.value = _completeMovieDetail.value!!.images?.posters
             } catch (t: Throwable) {
                 Log.e("Error fetching complete detail : ", t.message.toString())
                 _status.value = t.message
@@ -97,9 +105,7 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
             val poster = _selectedMovieDetail.value?.posterPath
             val name = _selectedMovieDetail.value?.original_title
             val savedMovie = SavedMovie(id, name, poster, isWatched = true, isWatchLater = false)
-            if (savedMovie != null) {
-                insert(savedMovie)
-            }
+            insert(savedMovie)
         }
         _showAddedToWatchedSnackbarEvent.value = true
     }
@@ -114,9 +120,7 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
             val poster = _selectedMovieDetail.value?.posterPath
             val name = _selectedMovieDetail.value?.original_title
             val savedMovie = SavedMovie(id, name, poster, isWatched = false, isWatchLater = true)
-            if (savedMovie != null) {
-                insert(savedMovie)
-            }
+            insert(savedMovie)
         }
         _showAddedToWatchLaterSnackbarEvent.value = true
     }

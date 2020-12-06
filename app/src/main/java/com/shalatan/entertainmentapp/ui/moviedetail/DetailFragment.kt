@@ -46,10 +46,13 @@ class DetailFragment : Fragment() {
         binding.viewModel = detailViewModel
         binding.lifecycleOwner = this
 
+        detailViewModel.posters.observe(viewLifecycleOwner, Observer {
+            val adapter = PostersAdapter(application, it)
+            binding.moviePoster.adapter = adapter
+        })
+
         detailViewModel.showAddedToWatchedSnackbarEvent.observe(viewLifecycleOwner, Observer {
-            Log.d("ENTERED VIEW MODEL", it.toString())
             if (it == true) { // Observed state is true.
-                Log.d("ENTERED VIEW MODEL", it.toString())
                 Snackbar.make(
                     requireActivity().findViewById(R.id.content),
                     "ADDED TO WATCHED MOVIES",
