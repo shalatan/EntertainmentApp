@@ -1,9 +1,6 @@
 package com.shalatan.entertainmentapp.model
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 

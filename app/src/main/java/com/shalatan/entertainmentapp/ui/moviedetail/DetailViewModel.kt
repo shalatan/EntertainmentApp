@@ -19,9 +19,6 @@ import kotlinx.coroutines.launch
 class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     AndroidViewModel(app) {
 
-    //fetch all movies from database to check if current movie already exist in table
-    val databaseMovies = database.getAllWatchedMovies()
-
     // The internal MutableLiveData String that stores the most recent response status
     private val _status = MutableLiveData<String>()
 

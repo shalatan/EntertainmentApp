@@ -30,6 +30,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
+            <!--            <androidx.viewpager2.widget.ViewPager2-->
+            <!--                android:id="@+id/movie_poster"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="400dp"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:viewPagerData="@{viewModel.completeMovieDetail.images.posters}" />-->
 
             <TextView
                 android:id="@+id/movie_name"

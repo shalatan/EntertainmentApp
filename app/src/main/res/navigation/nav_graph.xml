@@ -33,7 +33,7 @@
         android:id="@+id/watchedMoviesFragment"
         android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchedMoviesFragment"
         android:label="Watched Movies"
-        tools:layout="@layout/fragment_watched_movies" >
+        tools:layout="@layout/fragment_watched_movies">
         <action
             android:id="@+id/action_showDetail"
             app:destination="@id/detailFragment" />
@@ -46,7 +46,8 @@
     <fragment
         android:id="@+id/watchLaterMoviesFragment"
         android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchLaterMoviesFragment"
-        android:label="Watch Later Movies">
+        android:label="Watch Later Movies"
+        tools:layout="@layout/fragment_watch_later_movies">
         <action
             android:id="@+id/action_showDetail"
             app:destination="@id/detailFragment" />

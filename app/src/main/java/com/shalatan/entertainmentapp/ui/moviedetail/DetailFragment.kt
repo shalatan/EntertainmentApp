@@ -10,14 +10,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.database.MovieDatabase
-import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
-import com.shalatan.entertainmentapp.model.Movie
 
 
 class DetailFragment : Fragment() {

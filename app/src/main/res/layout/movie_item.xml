@@ -28,20 +28,20 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
 
-<!--        <com.google.android.material.imageview.ShapeableImageView-->
-<!--            android:id="@+id/movie_item"-->
-<!--            android:layout_width="130dp"-->
-<!--            android:layout_height="200dp"-->
-<!--            android:contentDescription="@string/cd_movie_poster"-->
-<!--            android:padding="2dp"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:transitionName="@{@string/movie_card_transition_name(movie.id)}"-->
-<!--            app:imageUrl="@{movie.posterPath}"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyTheme.Image"-->
-<!--            tools:src="@tools:sample/backgrounds/scenic" />-->
+        <!--        <com.google.android.material.imageview.ShapeableImageView-->
+        <!--            android:id="@+id/movie_item"-->
+        <!--            android:layout_width="130dp"-->
+        <!--            android:layout_height="200dp"-->
+        <!--            android:contentDescription="@string/cd_movie_poster"-->
+        <!--            android:padding="2dp"-->
+        <!--            android:scaleType="centerCrop"-->
+        <!--            android:transitionName="@{@string/movie_card_transition_name(movie.id)}"-->
+        <!--            app:imageUrl="@{movie.posterPath}"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyTheme.Image"-->
+        <!--            tools:src="@tools:sample/backgrounds/scenic" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
