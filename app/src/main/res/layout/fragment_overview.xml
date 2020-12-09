@@ -25,10 +25,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="48dp"
                 android:paddingBottom="2dp"
                 android:text="Popular Movies"
-                android:textSize="24sp" />
+                android:textSize="26sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/popular_recycler_view"
@@ -50,7 +50,7 @@
                 android:layout_marginBottom="2dp"
                 android:paddingBottom="2dp"
                 android:text="Top Rated Movies"
-                android:textSize="24sp" />
+                android:textSize="26sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/top_rated_recycler_view"
@@ -71,7 +71,7 @@
                 android:layout_marginBottom="2dp"
                 android:paddingBottom="2dp"
                 android:text="Upcoming Movies"
-                android:textSize="24sp" />
+                android:textSize="26sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/upcoming_recycler_view"

@@ -37,9 +37,9 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     val completeMovieDetail: LiveData<CompleteMovieDetail>
         get() = _completeMovieDetail
 
-    private val _posters = MutableLiveData<List<Poster>>()
-    val posters: LiveData<List<Poster>>
-        get() = _posters
+    private val _navigateToPosterFragment = MutableLiveData<Movie>()
+    val navigateToPosterFragment: LiveData<Movie>
+        get() = _navigateToPosterFragment
 
     /**
      * Request a toast by setting this value to true.
@@ -87,7 +87,8 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
             try {
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie
-                _posters.value = _completeMovieDetail.value!!.images?.posters
+                _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
+                Log.e("MOVIE", _completeMovieDetail.value.toString())
             } catch (t: Throwable) {
                 Log.e("Error fetching complete detail : ", t.message.toString())
                 _status.value = t.message
@@ -125,6 +126,9 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
         _showAddedToWatchLaterSnackbarEvent.value = true
     }
 
+    fun showMoviePosters() {
+        _navigateToPosterFragment.value = _selectedMovieDetail.value
+    }
 
     fun clearDatabase() {
         viewModelScope.launch {

@@ -19,24 +19,25 @@
             android:layout_height="match_parent"
             tools:ignore="ScrollViewSize">
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/movie_poster"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="350dp"-->
-            <!--                android:contentDescription="@string/cd_movie_poster"-->
-            <!--                android:scaleType="centerCrop"-->
-            <!--                app:imageUrl="@{viewModel.selectedMovieDetail.posterPath}"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                tools:srcCompat="@tools:sample/avatars" />-->
-            <androidx.viewpager2.widget.ViewPager2
+            <ImageView
                 android:id="@+id/movie_poster"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
+                android:contentDescription="@string/cd_movie_poster"
+                android:onClick="@{() -> viewModel.showMoviePosters()}"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.selectedMovieDetail.posterPath}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+            <!--            <androidx.viewpager2.widget.ViewPager2-->
+            <!--                android:id="@+id/movie_poster"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="400dp"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <TextView
                 android:id="@+id/movie_name"

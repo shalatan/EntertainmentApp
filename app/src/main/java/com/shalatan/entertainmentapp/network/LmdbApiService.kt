@@ -2,6 +2,7 @@ package com.shalatan.entertainmentapp.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.shalatan.entertainmentapp.model.CompleteMovieDetail
+import com.shalatan.entertainmentapp.model.ImagesResponse
 import com.shalatan.entertainmentapp.model.MovieResponse
 import com.shalatan.entertainmentapp.utils.Constants
 import com.squareup.moshi.Moshi
@@ -50,6 +51,12 @@ interface LmdbApiService {
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("append_to_response") atr: String = Constants.VIR
     ): Deferred<CompleteMovieDetail>
+
+    @GET("3/movie/{movieId}/images")
+    fun getSelectedMovieImages(
+        @Path("movieId") movieID: Int,
+        @Query("api_key") apiKey: String = Constants.API_KEY,
+    ): Deferred<ImagesResponse>
 }
 
 object LmdbApi {

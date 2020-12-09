@@ -8,8 +8,8 @@
         android:id="@+id/view_pager_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="center"
         android:contentDescription="@string/cd_movie_poster"
-        android:scaleType="centerCrop"
         tools:src="@tools:sample/backgrounds/scenic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

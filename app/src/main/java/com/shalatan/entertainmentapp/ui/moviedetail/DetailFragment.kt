@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.database.MovieDatabase
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
@@ -25,13 +26,6 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-//        sharedElementEnterTransition = MaterialContainerTransform().apply {
-//            // Scope the transition to a view in the hierarchy so we know it will be added under
-//            // the bottom app bar but over the elevation scale of the exiting HomeFragment.
-//            duration = 300.toLong()
-//            scrimColor = Color.TRANSPARENT
-//        }
-
         val application = requireNotNull(activity).application
         val binding = FragmentDetailBinding.inflate(inflater)
         val dataSource = MovieDatabase.getInstance(application).movieDAO
@@ -41,14 +35,12 @@ class DetailFragment : Fragment() {
         val detailViewModel =
             ViewModelProvider(this, detailViewModelFactory).get(DetailViewModel::class.java)
 
-        ViewCompat.setTransitionName(binding.moviePoster, movie.id.toString())
-
         binding.viewModel = detailViewModel
         binding.lifecycleOwner = this
 
-        detailViewModel.posters.observe(viewLifecycleOwner, Observer {
-            val adapter = PostersAdapter(application, it)
-            binding.moviePoster.adapter = adapter
+        detailViewModel.navigateToPosterFragment.observe(viewLifecycleOwner, Observer {
+            this.findNavController()
+                .navigate(DetailFragmentDirections.actionDetailFragmentToPosterFragment(it))
         })
 
         detailViewModel.showAddedToWatchedSnackbarEvent.observe(viewLifecycleOwner, Observer {

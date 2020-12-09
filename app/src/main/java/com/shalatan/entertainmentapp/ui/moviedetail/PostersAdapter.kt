@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shalatan.entertainmentapp.R
+import com.shalatan.entertainmentapp.model.Backdrop
 import com.shalatan.entertainmentapp.model.Poster
 import com.shalatan.entertainmentapp.utils.Constants
 import kotlinx.android.synthetic.main.view_pager_item.view.*
 
-class PostersAdapter(val application: Application,val images: List<Poster>) :
+class PostersAdapter(val application: Application, val images: List<Backdrop>) :
     RecyclerView.Adapter<PostersAdapter.PosterViewHolder>() {
     inner class PosterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -25,8 +26,8 @@ class PostersAdapter(val application: Application,val images: List<Poster>) :
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
         val image = images[position]
         val link = images[position].file_path
-        val url = Constants.IMG_BASE_URL+link
-        Log.e("BASE URL",url)
+        val url = Constants.IMG_BASE_URL_O + link
+        Log.e("BASE URL", url)
         Glide.with(application)
             .load(url)
             .into(holder.itemView.view_pager_image)

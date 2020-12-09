@@ -20,16 +20,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.shalatan.entertainmentapp.ui.moviedetail.DetailFragment"
-        android:label="Change It Later"
-        tools:layout="@layout/fragment_detail">
-        <argument
-            android:name="selectedMovie"
-            app:argType="com.shalatan.entertainmentapp.model.Movie" />
-    </fragment>
-
-    <fragment
         android:id="@+id/watchedMoviesFragment"
         android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchedMoviesFragment"
         android:label="Watched Movies"
@@ -55,6 +45,29 @@
         <!--            app:exitAnim="@anim/slide_out_left"-->
         <!--            app:popEnterAnim="@anim/slide_in_left"-->
         <!--            app:popExitAnim="@anim/slide_out_right" />-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.shalatan.entertainmentapp.ui.moviedetail.DetailFragment"
+        android:label="Change It Later"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="selectedMovie"
+            app:argType="com.shalatan.entertainmentapp.model.Movie" />
+        <action
+            android:id="@+id/action_detailFragment_to_posterFragment"
+            app:destination="@id/posterFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/posterFragment"
+        android:name="com.shalatan.entertainmentapp.ui.moviedetail.PosterFragment"
+        android:label="fragment_poster"
+        tools:layout="@layout/fragment_poster">
+        <argument
+            android:name="selectedMovie"
+            app:argType="com.shalatan.entertainmentapp.model.Movie" />
     </fragment>
 
 </navigation>
