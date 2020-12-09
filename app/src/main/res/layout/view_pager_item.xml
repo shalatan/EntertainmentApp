@@ -4,12 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <com.github.piasy.biv.view.BigImageView
         android:id="@+id/view_pager_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="center"
-        android:contentDescription="@string/cd_movie_poster"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        android:contentDescription="@string/cd_movie_poster"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

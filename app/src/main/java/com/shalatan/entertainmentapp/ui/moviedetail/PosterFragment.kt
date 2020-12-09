@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.github.piasy.biv.BigImageViewer
+import com.github.piasy.biv.loader.glide.GlideImageLoader
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentPosterBinding
 
@@ -25,6 +27,8 @@ class PosterFragment : Fragment() {
         val posterViewModel =
             ViewModelProvider(this, posterViewModelFactory).get(PosterViewModel::class.java)
         binding.posterViewModel = posterViewModel
+
+        BigImageViewer.initialize(GlideImageLoader.with(application));
 
         posterViewModel.images.observe(viewLifecycleOwner, Observer {
             Log.e("IMAGES VM - ", it.toString())
