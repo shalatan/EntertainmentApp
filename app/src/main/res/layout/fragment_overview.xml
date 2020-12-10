@@ -10,79 +10,98 @@
             type="com.shalatan.entertainmentapp.ui.overview.OverviewViewModel" />
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/open_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:contentDescription="@string/open_menu"
+            android:elevation="16dp"
+            android:onClick="showPopUp"
+            android:src="@drawable/ic_more_vert_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context="com.shalatan.entertainmentapp.MainActivity">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="48dp"
-                android:paddingBottom="2dp"
-                android:text="Popular Movies"
-                android:textSize="26sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/popular_recycler_view"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:orientation="horizontal"
-                android:paddingBottom="2dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:listData="@{viewModel.popularMovies}"
-                app:spanCount="3"
-                tools:listitem="@layout/movie_item" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context="com.shalatan.entertainmentapp.MainActivity">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
-                android:paddingBottom="2dp"
-                android:text="Top Rated Movies"
-                android:textSize="26sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/top_rated_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:orientation="horizontal"
-                android:paddingBottom="2dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:listData="@{viewModel.topRatedMovies}"
-                tools:listitem="@layout/movie_item" />
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="48dp"
+                    android:text="Popular Movies"
+                    android:textSize="28sp" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
-                android:paddingBottom="2dp"
-                android:text="Upcoming Movies"
-                android:textSize="26sp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/popular_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:listData="@{viewModel.popularMovies}"
+                    app:spanCount="3"
+                    tools:listitem="@layout/movie_item" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/upcoming_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:orientation="horizontal"
-                android:paddingBottom="2dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:listData="@{viewModel.upcomingMovies}"
-                app:spanCount="3"
-                tools:listitem="@layout/movie_item" />
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="2dp"
+                    android:paddingBottom="2dp"
+                    android:text="Top Rated Movies"
+                    android:textSize="28sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/top_rated_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:listData="@{viewModel.topRatedMovies}"
+                    tools:listitem="@layout/movie_item" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="2dp"
+                    android:paddingBottom="2dp"
+                    android:text="Upcoming Movies"
+                    android:textSize="28sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/upcoming_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:listData="@{viewModel.upcomingMovies}"
+                    app:spanCount="3"
+                    tools:listitem="@layout/movie_item" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

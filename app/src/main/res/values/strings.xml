@@ -13,6 +13,7 @@
 
     <string name="movie_card_transition_name">movie_card_%1$s</string>
     <string name="movie_card_detail_transition_name">movie_card_detail</string>
+    <string name="open_menu">Open Menu</string>
     <integer name="reply_motion_duration_large">300</integer>
 
 </resources>

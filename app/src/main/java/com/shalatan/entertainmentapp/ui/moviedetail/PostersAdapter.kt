@@ -27,16 +27,14 @@ class PostersAdapter(val application: Application, val images: List<Backdrop>) :
     }
 
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
-        val image = images[position]
+
         val link = images[position].file_path
         val url = Constants.IMG_BASE_URL_O + link
-//        val nextUrl = Constants.IMG_BASE_URL_O + images[position+1].file_path
 
         val bigImageView = holder.itemView.view_pager_image as BigImageView
         bigImageView.showImage(Uri.parse(url))
 //        BigImageViewer.prefetch(Uri.parse(nextUrl));
 
-//        Log.e("BASE URL", url)
 //        Glide.with(application)
 //            .load(url)
 //            .into(holder.itemView.view_pager_image)

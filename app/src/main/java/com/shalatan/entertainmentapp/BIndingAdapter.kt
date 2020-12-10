@@ -26,7 +26,6 @@ fun bindFavouriteRecyclerView(recyclerView: RecyclerView, data: List<SavedMovie>
     adapter.submitList(data)
 }
 
-
 //execute this binding adapter when the xml item has imgUrl attribute
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {
