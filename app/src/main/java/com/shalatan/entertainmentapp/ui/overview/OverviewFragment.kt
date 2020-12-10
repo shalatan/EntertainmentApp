@@ -1,10 +1,13 @@
 package com.shalatan.entertainmentapp.ui.overview
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -41,6 +44,9 @@ class OverviewFragment : Fragment() {
             viewModel.displayMovieDetails(it)
         })
         binding.upcomingRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
+            viewModel.displayMovieDetails(it)
+        })
+        binding.upcomingRecyclerView2.adapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })
 

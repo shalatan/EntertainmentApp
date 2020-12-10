@@ -35,17 +35,8 @@ class MainActivity : AppCompatActivity() {
         val inflater: MenuInflater = popup.menuInflater
         inflater.inflate(R.menu.bottom_app_bar_menu, popup.menu)
         popup.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.watchedMoviesFragment -> {
-                    Log.e("CLICKED", "WATCHED MOVIES")
-                }
-                R.id.watchLaterMoviesFragment -> {
-                    Log.e("CLICKED", "WATCH LATER")
-                }
-            }
-            true
+            menuItem.onNavDestinationSelected(navController)
         }
-
         popup.show()
     }
 

@@ -59,7 +59,7 @@ abstract class MovieDatabase : RoomDatabase() {
          * @param context The application context Singleton, used to get access to the filesystem.
          */
         fun getInstance(context: Context): MovieDatabase {
-            Log.e("DATABASE INSTANCE", "CREATED")
+            Log.e("DATABASE INSTANCE", "BANGAYAAAAAAA")
             // Multiple threads can ask for the database at the same time, ensure we only initialize
             // it once by using synchronized. Only one thread may enter a synchronized block at a
             // time.

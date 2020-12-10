@@ -44,10 +44,13 @@ class SavedContentAdapter(private val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: SavedContentViewHolder, position: Int) {
         val savedMovie = getItem(position)
-        holder.itemView.setOnClickListener{
-            Log.e("ITEMMMMM","CLICKEDDDDDD")
-            val movie = Movie(id = savedMovie.Id,posterPath = savedMovie.moviePoster!!,title = savedMovie.movieTitle!!)
-            Log.e("MOVIE DETAIL",movie.toString())
+        holder.itemView.setOnClickListener {
+            Log.e("ITEM", "DABADIYAAAAAAAAAAAAA")
+            val movie = Movie(
+                id = savedMovie.Id,
+                posterPath = savedMovie.moviePoster!!,
+                title = savedMovie.movieTitle!!
+            )
             (onClickListener.onClick(movie))
         }
         holder.bind(savedMovie)
