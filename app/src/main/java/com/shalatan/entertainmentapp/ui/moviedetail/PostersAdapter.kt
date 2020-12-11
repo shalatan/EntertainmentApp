@@ -5,10 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.databinding.ViewPagerItemBinding
 import com.shalatan.entertainmentapp.model.Backdrop
-
 
 class PostersAdapter :
     ListAdapter<Backdrop, PostersAdapter.PosterViewHolder>(DiffCallBack) {
@@ -22,7 +20,13 @@ class PostersAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
-        return PosterViewHolder(ViewPagerItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return PosterViewHolder(
+            ViewPagerItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {

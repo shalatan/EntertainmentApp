@@ -12,10 +12,15 @@
 
     </data>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <com.github.piasy.biv.view.BigImageView
             android:id="@+id/view_pager_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/cd_movie_poster"
             app:posterImageUrl="@{backdrop.file_path}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
