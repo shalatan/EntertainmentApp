@@ -16,7 +16,8 @@ import com.shalatan.entertainmentapp.generated.callback.OnClickListener
 import com.shalatan.entertainmentapp.model.Movie
 
 class SavedContentAdapter(private val onClickListener: OnClickListener) :
-    ListAdapter<SavedMovie, SavedContentAdapter.SavedContentViewHolder>(DiffCallBack) {
+    ListAdapter<SavedMovie, SavedContentAdapter.SavedContentViewHolder>(DiffCallBack)
+{
 
     class SavedContentViewHolder(private val binding: FavouriteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

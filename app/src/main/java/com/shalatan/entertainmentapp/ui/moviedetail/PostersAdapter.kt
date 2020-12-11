@@ -1,47 +1,42 @@
 package com.shalatan.entertainmentapp.ui.moviedetail
 
-import android.app.Application
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.github.piasy.biv.BigImageViewer
-import com.github.piasy.biv.view.BigImageView
-import com.shalatan.entertainmentapp.R
+import com.shalatan.entertainmentapp.database.SavedMovie
+import com.shalatan.entertainmentapp.databinding.ViewPagerItemBinding
 import com.shalatan.entertainmentapp.model.Backdrop
-import com.shalatan.entertainmentapp.utils.Constants
-import kotlinx.android.synthetic.main.view_pager_item.view.*
 
 
-class PostersAdapter(val application: Application, val images: List<Backdrop>) :
-    RecyclerView.Adapter<PostersAdapter.PosterViewHolder>() {
-    inner class PosterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+class PostersAdapter :
+    ListAdapter<Backdrop, PostersAdapter.PosterViewHolder>(DiffCallBack) {
+
+    class PosterViewHolder(private val binding: ViewPagerItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(backdrop: Backdrop) {
+            binding.backdrop = backdrop
+        }
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.view_pager_item, parent, false)
-        return PosterViewHolder(view)
+        return PosterViewHolder(ViewPagerItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
-
-        val link = images[position].file_path
-        val url = Constants.IMG_BASE_URL_O + link
-
-        val bigImageView = holder.itemView.view_pager_image as BigImageView
-        bigImageView.showImage(Uri.parse(url))
-//        BigImageViewer.prefetch(Uri.parse(nextUrl));
-
-//        Glide.with(application)
-//            .load(url)
-//            .into(holder.itemView.view_pager_image)
+        val backdrop = getItem(position)
+        holder.bind(backdrop)
     }
 
-    override fun getItemCount(): Int {
-        return images.size
-    }
+    companion object DiffCallBack : DiffUtil.ItemCallback<Backdrop>() {
+        override fun areItemsTheSame(oldItem: Backdrop, newItem: Backdrop): Boolean {
+            return newItem === oldItem
+        }
 
+        override fun areContentsTheSame(oldItem: Backdrop, newItem: Backdrop): Boolean {
+            return oldItem.file_path == newItem.file_path
+        }
+    }
 }

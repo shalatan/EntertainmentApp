@@ -30,10 +30,11 @@ class PosterFragment : Fragment() {
 
         BigImageViewer.initialize(GlideImageLoader.with(application));
 
+        val adapter = PostersAdapter()
+        binding.moviePoster.adapter = adapter
         posterViewModel.images.observe(viewLifecycleOwner, Observer {
             Log.e("IMAGES VM - ", it.toString())
-            val adapter = PostersAdapter(application, it.backdrops)
-            binding.moviePoster.adapter = adapter
+            adapter.submitList(it.backdrops)
         })
         return binding.root
     }
