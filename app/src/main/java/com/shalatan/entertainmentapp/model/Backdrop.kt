@@ -5,5 +5,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Backdrop(
-    val file_path: String?
+    val file_path: String
 ) : Parcelable
