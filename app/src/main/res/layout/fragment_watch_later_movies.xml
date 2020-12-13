@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:savedContent="@{viewModel.watchLaterMovies}"
+        android:paddingTop="28dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:savedContent="@{viewModel.watchLaterMovies}"
         tools:listitem="@layout/favourite_item" />
 </layout>

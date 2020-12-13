@@ -7,4 +7,5 @@ object Constants {
     const val IMG_BASE_URL = "https://image.tmdb.org/t/p/w500"
     const val IMG_BASE_URL_O = "https://image.tmdb.org/t/p/original"
     const val VIR = "videos,images,reviews"
+    const val YOUTUBE_API_KEY = "AIzaSyACUufzXxvSgLwqxxHHJkNnEkxGqJHpx1U"
 }

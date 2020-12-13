@@ -33,7 +33,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 tools:context="com.shalatan.entertainmentapp.MainActivity">
 
@@ -50,8 +50,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/popular_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:minHeight="220dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:listData="@{viewModel.popularMovies}"
@@ -72,8 +73,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/top_rated_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:minHeight="220dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:listData="@{viewModel.topRatedMovies}"
@@ -93,8 +95,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/upcoming_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:minHeight="220dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:listData="@{viewModel.upcomingMovies}"
@@ -115,8 +118,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/upcoming_recycler_view2"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:minHeight="220dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:listData="@{viewModel.upcomingMovies}"

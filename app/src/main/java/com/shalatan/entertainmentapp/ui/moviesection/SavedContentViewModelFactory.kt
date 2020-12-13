@@ -11,7 +11,7 @@ class SavedContentViewModelFactory(
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SavedContentViewModel::class.java)) {
-            return SavedContentViewModel(dataSource, application) as T
+            return SavedContentViewModel(dataSource) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

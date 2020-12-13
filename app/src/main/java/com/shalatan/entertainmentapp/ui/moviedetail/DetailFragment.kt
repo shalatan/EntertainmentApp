@@ -3,22 +3,24 @@ package com.shalatan.entertainmentapp.ui.moviedetail
 import android.R
 import android.app.Application
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.youtube.player.YouTubePlayerView
 import com.shalatan.entertainmentapp.database.MovieDatabase
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 
 
 class DetailFragment : Fragment() {
+
+    lateinit var youTubePlayerView: YouTubePlayerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,6 +69,27 @@ class DetailFragment : Fragment() {
                 detailViewModel.doneShowingSnackbar()
             }
         })
+
+//        binding.movieTrailer.setOnClickListener{
+//            youTubePlayerView.initialize(Constants.YOUTUBE_API_KEY,
+//                object : YouTubePlayer.OnInitializedListener {
+//                    override fun onInitializationSuccess(
+//                        provider: YouTubePlayer.Provider?,
+//                        youTubePlayer: YouTubePlayer?,
+//                        watched: Boolean
+//                    ) {
+//                        youTubePlayer?.loadVideo(detailViewModel.completeMovieDetail.value?.videos?.results?.get(0)?.key)
+//                    }
+//
+//                    override fun onInitializationFailure(
+//                        p0: YouTubePlayer.Provider?,
+//                        p1: YouTubeInitializationResult?
+//                    ) {
+//                    }
+//
+//                })
+//        }
+
         return binding.root
     }
 
@@ -80,14 +103,4 @@ class DetailFragment : Fragment() {
         imageButton1.setBackgroundColor(application.getColor(R.color.holo_blue_dark))
         imageButton2.setBackgroundColor(application.getColor(R.color.background_light))
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-//    }
 }

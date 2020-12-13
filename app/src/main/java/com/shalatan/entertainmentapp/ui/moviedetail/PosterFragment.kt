@@ -52,6 +52,7 @@ class PosterFragment : Fragment() {
                     "ENJOY YOUR NEW WALLPAPER ;)",
                     Snackbar.LENGTH_SHORT
                 ).show()
+                posterViewModel.doneShowingSnackbar()
             }
         })
         return binding.root
