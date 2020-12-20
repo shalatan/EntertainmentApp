@@ -40,9 +40,21 @@ class DetailFragment : Fragment() {
         binding.viewModel = detailViewModel
         binding.lifecycleOwner = this
 
-        detailViewModel.navigateToPosterFragment.observe(viewLifecycleOwner, Observer {
-            this.findNavController()
-                .navigate(DetailFragmentDirections.actionDetailFragmentToPosterFragment(it))
+//        detailViewModel.navigateToPosterFragment.observe(viewLifecycleOwner, Observer {
+//            this.findNavController()
+//                .navigate(DetailFragmentDirections.actionDetailFragmentToPosterFragment(it))
+//        })
+
+        val moviePosterViewPager = binding.moviePosterViewPager
+        moviePosterViewPager.clipToPadding = false
+        val adapter = PostersAdapter()
+        moviePosterViewPager.adapter = adapter
+        detailViewModel.completeMovieDetail.observe(viewLifecycleOwner, Observer {
+            if (it.images?.backdrops.isNullOrEmpty()) {
+                binding.moviePosterViewPager.visibility = View.GONE
+            } else {
+                adapter.submitList(it.images?.backdrops)
+            }
         })
 
         detailViewModel.showAddedToWatchedSnackbarEvent.observe(viewLifecycleOwner, Observer {

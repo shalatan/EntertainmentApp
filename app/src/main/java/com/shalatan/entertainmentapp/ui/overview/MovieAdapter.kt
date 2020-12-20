@@ -2,12 +2,9 @@ package com.shalatan.entertainmentapp.ui.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.MovieItemBinding
 import com.shalatan.entertainmentapp.model.Movie
 

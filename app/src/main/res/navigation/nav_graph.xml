@@ -57,7 +57,9 @@
             app:argType="com.shalatan.entertainmentapp.model.Movie" />
         <action
             android:id="@+id/action_detailFragment_to_posterFragment"
-            app:destination="@id/posterFragment" />
+            app:destination="@id/posterFragment"
+            app:popUpTo="@id/detailFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment

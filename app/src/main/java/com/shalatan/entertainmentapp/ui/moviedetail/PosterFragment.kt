@@ -30,7 +30,7 @@ class PosterFragment : Fragment() {
             ViewModelProvider(this, posterViewModelFactory).get(PosterViewModel::class.java)
         binding.posterViewModel = posterViewModel
 
-        BigImageViewer.initialize(GlideImageLoader.with(application));
+        BigImageViewer.initialize(GlideImageLoader.with(application))
 
         val adapter = PostersAdapter()
         binding.moviePoster.adapter = adapter

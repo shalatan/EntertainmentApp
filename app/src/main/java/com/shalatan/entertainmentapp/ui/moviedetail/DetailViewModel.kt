@@ -8,9 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.shalatan.entertainmentapp.database.MovieDAO
 import com.shalatan.entertainmentapp.database.SavedMovie
-import com.shalatan.entertainmentapp.model.CompleteMovieDetail
-import com.shalatan.entertainmentapp.model.Movie
-import com.shalatan.entertainmentapp.model.Poster
+import com.shalatan.entertainmentapp.model.*
 import com.shalatan.entertainmentapp.network.LmdbApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +38,10 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     private val _navigateToPosterFragment = MutableLiveData<Movie>()
     val navigateToPosterFragment: LiveData<Movie>
         get() = _navigateToPosterFragment
+
+    private val _backdropImages = MutableLiveData<Backdrop>()
+    val backdropImages: LiveData<Backdrop>
+        get() = _backdropImages
 
     /**
      * Request a toast by setting this value to true.

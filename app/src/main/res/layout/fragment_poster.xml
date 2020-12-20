@@ -28,6 +28,7 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/movie_poster"
+            android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
