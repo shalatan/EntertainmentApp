@@ -23,25 +23,19 @@ class PosterFragment : Fragment() {
     ): View? {
 
         val application = requireNotNull(activity).application
+        BigImageViewer.initialize(GlideImageLoader.with(application))
+
         val binding = FragmentPosterBinding.inflate(inflater)
-        val movie = PosterFragmentArgs.fromBundle(requireArguments()).selectedMovie
-        val posterViewModelFactory = PosterViewModelFactory(movie, application)
+
+        val posterURL = PosterFragmentArgs.fromBundle(requireArguments()).posterURL
+        Log.e("RECV URL", posterURL)
+        val posterViewModelFactory = PosterViewModelFactory(posterURL, application)
         posterViewModel =
             ViewModelProvider(this, posterViewModelFactory).get(PosterViewModel::class.java)
         binding.posterViewModel = posterViewModel
 
-        BigImageViewer.initialize(GlideImageLoader.with(application))
-
-        val adapter = PostersAdapter()
-        binding.moviePoster.adapter = adapter
-        posterViewModel.images.observe(viewLifecycleOwner, Observer {
-            Log.e("IMAGES VM - ", it.toString())
-            adapter.submitList(it.backdrops)
-        })
-
         binding.posterMenu.setOnClickListener {
-            val position = binding.moviePoster.currentItem
-            showPosterPopUp(it, position)
+            showPosterPopUp(it, posterURL)
         }
 
         //show snackbar when wallpaper is set successfully
@@ -58,7 +52,10 @@ class PosterFragment : Fragment() {
         return binding.root
     }
 
-    private fun showPosterPopUp(v: View, position: Int) {
+    /**
+     * show pop up menu
+     */
+    private fun showPosterPopUp(v: View, poster: String?) {
         val popup = PopupMenu(requireActivity(), v)
         val inflater: MenuInflater = popup.menuInflater
         inflater.inflate(R.menu.poster_menu, popup.menu)
@@ -67,7 +64,7 @@ class PosterFragment : Fragment() {
                 R.id.save -> {
                 }
                 R.id.wallpaper -> {
-                    posterViewModel.setImageAsWallpaper(position)
+                    posterViewModel.setImageAsWallpaper(poster)
                 }
             }
             true

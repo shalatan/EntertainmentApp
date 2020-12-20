@@ -68,8 +68,8 @@
         android:label="fragment_poster"
         tools:layout="@layout/fragment_poster">
         <argument
-            android:name="selectedMovie"
-            app:argType="com.shalatan.entertainmentapp.model.Movie" />
+            android:name="posterURL"
+            app:argType="string" />
     </fragment>
 
 </navigation>

@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.shalatan.entertainmentapp.databinding.ViewPagerItemBinding
 import com.shalatan.entertainmentapp.model.Backdrop
+import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 
-class PostersAdapter :
+class PostersAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Backdrop, PostersAdapter.PosterViewHolder>(DiffCallBack) {
 
     class PosterViewHolder(private val binding: ViewPagerItemBinding) :
@@ -16,7 +17,16 @@ class PostersAdapter :
         fun bind(backdrop: Backdrop) {
             binding.backdrop = backdrop
         }
+    }
 
+    companion object DiffCallBack : DiffUtil.ItemCallback<Backdrop>() {
+        override fun areItemsTheSame(oldItem: Backdrop, newItem: Backdrop): Boolean {
+            return newItem === oldItem
+        }
+
+        override fun areContentsTheSame(oldItem: Backdrop, newItem: Backdrop): Boolean {
+            return oldItem.file_path == newItem.file_path
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
@@ -31,16 +41,14 @@ class PostersAdapter :
 
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
         val backdrop = getItem(position)
+        holder.itemView.setOnClickListener {
+            (onClickListener.onCLick(backdrop.file_path))
+        }
         holder.bind(backdrop)
     }
 
-    companion object DiffCallBack : DiffUtil.ItemCallback<Backdrop>() {
-        override fun areItemsTheSame(oldItem: Backdrop, newItem: Backdrop): Boolean {
-            return newItem === oldItem
-        }
 
-        override fun areContentsTheSame(oldItem: Backdrop, newItem: Backdrop): Boolean {
-            return oldItem.file_path == newItem.file_path
-        }
+    class OnClickListener(val clickListener: (posterUrl: String) -> Unit) {
+        fun onCLick(posterUrl: String) = clickListener(posterUrl)
     }
 }

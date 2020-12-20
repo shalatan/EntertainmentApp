@@ -26,10 +26,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.viewpager2.widget.ViewPager2
+        <com.github.piasy.biv.view.BigImageView
             android:id="@+id/movie_poster"
-            android:clipToPadding="false"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:transitionName="poster_transition2"
+            app:posterImageUrl="@{posterViewModel.posterURL}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

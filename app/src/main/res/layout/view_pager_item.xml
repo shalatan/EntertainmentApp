@@ -19,12 +19,13 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/view_pager_image"
             android:layout_width="match_parent"
+            android:transitionName="poster_transition1"
             android:layout_height="match_parent"
             android:contentDescription="@string/cd_movie_poster"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
             android:scaleType="center"
-            app:posterImageUrl="@{backdrop.file_path}"
+            app:imageUrl="@{backdrop.file_path}"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyTheme.Image"
             tools:src="@tools:sample/backgrounds/scenic" />
     </androidx.constraintlayout.widget.ConstraintLayout>

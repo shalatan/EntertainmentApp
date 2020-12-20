@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -40,15 +39,17 @@ class DetailFragment : Fragment() {
         binding.viewModel = detailViewModel
         binding.lifecycleOwner = this
 
-//        detailViewModel.navigateToPosterFragment.observe(viewLifecycleOwner, Observer {
-//            this.findNavController()
-//                .navigate(DetailFragmentDirections.actionDetailFragmentToPosterFragment(it))
-//        })
-
+        //movie poster view pager
         val moviePosterViewPager = binding.moviePosterViewPager
         moviePosterViewPager.clipToPadding = false
-        val adapter = PostersAdapter()
+        val adapter = PostersAdapter(PostersAdapter.OnClickListener {
+//            val extras = FragmentNavigatorExtras(binding.moviePosterViewPager to "poster_transition2")
+            val directions = DetailFragmentDirections.actionDetailFragmentToPosterFragment(it)
+            this.findNavController().navigate(directions)
+        })
         moviePosterViewPager.adapter = adapter
+
+        //if there's no backdrop images, remove the poster view pager else submit the data
         detailViewModel.completeMovieDetail.observe(viewLifecycleOwner, Observer {
             if (it.images?.backdrops.isNullOrEmpty()) {
                 binding.moviePosterViewPager.visibility = View.GONE
@@ -57,6 +58,7 @@ class DetailFragment : Fragment() {
             }
         })
 
+        //snackbar events
         detailViewModel.showAddedToWatchedSnackbarEvent.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
@@ -65,7 +67,6 @@ class DetailFragment : Fragment() {
                     Snackbar.LENGTH_SHORT
                 ).show()
                 makeButtonUiChanges(application, binding.addToWatched, binding.addToWatchLater)
-                binding.addToWatched.setBackgroundColor(application.getColor(R.color.holo_red_dark))
                 detailViewModel.doneShowingSnackbar()
             }
         })
@@ -112,7 +113,7 @@ class DetailFragment : Fragment() {
     ) {
         imageButton1.isEnabled = false
         imageButton2.isEnabled = true
-        imageButton1.setBackgroundColor(application.getColor(R.color.holo_blue_dark))
-        imageButton2.setBackgroundColor(application.getColor(R.color.background_light))
+//        imageButton1.setBackgroundColor(application.getColor(R.color.holo_blue_dark))
+//        imageButton2.setBackgroundColor(application.getColor(R.color.background_light))
     }
 }

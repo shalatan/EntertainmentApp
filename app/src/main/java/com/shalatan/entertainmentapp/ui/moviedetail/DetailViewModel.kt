@@ -144,4 +144,8 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     private suspend fun insert(savedMovie: SavedMovie) {
         database.insert(savedMovie)
     }
+
+    fun displayPoster(posterURL: String) {
+
+    }
 }

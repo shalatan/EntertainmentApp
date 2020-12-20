@@ -20,15 +20,12 @@ import com.shalatan.entertainmentapp.network.LmdbApi
 import com.shalatan.entertainmentapp.utils.Constants
 import kotlinx.coroutines.*
 
-class PosterViewModel(val app: Application, val movie: Movie) : AndroidViewModel(app) {
+class PosterViewModel(val app: Application, val posterPath: String) : AndroidViewModel(app) {
 
-    private val _selectedMovieDetail = MutableLiveData<Movie>()
-    val selectedMovieDetail: LiveData<Movie>
-        get() = _selectedMovieDetail
 
-    private val _images = MutableLiveData<ImagesResponse>()
-    val images: LiveData<ImagesResponse>
-        get() = _images
+    private val _posterURL = MutableLiveData<String>()
+    val posterURL: LiveData<String>
+        get() = _posterURL
 
     private var _posterSetAsWallpaperSnackbarEvent = MutableLiveData<Boolean>()
     private var _posterSavedSnackbarEvent = MutableLiveData<Boolean>()
@@ -43,37 +40,17 @@ class PosterViewModel(val app: Application, val movie: Movie) : AndroidViewModel
         _posterSavedSnackbarEvent.value = false
     }
 
-    private val viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        _selectedMovieDetail.value = movie
-        fetchMoviePosters()
-    }
-
-    /**
-     * fetch movie posters and load in live data
-     */
-    private fun fetchMoviePosters() {
-        coroutineScope.launch {
-            val getMoviePosters =
-                LmdbApi.retrofitService.getSelectedMovieImages(_selectedMovieDetail.value!!.id)
-            try {
-                val imagesResponse = getMoviePosters.await()
-                _images.value = imagesResponse
-            } catch (t: Throwable) {
-                Log.e("Error fetching complete detail : ", t.message.toString())
-            }
-        }
+        _posterURL.value = posterPath
     }
 
     /**
      * set the position'th element of backdrops as wallpaper and trigger snackbar
      */
-    fun setImageAsWallpaper(position: Int) {
-        Log.e("PVM1",_posterSetAsWallpaperSnackbarEvent.value.toString())
-        val lastUrl = images.value?.backdrops?.get(position)?.file_path
-        val fullUrl = Constants.IMG_BASE_URL_O + lastUrl
+    fun setImageAsWallpaper(poster: String?) {
+        Log.e("PVM1", _posterSetAsWallpaperSnackbarEvent.value.toString())
+        val fullUrl = Constants.IMG_BASE_URL_O + poster
         Log.e("PVM1", fullUrl)
         Glide.with(app)
             .asBitmap()
@@ -85,7 +62,7 @@ class PosterViewModel(val app: Application, val movie: Movie) : AndroidViewModel
                 ) {
                     WallpaperManager.getInstance(app).setBitmap(resource)
                     _posterSetAsWallpaperSnackbarEvent.value = true
-                    Log.e("PVM2",_posterSetAsWallpaperSnackbarEvent.value.toString())
+                    Log.e("PVM2", _posterSetAsWallpaperSnackbarEvent.value.toString())
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {}
