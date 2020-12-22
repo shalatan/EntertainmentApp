@@ -9,7 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_light">#ffffffff</color>
     <color name="light_grey">#80919191</color>
+    <color name="background_dark">#121212</color>
 
     //text colors
-    <color name="primary_text">#FAFAFA</color>
+    <color name="high_emphasis_text">#FFFFFF</color>
+    <color name="mid_emphasis_text">#DEFFFFFF</color>
+    <color name="low_emphasis_text">#99FFFFFF</color>
 </resources>

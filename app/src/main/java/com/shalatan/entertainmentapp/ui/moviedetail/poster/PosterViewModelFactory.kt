@@ -1,10 +1,8 @@
-package com.shalatan.entertainmentapp.ui.moviedetail
+package com.shalatan.entertainmentapp.ui.moviedetail.poster
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.shalatan.entertainmentapp.database.MovieDAO
-import com.shalatan.entertainmentapp.model.Movie
 
 class PosterViewModelFactory(
     private val posterPath: String,

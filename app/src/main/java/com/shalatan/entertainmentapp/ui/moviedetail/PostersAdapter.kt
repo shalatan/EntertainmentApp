@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.shalatan.entertainmentapp.databinding.ViewPagerItemBinding
 import com.shalatan.entertainmentapp.model.Backdrop
-import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 
 class PostersAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Backdrop, PostersAdapter.PosterViewHolder>(DiffCallBack) {

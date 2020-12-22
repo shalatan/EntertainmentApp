@@ -1,4 +1,4 @@
-package com.shalatan.entertainmentapp.ui.moviedetail
+package com.shalatan.entertainmentapp.ui.moviedetail.poster
 
 import android.os.Bundle
 import android.util.Log

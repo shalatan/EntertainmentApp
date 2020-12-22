@@ -14,16 +14,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/view_pager_image"
             android:layout_width="match_parent"
-            android:transitionName="poster_transition1"
             android:layout_height="match_parent"
             android:contentDescription="@string/cd_movie_poster"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
             android:scaleType="center"
             app:imageUrl="@{backdrop.file_path}"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyTheme.Image"

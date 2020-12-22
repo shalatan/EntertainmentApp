@@ -64,7 +64,7 @@
 
     <fragment
         android:id="@+id/posterFragment"
-        android:name="com.shalatan.entertainmentapp.ui.moviedetail.PosterFragment"
+        android:name="com.shalatan.entertainmentapp.ui.moviedetail.poster.PosterFragment"
         android:label="fragment_poster"
         tools:layout="@layout/fragment_poster">
         <argument

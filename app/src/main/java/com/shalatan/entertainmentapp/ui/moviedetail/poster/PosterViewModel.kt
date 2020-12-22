@@ -1,4 +1,4 @@
-package com.shalatan.entertainmentapp.ui.moviedetail
+package com.shalatan.entertainmentapp.ui.moviedetail.poster
 
 import android.app.Application
 import android.app.WallpaperManager
@@ -11,14 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.material.snackbar.Snackbar
-import com.shalatan.entertainmentapp.model.Backdrop
-import com.shalatan.entertainmentapp.model.ImagesResponse
-import com.shalatan.entertainmentapp.model.Movie
-import com.shalatan.entertainmentapp.model.Poster
-import com.shalatan.entertainmentapp.network.LmdbApi
 import com.shalatan.entertainmentapp.utils.Constants
-import kotlinx.coroutines.*
 
 class PosterViewModel(val app: Application, val posterPath: String) : AndroidViewModel(app) {
 

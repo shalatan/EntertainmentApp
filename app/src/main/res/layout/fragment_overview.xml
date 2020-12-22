@@ -38,13 +38,14 @@
                 tools:context="com.shalatan.entertainmentapp.MainActivity">
 
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="48dp"
                     android:text="Popular Movies"
+                    android:textColor="@color/high_emphasis_text"
                     android:textSize="28sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -59,7 +60,7 @@
                     app:spanCount="3"
                     tools:listitem="@layout/movie_item" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -68,6 +69,7 @@
                     android:layout_marginBottom="2dp"
                     android:paddingBottom="2dp"
                     android:text="Top Rated Movies"
+                    android:textColor="@color/high_emphasis_text"
                     android:textSize="28sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -81,7 +83,7 @@
                     app:listData="@{viewModel.topRatedMovies}"
                     tools:listitem="@layout/movie_item" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,6 +92,7 @@
                     android:layout_marginBottom="2dp"
                     android:paddingBottom="2dp"
                     android:text="Upcoming Movies"
+                    android:textColor="@color/high_emphasis_text"
                     android:textSize="28sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -104,7 +107,7 @@
                     app:spanCount="3"
                     tools:listitem="@layout/movie_item" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,6 +116,7 @@
                     android:layout_marginBottom="2dp"
                     android:paddingBottom="2dp"
                     android:text="Upcoming Movies"
+                    android:textColor="@color/high_emphasis_text"
                     android:textSize="28sp" />
 
                 <androidx.recyclerview.widget.RecyclerView

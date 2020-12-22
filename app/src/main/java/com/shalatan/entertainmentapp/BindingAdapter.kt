@@ -36,7 +36,6 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 //    fullUrl?.let{
     fullUrl.let {
         val imgUri = it.toUri().buildUpon().scheme("https").build()
-        val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
         Glide.with(imageView.context)
             .load(imgUri)
             .apply(
