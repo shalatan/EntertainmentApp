@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.shalatan.entertainmentapp.databinding.MovieItemBinding
+import com.shalatan.entertainmentapp.databinding.ItemMovieBinding
 import com.shalatan.entertainmentapp.model.Movie
 
 class MovieAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Movie, MovieAdapter.MovieViewHolder>(DiffCallBack) {
 
-    class MovieViewHolder(private val binding: MovieItemBinding) :
+    class MovieViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.movie = movie
@@ -33,7 +33,7 @@ class MovieAdapter(private val onClickListener: OnClickListener) :
         parent: ViewGroup,
         viewType: Int
     ): MovieViewHolder {
-        return MovieViewHolder(MovieItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return MovieViewHolder(ItemMovieBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {

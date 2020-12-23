@@ -39,6 +39,18 @@
                 app:layout_constraintBottom_toBottomOf="@+id/movie_poster"
                 tools:layout_editor_absoluteX="12dp" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movie_genre_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/movie_poster"
+                tools:listitem="@layout/item_genre" />
+
             <TextView
                 android:id="@+id/movie_name"
                 android:layout_width="wrap_content"
@@ -51,7 +63,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.054"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_poster"
+                app:layout_constraintTop_toBottomOf="@+id/movie_genre_recycler_view"
                 tools:text="Movie Title" />
 
             <TextView
@@ -147,12 +159,6 @@
                 android:layout_marginTop="12dp"
                 app:layout_constraintTop_toBottomOf="@+id/raw_poster_section" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/testing"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_margin="12dp"
-                app:layout_constraintTop_toBottomOf="@+id/movie_poster_view_pager" />
 
             <!--            <fragment-->
             <!--                android:id="@+id/child_fragment_container"-->

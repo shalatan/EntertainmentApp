@@ -12,6 +12,5 @@
     <string name="cd_add_to_watched">Add to Watched</string>
 
     <string name="open_menu">Open Menu</string>
-    <integer name="reply_motion_duration_large">300</integer>
 
 </resources>

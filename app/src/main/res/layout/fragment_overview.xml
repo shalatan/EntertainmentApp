@@ -58,7 +58,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:listData="@{viewModel.popularMovies}"
                     app:spanCount="3"
-                    tools:listitem="@layout/movie_item" />
+                    tools:listitem="@layout/item_movie" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textView2"
@@ -81,7 +81,7 @@
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:listData="@{viewModel.topRatedMovies}"
-                    tools:listitem="@layout/movie_item" />
+                    tools:listitem="@layout/item_movie" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textView3"
@@ -105,7 +105,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:listData="@{viewModel.upcomingMovies}"
                     app:spanCount="3"
-                    tools:listitem="@layout/movie_item" />
+                    tools:listitem="@layout/item_movie" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textView4"
@@ -129,7 +129,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:listData="@{viewModel.upcomingMovies}"
                     app:spanCount="3"
-                    tools:listitem="@layout/movie_item" />
+                    tools:listitem="@layout/item_movie" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

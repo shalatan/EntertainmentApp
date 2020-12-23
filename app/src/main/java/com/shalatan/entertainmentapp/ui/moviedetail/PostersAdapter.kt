@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.shalatan.entertainmentapp.databinding.ViewPagerItemBinding
+import com.shalatan.entertainmentapp.databinding.ItemViewPagerPosterBinding
 import com.shalatan.entertainmentapp.model.Backdrop
 
 class PostersAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Backdrop, PostersAdapter.PosterViewHolder>(DiffCallBack) {
 
-    class PosterViewHolder(private val binding: ViewPagerItemBinding) :
+    class PosterViewHolder(private val binding: ItemViewPagerPosterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(backdrop: Backdrop) {
             binding.backdrop = backdrop
@@ -30,7 +30,7 @@ class PostersAdapter(private val onClickListener: OnClickListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
         return PosterViewHolder(
-            ViewPagerItemBinding.inflate(
+            ItemViewPagerPosterBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

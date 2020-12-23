@@ -3,16 +3,11 @@ package com.shalatan.entertainmentapp.ui.moviesection
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.databinding.FavouriteItemBinding
-import com.shalatan.entertainmentapp.databinding.MovieItemBinding
-import com.shalatan.entertainmentapp.generated.callback.OnClickListener
 import com.shalatan.entertainmentapp.model.Movie
 
 class SavedContentAdapter(private val onClickListener: OnClickListener) :

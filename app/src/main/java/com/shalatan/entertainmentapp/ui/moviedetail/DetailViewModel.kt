@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.http.POST
 
 class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     AndroidViewModel(app) {
