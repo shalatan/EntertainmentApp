@@ -1,6 +1,5 @@
 package com.shalatan.entertainmentapp.ui.moviesection
 
-import android.app.Application
 import androidx.lifecycle.*
 import com.shalatan.entertainmentapp.database.MovieDAO
 import com.shalatan.entertainmentapp.model.Movie

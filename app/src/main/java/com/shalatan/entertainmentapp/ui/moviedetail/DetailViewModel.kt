@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.shalatan.entertainmentapp.database.MovieDAO
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.*
-import com.shalatan.entertainmentapp.network.LmdbApi
+import com.shalatan.entertainmentapp.network.TmdbApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     AndroidViewModel(app) {
-
 
     // The internal MutableLiveData String that stores the most recent response status
     private val _status = MutableLiveData<String>()
@@ -84,7 +83,7 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     private fun fetchCurrentMovieDetails() {
         coroutineScope.launch {
             val getCompleteMovieDetail =
-                LmdbApi.retrofitService.getCompleteMovieDetail(_selectedMovieDetail.value!!.id)
+                TmdbApi.RETROFIT_SERVICE.getCompleteMovieDetailAsync(_selectedMovieDetail.value!!.id)
             try {
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie

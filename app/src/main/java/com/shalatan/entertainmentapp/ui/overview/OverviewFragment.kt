@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
 
-
 class OverviewFragment : Fragment() {
 
     /**
@@ -30,18 +29,29 @@ class OverviewFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+        binding.nowPlayingRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
+            viewModel.displayMovieDetails(it)
+        })
+
         binding.popularRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })
+
         binding.topRatedRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })
+
         binding.upcomingRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })
-        binding.upcomingRecyclerView2.adapter = MovieAdapter(MovieAdapter.OnClickListener {
-            viewModel.displayMovieDetails(it)
-        })
+
+        binding.goTo.setOnClickListener {
+            findNavController().navigate(OverviewFragmentDirections.actionShowGrid())
+        }
+
+//        binding.upcomingRecyclerView2.adapter = MovieAdapter(MovieAdapter.OnClickListener {
+//            viewModel.displayMovieDetails(it)
+//        })
 
         viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner, Observer {
             if (null != it) {

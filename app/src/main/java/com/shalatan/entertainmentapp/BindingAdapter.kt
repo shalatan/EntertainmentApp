@@ -7,18 +7,27 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.github.piasy.biv.view.BigImageView
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.ui.moviesection.SavedContentAdapter
+import com.shalatan.entertainmentapp.ui.overview.LandscapeMovieAdapter
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import com.shalatan.entertainmentapp.utils.Constants
+
+/* Bind List Views */
 
 //bind recycler view adapter for fragment_overview
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
     val adapter = recyclerView.adapter as MovieAdapter
+    adapter.submitList(data)
+}
+
+//bind recycler view adapter for fragment_overview
+@BindingAdapter("landscapeListData")
+fun bindLandscapeRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
+    val adapter = recyclerView.adapter as LandscapeMovieAdapter
     adapter.submitList(data)
 }
 
@@ -28,6 +37,8 @@ fun bindFavouriteRecyclerView(recyclerView: RecyclerView, data: List<SavedMovie>
     val adapter = recyclerView.adapter as SavedContentAdapter
     adapter.submitList(data)
 }
+
+/* Bind Images */
 
 //bind image into movie_item
 @BindingAdapter("imageUrl")
@@ -55,3 +66,4 @@ fun bindPoster(bigImageView: BigImageView, imgUrl: String?) {
         bigImageView.showImage(Uri.parse(fullUrl))
     }
 }
+

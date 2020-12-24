@@ -2,7 +2,6 @@ package com.shalatan.entertainmentapp.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.shalatan.entertainmentapp.model.CompleteMovieDetail
-import com.shalatan.entertainmentapp.model.ImagesResponse
 import com.shalatan.entertainmentapp.model.MovieResponse
 import com.shalatan.entertainmentapp.utils.Constants
 import com.squareup.moshi.Moshi
@@ -27,34 +26,42 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(Constants.BASE_URL)
     .build()
 
-interface LmdbApiService {
+interface TmdbApiService {
+
+    //add region
+    @GET("3/movie/now_playing")
+    fun getNowPlayingMoviesAsync(
+        @Query("api_key") apiKey: String = Constants.API_KEY
+    ): Deferred<MovieResponse>
+
     @GET("3/movie/popular")
-    fun getPopularMovies(
+    fun getPopularMoviesAsync(
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("region") lang: String = Constants.REGION_INDIA
     ): Deferred<MovieResponse>
 
     @GET("3/movie/top_rated")
-    fun getTopRatedMovies(
+    fun getTopRatedMoviesAsync(
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("region") lang: String = Constants.REGION_INDIA
     ): Deferred<MovieResponse>
 
-    @GET("3/movie/now_playing")
-    fun getUpcomingMovies(
+    //add region
+    @GET("3/movie/upcoming")
+    fun getUpcomingMoviesAsync(
         @Query("api_key") apiKey: String = Constants.API_KEY
     ): Deferred<MovieResponse>
 
     @GET("3/movie/{movieId}")
-    fun getCompleteMovieDetail(
+    fun getCompleteMovieDetailAsync(
         @Path("movieId") movieID: Int,
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("append_to_response") atr: String = Constants.VIR
     ): Deferred<CompleteMovieDetail>
 }
 
-object LmdbApi {
-    val retrofitService: LmdbApiService by lazy {
-        retrofit.create(LmdbApiService::class.java)
+object TmdbApi {
+    val RETROFIT_SERVICE: TmdbApiService by lazy {
+        retrofit.create(TmdbApiService::class.java)
     }
 }
