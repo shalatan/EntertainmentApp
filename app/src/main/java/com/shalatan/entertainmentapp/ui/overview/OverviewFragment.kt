@@ -45,24 +45,34 @@ class OverviewFragment : Fragment() {
             viewModel.displayMovieDetails(it)
         })
 
-        binding.goTo.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionShowGrid())
-        }
-
-//        binding.upcomingRecyclerView2.adapter = MovieAdapter(MovieAdapter.OnClickListener {
-//            viewModel.displayMovieDetails(it)
-//        })
-
         viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner, Observer {
             if (null != it) {
-//                val movieCardDetailTransitionName = getString(R.string.movie_card_detail_transition_name)
-//                val extras = FragmentNavigatorExtras(movie_item to movieCardDetailTransitionName)
-//                val directions = OverviewFragmentDirections.actionShowDetail(it)
-//                this.findNavController().navigate(directions,extras)
-                this.findNavController().navigate(OverviewFragmentDirections.actionShowDetail(it))
+                val directions = OverviewFragmentDirections.actionShowDetail(it)
+                this.findNavController().navigate(directions)
                 viewModel.displayMovieDetailsComplete()
             }
         })
+
+        binding.seeAllNowPlaying.setOnClickListener {
+            findNavController()
+                .navigate(OverviewFragmentDirections.actionShowGrid(viewModel.nowPlayingMovies.value!!.toTypedArray()))
+        }
+
+        binding.seeAllPopular.setOnClickListener {
+            findNavController()
+                .navigate(OverviewFragmentDirections.actionShowGrid(viewModel.popularMovies.value!!.toTypedArray()))
+        }
+
+        binding.seeAllTopRated.setOnClickListener {
+            findNavController()
+                .navigate(OverviewFragmentDirections.actionShowGrid(viewModel.topRatedMovies.value!!.toTypedArray()))
+        }
+
+        binding.seeAllUpcoming.setOnClickListener {
+            findNavController()
+                .navigate(OverviewFragmentDirections.actionShowGrid(viewModel.upcomingMovies.value!!.toTypedArray()))
+        }
+
         return binding.root
     }
 }

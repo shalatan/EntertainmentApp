@@ -14,6 +14,7 @@ class MovieAdapter(private val onClickListener: OnClickListener) :
     class MovieViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
+//            binding.itemMoviePoster.transitionName = movie.original_title
             binding.movie = movie
             binding.executePendingBindings()
         }

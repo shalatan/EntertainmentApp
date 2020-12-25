@@ -10,186 +10,192 @@
             type="com.shalatan.entertainmentapp.ui.overview.OverviewViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/overview_constraint"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/greeting_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="48dp"
+                android:text="@{viewModel.greetingText}"
+                android:textColor="#ffff"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Good Morning" />
+
+            <ImageView
+                android:id="@+id/open_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/open_menu"
+                android:elevation="16dp"
+                android:onClick="showPopUp"
+                android:src="@drawable/ic_more_vert_24"
+                app:layout_constraintBottom_toBottomOf="@+id/greeting_text_view"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/now_playing_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="Now Playing Movies"
+                android:textColor="@color/high_emphasis_text"
+                android:textSize="28sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/greeting_text_view" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/see_all_now_playing"
+                style="@style/seeAllTextView"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/now_playing_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/now_playing_text_view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/now_playing_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:context="com.shalatan.entertainmentapp.MainActivity">
+                android:layout_marginTop="16dp"
+                android:minHeight="220dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/now_playing_text_view"
+                app:listData="@{viewModel.nowPlayingMovies}"
+                tools:listitem="@layout/item_movie" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/top_rated_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:text="Top Rated Movies(IN)"
+                android:textColor="@color/high_emphasis_text"
+                android:textSize="28sp"
+                app:layout_constraintStart_toStartOf="@+id/now_playing_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/now_playing_recycler_view" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_weight="4"
-                        android:text="@{viewModel.greetingText}"
-                        android:textColor="#ffff"
-                        android:textSize="24sp"
-                        android:textStyle="italic"
-                        tools:text="Good Morning" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/see_all_top_rated"
+                style="@style/seeAllTextView"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/top_rated_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/top_rated_text_view" />
 
-                    <ImageView
-                        android:id="@+id/open_menu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/open_menu"
-                        android:elevation="16dp"
-                        android:onClick="showPopUp"
-                        android:src="@drawable/ic_more_vert_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/top_rated_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:minHeight="220dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/top_rated_text_view"
+                app:listData="@{viewModel.topRatedMovies}"
+                tools:listitem="@layout/item_movie" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/popular_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="26dp"
+                android:paddingBottom="2dp"
+                android:text="Popular Movies(IN)"
+                android:textColor="@color/high_emphasis_text"
+                android:textSize="28sp"
+                app:layout_constraintStart_toStartOf="@+id/top_rated_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/top_rated_recycler_view" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/see_all_popular"
+                style="@style/seeAllTextView"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/popular_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/popular_text_view" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/textView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="22dp"
-                        android:text="Now Playing Movies"
-                        android:textColor="@color/high_emphasis_text"
-                        android:textSize="28sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/popular_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:minHeight="220dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/popular_text_view"
+                app:listData="@{viewModel.popularMovies}"
+                tools:layout_editor_absoluteX="0dp"
+                tools:listitem="@layout/item_movie" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/go_to"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="22dp"
-                        android:gravity="end"
-                        android:text="See All"
-                        android:textColor="@color/high_emphasis_text"
-                        android:textSize="22sp" />
-                </LinearLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/upcoming_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:text="Upcoming Movies"
+                android:textColor="@color/high_emphasis_text"
+                android:textSize="28sp"
+                app:layout_constraintStart_toStartOf="@+id/popular_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/popular_recycler_view" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/now_playing_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:minHeight="220dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:listData="@{viewModel.nowPlayingMovies}"
-                    app:spanCount="3"
-                    tools:listitem="@layout/item_movie" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/see_all_upcoming"
+                style="@style/seeAllTextView"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/upcoming_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/upcoming_text_view" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginBottom="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="Popular Movies(IN)"
-                    android:textColor="@color/high_emphasis_text"
-                    android:textSize="28sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/upcoming_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:minHeight="200dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/upcoming_text_view"
+                app:listData="@{viewModel.upcomingMovies}"
+                app:spanCount="3"
+                tools:listitem="@layout/item_movie" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/popular_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:minHeight="220dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:listData="@{viewModel.popularMovies}"
-                    tools:listitem="@layout/item_movie" />
+            <!--                <com.google.android.material.textview.MaterialTextView-->
+            <!--                    android:id="@+id/textView0"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:layout_marginTop="16dp"-->
+            <!--                    android:text="Popular Movies"-->
+            <!--                    android:textColor="@color/high_emphasis_text"-->
+            <!--                    android:textSize="28sp" />-->
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginBottom="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="Top Rated Movies(IN)"
-                    android:textColor="@color/high_emphasis_text"
-                    android:textSize="28sp" />
+            <!--                <androidx.recyclerview.widget.RecyclerView-->
+            <!--                    android:id="@+id/watch_later_recycler_view"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="8dp"-->
+            <!--                    android:orientation="horizontal"-->
+            <!--                    app:landscapeListData="@{viewModel.popularMovies}"-->
+            <!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+            <!--                    app:spanCount="3"-->
+            <!--                    tools:listitem="@layout/item_movie_landscape" />-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/top_rated_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:minHeight="220dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:listData="@{viewModel.topRatedMovies}"
-                    app:spanCount="3"
-                    tools:listitem="@layout/item_movie" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginBottom="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="Upcoming Movies"
-                    android:textColor="@color/high_emphasis_text"
-                    android:textSize="28sp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/upcoming_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:minHeight="200dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:listData="@{viewModel.upcomingMovies}"
-                    app:spanCount="3"
-                    tools:listitem="@layout/item_movie" />
-
-                <!--                <com.google.android.material.textview.MaterialTextView-->
-                <!--                    android:id="@+id/textView0"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginStart="8dp"-->
-                <!--                    android:layout_marginTop="16dp"-->
-                <!--                    android:text="Popular Movies"-->
-                <!--                    android:textColor="@color/high_emphasis_text"-->
-                <!--                    android:textSize="28sp" />-->
-
-                <!--                <androidx.recyclerview.widget.RecyclerView-->
-                <!--                    android:id="@+id/watch_later_recycler_view"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="8dp"-->
-                <!--                    android:orientation="horizontal"-->
-                <!--                    app:landscapeListData="@{viewModel.popularMovies}"-->
-                <!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-                <!--                    app:spanCount="3"-->
-                <!--                    tools:listitem="@layout/item_movie_landscape" />-->
-
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

@@ -22,9 +22,9 @@
             <ImageView
                 android:id="@+id/movie_poster"
                 android:layout_width="match_parent"
+                android:transitionName="poster"
                 android:layout_height="460dp"
                 android:contentDescription="@string/cd_movie_poster"
-                android:onClick="@{() -> viewModel.showMoviePosters()}"
                 android:scaleType="center"
                 app:imageUrl="@{viewModel.selectedMovieDetail.posterPath}"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentMovieGridBinding
 
 class MovieGridFragment : Fragment() {
@@ -24,13 +23,20 @@ class MovieGridFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val movies = MovieGridFragmentArgs.fromBundle(requireArguments()).moviesList.toMutableList()
         val binding = FragmentMovieGridBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.moviesGridRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener{
-//            findNavController().navigate(Dire)
+        val adapter = MovieAdapter(MovieAdapter.OnClickListener {
+            findNavController().navigate(
+                MovieGridFragmentDirections.actionMovieGridFragmentToDetailFragment(
+                    it
+                )
+            )
         })
+        binding.moviesGridRecyclerView.adapter = adapter
+        adapter.submitList(movies)
 
         return binding.root
     }

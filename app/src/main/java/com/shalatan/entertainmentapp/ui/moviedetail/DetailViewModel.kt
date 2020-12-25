@@ -125,15 +125,11 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
         _showAddedToWatchLaterSnackbarEvent.value = true
     }
 
-    fun showMoviePosters() {
-        _navigateToPosterFragment.value = _selectedMovieDetail.value
-    }
-
-    fun clearDatabase() {
-        viewModelScope.launch {
-            delete()
-        }
-    }
+//    fun clearDatabase() {
+//        viewModelScope.launch {
+//            delete()
+//        }
+//    }
 
     private suspend fun delete() {
         database.clear()

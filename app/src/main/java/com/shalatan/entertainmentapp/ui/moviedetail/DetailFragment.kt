@@ -3,6 +3,7 @@ package com.shalatan.entertainmentapp.ui.moviedetail
 import android.R
 import android.app.Application
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,9 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.explode)
 
         val application = requireNotNull(activity).application
         val binding = FragmentDetailBinding.inflate(inflater)

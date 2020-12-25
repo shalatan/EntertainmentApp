@@ -41,6 +41,14 @@ class OverviewViewModel : ViewModel() {
     val navigateToSelectedMovie: LiveData<Movie>
         get() = _navigateToSelectedMovie
 
+    private val _navigateToSelectedMovieListGrid = MutableLiveData<List<Movie>>()
+    val navigateToSelectedMovieListGrid: LiveData<List<Movie>>
+        get() = _navigateToSelectedMovieListGrid
+
+    private val _showMovieListGrid = MutableLiveData<List<Movie>>()
+    val showMovieListGrid: LiveData<List<Movie>>
+        get() = _showMovieListGrid
+
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -72,7 +80,6 @@ class OverviewViewModel : ViewModel() {
                 _popularMovies.value = getPopularMoviesDeferred.await().movies
                 _topRatedMovies.value = getTopRatedMoviesDeferred.await().movies
                 _upcomingMovies.value = getUpcomingMoviesDeferred.await().movies
-                Log.e("UP", _upcomingMovies.value.toString())
             } catch (t: Throwable) {
                 _status.value = "Failure" + t.message
                 Log.e("ERROR", _status.value.toString())
@@ -96,9 +103,9 @@ class OverviewViewModel : ViewModel() {
         _navigateToSelectedMovie.value = null
     }
 
-
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
     }
+
 }
