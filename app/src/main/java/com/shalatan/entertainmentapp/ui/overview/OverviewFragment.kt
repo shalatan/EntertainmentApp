@@ -1,13 +1,16 @@
 package com.shalatan.entertainmentapp.ui.overview
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
 
 class OverviewFragment : Fragment() {
@@ -28,6 +31,18 @@ class OverviewFragment : Fragment() {
         val binding = FragmentOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        // Set up the tool bar
+        (activity as AppCompatActivity).setSupportActionBar(binding.appBar)
+        binding.appBar.setNavigationOnClickListener(
+            NavigationIconClickListener(
+                activity as AppCompatActivity,
+                binding.movieScrollView,
+                AccelerateDecelerateInterpolator(),
+                ContextCompat.getDrawable(requireContext(), R.drawable.shr_branded_menu),
+                ContextCompat.getDrawable(requireContext(), R.drawable.shr_close_menu)
+            )
+        )
 
         binding.nowPlayingRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
@@ -73,6 +88,22 @@ class OverviewFragment : Fragment() {
                 .navigate(OverviewFragmentDirections.actionShowGrid(viewModel.upcomingMovies.value!!.toTypedArray()))
         }
 
+        binding.watchLaterMovies.setOnClickListener {
+            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchLaterMoviesFragment())
+        }
+
+        binding.watchedMovies.setOnClickListener {
+            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchLaterMoviesFragment())
+        }
+
+        binding.seriesSection.setOnClickListener {
+            Toast.makeText(requireContext(), "Not Yet Implemented", Toast.LENGTH_SHORT).show()
+        }
+
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
     }
 }

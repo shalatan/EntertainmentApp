@@ -14,7 +14,6 @@
         <!-- Customize your theme here. -->
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowBackground">@color/background_dark</item>
-        <item name="android:windowTranslucentStatus">true</item>
         <item name="fontFamily">sans-serif</item>
     </style>
 </resources>

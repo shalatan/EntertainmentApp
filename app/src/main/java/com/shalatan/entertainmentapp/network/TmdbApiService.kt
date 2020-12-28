@@ -31,25 +31,29 @@ interface TmdbApiService {
     //add region
     @GET("3/movie/now_playing")
     fun getNowPlayingMoviesAsync(
-        @Query("api_key") apiKey: String = Constants.API_KEY
+        @Query("api_key") apiKey: String = Constants.API_KEY,
+        @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
     @GET("3/movie/popular")
     fun getPopularMoviesAsync(
         @Query("api_key") apiKey: String = Constants.API_KEY,
-        @Query("region") lang: String = Constants.REGION_INDIA
+        @Query("region") lang: String = Constants.REGION_INDIA,
+        @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
     @GET("3/movie/top_rated")
     fun getTopRatedMoviesAsync(
         @Query("api_key") apiKey: String = Constants.API_KEY,
-        @Query("region") lang: String = Constants.REGION_INDIA
+        @Query("region") lang: String = Constants.REGION_INDIA,
+        @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
     //add region
     @GET("3/movie/upcoming")
     fun getUpcomingMoviesAsync(
-        @Query("api_key") apiKey: String = Constants.API_KEY
+        @Query("api_key") apiKey: String = Constants.API_KEY,
+        @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
     @GET("3/movie/{movieId}")
