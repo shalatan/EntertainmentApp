@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        android:paddingTop="26dp">
 
         <LinearLayout
             style="@style/Widget.Shrine.Backdrop"
@@ -33,7 +34,7 @@
 
             <View
                 android:layout_width="76dp"
-                android:layout_height="0.6dp"
+                android:layout_height="0.8dp"
                 android:layout_margin="16dp"
                 android:background="@color/design_default_color_on_primary" />
 

@@ -2,6 +2,6 @@
 <resources>
     <dimen name="pageMargin">20dp</dimen>
     <dimen name="offset">30dp</dimen>
-    <dimen name="shr_product_grid_reveal_height">400dp</dimen>
+    <dimen name="shr_product_grid_reveal_height">500dp</dimen>
 
 </resources>

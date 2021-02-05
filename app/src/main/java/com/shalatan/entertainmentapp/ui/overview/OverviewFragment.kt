@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
 
@@ -93,11 +95,11 @@ class OverviewFragment : Fragment() {
         }
 
         binding.watchedMovies.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchLaterMoviesFragment())
+            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchedMoviesFragment())
         }
 
         binding.seriesSection.setOnClickListener {
-            Toast.makeText(requireContext(), "Not Yet Implemented", Toast.LENGTH_SHORT).show()
+            Snackbar.make(it, "Coming Soon !!", Snackbar.LENGTH_SHORT).show()
         }
 
         return binding.root

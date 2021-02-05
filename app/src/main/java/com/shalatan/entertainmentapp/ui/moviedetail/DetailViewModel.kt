@@ -66,11 +66,9 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
         _showAddedToWatchLaterSnackbarEvent.value = false
     }
 
-
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
 
     init {
         _selectedMovieDetail.value = movie
@@ -87,6 +85,7 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
             try {
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie
+                Log.e("MOVIE : ", completeMovie.toString())
                 _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
             } catch (t: Throwable) {
                 Log.e("Error fetching complete detail : ", t.message.toString())

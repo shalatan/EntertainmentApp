@@ -62,6 +62,7 @@ class PosterFragment : Fragment() {
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.save -> {
+                    Snackbar.make(v.rootView, "Coming Soon !!", Snackbar.LENGTH_SHORT).show()
                 }
                 R.id.wallpaper -> {
                     posterViewModel.setImageAsWallpaper(poster)
