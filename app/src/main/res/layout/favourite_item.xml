@@ -10,38 +10,35 @@
             type="com.shalatan.entertainmentapp.database.SavedMovie" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:padding="4dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/saved_movie_poster"
-            android:layout_width="68dp"
-            android:layout_height="82dp"
-            android:layout_marginStart="8dp"
-            android:contentDescription="@string/cd_movie_poster"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{savedMovie.moviePoster}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            <ImageView
+                android:id="@+id/saved_movie_poster"
+                android:layout_width="68dp"
+                android:layout_height="80dp"
+                android:contentDescription="@string/cd_movie_poster"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{savedMovie.moviePoster}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <TextView
-            android:id="@+id/movie_title"
-            android:layout_width="282dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{savedMovie.movieTitle}"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.409"
-            app:layout_constraintStart_toEndOf="@+id/saved_movie_poster"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="MOVIE NAME" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/movie_title"
+                android:layout_width="282dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
+                android:text="@{savedMovie.movieTitle}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.409"
+                app:layout_constraintStart_toEndOf="@+id/saved_movie_poster"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="MOVIE NAME" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

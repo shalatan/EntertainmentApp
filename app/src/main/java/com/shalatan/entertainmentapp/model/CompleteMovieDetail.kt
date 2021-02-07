@@ -6,6 +6,7 @@ data class CompleteMovieDetail(
     val backdrop_path: String?,
     val belongs_to_collection: BelongsToCollection?,
     val budget: Int?,
+    val credits: Credits?,
     val genres: List<Genre>?,
     val homepage: String?,
     val id: Int?,

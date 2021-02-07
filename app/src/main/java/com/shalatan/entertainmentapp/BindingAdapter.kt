@@ -9,9 +9,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.github.piasy.biv.view.BigImageView
 import com.shalatan.entertainmentapp.database.SavedMovie
+import com.shalatan.entertainmentapp.model.Cast
 import com.shalatan.entertainmentapp.model.Movie
+import com.shalatan.entertainmentapp.ui.moviedetail.MovieCastAdapter
 import com.shalatan.entertainmentapp.ui.moviesection.SavedContentAdapter
-import com.shalatan.entertainmentapp.ui.overview.LandscapeMovieAdapter
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import com.shalatan.entertainmentapp.utils.Constants
 
@@ -25,17 +26,24 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
 }
 
 //bind recycler view adapter for fragment_overview
-@BindingAdapter("landscapeListData")
-fun bindLandscapeRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
-    val adapter = recyclerView.adapter as LandscapeMovieAdapter
-    adapter.submitList(data)
-}
+//@BindingAdapter("landscapeListData")
+//fun bindLandscapeRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
+//    val adapter = recyclerView.adapter as LandscapeMovieAdapter
+//    adapter.submitList(data)
+//}
 
 //bind recycler view adapter for fragments_(watched/watch_later)_movies
 @BindingAdapter("savedContent")
 fun bindFavouriteRecyclerView(recyclerView: RecyclerView, data: List<SavedMovie>?) {
     val adapter = recyclerView.adapter as SavedContentAdapter
     adapter.submitList(data)
+}
+
+//bind recycler view adapter for fragment_overview
+@BindingAdapter("castListData")
+fun bindMovieCastRecyclerView(recyclerView: RecyclerView, data: List<Cast>?) {
+    val movieCastAdapter = recyclerView.adapter as MovieCastAdapter
+    movieCastAdapter.submitList(data)
 }
 
 /* Bind Images */

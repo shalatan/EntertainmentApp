@@ -85,7 +85,7 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
             try {
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie
-                Log.e("MOVIE : ", completeMovie.toString())
+                Log.e("MOVIE : ", _completeMovieDetail.value!!.credits?.cast.toString())
                 _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
             } catch (t: Throwable) {
                 Log.e("Error fetching complete detail : ", t.message.toString())

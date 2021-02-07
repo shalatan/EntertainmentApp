@@ -28,6 +28,7 @@
                 android:transitionName="poster"
                 app:imageUrl="@{viewModel.selectedMovieDetail.posterPath}"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic" />
@@ -44,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -53,16 +54,15 @@
 
             <TextView
                 android:id="@+id/movie_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@{viewModel.selectedMovieDetail.original_title}"
                 android:textColor="@color/high_emphasis_text"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.054"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                app:layout_constraintStart_toStartOf="@+id/startGuideline"
                 app:layout_constraintTop_toBottomOf="@+id/movie_genre_recycler_view"
                 tools:text="Movie Title" />
 
@@ -74,7 +74,7 @@
                 android:text="@{String.valueOf(viewModel.completeMovieDetail.vote_average)}"
                 android:textColor="@color/low_emphasis_text"
                 android:textSize="22sp"
-                app:layout_constraintStart_toStartOf="@+id/movie_name"
+                app:layout_constraintStart_toStartOf="@+id/startGuideline"
                 app:layout_constraintTop_toBottomOf="@+id/movie_name"
                 tools:text="6.9" />
 
@@ -92,25 +92,24 @@
                 android:id="@+id/raw_synopsis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/synopsis"
                 android:textColor="@color/mid_emphasis_text"
-                android:textSize="22sp"
-                app:layout_constraintStart_toStartOf="@+id/movie_rating"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/startGuideline"
                 app:layout_constraintTop_toBottomOf="@+id/movie_rating" />
 
             <TextView
                 android:id="@+id/movie_overview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="12dp"
                 android:text="@{viewModel.completeMovieDetail.overview}"
                 android:textAlignment="viewStart"
                 android:textColor="@color/low_emphasis_text"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/raw_synopsis"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                app:layout_constraintStart_toStartOf="@+id/startGuideline"
                 app:layout_constraintTop_toBottomOf="@+id/raw_synopsis"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper volutpat libero at pharetra. Praesent eros purus, tempor non sodales sed, feugiat vitae massa. Ut id commodo metus, sit amet dapibus purus. Nam ligula metus, tincidunt non magna at, cursus tempor ligula." />
 
@@ -142,15 +141,39 @@
                 app:srcCompat="@drawable/custom_watch_later" />
 
             <TextView
+                android:id="@+id/raw_cast_section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Cast"
+                android:textColor="@color/mid_emphasis_text"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/startGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/movie_overview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movie_cast_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="140dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/endGuideline"
+                app:layout_constraintStart_toStartOf="@+id/startGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/raw_cast_section"
+                tools:listitem="@layout/item_cast" />
+
+            <TextView
                 android:id="@+id/raw_poster_section"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Posters"
                 android:textColor="@color/mid_emphasis_text"
-                android:textSize="22sp"
-                app:layout_constraintStart_toStartOf="@+id/movie_overview"
-                app:layout_constraintTop_toBottomOf="@+id/movie_overview" />
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/startGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/movie_cast_recycler_view" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/movie_poster_view_pager"
@@ -158,6 +181,20 @@
                 android:layout_height="160dp"
                 android:layout_marginTop="12dp"
                 app:layout_constraintTop_toBottomOf="@+id/raw_poster_section" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/startGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/endGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
 
             <!--            <fragment-->
             <!--                android:id="@+id/child_fragment_container"-->

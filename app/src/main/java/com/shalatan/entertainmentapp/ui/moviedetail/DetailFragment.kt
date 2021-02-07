@@ -54,12 +54,17 @@ class DetailFragment : Fragment() {
         moviePosterViewPager.adapter = postersAdapter
         setUpPosterViewPager(moviePosterViewPager)
 
+        val movieCastRecyclerView = binding.movieCastRecyclerView
+        val movieCastAdapter = MovieCastAdapter()
+        movieCastRecyclerView.adapter = movieCastAdapter
+
         val genreAdapter = GenreAdapter()
         binding.movieGenreRecyclerView.adapter = genreAdapter
 
         //if there's no backdrop images, remove the poster view pager else submit the data
         detailViewModel.completeMovieDetail.observe(viewLifecycleOwner, Observer {
             genreAdapter.submitList(it.genres)
+            movieCastAdapter.submitList(it.credits?.cast)
             if (it.images?.backdrops.isNullOrEmpty()) {
                 binding.moviePosterViewPager.visibility = View.GONE
             } else {

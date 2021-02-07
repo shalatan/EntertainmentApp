@@ -89,4 +89,8 @@ dependencies {
     implementation 'com.github.piasy:GlideImageLoader:1.7.0'
     implementation 'com.github.piasy:BigImageViewer:1.7.0'
 
+    //pagination
+    implementation 'com.github.markomilos:paginate:1.0.0'
+
+
 }
