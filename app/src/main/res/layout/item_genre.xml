@@ -18,7 +18,7 @@
         app:cardBackgroundColor="@color/background_dark"
         app:cardCornerRadius="14dp"
         app:cardElevation="8dp"
-        app:strokeColor="#3E9FD7"
+        app:strokeColor="#E50914"
         app:strokeWidth="2dp">
 
         <TextView

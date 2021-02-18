@@ -11,6 +11,9 @@
     <color name="light_grey">#80919191</color>
     <color name="background_dark">#000000</color>
 
+    <color name="red_espn">#CC0000</color>
+    <color name="red_netflix">#E50914</color>
+
     //text colors
     <color name="high_emphasis_text">#FFFFFF</color>
     <color name="mid_emphasis_text">#DEFFFFFF</color>
