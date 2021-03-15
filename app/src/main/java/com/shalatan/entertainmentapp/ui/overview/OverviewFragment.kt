@@ -3,8 +3,6 @@ package com.shalatan.entertainmentapp.ui.overview
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -14,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
+import kotlin.math.absoluteValue
 
 class OverviewFragment : Fragment() {
 
@@ -41,8 +40,8 @@ class OverviewFragment : Fragment() {
                 activity as AppCompatActivity,
                 binding.movieScrollView,
                 AccelerateDecelerateInterpolator(),
-                ContextCompat.getDrawable(requireContext(), R.drawable.shr_branded_menu),
-                ContextCompat.getDrawable(requireContext(), R.drawable.shr_close_menu)
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_open),
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_close)
             )
         )
 
@@ -71,23 +70,19 @@ class OverviewFragment : Fragment() {
         })
 
         binding.seeAllNowPlaying.setOnClickListener {
-            findNavController()
-                .navigate(OverviewFragmentDirections.actionShowGrid(viewModel.nowPlayingMovies.value!!.toTypedArray()))
+            findNavController().navigate(OverviewFragmentDirections.actionShowGrid())
         }
 
         binding.seeAllPopular.setOnClickListener {
-            findNavController()
-                .navigate(OverviewFragmentDirections.actionShowGrid(viewModel.popularMovies.value!!.toTypedArray()))
+            findNavController().navigate(OverviewFragmentDirections.actionShowGrid())
         }
 
         binding.seeAllTopRated.setOnClickListener {
-            findNavController()
-                .navigate(OverviewFragmentDirections.actionShowGrid(viewModel.topRatedMovies.value!!.toTypedArray()))
+            findNavController().navigate(OverviewFragmentDirections.actionShowGrid())
         }
 
         binding.seeAllUpcoming.setOnClickListener {
-            findNavController()
-                .navigate(OverviewFragmentDirections.actionShowGrid(viewModel.upcomingMovies.value!!.toTypedArray()))
+            findNavController().navigate(OverviewFragmentDirections.actionShowGrid())
         }
 
         binding.watchLaterMovies.setOnClickListener {

@@ -68,7 +68,6 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
 
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     init {
         _selectedMovieDetail.value = movie

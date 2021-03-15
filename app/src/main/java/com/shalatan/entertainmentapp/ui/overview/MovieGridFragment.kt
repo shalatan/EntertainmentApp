@@ -1,6 +1,7 @@
 package com.shalatan.entertainmentapp.ui.overview
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,20 +24,17 @@ class MovieGridFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val movies = MovieGridFragmentArgs.fromBundle(requireArguments()).moviesList.toMutableList()
+//        val movies = MovieGridFragmentArgs.fromBundle(requireArguments()).moviesList.toMutableList()
         val binding = FragmentMovieGridBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         val adapter = MovieAdapter(MovieAdapter.OnClickListener {
             findNavController().navigate(
-                MovieGridFragmentDirections.actionMovieGridFragmentToDetailFragment(
-                    it
-                )
+                MovieGridFragmentDirections.actionMovieGridFragmentToDetailFragment(it)
             )
         })
         binding.moviesGridRecyclerView.adapter = adapter
-        adapter.submitList(movies)
 
         return binding.root
     }

@@ -62,7 +62,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/app_bar"
-                app:titleTextColor="@color/red_espn"
+                app:titleTextColor="@color/white_smoke"
                 style="@style/Widget.Shrine.Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -71,8 +71,8 @@
                 android:paddingEnd="12dp"
                 android:paddingRight="12dp"
                 app:contentInsetStart="0dp"
-                app:navigationIcon="@drawable/shr_branded_menu"
-                app:title="BLABLA" />
+                app:navigationIcon="@drawable/ic_clapper_open"
+                app:title="Movies Hex" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView

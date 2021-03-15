@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.network.TmdbApi
+import com.shalatan.entertainmentapp.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -45,46 +46,45 @@ class OverviewViewModel : ViewModel() {
     val navigateToSelectedMovieListGrid: LiveData<List<Movie>>
         get() = _navigateToSelectedMovieListGrid
 
-    private val _showMovieListGrid = MutableLiveData<List<Movie>>()
-    val showMovieListGrid: LiveData<List<Movie>>
-        get() = _showMovieListGrid
-
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
-    var greetingText: String = getGreetingMessage()
 
     init {
         fetchMoviesLists()
     }
 
-    private fun getGreetingMessage(): String {
-        val c = Calendar.getInstance()
-        return when (c.get(Calendar.HOUR_OF_DAY)) {
-            in 0..11 -> "Good Morning"
-            in 12..15 -> "Good Afternoon"
-            in 16..20 -> "Good Evening"
-            in 21..23 -> "Good Night"
-            else -> "Hello"
+    private fun fetchMoviesLists() {
+        fetchNowPlayingMovies()
+        fetchTopRatedMovies()
+        fetchPopularMovies()
+        fetchUpcomingMovies()
+    }
+
+    private fun fetchNowPlayingMovies(){
+        coroutineScope.launch {
+            val getNowPlayingMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getNowPlayingMoviesAsync()
+            _nowPlayingMovies.value = getNowPlayingMoviesDeferred.await().movies
         }
     }
 
-    private fun fetchMoviesLists() {
+    private fun fetchPopularMovies(){
         coroutineScope.launch {
-            val getNowPlayingMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getNowPlayingMoviesAsync()
             val getPopularMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getPopularMoviesAsync()
-            val getTopRatedMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getTopRatedMoviesAsync()
-            val getUpcomingMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getUpcomingMoviesAsync()
-            try {
-                _nowPlayingMovies.value = getNowPlayingMoviesDeferred.await().movies
-                _popularMovies.value = getPopularMoviesDeferred.await().movies
-                _topRatedMovies.value = getTopRatedMoviesDeferred.await().movies
-                _upcomingMovies.value = getUpcomingMoviesDeferred.await().movies
-            } catch (t: Throwable) {
-                _status.value = "Failure" + t.message
-                Log.e("ERROR", _status.value.toString())
+            _popularMovies.value = getPopularMoviesDeferred.await().movies
+        }
+    }
 
-            }
+    private fun fetchTopRatedMovies(){
+        coroutineScope.launch {
+            val getTopRatedMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getTopRatedMoviesAsync()
+            _topRatedMovies.value = getTopRatedMoviesDeferred.await().movies
+        }
+    }
+
+    private fun fetchUpcomingMovies(){
+        coroutineScope.launch {
+            val getUpcomingMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getUpcomingMoviesAsync()
+            _upcomingMovies.value = getUpcomingMoviesDeferred.await().movies
         }
     }
 
@@ -97,7 +97,7 @@ class OverviewViewModel : ViewModel() {
     }
 
     /**
-     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
+     * After the navigation has taken place, make sure navigateToSelectedMovie is set to null
      */
     fun displayMovieDetailsComplete() {
         _navigateToSelectedMovie.value = null
