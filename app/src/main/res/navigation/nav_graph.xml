@@ -81,9 +81,9 @@
         <action
             android:id="@+id/action_movieGridFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
-        <!--        <argument-->
-        <!--            android:name="moviesList"-->
-        <!--            app:argType="com.shalatan.entertainmentapp.model.Movie[]" />-->
+        <argument
+            android:name="listNumber"
+            app:argType="integer"/>
     </fragment>
 
 </navigation>

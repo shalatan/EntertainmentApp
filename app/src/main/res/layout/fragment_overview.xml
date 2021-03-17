@@ -36,8 +36,8 @@
                 android:layout_width="76dp"
                 android:layout_height="0.8dp"
                 android:layout_margin="16dp"
-                android:backgroundTint="#CC0000"
-                android:background="@color/design_default_color_on_primary" />
+                android:background="@color/design_default_color_on_primary"
+                android:backgroundTint="#CC0000" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/watched_movies"
@@ -62,7 +62,6 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/app_bar"
-                app:titleTextColor="@color/white_smoke"
                 style="@style/Widget.Shrine.Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -72,7 +71,8 @@
                 android:paddingRight="12dp"
                 app:contentInsetStart="0dp"
                 app:navigationIcon="@drawable/ic_clapper_open"
-                app:title="Movies Hex" />
+                app:title="Movies Hex"
+                app:titleTextColor="@color/white_smoke" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -136,12 +136,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/now_playing_text_view" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/now_playing_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:minHeight="220dp"
+                    android:minHeight="230dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/now_playing_text_view"
@@ -167,12 +167,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/top_rated_text_view" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/top_rated_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:minHeight="220dp"
+                    android:minHeight="230dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/top_rated_text_view"
@@ -200,12 +200,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/popular_text_view" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/popular_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:minHeight="220dp"
+                    android:minHeight="230dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/popular_text_view"
@@ -232,12 +232,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/upcoming_text_view" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/upcoming_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:minHeight="200dp"
+                    android:minHeight="230dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/upcoming_text_view"

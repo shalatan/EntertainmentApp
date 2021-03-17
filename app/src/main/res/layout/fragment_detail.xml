@@ -178,9 +178,15 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/movie_poster_view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="240dp"
                 android:layout_marginTop="12dp"
-                app:layout_constraintTop_toBottomOf="@+id/raw_poster_section" />
+                app:layout_constraintTop_toBottomOf="@+id/raw_poster_section"
+                android:layout_marginBottom="40dp"/>
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@+id/movie_poster_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/startGuideline"

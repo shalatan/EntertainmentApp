@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.shalatan.entertainmentapp.databinding.FragmentMovieGridBinding
 
 class MovieGridFragment : Fragment() {
@@ -19,12 +20,15 @@ class MovieGridFragment : Fragment() {
         ViewModelProvider(this).get(OverviewViewModel::class.java)
     }
 
+    val args: MovieGridFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-//        val movies = MovieGridFragmentArgs.fromBundle(requireArguments()).moviesList.toMutableList()
+        val listNumber = args.listNumber
+        Log.e("LIST",listNumber.toString())
         val binding = FragmentMovieGridBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel

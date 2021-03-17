@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
 import kotlin.math.absoluteValue
@@ -70,19 +71,19 @@ class OverviewFragment : Fragment() {
         })
 
         binding.seeAllNowPlaying.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionShowGrid())
-        }
-
-        binding.seeAllPopular.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionShowGrid())
+            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(1))
         }
 
         binding.seeAllTopRated.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionShowGrid())
+            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(2))
+        }
+
+        binding.seeAllPopular.setOnClickListener {
+            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(3))
         }
 
         binding.seeAllUpcoming.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionShowGrid())
+            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(4))
         }
 
         binding.watchLaterMovies.setOnClickListener {

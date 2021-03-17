@@ -92,5 +92,7 @@ dependencies {
     //pagination
     implementation 'com.github.markomilos:paginate:1.0.0'
 
+    implementation 'com.github.sparrow007:carouselrecyclerview:1.0.0'
+
 
 }
