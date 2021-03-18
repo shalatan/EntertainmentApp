@@ -13,7 +13,6 @@ class SavedContentViewModel(val database: MovieDAO) :
     val watchedMovies = database.getAllWatchedMovies()
     val watchLaterMovies = database.getAllWatchLaterMovies()
 
-
     private val _navigateToSelectedMovie = MutableLiveData<Movie>()
     val navigateToSelectedMovie: LiveData<Movie>
         get() = _navigateToSelectedMovie

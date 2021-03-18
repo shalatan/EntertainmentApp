@@ -29,30 +29,26 @@ private val retrofit = Retrofit.Builder()
 interface TmdbApiService {
 
     //add region
-    @GET("3/movie/now_playing")
+    @GET("3/movie/now_playing?api_key=ea9a49ebf2b74721a75aae271ebd3036")
     fun getNowPlayingMoviesAsync(
-        @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
-    @GET("3/movie/popular")
+    @GET("3/movie/popular?api_key=ea9a49ebf2b74721a75aae271ebd3036")
     fun getPopularMoviesAsync(
-        @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("region") lang: String = Constants.REGION_INDIA,
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
-    @GET("3/movie/top_rated")
+    @GET("3/movie/top_rated?api_key=ea9a49ebf2b74721a75aae271ebd3036")
     fun getTopRatedMoviesAsync(
-        @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("region") lang: String = Constants.REGION_INDIA,
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
     //add region
-    @GET("3/movie/upcoming")
+    @GET("3/movie/upcoming?api_key=ea9a49ebf2b74721a75aae271ebd3036")
     fun getUpcomingMoviesAsync(
-        @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 

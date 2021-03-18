@@ -76,7 +76,7 @@
 
     <fragment
         android:id="@+id/movieGridFragment"
-        android:name="com.shalatan.entertainmentapp.ui.overview.MovieGridFragment"
+        android:name="com.shalatan.entertainmentapp.ui.overview.moviegrid.MovieGridFragment"
         tools:layout="@layout/fragment_movie_grid">
         <action
             android:id="@+id/action_movieGridFragment_to_detailFragment"
