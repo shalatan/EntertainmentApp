@@ -91,6 +91,7 @@ dependencies {
 
     //pagination
     implementation 'com.github.markomilos:paginate:1.0.0'
+    implementation "androidx.paging:paging-runtime-ktx:3.0.0-beta02"
 
     implementation 'com.github.sparrow007:carouselrecyclerview:1.0.0'
 

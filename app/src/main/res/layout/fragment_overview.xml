@@ -128,13 +128,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/see_all_now_playing"
-                    style="@style/seeAllTextView"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/now_playing_text_view"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/now_playing_text_view" />
+<!--                <com.google.android.material.textview.MaterialTextView-->
+<!--                    android:id="@+id/see_all_now_playing"-->
+<!--                    style="@style/seeAllTextView"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/now_playing_text_view"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/now_playing_text_view" />-->
 
                 <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/now_playing_recycler_view"
@@ -159,13 +159,13 @@
                     app:layout_constraintStart_toStartOf="@+id/now_playing_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/now_playing_recycler_view" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/see_all_top_rated"
-                    style="@style/seeAllTextView"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/top_rated_text_view"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/top_rated_text_view" />
+<!--                <com.google.android.material.textview.MaterialTextView-->
+<!--                    android:id="@+id/see_all_top_rated"-->
+<!--                    style="@style/seeAllTextView"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/top_rated_text_view"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/top_rated_text_view" />-->
 
                 <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/top_rated_recycler_view"
@@ -192,13 +192,13 @@
                     app:layout_constraintStart_toStartOf="@+id/top_rated_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/top_rated_recycler_view" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/see_all_popular"
-                    style="@style/seeAllTextView"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/popular_text_view"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/popular_text_view" />
+<!--                <com.google.android.material.textview.MaterialTextView-->
+<!--                    android:id="@+id/see_all_popular"-->
+<!--                    style="@style/seeAllTextView"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/popular_text_view"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/popular_text_view" />-->
 
                 <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/popular_recycler_view"
@@ -224,13 +224,13 @@
                     app:layout_constraintStart_toStartOf="@+id/popular_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/popular_recycler_view" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/see_all_upcoming"
-                    style="@style/seeAllTextView"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/upcoming_text_view"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/upcoming_text_view" />
+<!--                <com.google.android.material.textview.MaterialTextView-->
+<!--                    android:id="@+id/see_all_upcoming"-->
+<!--                    style="@style/seeAllTextView"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/upcoming_text_view"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/upcoming_text_view" />-->
 
                 <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/upcoming_recycler_view"

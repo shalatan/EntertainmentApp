@@ -70,21 +70,21 @@ class OverviewFragment : Fragment() {
             }
         })
 
-        binding.seeAllNowPlaying.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(1))
-        }
-
-        binding.seeAllTopRated.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(2))
-        }
-
-        binding.seeAllPopular.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(3))
-        }
-
-        binding.seeAllUpcoming.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(4))
-        }
+//        binding.seeAllNowPlaying.setOnClickListener {
+//            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(1))
+//        }
+//
+//        binding.seeAllTopRated.setOnClickListener {
+//            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(2))
+//        }
+//
+//        binding.seeAllPopular.setOnClickListener {
+//            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(3))
+//        }
+//
+//        binding.seeAllUpcoming.setOnClickListener {
+//            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(4))
+//        }
 
         binding.watchLaterMovies.setOnClickListener {
             findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchLaterMoviesFragment())

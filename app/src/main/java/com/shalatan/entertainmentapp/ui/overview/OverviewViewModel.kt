@@ -6,12 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.network.TmdbApi
-import com.shalatan.entertainmentapp.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.util.*
 
 class OverviewViewModel : ViewModel() {
 
@@ -54,37 +52,26 @@ class OverviewViewModel : ViewModel() {
     }
 
     private fun fetchMoviesLists() {
-        fetchNowPlayingMovies()
-        fetchTopRatedMovies()
-        fetchPopularMovies()
-        fetchUpcomingMovies()
+        fetchMovieSData()
     }
 
-    private fun fetchNowPlayingMovies(){
-        coroutineScope.launch {
-            val getNowPlayingMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getNowPlayingMoviesAsync()
-            _nowPlayingMovies.value = getNowPlayingMoviesDeferred.await().movies
-        }
-    }
 
-    private fun fetchPopularMovies(){
+    private fun fetchMovieSData(){
         coroutineScope.launch {
             val getPopularMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getPopularMoviesAsync()
-            _popularMovies.value = getPopularMoviesDeferred.await().movies
-        }
-    }
-
-    private fun fetchTopRatedMovies(){
-        coroutineScope.launch {
+            val getNowPlayingMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getNowPlayingMoviesAsync()
             val getTopRatedMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getTopRatedMoviesAsync()
-            _topRatedMovies.value = getTopRatedMoviesDeferred.await().movies
-        }
-    }
-
-    private fun fetchUpcomingMovies(){
-        coroutineScope.launch {
             val getUpcomingMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getUpcomingMoviesAsync()
-            _upcomingMovies.value = getUpcomingMoviesDeferred.await().movies
+            try {
+                _nowPlayingMovies.value = getNowPlayingMoviesDeferred.await().movies
+                _popularMovies.value = getPopularMoviesDeferred.await().movies
+                _topRatedMovies.value = getTopRatedMoviesDeferred.await().movies
+                _upcomingMovies.value = getUpcomingMoviesDeferred.await().movies
+            }catch (t: Throwable) {
+                _status.value = "Failure" + t.message
+                Log.e("ERROR", _status.value.toString())
+
+            }
         }
     }
 
