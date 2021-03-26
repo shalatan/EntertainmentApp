@@ -23,6 +23,7 @@ import com.shalatan.entertainmentapp.utils.Constants
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
     val adapter = recyclerView.adapter as MovieAdapter
     adapter.submitList(data)
+//    adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 }
 
 //bind recycler view adapter for fragment_overview

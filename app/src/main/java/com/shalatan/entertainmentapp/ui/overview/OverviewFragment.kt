@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import com.shalatan.entertainmentapp.R
@@ -69,22 +70,6 @@ class OverviewFragment : Fragment() {
                 viewModel.displayMovieDetailsComplete()
             }
         })
-
-//        binding.seeAllNowPlaying.setOnClickListener {
-//            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(1))
-//        }
-//
-//        binding.seeAllTopRated.setOnClickListener {
-//            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(2))
-//        }
-//
-//        binding.seeAllPopular.setOnClickListener {
-//            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(3))
-//        }
-//
-//        binding.seeAllUpcoming.setOnClickListener {
-//            findNavController().navigate(OverviewFragmentDirections.actionShowGrid(4))
-//        }
 
         binding.watchLaterMovies.setOnClickListener {
             findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchLaterMoviesFragment())
