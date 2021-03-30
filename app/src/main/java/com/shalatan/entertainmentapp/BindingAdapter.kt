@@ -1,6 +1,7 @@
 package com.shalatan.entertainmentapp
 
 import android.net.Uri
+import android.util.Log
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter

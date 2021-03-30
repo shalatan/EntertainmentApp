@@ -48,15 +48,10 @@ class OverviewViewModel : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        fetchMoviesLists()
+        fetchMoviesData()
     }
 
-    private fun fetchMoviesLists() {
-        fetchMovieSData()
-    }
-
-
-    private fun fetchMovieSData(){
+    private fun fetchMoviesData() {
         coroutineScope.launch {
             val getPopularMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getPopularMoviesAsync()
             val getNowPlayingMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getNowPlayingMoviesAsync()
@@ -67,7 +62,7 @@ class OverviewViewModel : ViewModel() {
                 _popularMovies.value = getPopularMoviesDeferred.await().movies
                 _topRatedMovies.value = getTopRatedMoviesDeferred.await().movies
                 _upcomingMovies.value = getUpcomingMoviesDeferred.await().movies
-            }catch (t: Throwable) {
+            } catch (t: Throwable) {
                 _status.value = "Failure" + t.message
                 Log.e("ERROR", _status.value.toString())
 

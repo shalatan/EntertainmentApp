@@ -200,7 +200,7 @@
 <!--                    app:layout_constraintEnd_toEndOf="parent"-->
 <!--                    app:layout_constraintTop_toTopOf="@+id/popular_text_view" />-->
 
-                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/popular_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -232,7 +232,7 @@
 <!--                    app:layout_constraintEnd_toEndOf="parent"-->
 <!--                    app:layout_constraintTop_toTopOf="@+id/upcoming_text_view" />-->
 
-                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/upcoming_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
