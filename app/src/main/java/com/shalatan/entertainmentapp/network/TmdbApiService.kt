@@ -14,6 +14,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
 
 //https://api.themoviedb.org/3/movie/popular?api_key=ea9a49ebf2b74721a75aae271ebd3036
 //https://api.themoviedb.org/3/movie/216015?api_key=ea9a49ebf2b74721a75aae271ebd3036&append_to_response=videos,images,reviews
@@ -21,12 +22,16 @@ import retrofit2.http.Query
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
-//HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-//interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-private val httpLoggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
-private val okHttpClient = OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build()
+private val httpLoggingInterceptor =
+    HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+
+private val okHttpClient = OkHttpClient.Builder()
+    .addInterceptor(httpLoggingInterceptor)
+    .connectTimeout(1, TimeUnit.MINUTES) // connect timeout
+    .writeTimeout(1, TimeUnit.MINUTES) // write timeout
+    .readTimeout(1, TimeUnit.MINUTES) // read timeout
+    .build()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -34,7 +39,6 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(Constants.BASE_URL)
     .client(okHttpClient)
     .build()
-
 
 
 interface TmdbApiService {

@@ -167,7 +167,7 @@
 <!--                    app:layout_constraintEnd_toEndOf="parent"-->
 <!--                    app:layout_constraintTop_toTopOf="@+id/top_rated_text_view" />-->
 
-                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/top_rated_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

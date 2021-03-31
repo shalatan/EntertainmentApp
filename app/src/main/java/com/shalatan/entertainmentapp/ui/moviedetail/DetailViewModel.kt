@@ -2,6 +2,7 @@ package com.shalatan.entertainmentapp.ui.moviedetail
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 
 class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     AndroidViewModel(app) {
@@ -67,29 +69,34 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
     }
 
     private val viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     init {
         _selectedMovieDetail.value = movie
-        fetchCurrentMovieDetails()
+        fetchCurrentMovieDetails(movie)
     }
 
     /**
      * fetch complete movie details with retrofit
      */
-    private fun fetchCurrentMovieDetails() {
+    private fun fetchCurrentMovieDetails(movie: Movie) {
         coroutineScope.launch {
             val getCompleteMovieDetail =
                 TmdbApi.RETROFIT_SERVICE.getCompleteMovieDetailAsync(_selectedMovieDetail.value!!.id)
             try {
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie
-                Log.e("MOVIE : ", _completeMovieDetail.value!!.credits?.cast.toString())
+                Log.e("MOVIE : ", _completeMovieDetail.value!!.toString())
                 _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
-            } catch (t: Throwable) {
-                Log.e("Error fetching complete detail : ", t.message.toString())
+            } catch (exception: SocketTimeoutException) {
+                Toast.makeText(getApplication(),"Slow Network Connection",Toast.LENGTH_SHORT).show()
+            }
+            catch (t: Throwable) {
+                Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
+                Log.e("Movie Name : ", movie.original_title.toString())
                 _status.value = t.message
             }
+
         }
     }
 
