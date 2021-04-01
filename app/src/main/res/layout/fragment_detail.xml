@@ -23,7 +23,7 @@
             android:contentDescription="@string/cd_movie_poster"
             android:scaleType="center"
             android:transitionName="poster"
-            app:imageUrl="@{viewModel.selectedMovieDetail.backdrop_path}"
+            app:imageUrl="@{viewModel.selectedMovieDetail.posterPath}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

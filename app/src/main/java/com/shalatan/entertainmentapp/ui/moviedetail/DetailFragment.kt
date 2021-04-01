@@ -20,7 +20,6 @@ import com.google.android.youtube.player.YouTubePlayerView
 import com.shalatan.entertainmentapp.database.MovieDatabase
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 
-
 class DetailFragment : Fragment() {
 
     lateinit var youTubePlayerView: YouTubePlayerView
