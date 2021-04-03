@@ -10,15 +10,22 @@
             type="com.shalatan.entertainmentapp.database.SavedMovie" />
     </data>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/black">
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_margin="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp">
 
             <ImageView
                 android:id="@+id/saved_movie_poster"
                 android:layout_width="68dp"
                 android:layout_height="80dp"
+                android:layout_marginStart="4dp"
                 android:contentDescription="@string/cd_movie_poster"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{savedMovie.moviePoster}"
@@ -41,4 +48,5 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="MOVIE NAME" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

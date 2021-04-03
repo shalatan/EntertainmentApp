@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.shalatan.entertainmentapp.ui.moviesection.SavedContentViewModel" />
@@ -15,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        
         android:paddingTop="28dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"

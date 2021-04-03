@@ -51,19 +51,20 @@ interface TmdbApiService {
 
     @GET("3/movie/popular?api_key=ea9a49ebf2b74721a75aae271ebd3036")
     fun getPopularMoviesAsync(
-        @Query("region") lang: String = Constants.REGION_INDIA,
+//        @Query("region") lang: String = Constants.REGION_INDIA,
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
     @GET("3/movie/top_rated?api_key=ea9a49ebf2b74721a75aae271ebd3036")
     fun getTopRatedMoviesAsync(
-        @Query("region") lang: String = Constants.REGION_INDIA,
+//        @Query("region") lang: String = Constants.REGION_INDIA,
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
     //add region
     @GET("3/movie/upcoming?api_key=ea9a49ebf2b74721a75aae271ebd3036")
     fun getUpcomingMoviesAsync(
+//        @Query("region") lang: String = Constants.REGION_INDIA,
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 

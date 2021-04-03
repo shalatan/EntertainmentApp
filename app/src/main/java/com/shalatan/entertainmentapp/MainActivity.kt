@@ -26,27 +26,4 @@ class MainActivity : AppCompatActivity() {
 //        setSupportActionBar(toolbar)
 //        setupActionBarWithNavController(navController)
     }
-
-    fun showPopUp(v: View) {
-        val popup = PopupMenu(this, v)
-        val inflater: MenuInflater = popup.menuInflater
-        inflater.inflate(R.menu.overview_fragment_menu, popup.menu)
-        popup.setOnMenuItemClickListener { menuItem ->
-            menuItem.onNavDestinationSelected(navController)
-        }
-        popup.show()
-    }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.bottom_app_bar_menu, menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
-//    }
-//
-//    override fun onSupportNavigateUp(): Boolean {
-//        return navController.navigateUp() || super.onSupportNavigateUp()
-//    }
 }

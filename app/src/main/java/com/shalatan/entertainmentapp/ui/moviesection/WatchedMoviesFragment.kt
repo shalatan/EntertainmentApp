@@ -1,17 +1,22 @@
 package com.shalatan.entertainmentapp.ui.moviesection
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.MovieDatabase
 import com.shalatan.entertainmentapp.databinding.FragmentWatchedMoviesBinding
+
 
 class WatchedMoviesFragment : Fragment() {
 
@@ -44,6 +49,17 @@ class WatchedMoviesFragment : Fragment() {
             }
         })
 
+        //divider for recyclerView
+        val decoration =
+            DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+        ContextCompat.getDrawable(requireContext(), R.drawable.recycler_view_divider)?.let {
+            decoration.setDrawable(
+                it
+            )
+        }
+        binding.savedContentRecyclerView.addItemDecoration(decoration)
+
+        //swipe to delete
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -60,5 +76,4 @@ class WatchedMoviesFragment : Fragment() {
         }).attachToRecyclerView(binding.savedContentRecyclerView)
         return binding.root
     }
-
 }
