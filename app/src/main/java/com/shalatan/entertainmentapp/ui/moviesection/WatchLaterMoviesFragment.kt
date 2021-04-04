@@ -1,7 +1,6 @@
 package com.shalatan.entertainmentapp.ui.moviesection
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +44,18 @@ class WatchLaterMoviesFragment : Fragment() {
             if (it != null) {
                 val directions = WatchLaterMoviesFragmentDirections.actionShowDetail(it)
                 this.findNavController().navigate(directions)
-                viewModel.displayMovieDetailsComplete()
+                viewModel.displayMovieDetailsCompleted()
+            }
+        })
+
+        //show or hide recyclerView is there's data or not
+        viewModel.watchLaterMovies.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty()){
+                binding.savedContentRecyclerView.visibility = View.GONE
+                binding.savedContentText.visibility = View.VISIBLE
+            }else{
+                binding.savedContentRecyclerView.visibility = View.VISIBLE
+                binding.savedContentText.visibility = View.GONE
             }
         })
 

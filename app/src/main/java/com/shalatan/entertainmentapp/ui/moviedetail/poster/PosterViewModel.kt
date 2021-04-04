@@ -55,7 +55,7 @@ class PosterViewModel(val app: Application, val posterPath: String) : AndroidVie
                 ) {
                     WallpaperManager.getInstance(app).setBitmap(resource)
                     _posterSetAsWallpaperSnackbarEvent.value = true
-                    Log.e("PVM2", _posterSetAsWallpaperSnackbarEvent.value.toString())
+                    Log.e("PosterViewModel : ", _posterSetAsWallpaperSnackbarEvent.value.toString())
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {}

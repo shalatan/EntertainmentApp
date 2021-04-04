@@ -4,21 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.shalatan.entertainmentapp.ui.moviesection.SavedContentViewModel" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/saved_content_recycler_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        
-        android:paddingTop="28dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:savedContent="@{viewModel.watchedMovies}"
-        tools:listitem="@layout/favourite_item" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/saved_content_text"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textSize="26sp"
+            android:textStyle="italic"
+            android:text="ADD MOVIES TO SHOW HERE !! \n\n SWIPE MOVIE LEFT TO REMOVE THEM FROM LIST"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/saved_content_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="28dp"
+            android:visibility="visible"
+            android:paddingEnd="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:savedContent="@{viewModel.watchedMovies}"
+            tools:listitem="@layout/favourite_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

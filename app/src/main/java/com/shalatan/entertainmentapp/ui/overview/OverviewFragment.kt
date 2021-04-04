@@ -51,6 +51,39 @@ class OverviewFragment : Fragment() {
             viewModel.displayMovieDetails(it)
         })
 
+        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty()) {
+
+            } else {
+                binding.nowPlayingRecyclerView.visibility = View.VISIBLE
+                binding.nowPlayingProgressBar.visibility = View.GONE
+            }
+        })
+        viewModel.topRatedMovies.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty()) {
+
+            } else {
+                binding.topRatedRecyclerView.visibility = View.VISIBLE
+                binding.topRatedProgressBar.visibility = View.GONE
+            }
+        })
+        viewModel.popularMovies.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty()) {
+
+            } else {
+                binding.popularRecyclerView.visibility = View.VISIBLE
+                binding.popularProgressBar.visibility = View.GONE
+            }
+        })
+        viewModel.upcomingMovies.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty()) {
+
+            } else {
+                binding.upcomingRecyclerView.visibility = View.VISIBLE
+                binding.upcomingProgressBar.visibility = View.GONE
+            }
+        })
+
         binding.popularRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })

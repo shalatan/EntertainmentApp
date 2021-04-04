@@ -3,6 +3,7 @@ package com.shalatan.entertainmentapp.ui.moviedetail.poster
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -24,8 +25,9 @@ class PosterFragment : Fragment() {
 
         val application = requireNotNull(activity).application
         BigImageViewer.initialize(GlideImageLoader.with(application))
-
         val binding = FragmentPosterBinding.inflate(inflater)
+
+        Toast.makeText(context,"Posters Are Zoomable",Toast.LENGTH_SHORT).show()
 
         val posterURL = PosterFragmentArgs.fromBundle(requireArguments()).posterURL
         Log.e("RECV URL", posterURL)
@@ -61,10 +63,11 @@ class PosterFragment : Fragment() {
         inflater.inflate(R.menu.poster_menu, popup.menu)
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.save -> {
-                    Snackbar.make(v.rootView, "Coming Soon !!", Snackbar.LENGTH_SHORT).show()
-                }
+//                R.id.save -> {
+//                    Snackbar.make(v.rootView, "Coming Soon !!", Snackbar.LENGTH_SHORT).show()
+//                }
                 R.id.wallpaper -> {
+                    Snackbar.make(v.rootView, "Please Wait !!", Snackbar.LENGTH_SHORT).show()
                     posterViewModel.setImageAsWallpaper(poster)
                 }
             }

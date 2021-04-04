@@ -24,7 +24,7 @@ class SavedContentViewModel(val database: MovieDAO) :
         _navigateToSelectedMovie.value = movie
     }
 
-    fun displayMovieDetailsComplete() {
+    fun displayMovieDetailsCompleted() {
         _navigateToSelectedMovie.value = null
     }
 

@@ -36,6 +36,15 @@ class WatchedMoviesFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+//        if(viewModel.watchedMovies.value.isEmpty()){
+//            binding.savedContentText.visibility = View.GONE
+//            binding.savedContentRecyclerView.visibility = View.VISIBLE
+//        }
+//        else{
+//            binding.savedContentText.visibility = View.VISIBLE
+//            binding.savedContentRecyclerView.visibility = View.GONE
+//        }
+
         binding.savedContentRecyclerView.adapter =
             SavedContentAdapter(SavedContentAdapter.OnClickListener {
                 viewModel.displayMovieDetails(it)
@@ -45,7 +54,18 @@ class WatchedMoviesFragment : Fragment() {
             if (it != null) {
                 val directions = WatchLaterMoviesFragmentDirections.actionShowDetail(it)
                 this.findNavController().navigate(directions)
-                viewModel.displayMovieDetailsComplete()
+                viewModel.displayMovieDetailsCompleted()
+            }
+        })
+
+        //show or hide recyclerView is there's data or not
+        viewModel.watchedMovies.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty()){
+                binding.savedContentRecyclerView.visibility = View.GONE
+                binding.savedContentText.visibility = View.VISIBLE
+            }else{
+                binding.savedContentRecyclerView.visibility = View.VISIBLE
+                binding.savedContentText.visibility = View.GONE
             }
         })
 
