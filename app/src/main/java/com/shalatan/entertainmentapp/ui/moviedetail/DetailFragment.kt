@@ -79,7 +79,6 @@ class DetailFragment : Fragment() {
                     "ADDED TO WATCHED MOVIES",
                     Snackbar.LENGTH_SHORT
                 ).show()
-                makeButtonUiChanges(application, binding.addToWatched, binding.addToWatchLater)
                 detailViewModel.doneShowingSnackbar()
             }
         })
@@ -91,7 +90,6 @@ class DetailFragment : Fragment() {
                     "ADDED TO WATCH LATER MOVIES",
                     Snackbar.LENGTH_SHORT // How long to display the message.
                 ).show()
-                makeButtonUiChanges(application, binding.addToWatchLater, binding.addToWatched)
                 detailViewModel.doneShowingSnackbar()
             }
         })
@@ -144,18 +142,4 @@ class DetailFragment : Fragment() {
             }
         }
     }
-
-    private fun makeButtonUiChanges(
-        application: Application,
-        imageButton1: ImageView,
-        imageButton2: ImageView
-    ) {
-//        imageButton1.isEnabled = false
-//        imageButton2.isEnabled = true
-        imageButton1.isPressed = true
-        imageButton2.isPressed = false
-//        imageButton1.setBackgroundColor(application.getColor(R.color.holo_blue_dark))
-//        imageButton2.setBackgroundColor(application.getColor(R.color.background_light))
-    }
-
 }
