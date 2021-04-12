@@ -1,15 +1,22 @@
 <h1 align="center">Movies Hex</h1>
 
+[![Get it on Google Play](https://lisk.io/sites/default/files/pictures/2020-01/download_on_the_play_store_badge.svg)](https://play.google.com/store/apps/details?id=com.shalatan.entertainmentapp)
+
+<a href='https://play.google.com/store/apps/details?id=com.shalatan.entertainmentapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
 
-
-
-
-
+<!-- 
+google-play-badge -->
 
 ## MAD Score
 ![alt text](https://github.com/Shalatan/EntertainmentApp/blob/master/gallery/summary.png?raw=true)
-![kotlin](https://user-images.githubusercontent.com/24237865/102366932-8a53fa80-3ffc-11eb-8131-fd6745a6f079.png)
+![alt text](https://github.com/Shalatan/EntertainmentApp/blob/master/gallery/kotlin.png?raw=true)
+![alt text](https://github.com/Shalatan/EntertainmentApp/blob/master/gallery/jetpack.png?raw=true)
+
+## Architecture
+Movies Kex is based on MVVM architecture and repository pattern.
+
+![alt text](https://github.com/Shalatan/EntertainmentApp/blob/master/gallery/mvvm-architecture.png?raw=true)
 
 
 
