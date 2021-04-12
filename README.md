@@ -1,12 +1,12 @@
 <h1 align="center">Movies Hex</h1>
 
-[![Get it on Google Play](https://lisk.io/sites/default/files/pictures/2020-01/download_on_the_play_store_badge.svg)](https://play.google.com/store/apps/details?id=com.shalatan.entertainmentapp)
+<!-- [![Get it on Google Play](https://lisk.io/sites/default/files/pictures/2020-01/download_on_the_play_store_badge.svg)](https://play.google.com/store/apps/details?id=com.shalatan.entertainmentapp) -->
 
-<a href='https://play.google.com/store/apps/details?id=com.shalatan.entertainmentapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+<!-- <a href='https://play.google.com/store/apps/details?id=com.shalatan.entertainmentapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a> -->
 
-
-<!-- 
-google-play-badge -->
+<p align="center"> 
+<a href="https://play.google.com/store/apps/details?id=com.shalatan.entertainmentapp" target="_blank"> <img src="https://github.com/Shalatan/EntertainmentApp/blob/master/gallery/play-store-badge.svg?raw=true" alt="android" width="40" height="40"/> </a>
+</p>
 
 ## MAD Score
 ![alt text](https://github.com/Shalatan/EntertainmentApp/blob/master/gallery/summary.png?raw=true)
