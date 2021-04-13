@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "888197843438",
+    "project_id": "movies-hex",
+    "storage_bucket": "movies-hex.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888197843438:android:03339939470a4bd20126ff",
+        "android_client_info": {
+          "package_name": "com.shalatan.entertainmentapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888197843438-70eabdgq1063oafjm0sclogh21bbv3fc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFev8xTlGoBfDKi35wIGEqWzNTc-_T3sQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888197843438-70eabdgq1063oafjm0sclogh21bbv3fc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
