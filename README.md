@@ -38,6 +38,7 @@ Movies hex also supports creation of watchlists like 'Watch Later Movies' and 'W
 - [BigImageViewer](https://github.com/Piasy/BigImageViewer) - For Zoomable Images
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
 - [Motion Layout](https://developer.android.com/training/constraint-layout/motionlayout) - To implement motions in fragments
+- [ReflectionView](https://github.com/sparrow007/CarouselRecyclerview) - For Reflective Image Views
 
 # MAD Score
 ![alt text](gallery/summary.png)
