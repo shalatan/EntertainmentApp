@@ -27,7 +27,7 @@ class PosterFragment : Fragment() {
         BigImageViewer.initialize(GlideImageLoader.with(application))
         val binding = FragmentPosterBinding.inflate(inflater)
 
-        Toast.makeText(context,"Posters Are Zoomable",Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context,"Posters Are Zoomable",Toast.LENGTH_SHORT).show()
 
         val posterURL = PosterFragmentArgs.fromBundle(requireArguments()).posterURL
         Log.e("RECV URL", posterURL)

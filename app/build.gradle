@@ -99,4 +99,8 @@ dependencies {
 
     // Carousel Recycler View
     implementation 'com.github.sparrow007:carouselrecyclerview:1.0.0'
+//    implementation 'com.ccy:FocusLayoutManager:1.0.2'
+
+    // Leak Canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }

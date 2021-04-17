@@ -2,6 +2,7 @@ package com.shalatan.entertainmentapp.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.shalatan.entertainmentapp.model.CompleteMovieDetail
+import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.model.MovieResponse
 import com.shalatan.entertainmentapp.utils.Constants
 import com.squareup.moshi.Moshi
@@ -16,8 +17,9 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
-//https://api.themoviedb.org/3/movie/popular?api_key=ea9a49ebf2b74721a75aae271ebd3036
-//https://api.themoviedb.org/3/movie/216015?api_key=ea9a49ebf2b74721a75aae271ebd3036&append_to_response=videos,images,reviews
+//movies list - https://api.themoviedb.org/3/movie/popular?api_key={api_key}
+//complete movie details - https://api.themoviedb.org/3/movie/216015?api_key={api_key}&append_to_response=videos,images,reviews
+//search - https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -74,6 +76,12 @@ interface TmdbApiService {
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("append_to_response") atr: String = Constants.VIR
     ): Deferred<CompleteMovieDetail>
+
+    @GET("3/search/movie")
+    fun getSearchedMovie(
+        @Query("api_key") apiKey: String = Constants.API_KEY,
+        @Query("query") search: String
+    ): Deferred<MovieResponse>
 }
 
 object TmdbApi {

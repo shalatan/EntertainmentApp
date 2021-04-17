@@ -86,7 +86,6 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
             try {
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie
-                Log.e("MOVIE : ", _completeMovieDetail.value!!.toString())
                 _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
             } catch (exception: SocketTimeoutException) {
                 Toast.makeText(getApplication(),"Slow Network Connection",Toast.LENGTH_SHORT).show()

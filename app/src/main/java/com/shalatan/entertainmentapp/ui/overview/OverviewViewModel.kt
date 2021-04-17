@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.network.TmdbApi
+import com.shalatan.entertainmentapp.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -36,6 +37,10 @@ class OverviewViewModel : ViewModel() {
     val upcomingMovies: LiveData<List<Movie>>
         get() = _upcomingMovies
 
+    private val _searchedMovies = MutableLiveData<List<Movie>>()
+    val searchedMovies: LiveData<List<Movie>>
+        get() = _searchedMovies
+
     private val _navigateToSelectedMovie = MutableLiveData<Movie>()
     val navigateToSelectedMovie: LiveData<Movie>
         get() = _navigateToSelectedMovie
@@ -44,11 +49,16 @@ class OverviewViewModel : ViewModel() {
     val navigateToSelectedMovieListGrid: LiveData<List<Movie>>
         get() = _navigateToSelectedMovieListGrid
 
+    private val _openSearchBox = MutableLiveData<Boolean>()
+    val openSearchBox: LiveData<Boolean>
+        get() = _openSearchBox
+
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
         fetchMoviesData()
+        _openSearchBox.value = true
     }
 
     private fun fetchMoviesData() {
@@ -65,7 +75,6 @@ class OverviewViewModel : ViewModel() {
             } catch (t: Throwable) {
                 _status.value = "Failure" + t.message
                 Log.e("ERROR", _status.value.toString())
-
             }
         }
     }
@@ -90,4 +99,27 @@ class OverviewViewModel : ViewModel() {
         viewModelJob.cancel()
     }
 
+    /**
+     * fetch searched movies
+     */
+    fun findMoviesForSearchText(search: String) {
+        coroutineScope.launch {
+            val getSearchMoviesDeferred =
+                TmdbApi.RETROFIT_SERVICE.getSearchedMovie(Constants.API_KEY, search)
+            try {
+                _searchedMovies.value = getSearchMoviesDeferred.await().movies
+            } catch (t: Throwable) {
+                Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
+                Log.e("Movie Name : ", search)
+                _status.value = t.message
+            }
+        }
+    }
+
+    /**
+     * trigger to openSearchBox to observe
+     */
+    fun triggerSearchLayout() {
+        _openSearchBox.value = _openSearchBox.value != true
+    }
 }

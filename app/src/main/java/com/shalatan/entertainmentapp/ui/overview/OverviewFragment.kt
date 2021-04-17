@@ -1,20 +1,22 @@
 package com.shalatan.entertainmentapp.ui.overview
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
-import kotlin.math.absoluteValue
+
 
 class OverviewFragment : Fragment() {
 
@@ -24,6 +26,8 @@ class OverviewFragment : Fragment() {
     private val viewModel: OverviewViewModel by lazy {
         ViewModelProvider(this).get(OverviewViewModel::class.java)
     }
+    private var searchBoxOpen = false
+    private lateinit var binding: FragmentOverviewBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +35,7 @@ class OverviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = FragmentOverviewBinding.inflate(inflater)
+        binding = FragmentOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -46,10 +50,6 @@ class OverviewFragment : Fragment() {
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_close)
             )
         )
-
-        binding.nowPlayingRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
-            viewModel.displayMovieDetails(it)
-        })
 
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
@@ -84,6 +84,10 @@ class OverviewFragment : Fragment() {
             }
         })
 
+        binding.nowPlayingRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
+            viewModel.displayMovieDetails(it)
+        })
+
         binding.popularRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })
@@ -93,6 +97,10 @@ class OverviewFragment : Fragment() {
         })
 
         binding.upcomingRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
+            viewModel.displayMovieDetails(it)
+        })
+
+        binding.searchRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })
 
@@ -116,7 +124,28 @@ class OverviewFragment : Fragment() {
             Snackbar.make(it, "Coming Soon !!", Snackbar.LENGTH_SHORT).show()
         }
 
+        viewModel.openSearchBox.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                closeTheSearchBox()
+            } else {
+                openTheSearchBox()
+            }
+        })
         return binding.root
     }
 
+    private fun closeTheSearchBox() {
+        binding.searchBarLinearLayout.visibility = View.GONE
+        binding.searchRecyclerView.visibility = View.GONE
+        searchBoxOpen = !searchBoxOpen
+    }
+
+    private fun openTheSearchBox() {
+        binding.searchBarLinearLayout.visibility = View.VISIBLE
+        binding.searchRecyclerView.visibility = View.VISIBLE
+        searchBoxOpen = !searchBoxOpen
+        binding.movieScrollView.post {
+            binding.movieScrollView.fullScroll(View.FOCUS_DOWN)
+        }
+    }
 }

@@ -10,7 +10,7 @@
             type="com.shalatan.entertainmentapp.ui.overview.OverviewViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
@@ -18,12 +18,14 @@
         android:paddingTop="26dp">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             style="@style/Widget.Shrine.Backdrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingTop="?attr/actionBarSize">
+            android:paddingTop="?attr/actionBarSize"
+            tools:layout_editor_absoluteY="26dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/series_section"
@@ -56,20 +58,20 @@
         </LinearLayout>
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:elevation="0dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/app_bar"
-                style="@style/Widget.Shrine.Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:background="@color/background_dark"
                 android:paddingStart="12dp"
-                android:paddingLeft="12dp"
                 android:paddingEnd="12dp"
-                android:paddingRight="12dp"
-                app:contentInsetStart="0dp"
                 app:navigationIcon="@drawable/ic_clapper_open"
                 app:title="Movies Hex"
                 app:titleTextColor="@color/white_smoke" />
@@ -79,7 +81,7 @@
             android:id="@+id/movie_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginTop="?actionBarSize"
             android:elevation="4dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -116,8 +118,8 @@
                 <ImageView
                     android:id="@+id/now_playing_progress_bar"
                     android:layout_width="160dp"
-                    android:src="@drawable/loading_animation"
                     android:layout_height="160dp"
+                    android:src="@drawable/loading_animation"
                     app:layout_constraintBottom_toBottomOf="@+id/now_playing_recycler_view"
                     app:layout_constraintEnd_toEndOf="@+id/now_playing_recycler_view"
                     app:layout_constraintStart_toStartOf="@+id/now_playing_recycler_view"
@@ -138,10 +140,10 @@
                     android:id="@+id/top_rated_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
                     android:layout_marginTop="16dp"
                     android:minHeight="240dp"
                     android:orientation="horizontal"
+                    android:visibility="invisible"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/top_rated_text_view"
                     app:listData="@{viewModel.topRatedMovies}"
@@ -150,8 +152,8 @@
                 <ImageView
                     android:id="@+id/top_rated_progress_bar"
                     android:layout_width="160dp"
-                    android:src="@drawable/loading_animation"
                     android:layout_height="160dp"
+                    android:src="@drawable/loading_animation"
                     app:layout_constraintBottom_toBottomOf="@+id/top_rated_recycler_view"
                     app:layout_constraintEnd_toEndOf="@+id/top_rated_recycler_view"
                     app:layout_constraintStart_toStartOf="@+id/top_rated_recycler_view"
@@ -176,8 +178,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:minHeight="240dp"
-                    android:visibility="invisible"
                     android:orientation="horizontal"
+                    android:visibility="invisible"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/popular_text_view"
                     app:listData="@{viewModel.popularMovies}"
@@ -187,8 +189,8 @@
                 <ImageView
                     android:id="@+id/popular_progress_bar"
                     android:layout_width="160dp"
-                    android:src="@drawable/loading_animation"
                     android:layout_height="160dp"
+                    android:src="@drawable/loading_animation"
                     app:layout_constraintBottom_toBottomOf="@+id/popular_recycler_view"
                     app:layout_constraintEnd_toEndOf="@+id/popular_recycler_view"
                     app:layout_constraintStart_toStartOf="@+id/popular_recycler_view"
@@ -210,9 +212,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:visibility="invisible"
                     android:minHeight="240dp"
                     android:orientation="horizontal"
+                    android:visibility="invisible"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/upcoming_text_view"
                     app:listData="@{viewModel.upcomingMovies}"
@@ -222,14 +224,75 @@
                 <ImageView
                     android:id="@+id/upcoming_progress_bar"
                     android:layout_width="160dp"
-                    android:src="@drawable/loading_animation"
                     android:layout_height="160dp"
+                    android:src="@drawable/loading_animation"
                     app:layout_constraintBottom_toBottomOf="@+id/upcoming_recycler_view"
                     app:layout_constraintEnd_toEndOf="@+id/upcoming_recycler_view"
                     app:layout_constraintStart_toStartOf="@+id/upcoming_recycler_view"
                     app:layout_constraintTop_toTopOf="@+id/upcoming_recycler_view" />
 
+                <LinearLayout
+                    android:id="@+id/search_bar_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/upcoming_recycler_view">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="8"
+                        android:hint="Search">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/search_edit_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/search_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="2"
+                        android:onClick="@{() -> viewModel.findMoviesForSearchText(searchEditText.getText().toString())}" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/search_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:minHeight="240dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/search_bar_linear_layout"
+                    app:listData="@{viewModel.searchedMovies}"
+                    app:spanCount="3"
+                    tools:listitem="@layout/item_movie" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
-    </FrameLayout>
+
+        <ImageView
+            android:id="@+id/search_fab"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginBottom="36dp"
+            android:elevation="16dp"
+            android:onClick="@{() -> viewModel.triggerSearchLayout()}"
+            android:scaleType="centerCrop"
+            android:src="@drawable/outline_saved_search_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
