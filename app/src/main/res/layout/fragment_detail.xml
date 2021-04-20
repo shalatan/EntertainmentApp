@@ -317,6 +317,14 @@
             <!--                app:srcCompat="@android:drawable/btn_star_big_on" />-->
 
         </ScrollView>
+
+        <View
+            android:id="@+id/adult_viewer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            app:adultChecker="@{viewModel.completeMovieDetail.adult}"
+            android:background="@drawable/adult_true" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </layout>

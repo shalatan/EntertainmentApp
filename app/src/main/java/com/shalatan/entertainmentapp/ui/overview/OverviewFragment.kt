@@ -2,11 +2,9 @@ package com.shalatan.entertainmentapp.ui.overview
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -16,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
-
 
 class OverviewFragment : Fragment() {
 
@@ -33,7 +30,7 @@ class OverviewFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
@@ -124,6 +121,7 @@ class OverviewFragment : Fragment() {
             Snackbar.make(it, "Coming Soon !!", Snackbar.LENGTH_SHORT).show()
         }
 
+        //observe the fab buttons click handled in viewModel to retail the state
         viewModel.openSearchBox.observe(viewLifecycleOwner, Observer {
             if (it) {
                 closeTheSearchBox()
@@ -131,15 +129,26 @@ class OverviewFragment : Fragment() {
                 openTheSearchBox()
             }
         })
+
+        //hide the soft keyboard automatically from screen when data is ready to display in searchRecyclerView
+        viewModel.searchedMovies.observe(viewLifecycleOwner, Observer {
+            binding.searchEditText.hideKeyboard()
+        })
         return binding.root
     }
 
+    /**
+     * make necessary changes in UI when fab is clicked to close the search section
+     */
     private fun closeTheSearchBox() {
         binding.searchBarLinearLayout.visibility = View.GONE
         binding.searchRecyclerView.visibility = View.GONE
         searchBoxOpen = !searchBoxOpen
     }
 
+    /**
+     * make necessary changes in UI when fab is clicked to open the search section
+     */
     private fun openTheSearchBox() {
         binding.searchBarLinearLayout.visibility = View.VISIBLE
         binding.searchRecyclerView.visibility = View.VISIBLE
@@ -147,5 +156,13 @@ class OverviewFragment : Fragment() {
         binding.movieScrollView.post {
             binding.movieScrollView.fullScroll(View.FOCUS_DOWN)
         }
+    }
+
+    /**
+     * hide soft-keyboard
+     */
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 }

@@ -19,7 +19,6 @@ data class CompleteMovieDetail(
     val poster_path: String?,
     val release_date: String?,
     val revenue: Double?,
-    val reviews: Reviews?,
     val runtime: Int?,
     val status: String?,
     val tagline: String?,

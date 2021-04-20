@@ -2,6 +2,7 @@ package com.shalatan.entertainmentapp
 
 import android.net.Uri
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -74,6 +75,16 @@ fun bindPoster(bigImageView: BigImageView, imgUrl: String?) {
     val fullUrl = Constants.IMG_BASE_URL_O + imgUrl
     fullUrl.let {
         bigImageView.showImage(Uri.parse(fullUrl))
+    }
+}
+
+@BindingAdapter("adultChecker")
+fun adultCheck(view: View, adult: Boolean){
+    Log.e("ADULT VLAUE",adult.toString())
+    if (adult){
+        view.setBackgroundResource(R.drawable.adult_true)
+    }else{
+        view.setBackgroundResource(R.drawable.adult_false)
     }
 }
 
