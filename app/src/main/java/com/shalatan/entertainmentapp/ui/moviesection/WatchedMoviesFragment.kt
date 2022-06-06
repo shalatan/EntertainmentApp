@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.MovieDatabase
 import com.shalatan.entertainmentapp.databinding.FragmentWatchedMoviesBinding
-
 
 class WatchedMoviesFragment : Fragment() {
 
@@ -25,13 +25,13 @@ class WatchedMoviesFragment : Fragment() {
     ): View? {
 
         val binding = FragmentWatchedMoviesBinding.inflate(inflater)
-        val application = requireNotNull(this.activity).application
-        val dataSource = MovieDatabase.getInstance(application).movieDAO
-        val viewModelFactory = SavedContentViewModelFactory(dataSource, application)
+        val dataSource = MovieDatabase.getInstance(requireContext()).movieDAO
+        val repository = SavedContentRepository(dataSource)
+        val viewModelFactory = SavedContentViewModelFactory(repository)
 
         val viewModel = ViewModelProvider(
             this, viewModelFactory
-        ).get(SavedContentViewModel::class.java)
+        )[SavedContentViewModel::class.java]
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -52,18 +52,17 @@ class WatchedMoviesFragment : Fragment() {
 
         viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                val directions = WatchLaterMoviesFragmentDirections.actionShowDetail(it)
-                this.findNavController().navigate(directions)
+                this.findNavController().navigate(NavGraphDirections.actionGlobalDetailFragment(it))
                 viewModel.displayMovieDetailsCompleted()
             }
         })
 
         //show or hide recyclerView is there's data or not
         viewModel.watchedMovies.observe(viewLifecycleOwner, Observer {
-            if (it.isNullOrEmpty()){
+            if (it.isNullOrEmpty()) {
                 binding.savedContentRecyclerView.visibility = View.GONE
                 binding.savedContentText.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.savedContentRecyclerView.visibility = View.VISIBLE
                 binding.savedContentText.visibility = View.GONE
             }

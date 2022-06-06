@@ -10,9 +10,6 @@
         android:name="com.shalatan.entertainmentapp.ui.overview.OverviewFragment"
         tools:layout="@layout/fragment_overview">
         <action
-            android:id="@+id/action_showDetail"
-            app:destination="@id/detailFragment" />
-        <action
             android:id="@+id/action_showGrid"
             app:destination="@id/movieGridFragment" />
         <action
@@ -30,28 +27,12 @@
     <fragment
         android:id="@+id/watchedMoviesFragment"
         android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchedMoviesFragment"
-        tools:layout="@layout/fragment_watched_movies">
-        <action
-            android:id="@+id/action_showDetail"
-            app:destination="@id/detailFragment" />
-        <!--            app:enterAnim="@anim/slide_in_right"-->
-        <!--            app:exitAnim="@anim/slide_out_left"-->
-        <!--            app:popEnterAnim="@anim/slide_in_left"-->
-        <!--            app:popExitAnim="@anim/slide_out_right" />-->
-    </fragment>
+        tools:layout="@layout/fragment_watched_movies"/>
 
     <fragment
         android:id="@+id/watchLaterMoviesFragment"
         android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchLaterMoviesFragment"
-        tools:layout="@layout/fragment_watch_later_movies">
-        <action
-            android:id="@+id/action_showDetail"
-            app:destination="@id/detailFragment" />
-        <!--            app:enterAnim="@anim/slide_in_right"-->
-        <!--            app:exitAnim="@anim/slide_out_left"-->
-        <!--            app:popEnterAnim="@anim/slide_in_left"-->
-        <!--            app:popExitAnim="@anim/slide_out_right" />-->
-    </fragment>
+        tools:layout="@layout/fragment_watch_later_movies"/>
 
     <fragment
         android:id="@+id/detailFragment"
@@ -78,12 +59,10 @@
         android:id="@+id/movieGridFragment"
         android:name="com.shalatan.entertainmentapp.ui.overview.moviegrid.MovieGridFragment"
         tools:layout="@layout/fragment_movie_grid">
-        <action
-            android:id="@+id/action_movieGridFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
         <argument
             android:name="listNumber"
             app:argType="integer"/>
     </fragment>
+    <action android:id="@+id/action_global_detailFragment" app:destination="@id/detailFragment" />
 
 </navigation>

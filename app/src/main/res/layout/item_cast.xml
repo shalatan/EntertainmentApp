@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="cast"
             type="com.shalatan.entertainmentapp.model.Cast" />

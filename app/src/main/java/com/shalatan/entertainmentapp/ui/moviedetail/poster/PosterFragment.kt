@@ -3,13 +3,12 @@ package com.shalatan.entertainmentapp.ui.moviedetail.poster
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.github.piasy.biv.BigImageViewer
-import com.github.piasy.biv.loader.glide.GlideImageLoader
+//import com.github.piasy.biv.BigImageViewer
+//import com.github.piasy.biv.loader.glide.GlideImageLoader
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentPosterBinding
@@ -24,10 +23,9 @@ class PosterFragment : Fragment() {
     ): View? {
 
         val application = requireNotNull(activity).application
-        BigImageViewer.initialize(GlideImageLoader.with(application))
+//        BigImageViewer.initialize(GlideImageLoader.with(application))
         val binding = FragmentPosterBinding.inflate(inflater)
 
-//        Toast.makeText(context,"Posters Are Zoomable",Toast.LENGTH_SHORT).show()
 
         val posterURL = PosterFragmentArgs.fromBundle(requireArguments()).posterURL
         Log.e("RECV URL", posterURL)

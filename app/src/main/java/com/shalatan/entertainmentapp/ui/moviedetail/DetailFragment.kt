@@ -1,13 +1,11 @@
 package com.shalatan.entertainmentapp.ui.moviedetail
 
 import android.R
-import android.app.Application
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -30,14 +28,15 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.explode)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(R.transition.explode)
 
-        val application = requireNotNull(activity).application
         val binding = FragmentDetailBinding.inflate(inflater)
-        val dataSource = MovieDatabase.getInstance(application).movieDAO
+        val dataSource = MovieDatabase.getInstance(requireContext()).movieDAO
+        val repository = DetailRepository(dataSource)
 
         val movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie
-        val detailViewModelFactory = DetailViewModelFactory(dataSource, movie, application)
+        val detailViewModelFactory = DetailViewModelFactory(movie, repository)
         val detailViewModel =
             ViewModelProvider(this, detailViewModelFactory).get(DetailViewModel::class.java)
 

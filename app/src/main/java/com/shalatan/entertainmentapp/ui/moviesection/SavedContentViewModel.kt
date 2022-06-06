@@ -1,20 +1,17 @@
 package com.shalatan.entertainmentapp.ui.moviesection
 
 import androidx.lifecycle.*
-import com.shalatan.entertainmentapp.database.MovieDAO
 import com.shalatan.entertainmentapp.model.Movie
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class SavedContentViewModel(val database: MovieDAO) :
+class SavedContentViewModel(private val repository: SavedContentRepository) :
     ViewModel() {
 
-    val watchedMovies = database.getAllWatchedMovies()
-    val watchLaterMovies = database.getAllWatchLaterMovies()
+    val watchedMovies = repository.getAllWatchedMovies()
+    val watchLaterMovies = repository.getAllWatchLaterMovies()
 
-    private val _navigateToSelectedMovie = MutableLiveData<Movie>()
-    val navigateToSelectedMovie: LiveData<Movie>
+    private val _navigateToSelectedMovie = MutableLiveData<Movie?>()
+    val navigateToSelectedMovie: LiveData<Movie?>
         get() = _navigateToSelectedMovie
 
     /**
@@ -38,9 +35,9 @@ class SavedContentViewModel(val database: MovieDAO) :
     }
 
     private suspend fun deleteWatchLaterMovie(position: Int) {
-        withContext(Dispatchers.IO) {
+        viewModelScope.launch {
             watchLaterMovies.value?.get(position)?.let {
-                database.delete(it)
+                repository.deleteMovieFromDatabase(it)
             }
         }
     }
@@ -55,9 +52,9 @@ class SavedContentViewModel(val database: MovieDAO) :
     }
 
     private suspend fun deleteWatchedMovie(position: Int) {
-        withContext(Dispatchers.IO) {
+        viewModelScope.launch {
             watchedMovies.value?.get(position)?.let {
-                database.delete(it)
+                repository.deleteMovieFromDatabase(it)
             }
         }
     }

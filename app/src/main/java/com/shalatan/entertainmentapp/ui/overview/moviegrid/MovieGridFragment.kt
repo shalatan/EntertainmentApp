@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.databinding.FragmentMovieGridBinding
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import com.shalatan.entertainmentapp.ui.overview.OverviewViewModel
@@ -21,7 +22,8 @@ class MovieGridFragment : Fragment() {
     private val viewModel: OverviewViewModel by lazy {
         ViewModelProvider(this).get(OverviewViewModel::class.java)
     }
-//
+
+    //
 //    private lateinit var viewModel: MovieGridViewModel
     val args: MovieGridFragmentArgs by navArgs()
 
@@ -40,15 +42,13 @@ class MovieGridFragment : Fragment() {
 //        })
 //
         val listNumber = args.listNumber
-        Log.e("LIST",listNumber.toString())
+        Log.e("LIST", listNumber.toString())
         val binding = FragmentMovieGridBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         val adapter = MovieAdapter(MovieAdapter.OnClickListener {
-            findNavController().navigate(
-                MovieGridFragmentDirections.actionMovieGridFragmentToDetailFragment(it)
-            )
+            this.findNavController().navigate(NavGraphDirections.actionGlobalDetailFragment(it))
         })
         binding.moviesGridRecyclerView.adapter = adapter
 

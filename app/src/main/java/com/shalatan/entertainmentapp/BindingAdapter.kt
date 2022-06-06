@@ -1,6 +1,5 @@
 package com.shalatan.entertainmentapp
 
-import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -9,7 +8,6 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.github.piasy.biv.view.BigImageView
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.Cast
 import com.shalatan.entertainmentapp.model.Movie
@@ -71,19 +69,23 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 
 //bind poster into view_pager_item
 @BindingAdapter("posterImageUrl")
-fun bindPoster(bigImageView: BigImageView, imgUrl: String?) {
+//fun bindPoster(bigImageView: BigImageView, imgUrl: String?) {
+fun bindPoster(bigImageView: ImageView, imgUrl: String?) {
     val fullUrl = Constants.IMG_BASE_URL_O + imgUrl
     fullUrl.let {
-        bigImageView.showImage(Uri.parse(fullUrl))
+//        bigImageView.showImage(Uri.parse(fullUrl))
+        Glide.with(bigImageView.context)
+            .load(fullUrl)
+            .into(bigImageView)
     }
 }
 
 @BindingAdapter("adultChecker")
-fun adultCheck(view: View, adult: Boolean){
-    Log.e("ADULT VLAUE",adult.toString())
-    if (adult){
+fun adultCheck(view: View, adult: Boolean) {
+    Log.e("ADULT VLAUE", adult.toString())
+    if (adult) {
         view.setBackgroundResource(R.drawable.adult_true)
-    }else{
+    } else {
         view.setBackgroundResource(R.drawable.adult_false)
     }
 }

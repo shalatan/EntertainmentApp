@@ -46,7 +46,6 @@ class PostersAdapter(private val onClickListener: OnClickListener) :
         holder.bind(backdrop)
     }
 
-
     class OnClickListener(val clickListener: (posterUrl: String) -> Unit) {
         fun onCLick(posterUrl: String) = clickListener(posterUrl)
     }

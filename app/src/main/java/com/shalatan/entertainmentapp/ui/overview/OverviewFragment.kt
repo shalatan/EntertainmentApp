@@ -2,26 +2,26 @@ package com.shalatan.entertainmentapp.ui.overview
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
 
-class OverviewFragment : Fragment() {
+class OverviewFragment : androidx.fragment.app.Fragment() {
 
-    /**
-     * Lazily initialize our [OverviewViewModel].
-     */
+    private val TAG = "OverviewFragment"
+
     private val viewModel: OverviewViewModel by lazy {
-        ViewModelProvider(this).get(OverviewViewModel::class.java)
+        ViewModelProvider(this)[OverviewViewModel::class.java]
     }
     private var searchBoxOpen = false
     private lateinit var binding: FragmentOverviewBinding
@@ -31,6 +31,8 @@ class OverviewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        Log.e(TAG, "onCreateView")
 
         binding = FragmentOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
@@ -103,8 +105,7 @@ class OverviewFragment : Fragment() {
 
         viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner, Observer {
             if (null != it) {
-                val directions = OverviewFragmentDirections.actionShowDetail(it)
-                this.findNavController().navigate(directions)
+                this.findNavController().navigate(NavGraphDirections.actionGlobalDetailFragment(it))
                 viewModel.displayMovieDetailsComplete()
             }
         })

@@ -1,13 +1,7 @@
 package com.shalatan.entertainmentapp.ui.moviedetail
 
-import android.app.Application
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.shalatan.entertainmentapp.database.MovieDAO
+import androidx.lifecycle.*
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.*
 import com.shalatan.entertainmentapp.network.TmdbApi
@@ -17,8 +11,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
 
-class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
-    AndroidViewModel(app) {
+class DetailViewModel(private val movie: Movie, private val repository: DetailRepository) :
+    ViewModel() {
 
     // The internal MutableLiveData String that stores the most recent response status
     private val _status = MutableLiveData<String>()
@@ -80,7 +74,7 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
      * fetch complete movie details with retrofit
      */
     private fun fetchCurrentMovieDetails(movie: Movie) {
-        coroutineScope.launch {
+        viewModelScope.launch {
             val getCompleteMovieDetail =
                 TmdbApi.RETROFIT_SERVICE.getCompleteMovieDetailAsync(_selectedMovieDetail.value!!.id)
             try {
@@ -88,9 +82,8 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
                 _completeMovieDetail.value = completeMovie
                 _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
             } catch (exception: SocketTimeoutException) {
-                Toast.makeText(getApplication(),"Slow Network Connection",Toast.LENGTH_SHORT).show()
-            }
-            catch (t: Throwable) {
+                Log.e("Error fetching movie timeout", "Hi")
+            } catch (t: Throwable) {
                 Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
                 Log.e("Movie Name : ", movie.original_title.toString())
                 _status.value = t.message
@@ -109,7 +102,7 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
             val poster = _selectedMovieDetail.value?.posterPath
             val name = _selectedMovieDetail.value?.original_title
             val savedMovie = SavedMovie(id, name, poster, isWatched = true, isWatchLater = false)
-            insert(savedMovie)
+            repository.addMovieToWatched(savedMovie)
         }
         _showAddedToWatchedSnackbarEvent.value = true
     }
@@ -124,22 +117,9 @@ class DetailViewModel(val database: MovieDAO, movie: Movie, app: Application) :
             val poster = _selectedMovieDetail.value?.posterPath
             val name = _selectedMovieDetail.value?.original_title
             val savedMovie = SavedMovie(id, name, poster, isWatched = false, isWatchLater = true)
-            insert(savedMovie)
+            repository.addMovieToWatchlater(savedMovie)
         }
         _showAddedToWatchLaterSnackbarEvent.value = true
     }
 
-//    fun clearDatabase() {
-//        viewModelScope.launch {
-//            delete()
-//        }
-//    }
-
-    private suspend fun delete() {
-        database.clear()
-    }
-
-    private suspend fun insert(savedMovie: SavedMovie) {
-        database.insert(savedMovie)
-    }
 }

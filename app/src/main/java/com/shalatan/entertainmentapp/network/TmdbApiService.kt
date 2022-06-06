@@ -2,7 +2,6 @@ package com.shalatan.entertainmentapp.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.shalatan.entertainmentapp.model.CompleteMovieDetail
-import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.model.MovieResponse
 import com.shalatan.entertainmentapp.utils.Constants
 import com.squareup.moshi.Moshi

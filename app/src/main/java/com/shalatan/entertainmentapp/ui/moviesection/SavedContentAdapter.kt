@@ -1,6 +1,5 @@
 package com.shalatan.entertainmentapp.ui.moviesection
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -40,7 +39,6 @@ class SavedContentAdapter(private val onClickListener: OnClickListener) :
     override fun onBindViewHolder(holder: SavedContentViewHolder, position: Int) {
         val savedMovie = getItem(position)
         holder.itemView.setOnClickListener {
-            Log.e("ITEM", "DABADIYAAAAAAAAAAAAA")
             val movie = Movie(
                 id = savedMovie.Id,
                 posterPath = savedMovie.moviePoster!!,

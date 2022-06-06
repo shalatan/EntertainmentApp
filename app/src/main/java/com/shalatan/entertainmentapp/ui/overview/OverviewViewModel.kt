@@ -1,9 +1,6 @@
 package com.shalatan.entertainmentapp.ui.overview
 
-import android.content.Context
 import android.util.Log
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,8 +41,8 @@ class OverviewViewModel : ViewModel() {
     val searchedMovies: LiveData<List<Movie>>
         get() = _searchedMovies
 
-    private val _navigateToSelectedMovie = MutableLiveData<Movie>()
-    val navigateToSelectedMovie: LiveData<Movie>
+    private val _navigateToSelectedMovie = MutableLiveData<Movie?>()
+    val navigateToSelectedMovie: LiveData<Movie?>
         get() = _navigateToSelectedMovie
 
     private val _navigateToSelectedMovieListGrid = MutableLiveData<List<Movie>>()
