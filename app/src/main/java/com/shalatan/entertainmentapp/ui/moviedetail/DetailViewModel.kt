@@ -3,16 +3,14 @@ package com.shalatan.entertainmentapp.ui.moviedetail
 import android.util.Log
 import androidx.lifecycle.*
 import com.shalatan.entertainmentapp.database.SavedMovie
-import com.shalatan.entertainmentapp.di.NetworkModule
 import com.shalatan.entertainmentapp.model.*
-//import com.shalatan.entertainmentapp.network.TmdbApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
+import javax.inject.Inject
 
-class DetailViewModel(private val movie: Movie, private val repository: DetailRepository) :
+@HiltViewModel
+class DetailViewModel @Inject constructor(private val repository: DetailRepository) :
     ViewModel() {
 
     // The internal MutableLiveData String that stores the most recent response status
@@ -54,7 +52,6 @@ class DetailViewModel(private val movie: Movie, private val repository: DetailRe
 
     /**
      * Call this immediately after calling `show()` on a toast.
-     *
      * It will clear the toast request, so if the user rotates their phone it won't show a duplicate
      * toast.
      */
@@ -63,35 +60,28 @@ class DetailViewModel(private val movie: Movie, private val repository: DetailRe
         _showAddedToWatchLaterSnackbarEvent.value = false
     }
 
-    private val viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
-
-    init {
+    fun fetchMovieData(movie: Movie) {
         _selectedMovieDetail.value = movie
-//        fetchCurrentMovieDetails(movie)
+        fetchCurrentMovieDetails(movie)
     }
 
-//    /**
-//     * fetch complete movie details with retrofit
-//     */
-//    private fun fetchCurrentMovieDetails(movie: Movie) {
-//        viewModelScope.launch {
-//            val getCompleteMovieDetail =
-//                TmdbApi.RETROFIT_SERVICE.getCompleteMovieDetailAsync(_selectedMovieDetail.value!!.id)
-//            try {
-//                val completeMovie = getCompleteMovieDetail.await()
-//                _completeMovieDetail.value = completeMovie
-//                _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
-//            } catch (exception: SocketTimeoutException) {
-//                Log.e("Error fetching movie timeout", "Hi")
-//            } catch (t: Throwable) {
-//                Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
-//                Log.e("Movie Name : ", movie.original_title.toString())
-//                _status.value = t.message
-//            }
-//
-//        }
-//    }
+    private fun fetchCurrentMovieDetails(movie: Movie) {
+        viewModelScope.launch {
+            val getCompleteMovieDetail = repository.fetchCompleteMovieDataAsync(movie.id)
+            try {
+                val completeMovie = getCompleteMovieDetail.await()
+                _completeMovieDetail.value = completeMovie
+                _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
+            } catch (exception: SocketTimeoutException) {
+                Log.e("Error fetching movie timeout", "Hi")
+            } catch (t: Throwable) {
+                Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
+                Log.e("Movie Name : ", movie.original_title.toString())
+                _status.value = t.message
+            }
+
+        }
+    }
 
     /**
      * add or replace existing data of movie to database with isWatched value true

@@ -8,19 +8,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.youtube.player.YouTubePlayerView
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
-import com.shalatan.entertainmentapp.di.DatabaseModule
+import com.shalatan.entertainmentapp.model.Movie
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     lateinit var youTubePlayerView: YouTubePlayerView
+
+    val viewModel: DetailViewModel by viewModels()
+    lateinit var movie: Movie
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie
+        viewModel.fetchMovieData(movie)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,16 +43,7 @@ class DetailFragment : Fragment() {
             TransitionInflater.from(context).inflateTransition(R.transition.explode)
 
         val binding = FragmentDetailBinding.inflate(inflater)
-        val dataSource =
-            DatabaseModule.provideMovieDao(DatabaseModule.provideDatabase(requireContext()))
-        val repository = DetailRepository(dataSource)
-
-        val movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie
-        val detailViewModelFactory = DetailViewModelFactory(movie, repository)
-        val detailViewModel =
-            ViewModelProvider(this, detailViewModelFactory).get(DetailViewModel::class.java)
-
-        binding.viewModel = detailViewModel
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         //movie poster view pager
@@ -61,7 +63,7 @@ class DetailFragment : Fragment() {
         binding.movieGenreRecyclerView.adapter = genreAdapter
 
         //if there's no backdrop images, remove the poster view pager else submit the data
-        detailViewModel.completeMovieDetail.observe(viewLifecycleOwner, Observer {
+        viewModel.completeMovieDetail.observe(viewLifecycleOwner, Observer {
             genreAdapter.submitList(it.genres)
             movieCastAdapter.submitList(it.credits?.cast)
             if (it.images?.backdrops.isNullOrEmpty()) {
@@ -72,25 +74,25 @@ class DetailFragment : Fragment() {
         })
 
         //snackbar events
-        detailViewModel.showAddedToWatchedSnackbarEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.showAddedToWatchedSnackbarEvent.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
                     requireActivity().findViewById(R.id.content),
                     "ADDED TO WATCHED MOVIES",
                     Snackbar.LENGTH_SHORT
                 ).show()
-                detailViewModel.doneShowingSnackbar()
+                viewModel.doneShowingSnackbar()
             }
         })
 
-        detailViewModel.showAddedToWatchLaterSnackbarEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.showAddedToWatchLaterSnackbarEvent.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 Snackbar.make(
                     requireActivity().findViewById(R.id.content),
                     "ADDED TO WATCH LATER MOVIES",
                     Snackbar.LENGTH_SHORT // How long to display the message.
                 ).show()
-                detailViewModel.doneShowingSnackbar()
+                viewModel.doneShowingSnackbar()
             }
         })
 
