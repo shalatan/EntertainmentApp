@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -17,33 +18,22 @@ import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.MovieDatabase
 import com.shalatan.entertainmentapp.databinding.FragmentWatchedMoviesBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class WatchedMoviesFragment : Fragment() {
+
+    val viewModel: SavedContentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = FragmentWatchedMoviesBinding.inflate(inflater)
-        val dataSource = MovieDatabase.getInstance(requireContext()).movieDAO
-        val repository = SavedContentRepository(dataSource)
-        val viewModelFactory = SavedContentViewModelFactory(repository)
-
-        val viewModel = ViewModelProvider(
-            this, viewModelFactory
-        )[SavedContentViewModel::class.java]
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-//        if(viewModel.watchedMovies.value.isEmpty()){
-//            binding.savedContentText.visibility = View.GONE
-//            binding.savedContentRecyclerView.visibility = View.VISIBLE
-//        }
-//        else{
-//            binding.savedContentText.visibility = View.VISIBLE
-//            binding.savedContentRecyclerView.visibility = View.GONE
-//        }
 
         binding.savedContentRecyclerView.adapter =
             SavedContentAdapter(SavedContentAdapter.OnClickListener {

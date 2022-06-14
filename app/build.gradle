@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
+    id("dagger.hilt.android.plugin")
 }
 
 def localProperties = new Properties()
@@ -103,4 +104,9 @@ dependencies {
 
     // Leak Canary
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+
+    //Hilt
+    implementation("com.google.dagger:hilt-android:2.40.5")
+    kapt("com.google.dagger:hilt-android-compiler:2.40.5")
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
 }

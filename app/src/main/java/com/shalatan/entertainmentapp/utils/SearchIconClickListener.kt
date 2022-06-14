@@ -1,4 +1,4 @@
-package com.shalatan.entertainmentapp.ui.overview
+package com.shalatan.entertainmentapp.utils
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator

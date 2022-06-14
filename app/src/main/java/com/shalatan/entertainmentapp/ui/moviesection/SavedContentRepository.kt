@@ -3,8 +3,9 @@ package com.shalatan.entertainmentapp.ui.moviesection
 import androidx.lifecycle.LiveData
 import com.shalatan.entertainmentapp.database.MovieDAO
 import com.shalatan.entertainmentapp.database.SavedMovie
+import javax.inject.Inject
 
-class SavedContentRepository(private val dao: MovieDAO) {
+class SavedContentRepository @Inject constructor(private val dao: MovieDAO) {
 
     fun getAllWatchedMovies(): LiveData<List<SavedMovie>> {
         return dao.getAllWatchedMovies()

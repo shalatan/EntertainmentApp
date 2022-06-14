@@ -2,9 +2,12 @@ package com.shalatan.entertainmentapp.ui.moviesection
 
 import androidx.lifecycle.*
 import com.shalatan.entertainmentapp.model.Movie
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SavedContentViewModel(private val repository: SavedContentRepository) :
+@HiltViewModel
+class SavedContentViewModel @Inject constructor(private val repository: SavedContentRepository) :
     ViewModel() {
 
     val watchedMovies = repository.getAllWatchedMovies()

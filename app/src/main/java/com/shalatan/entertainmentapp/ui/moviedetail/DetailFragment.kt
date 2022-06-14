@@ -15,8 +15,8 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.youtube.player.YouTubePlayerView
-import com.shalatan.entertainmentapp.database.MovieDatabase
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
+import com.shalatan.entertainmentapp.di.DatabaseModule
 
 class DetailFragment : Fragment() {
 
@@ -32,7 +32,8 @@ class DetailFragment : Fragment() {
             TransitionInflater.from(context).inflateTransition(R.transition.explode)
 
         val binding = FragmentDetailBinding.inflate(inflater)
-        val dataSource = MovieDatabase.getInstance(requireContext()).movieDAO
+        val dataSource =
+            DatabaseModule.provideMovieDao(DatabaseModule.provideDatabase(requireContext()))
         val repository = DetailRepository(dataSource)
 
         val movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie

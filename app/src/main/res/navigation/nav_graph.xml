@@ -10,9 +10,6 @@
         android:name="com.shalatan.entertainmentapp.ui.overview.OverviewFragment"
         tools:layout="@layout/fragment_overview">
         <action
-            android:id="@+id/action_showGrid"
-            app:destination="@id/movieGridFragment" />
-        <action
             android:id="@+id/action_overviewFragment_to_watchedMoviesFragment"
             app:destination="@id/watchedMoviesFragment" />
         <action
@@ -55,14 +52,6 @@
             app:argType="string" />
     </fragment>
 
-    <fragment
-        android:id="@+id/movieGridFragment"
-        android:name="com.shalatan.entertainmentapp.ui.overview.moviegrid.MovieGridFragment"
-        tools:layout="@layout/fragment_movie_grid">
-        <argument
-            android:name="listNumber"
-            app:argType="integer"/>
-    </fragment>
     <action android:id="@+id/action_global_detailFragment" app:destination="@id/detailFragment" />
 
 </navigation>

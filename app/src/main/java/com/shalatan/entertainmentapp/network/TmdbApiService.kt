@@ -41,7 +41,6 @@ private val retrofit = Retrofit.Builder()
     .client(okHttpClient)
     .build()
 
-
 interface TmdbApiService {
 
     //add region
@@ -77,14 +76,14 @@ interface TmdbApiService {
     ): Deferred<CompleteMovieDetail>
 
     @GET("3/search/movie")
-    fun getSearchedMovie(
+    fun getSearchedMovieAsync(
         @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("query") search: String
     ): Deferred<MovieResponse>
 }
 
-object TmdbApi {
-    val RETROFIT_SERVICE: TmdbApiService by lazy {
-        retrofit.create(TmdbApiService::class.java)
-    }
-}
+//object TmdbApi {
+//    val RETROFIT_SERVICE: TmdbApiService by lazy {
+//        retrofit.create(TmdbApiService::class.java)
+//    }
+//}

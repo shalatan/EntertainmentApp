@@ -5,14 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.shalatan.entertainmentapp.model.Movie
-import com.shalatan.entertainmentapp.network.TmdbApi
 import com.shalatan.entertainmentapp.utils.Constants
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class OverviewViewModel : ViewModel() {
+@HiltViewModel
+class OverviewViewModel @Inject constructor(private val repository: OverviewRepository) :
+    ViewModel() {
 
     // The internal MutableLiveData String that stores the most recent response status
     private val _status = MutableLiveData<String>()
@@ -63,15 +66,15 @@ class OverviewViewModel : ViewModel() {
 
     private fun fetchMoviesData() {
         coroutineScope.launch {
-            val getPopularMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getPopularMoviesAsync()
-            val getNowPlayingMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getNowPlayingMoviesAsync()
-            val getTopRatedMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getTopRatedMoviesAsync()
-            val getUpcomingMoviesDeferred = TmdbApi.RETROFIT_SERVICE.getUpcomingMoviesAsync()
+            val topMovies = repository.getTopRatedMoviesAsync()
+            val popularMovies = repository.getPopularMoviesAsync()
+            val nowPlayingMovies = repository.getNowPlayingMoviesAsync()
+            val upcomingMovies = repository.getUpcomingMoviesAsync()
             try {
-                _nowPlayingMovies.value = getNowPlayingMoviesDeferred.await().movies
-                _popularMovies.value = getPopularMoviesDeferred.await().movies
-                _topRatedMovies.value = getTopRatedMoviesDeferred.await().movies
-                _upcomingMovies.value = getUpcomingMoviesDeferred.await().movies
+                _topRatedMovies.value = topMovies.await().movies
+                _popularMovies.value = popularMovies.await().movies
+                _nowPlayingMovies.value = nowPlayingMovies.await().movies
+                _upcomingMovies.value = upcomingMovies.await().movies
             } catch (t: Throwable) {
                 _status.value = "Failure" + t.message
                 Log.e("ERROR", _status.value.toString())
@@ -105,7 +108,7 @@ class OverviewViewModel : ViewModel() {
     fun findMoviesForSearchText(search: String) {
         coroutineScope.launch {
             val getSearchMoviesDeferred =
-                TmdbApi.RETROFIT_SERVICE.getSearchedMovie(Constants.API_KEY, search)
+                repository.getSearchedMovieAsync(Constants.API_KEY, search)
             try {
                 _searchedMovies.value = getSearchMoviesDeferred.await().movies
             } catch (t: Throwable) {

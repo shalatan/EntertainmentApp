@@ -3,8 +3,9 @@ package com.shalatan.entertainmentapp.ui.moviedetail
 import android.util.Log
 import androidx.lifecycle.*
 import com.shalatan.entertainmentapp.database.SavedMovie
+import com.shalatan.entertainmentapp.di.NetworkModule
 import com.shalatan.entertainmentapp.model.*
-import com.shalatan.entertainmentapp.network.TmdbApi
+//import com.shalatan.entertainmentapp.network.TmdbApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -67,30 +68,30 @@ class DetailViewModel(private val movie: Movie, private val repository: DetailRe
 
     init {
         _selectedMovieDetail.value = movie
-        fetchCurrentMovieDetails(movie)
+//        fetchCurrentMovieDetails(movie)
     }
 
-    /**
-     * fetch complete movie details with retrofit
-     */
-    private fun fetchCurrentMovieDetails(movie: Movie) {
-        viewModelScope.launch {
-            val getCompleteMovieDetail =
-                TmdbApi.RETROFIT_SERVICE.getCompleteMovieDetailAsync(_selectedMovieDetail.value!!.id)
-            try {
-                val completeMovie = getCompleteMovieDetail.await()
-                _completeMovieDetail.value = completeMovie
-                _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
-            } catch (exception: SocketTimeoutException) {
-                Log.e("Error fetching movie timeout", "Hi")
-            } catch (t: Throwable) {
-                Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
-                Log.e("Movie Name : ", movie.original_title.toString())
-                _status.value = t.message
-            }
-
-        }
-    }
+//    /**
+//     * fetch complete movie details with retrofit
+//     */
+//    private fun fetchCurrentMovieDetails(movie: Movie) {
+//        viewModelScope.launch {
+//            val getCompleteMovieDetail =
+//                TmdbApi.RETROFIT_SERVICE.getCompleteMovieDetailAsync(_selectedMovieDetail.value!!.id)
+//            try {
+//                val completeMovie = getCompleteMovieDetail.await()
+//                _completeMovieDetail.value = completeMovie
+//                _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
+//            } catch (exception: SocketTimeoutException) {
+//                Log.e("Error fetching movie timeout", "Hi")
+//            } catch (t: Throwable) {
+//                Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
+//                Log.e("Movie Name : ", movie.original_title.toString())
+//                _status.value = t.message
+//            }
+//
+//        }
+//    }
 
     /**
      * add or replace existing data of movie to database with isWatched value true

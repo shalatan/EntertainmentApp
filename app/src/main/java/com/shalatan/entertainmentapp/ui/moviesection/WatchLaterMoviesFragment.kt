@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -17,21 +18,19 @@ import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.MovieDatabase
 import com.shalatan.entertainmentapp.databinding.FragmentWatchLaterMoviesBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class WatchLaterMoviesFragment : Fragment() {
+
+    val viewModel: SavedContentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = FragmentWatchLaterMoviesBinding.inflate(inflater)
-        val dataSource = MovieDatabase.getInstance(requireContext()).movieDAO
-        val repository = SavedContentRepository(dataSource)
-        val viewModelFactory = SavedContentViewModelFactory(repository)
-
-        val viewModel = ViewModelProvider(
-            this, viewModelFactory
-        )[SavedContentViewModel::class.java]
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -50,10 +49,10 @@ class WatchLaterMoviesFragment : Fragment() {
 
         //show or hide recyclerView is there's data or not
         viewModel.watchLaterMovies.observe(viewLifecycleOwner, Observer {
-            if (it.isNullOrEmpty()){
+            if (it.isNullOrEmpty()) {
                 binding.savedContentRecyclerView.visibility = View.GONE
                 binding.savedContentText.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.savedContentRecyclerView.visibility = View.VISIBLE
                 binding.savedContentText.visibility = View.GONE
             }
