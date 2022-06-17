@@ -4,21 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="cast"
             type="com.shalatan.entertainmentapp.model.Cast" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.Material3.CardView.Outlined"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardBackgroundColor="#00FFFFFF">
+        app:strokeWidth="0dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp">
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/item_movie_cast_photo"
@@ -27,12 +30,6 @@
                 android:contentDescription="@string/cd_movie_cast_profile"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{cast.profile_path}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView
@@ -42,9 +39,6 @@
                 android:maxLines="2"
                 android:text="@{cast.name}"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/item_movie_cast_photo"
-                app:layout_constraintStart_toStartOf="@+id/item_movie_cast_photo"
-                app:layout_constraintTop_toBottomOf="@+id/item_movie_cast_photo"
                 tools:text="Cast Name" />
 
             <!--        <com.google.android.material.imageview.ShapeableImageView-->
@@ -62,6 +56,6 @@
             <!--            app:layout_constraintTop_toTopOf="parent"-->
             <!--            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyTheme.Image"-->
             <!--            tools:src="@tools:sample/backgrounds/scenic" />-->
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

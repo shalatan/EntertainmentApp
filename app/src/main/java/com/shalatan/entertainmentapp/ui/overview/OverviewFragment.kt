@@ -2,10 +2,10 @@ package com.shalatan.entertainmentapp.ui.overview
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -22,12 +22,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class OverviewFragment : Fragment() {
 
-    private val TAG = "OverviewFragment"
-
     val viewModel: OverviewViewModel by viewModels()
 
     private var searchBoxOpen = false
     private lateinit var binding: FragmentOverviewBinding
+    private lateinit var backdropMenuList: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,11 +37,13 @@ class OverviewFragment : Fragment() {
         binding = FragmentOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        backdropMenuList = binding.backdropMenuList
 
         // Set up the tool bar
         (activity as AppCompatActivity).setSupportActionBar(binding.appBar)
         binding.appBar.setNavigationOnClickListener(
             NavigationIconClickListener(
+                backdropMenuList,
                 activity as AppCompatActivity,
                 binding.movieScrollView,
                 AccelerateDecelerateInterpolator(),
@@ -50,6 +51,7 @@ class OverviewFragment : Fragment() {
                 ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_close)
             )
         )
+
 
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {

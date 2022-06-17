@@ -10,22 +10,19 @@
             type="com.shalatan.entertainmentapp.ui.overview.OverviewViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:paddingTop="26dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/backdrop_menu_list"
             style="@style/Widget.Shrine.Backdrop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingTop="?attr/actionBarSize"
-            tools:layout_editor_absoluteY="26dp">
+            android:visibility="invisible">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/series_section"
@@ -54,7 +51,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="My Watch Later Movies" />
-
         </LinearLayout>
 
         <com.google.android.material.appbar.AppBarLayout
@@ -65,30 +61,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/background_dark"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:navigationIcon="@drawable/ic_clapper_open"
                 app:title="Movies Hex"
-                app:titleTextColor="@color/white_smoke" />
+                app:titleCentered="true" />
+            <!--            app:titleTextColor="@color/white_smoke"-->
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/movie_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?actionBarSize"
-            android:elevation="4dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background_dark">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/now_playing_text_view"
@@ -97,7 +91,6 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="14dp"
                     android:text="Now Playing Movies"
-                    android:textColor="@color/high_emphasis_text"
                     android:textSize="28sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -142,7 +135,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Top Rated Movies"
-                    android:textColor="@color/high_emphasis_text"
                     android:textSize="28sp"
                     app:layout_constraintStart_toStartOf="@+id/now_playing_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/margin_line_1" />
@@ -189,7 +181,6 @@
                     android:layout_marginTop="16dp"
                     android:paddingBottom="2dp"
                     android:text="Popular Movies"
-                    android:textColor="@color/high_emphasis_text"
                     android:textSize="28sp"
                     app:layout_constraintStart_toStartOf="@+id/top_rated_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/margin_line_2" />
@@ -236,7 +227,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Upcoming Movies"
-                    android:textColor="@color/high_emphasis_text"
                     android:textSize="28sp"
                     app:layout_constraintStart_toStartOf="@+id/popular_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/margin_line_3" />
@@ -287,10 +277,10 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="4dp"
-                        android:layout_width="0dp"
                         android:layout_weight="8"
                         android:hint="Search">
 
@@ -302,13 +292,13 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/search_button"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:layout_weight="2"
-                        android:text="Find"
                         android:layout_marginEnd="8dp"
+                        android:layout_weight="2"
                         android:onClick="@{() -> viewModel.findMoviesForSearchText(searchEditText.getText().toString())}"
-                        android:layout_width="0dp" />
+                        android:text="Find" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -329,19 +319,28 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <ImageView
-            android:id="@+id/search_fab"
-            android:layout_width="54dp"
-            android:layout_height="54dp"
-            android:layout_marginEnd="36dp"
-            android:layout_marginBottom="36dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:elevation="16dp"
-            android:onClick="@{() -> viewModel.triggerSearchLayout()}"
-            android:scaleType="centerCrop"
-            android:src="@drawable/outline_saved_search_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        <!--        <ImageView-->
+        <!--            android:id="@+id/search_fab"-->
+        <!--            android:layout_width="54dp"-->
+        <!--            android:layout_height="54dp"-->
+        <!--            android:layout_marginEnd="36dp"-->
+        <!--            android:layout_marginBottom="36dp"-->
+        <!--            android:elevation="16dp"-->
+        <!--            android:onClick="@{() -> viewModel.triggerSearchLayout()}"-->
+        <!--            android:scaleType="centerCrop"-->
+        <!--            android:src="@drawable/outline_saved_search_24"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent" />-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/search_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="32dp"
+            android:elevation="8dp"
+            android:onClick="@{() -> viewModel.triggerSearchLayout()}"
+            app:srcCompat="@drawable/outline_saved_search_24" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

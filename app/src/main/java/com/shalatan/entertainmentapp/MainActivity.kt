@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun hasNetwork(context: Context): Boolean? {
+    private fun hasNetwork(context: Context): Boolean? {
         var isConnected: Boolean? = false // Initial Value
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
