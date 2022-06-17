@@ -7,10 +7,20 @@
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable-xxxhdpi/app_icon.xml" value="0.1905" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/adult_true.xml" value="0.1905" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/loading_image.xml" value="0.20038610038610039" />
-        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_detail.xml" value="0.16799999999999998" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/favourite_item.xml" value="0.1875" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_detail.xml" value="0.1" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_movie_grid.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_overview.xml" value="0.13900273224043716" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_poster.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_watch_later_movies.xml" value="0.1" />
-        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_movie.xml" value="0.1" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_watched_movies.xml" value="0.1875" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_watched_series.xml" value="0.1875" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_cast.xml" value="0.1875" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_genre.xml" value="0.1875" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_movie.xml" value="0.264" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_movie_landscape.xml" value="0.1875" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_view_pager_poster.xml" value="0.1875" />
       </map>
     </option>
   </component>

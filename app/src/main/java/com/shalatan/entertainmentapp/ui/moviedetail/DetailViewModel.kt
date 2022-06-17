@@ -71,6 +71,10 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
             try {
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie
+                Log.e(
+                    "ABCD SYNOPSIS OF ${completeMovie.title} : ",
+                    completeMovie.overview.toString()
+                )
                 _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
             } catch (exception: SocketTimeoutException) {
                 Log.e("Error fetching movie timeout", "Hi")

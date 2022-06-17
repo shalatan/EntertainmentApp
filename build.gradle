@@ -23,11 +23,11 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven {
-            url "https://dl.bintray.com/piasy/maven"
+        mavenCentral()
+//        maven {
+//            url "https://dl.bintray.com/piasy/maven"
 //            isAllowInsecureProtocol = true
-        }
+//        }
     }
 }
 
