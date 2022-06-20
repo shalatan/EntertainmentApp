@@ -52,6 +52,6 @@
             app:argType="string" />
     </fragment>
 
-    <action android:id="@+id/action_global_detailFragment" app:destination="@id/detailFragment" />
+    <action android:id="@+id/action_global_detailFragment" app:destination="@id/detailFragment" /><action android:id="@+id/action_global_watchLaterMoviesFragment" app:destination="@id/watchLaterMoviesFragment"/><action android:id="@+id/action_global_watchedMoviesFragment" app:destination="@id/watchedMoviesFragment"/>
 
 </navigation>

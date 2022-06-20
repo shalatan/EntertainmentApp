@@ -10,7 +10,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.Cast
+import com.shalatan.entertainmentapp.model.Genre
 import com.shalatan.entertainmentapp.model.Movie
+import com.shalatan.entertainmentapp.ui.moviedetail.GenreAdapter
 import com.shalatan.entertainmentapp.ui.moviedetail.MovieCastAdapter
 import com.shalatan.entertainmentapp.ui.moviesection.SavedContentAdapter
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
@@ -40,11 +42,16 @@ fun bindFavouriteRecyclerView(recyclerView: RecyclerView, data: List<SavedMovie>
     adapter.submitList(data)
 }
 
-//bind recycler view adapter for fragment_overview
-@BindingAdapter("castListData")
+@BindingAdapter("movieCastList")
 fun bindMovieCastRecyclerView(recyclerView: RecyclerView, data: List<Cast>?) {
     val movieCastAdapter = recyclerView.adapter as MovieCastAdapter
     movieCastAdapter.submitList(data)
+}
+
+@BindingAdapter("movieGenreList")
+fun bindMovieGenreRecyclerView(recyclerView: RecyclerView, data: List<Genre>?) {
+    val movieGenreAdapter = recyclerView.adapter as GenreAdapter
+    movieGenreAdapter.submitList(data)
 }
 
 /* Bind Images */
@@ -69,7 +76,6 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 
 //bind poster into view_pager_item
 @BindingAdapter("posterImageUrl")
-//fun bindPoster(bigImageView: BigImageView, imgUrl: String?) {
 fun bindPoster(bigImageView: ImageView, imgUrl: String?) {
     val fullUrl = Constants.IMG_BASE_URL_O + imgUrl
     fullUrl.let {
@@ -82,7 +88,7 @@ fun bindPoster(bigImageView: ImageView, imgUrl: String?) {
 
 @BindingAdapter("adultChecker")
 fun adultCheck(view: View, adult: Boolean) {
-    Log.e("ADULT VLAUE", adult.toString())
+    Log.e("Testing Adult Check : ", adult.toString())
     if (adult) {
         view.setBackgroundResource(R.drawable.adult_true)
     } else {
