@@ -49,24 +49,19 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-                <!--                    <View-->
-                <!--                        android:id="@+id/view"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="60dp"-->
-                <!--                        android:background="@drawable/custom_fading_view"-->
-                <!--                        tools:layout_editor_absoluteX="12dp" />-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/movie_genre_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:movieGenreList="@{viewModel.completeMovieDetail.genres}"
                     android:minHeight="40dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/invisible"
                     tools:listitem="@layout/item_genre" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/movie_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -79,7 +74,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/movie_genre_recycler_view"
                     tools:text="Movie Title" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/movie_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,17 +85,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/movie_name"
                     tools:text="6.9" />
 
-                <!--            <TextView-->
-                <!--                android:id="@+id/movie_release_date"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:layout_marginStart="8dp"-->
-                <!--                android:text="@{viewModel.completeMovieDetail.title}"-->
-                <!--                app:layout_constraintBottom_toBottomOf="@+id/movie_rating"-->
-                <!--                app:layout_constraintStart_toEndOf="@+id/movie_rating"-->
-                <!--                tools:text="Release Date" />-->
-
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/raw_synopsis"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,12 +95,11 @@
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
                     app:layout_constraintTop_toBottomOf="@+id/movie_rating" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/movie_overview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="@{viewModel.completeMovieDetail.overview}"
                     android:textAlignment="viewStart"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
@@ -123,54 +107,55 @@
                     app:layout_constraintTop_toBottomOf="@+id/raw_synopsis"
                     tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper volutpat libero at pharetra. Praesent eros purus, tempor non sodales sed, feugiat vitae massa. Ut id commodo metus, sit amet dapibus purus. Nam ligula metus, tincidunt non magna at, cursus tempor ligula." />
 
-                <ImageButton
-                    android:id="@+id/add_to_watched"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
-                    android:contentDescription="@string/cd_add_to_watched"
-                    android:onClick="@{() -> viewModel.addMovieToWatched()}"
-                    android:src="@drawable/watched_default"
-                    app:layout_constraintEnd_toStartOf="@+id/add_to_watch_later"
-                    app:layout_constraintTop_toTopOf="@+id/movie_rating"
-                    app:srcCompat="@drawable/watched_default" />
-
-                <TextView
-                    android:id="@+id/textView3"
+                <LinearLayout
+                    android:id="@+id/watch_later_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Watched"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@id/add_to_watched"
-                    app:layout_constraintStart_toStartOf="@id/add_to_watched"
-                    app:layout_constraintTop_toBottomOf="@id/add_to_watched" />
+                    android:layout_marginEnd="24dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/rated_layout"
+                    app:layout_constraintEnd_toStartOf="@id/rated_layout">
 
-                <ImageButton
-                    android:id="@+id/add_to_watch_later"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_marginEnd="16dp"
-                    android:contentDescription="@string/cd_add_to_watch_later"
-                    android:onClick="@{() -> viewModel.addMovieToWatchLater()}"
-                    app:layout_constraintBottom_toBottomOf="@+id/add_to_watched"
-                    app:layout_constraintEnd_toEndOf="@id/endGuideline"
-                    app:layout_constraintTop_toTopOf="@+id/add_to_watched"
-                    app:srcCompat="@drawable/watch_later_default" />
+                    <ImageView
+                        android:id="@+id/watch_later_layout_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_watch_later_false" />
 
-                <TextView
-                    android:id="@+id/textView4"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/watch_later_layout_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Watch List" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rated_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Watch Later"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@id/add_to_watch_later"
-                    app:layout_constraintStart_toStartOf="@id/add_to_watch_later"
-                    app:layout_constraintTop_toBottomOf="@id/add_to_watch_later" />
+                    android:layout_marginEnd="24dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/raw_synopsis"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline">
 
-                <TextView
+                    <ImageView
+                        android:id="@+id/rated_layout_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_watched_false" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/rated_layout_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Rate" />
+                </LinearLayout>
+
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/raw_cast_section"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -187,11 +172,12 @@
                     android:layout_marginTop="12dp"
                     android:minHeight="180dp"
                     android:orientation="horizontal"
+                    app:movieCastList="@{viewModel.completeMovieDetail.credits.cast}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/raw_cast_section"
                     tools:listitem="@layout/item_cast" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/raw_poster_section"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -209,11 +195,33 @@
                     android:layout_marginBottom="40dp"
                     app:layout_constraintTop_toBottomOf="@+id/raw_poster_section" />
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/movie_similar_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Similar Movies"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@+id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/movie_poster_view_pager" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/movie_similar_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:minHeight="240dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/movie_similar_text_view"
+                    app:listData="@{viewModel.recommendedMovies}"
+                    tools:listitem="@layout/item_movie" />
+
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    app:layout_constraintTop_toBottomOf="@+id/movie_poster_view_pager" />
+                    app:layout_constraintTop_toBottomOf="@+id/movie_similar_recycler_view" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/startGuideline"

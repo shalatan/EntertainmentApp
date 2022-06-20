@@ -12,7 +12,7 @@ class SavedContentRepository @Inject constructor(private val dao: MovieDAO) {
     }
 
     fun getAllWatchLaterMovies(): LiveData<List<SavedMovie>> {
-        return dao.getAllWatchedMovies()
+        return dao.getAllWatchLaterMovies()
     }
 
     suspend fun deleteMovieFromDatabase(savedMovie: SavedMovie) {

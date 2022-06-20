@@ -24,12 +24,13 @@
             android:paddingTop="?attr/actionBarSize"
             android:visibility="invisible">
 
-            <com.google.android.material.button.MaterialButton
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/series_section"
-                style="@style/Widget.Shrine.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Switch to Series Section" />
+                android:layout_marginTop="16dp"
+                android:text="Switch to Series Section"
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="76dp"
@@ -38,19 +39,20 @@
                 android:background="@color/design_default_color_on_primary"
                 android:backgroundTint="#CC0000" />
 
-            <com.google.android.material.button.MaterialButton
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/watched_movies"
-                style="@style/Widget.Shrine.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Watched Movies" />
+                android:text="My Watched Movies"
+                android:textSize="18sp" />
 
-            <com.google.android.material.button.MaterialButton
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/watch_later_movies"
-                style="@style/Widget.Shrine.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Watch Later Movies" />
+                android:layout_marginTop="16dp"
+                android:text="My Watch Later Movies"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <com.google.android.material.appbar.AppBarLayout
@@ -340,7 +342,7 @@
             android:layout_margin="32dp"
             android:elevation="8dp"
             android:onClick="@{() -> viewModel.triggerSearchLayout()}"
-            app:srcCompat="@drawable/outline_saved_search_24" />
+            app:srcCompat="@android:drawable/ic_menu_search" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

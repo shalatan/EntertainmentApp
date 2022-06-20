@@ -3,6 +3,7 @@ package com.shalatan.entertainmentapp.ui.moviedetail
 import com.shalatan.entertainmentapp.database.MovieDAO
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.CompleteMovieDetail
+import com.shalatan.entertainmentapp.model.MovieResponse
 import com.shalatan.entertainmentapp.network.TmdbApiService
 import com.shalatan.entertainmentapp.utils.Constants
 import kotlinx.coroutines.Deferred
@@ -13,16 +14,28 @@ class DetailRepository @Inject constructor(
     private val tmdbApiService: TmdbApiService
 ) {
 
-    suspend fun addMovieToWatched(savedMovie: SavedMovie) {
+    suspend fun insertMovie(savedMovie: SavedMovie) {
         dao.insert(savedMovie)
     }
 
-    suspend fun addMovieToWatchlater(savedMovie: SavedMovie) {
-        dao.insert(savedMovie)
+    suspend fun updateMovie(savedMovie: SavedMovie) {
+        dao.update(savedMovie)
+    }
+
+    suspend fun isMovieInWatchedList(movieId: Int): Int {
+        return dao.isMovieInRatedList(movieId)
+    }
+
+    suspend fun isMovieInWatchLaterList(movieId: Int): Int {
+        return dao.isMovieInWatchLaterList(movieId)
     }
 
     fun fetchCompleteMovieDataAsync(movieId: Int): Deferred<CompleteMovieDetail> {
         return tmdbApiService.getCompleteMovieDetailAsync(movieId, Constants.API_KEY, Constants.VIR)
+    }
+
+    fun fetchSimilarMoviesDataAsync(movieId: Int): Deferred<MovieResponse> {
+        return tmdbApiService.getRecommendationMoviesAsync(movieId, Constants.API_KEY, 1)
     }
 }
 

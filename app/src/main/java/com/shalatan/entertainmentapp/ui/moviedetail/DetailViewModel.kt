@@ -13,13 +13,6 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(private val repository: DetailRepository) :
     ViewModel() {
 
-    // The internal MutableLiveData String that stores the most recent response status
-    private val _status = MutableLiveData<String>()
-
-    // The external immutable LiveData for the status String
-    val status: LiveData<String>
-        get() = _status
-
     private val _selectedMovieDetail = MutableLiveData<Movie>()
     val selectedMovieDetail: LiveData<Movie>
         get() = _selectedMovieDetail
@@ -36,29 +29,17 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     val backdropImages: LiveData<Backdrop>
         get() = _backdropImages
 
-    /**
-     * Request a toast by setting this value to true.
-     */
-    private var _showAddedToWatchedSnackbarEvent = MutableLiveData<Boolean>()
-    private var _showAddedToWatchLaterSnackbarEvent = MutableLiveData<Boolean>()
+    private val _recommendedMovies = MutableLiveData<List<Movie>>()
+    val recommendedMovies: LiveData<List<Movie>>
+        get() = _recommendedMovies
 
-    /**
-     * If this is true, immediately `show()` a toast and call `doneShowingSnackbar()`.
-     */
-    val showAddedToWatchedSnackbarEvent: LiveData<Boolean>
-        get() = _showAddedToWatchedSnackbarEvent
-    val showAddedToWatchLaterSnackbarEvent: LiveData<Boolean>
-        get() = _showAddedToWatchLaterSnackbarEvent
+    private val _isMovieExistInWatchedList = MutableLiveData<Boolean>()
+    val isMovieExistInWatchedList: LiveData<Boolean>
+        get() = _isMovieExistInWatchedList
 
-    /**
-     * Call this immediately after calling `show()` on a toast.
-     * It will clear the toast request, so if the user rotates their phone it won't show a duplicate
-     * toast.
-     */
-    fun doneShowingSnackbar() {
-        _showAddedToWatchedSnackbarEvent.value = false
-        _showAddedToWatchLaterSnackbarEvent.value = false
-    }
+    private val _isMovieExistInWatchLaterList = MutableLiveData<Boolean>()
+    val isMovieExistInWatchLaterList: LiveData<Boolean>
+        get() = _isMovieExistInWatchLaterList
 
     fun fetchMovieData(movie: Movie) {
         _selectedMovieDetail.value = movie
@@ -68,53 +49,57 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     private fun fetchCurrentMovieDetails(movie: Movie) {
         viewModelScope.launch {
             val getCompleteMovieDetail = repository.fetchCompleteMovieDataAsync(movie.id)
+            val similarMovies = repository.fetchSimilarMoviesDataAsync(movie.id)
             try {
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie
-                Log.e(
-                    "ABCD SYNOPSIS OF ${completeMovie.title} : ",
-                    completeMovie.overview.toString()
-                )
-                _status.value = _completeMovieDetail.value!!.images?.backdrops.toString()
+                _recommendedMovies.value = similarMovies.await().movies
             } catch (exception: SocketTimeoutException) {
                 Log.e("Error fetching movie timeout", "Hi")
             } catch (t: Throwable) {
                 Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
-                Log.e("Movie Name : ", movie.original_title.toString())
-                _status.value = t.message
             }
-
         }
-    }
-
-    /**
-     * add or replace existing data of movie to database with isWatched value true
-     */
-    fun addMovieToWatched() {
-        viewModelScope.launch {
-            Log.e("CLICKED", "ADDED TO WATCHED")
-            val id = _selectedMovieDetail.value!!.id
-            val poster = _selectedMovieDetail.value?.posterPath
-            val name = _selectedMovieDetail.value?.original_title
-            val savedMovie = SavedMovie(id, name, poster, isWatched = true, isWatchLater = false)
-            repository.addMovieToWatched(savedMovie)
-        }
-        _showAddedToWatchedSnackbarEvent.value = true
     }
 
     /**
      * add or replace existing data of movie to database with isWatchlater value true
      */
-    fun addMovieToWatchLater() {
+    fun addMovieToWatchList(isRated: Boolean, isWatchLater: Boolean) {
         viewModelScope.launch {
-            Log.e("CLICKED", "ADDED TO WATCH LATER")
             val id = _selectedMovieDetail.value!!.id
             val poster = _selectedMovieDetail.value?.posterPath
             val name = _selectedMovieDetail.value?.original_title
-            val savedMovie = SavedMovie(id, name, poster, isWatched = false, isWatchLater = true)
-            repository.addMovieToWatchlater(savedMovie)
+            val savedMovie =
+                SavedMovie(id, name, poster, isRated = isRated, isWatchLater = isWatchLater)
+            repository.insertMovie(savedMovie)
         }
-        _showAddedToWatchLaterSnackbarEvent.value = true
+    }
+
+    /**
+     * update existing data of movie to database
+     */
+    fun updateExistingMovieData(isWatchLater: Boolean, isRated: Boolean) {
+        viewModelScope.launch {
+            val id = _selectedMovieDetail.value!!.id
+            val poster = _selectedMovieDetail.value?.posterPath
+            val name = _selectedMovieDetail.value?.original_title
+            val savedMovie =
+                SavedMovie(id, name, poster, isRated = isRated, isWatchLater = isWatchLater)
+            repository.updateMovie(savedMovie)
+        }
+    }
+
+    /**
+     * check if current movie exists in watched or watchlater list
+     */
+    fun isMovieSavedInWatchList(movieId: Int) {
+        viewModelScope.launch {
+            val isMovieWatched = repository.isMovieInWatchedList(movieId)
+            val isMovieWatchLater = repository.isMovieInWatchLaterList(movieId)
+            _isMovieExistInWatchedList.value = isMovieWatched != 0
+            _isMovieExistInWatchLaterList.value = isMovieWatchLater != 0
+        }
     }
 
 }

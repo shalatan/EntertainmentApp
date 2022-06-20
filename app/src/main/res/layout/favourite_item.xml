@@ -10,15 +10,17 @@
             type="com.shalatan.entertainmentapp.database.SavedMovie" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.Material3.CardView.Outlined"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:strokeWidth="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp">
+            android:layout_margin="8dp">
 
             <ImageView
                 android:id="@+id/saved_movie_poster"
@@ -38,14 +40,12 @@
                 android:layout_width="282dp"
                 android:layout_height="27dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:text="@{savedMovie.movieTitle}"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.409"
                 app:layout_constraintStart_toEndOf="@+id/saved_movie_poster"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="MOVIE NAME" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

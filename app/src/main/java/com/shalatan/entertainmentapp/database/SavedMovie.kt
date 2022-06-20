@@ -9,6 +9,8 @@ data class SavedMovie(
     var Id: Int = -1,
     var movieTitle: String? = "",
     var moviePoster: String? = "",
-    var isWatched: Boolean = false,
-    var isWatchLater: Boolean = false
+//    var overview: String? = "",
+    var isWatchLater: Boolean = false,
+    var isRated: Boolean = false,
+//    var recommendationWeight: Int = -1
 )
