@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<!--    <style name="Widget.Shrine.Toolbar" parent="Widget.AppCompat.Toolbar">-->
-<!--        <item name="android:background">@color/background_dark</item>-->
-<!--        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>-->
-<!--        <item name="titleTextAppearance">@style/TextAppearance.Shrine.Toolbar</item>-->
-<!--    </style>-->
+    <!--    <style name="Widget.Shrine.Toolbar" parent="Widget.AppCompat.Toolbar">-->
+    <!--        <item name="android:background">@color/background_dark</item>-->
+    <!--        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>-->
+    <!--        <item name="titleTextAppearance">@style/TextAppearance.Shrine.Toolbar</item>-->
+    <!--    </style>-->
 
-<!--    <style name="TextAppearance.Shrine.Toolbar" parent="TextAppearance.MaterialComponents.Button">-->
-<!--        <item name="android:textSize">16sp</item>-->
-<!--        <item name="android:textColor">#ffff</item>-->
-<!--    </style>-->
+    <!--    <style name="TextAppearance.Shrine.Toolbar" parent="TextAppearance.MaterialComponents.Button">-->
+    <!--        <item name="android:textSize">16sp</item>-->
+    <!--        <item name="android:textColor">#ffff</item>-->
+    <!--    </style>-->
 
     <style name="Widget.Shrine.Backdrop" parent="">
-<!--        <item name="android:background">@color/background_dark</item>-->
+        <!--        <item name="android:background">@color/background_dark</item>-->
     </style>
 
     <style name="Widget.Shrine.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">

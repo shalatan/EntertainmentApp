@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar.OnRatingBarChangeListener
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
+import com.shalatan.entertainmentapp.MainViewModel
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 import com.shalatan.entertainmentapp.model.Movie
@@ -22,10 +25,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     val viewModel: DetailViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
+
     lateinit var movie: Movie
     lateinit var binding: FragmentDetailBinding
-    lateinit var movieWatchedIcon: ImageView
-    lateinit var movieWatchLaterIcon: ImageView
+    private lateinit var movieWatchedIcon: ImageView
+    private lateinit var movieWatchLaterIcon: ImageView
     private var isRated = false
     private var isWatchLater = false
 
@@ -79,42 +84,41 @@ class DetailFragment : Fragment() {
 
         binding.watchLaterLayout.setOnClickListener {
             if (isWatchLater) {
-                if (isRated) {
-                    viewModel.updateExistingMovieData(isWatchLater = false, isRated = true)
-                } else {
-                    viewModel.updateExistingMovieData(isWatchLater = false, isRated = false)
-                }
+                viewModel.updateWatchLaterStatus(!isWatchLater)
                 markMovieAsWatchLaterFalse()
             } else {
-                //if it's not in watch later list, drop logic further down
-                if (isRated) {
-                    //if it's already rated, means it exists in db, hence update
-                    viewModel.updateExistingMovieData(isWatchLater = true, isRated = true)
-                } else {
-                    //if it's not rated also, means it doesn't exist in db, hence insert
-                    viewModel.addMovieToWatchList(isRated = false, isWatchLater = true)
-                }
+                viewModel.addMovieToWatchList(isRated = false, isWatchLater = true)
+                viewModel.updateWatchLaterStatus(!isWatchLater)
                 markMovieAsWatchLaterTrue()
             }
         }
 
+        var recommendedMovies = emptyList<Movie>()
+        viewModel.recommendedMovies.observe(viewLifecycleOwner) {
+            recommendedMovies = it
+        }
+
+        val ratingBar = binding.movieRatingBar
         binding.ratedLayout.setOnClickListener {
             if (isRated) {
-                if (isWatchLater) {
-                    viewModel.updateExistingMovieData(isWatchLater = true, isRated = false)
-                } else {
-                    viewModel.updateExistingMovieData(isWatchLater = false, isRated = false)
-                }
+                viewModel.updateRatedStatus(isRated = false, rating = 0f)
                 markMovieAsRatedFalse()
             } else {
-                if (isWatchLater) {
-                    viewModel.updateExistingMovieData(isWatchLater = true, isRated = true)
-                } else {
-                    viewModel.addMovieToWatchList(isRated = true, isWatchLater = false)
-                }
+                ratingBar.visibility = View.VISIBLE
+                ratingBar.onRatingBarChangeListener =
+                    OnRatingBarChangeListener { rb, rating, fromUser ->
+                        if (fromUser) {
+                            viewModel.addMovieToWatchList(isWatchLater = false, isRated = true)
+                            viewModel.updateRatedStatus(isRated = true, rating = rating)
+                            mainViewModel.recommendMovie(movie.id, recommendedMovies, rating)
+                            rb.visibility = View.INVISIBLE
+                        }
+                    }
                 markMovieAsRatedTrue()
             }
         }
+
+
 
         viewModel.isMovieExistInWatchedList.observe(viewLifecycleOwner) {
             if (it) {

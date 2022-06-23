@@ -21,14 +21,6 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     val completeMovieDetail: LiveData<CompleteMovieDetail>
         get() = _completeMovieDetail
 
-    private val _navigateToPosterFragment = MutableLiveData<Movie>()
-    val navigateToPosterFragment: LiveData<Movie>
-        get() = _navigateToPosterFragment
-
-    private val _backdropImages = MutableLiveData<Backdrop>()
-    val backdropImages: LiveData<Backdrop>
-        get() = _backdropImages
-
     private val _recommendedMovies = MutableLiveData<List<Movie>>()
     val recommendedMovies: LiveData<List<Movie>>
         get() = _recommendedMovies
@@ -70,23 +62,20 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
             val id = _selectedMovieDetail.value!!.id
             val poster = _selectedMovieDetail.value?.posterPath
             val name = _selectedMovieDetail.value?.original_title
+            val overview = _selectedMovieDetail.value?.overview
             val savedMovie =
-                SavedMovie(id, name, poster, isRated = isRated, isWatchLater = isWatchLater)
+                SavedMovie(
+                    Id = id,
+                    movieTitle = name,
+                    moviePoster = poster,
+                    movieOverview = overview,
+                    isRated = isRated,
+                    isWatchLater = isWatchLater,
+                    isRecommendationConsidered = false,
+                    recommendationWeight = 0,
+                    rating = 0f
+                )
             repository.insertMovie(savedMovie)
-        }
-    }
-
-    /**
-     * update existing data of movie to database
-     */
-    fun updateExistingMovieData(isWatchLater: Boolean, isRated: Boolean) {
-        viewModelScope.launch {
-            val id = _selectedMovieDetail.value!!.id
-            val poster = _selectedMovieDetail.value?.posterPath
-            val name = _selectedMovieDetail.value?.original_title
-            val savedMovie =
-                SavedMovie(id, name, poster, isRated = isRated, isWatchLater = isWatchLater)
-            repository.updateMovie(savedMovie)
         }
     }
 
@@ -99,6 +88,20 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
             val isMovieWatchLater = repository.isMovieInWatchLaterList(movieId)
             _isMovieExistInWatchedList.value = isMovieWatched != 0
             _isMovieExistInWatchLaterList.value = isMovieWatchLater != 0
+        }
+    }
+
+    fun updateWatchLaterStatus(isWatchLater: Boolean) {
+        val id = _selectedMovieDetail.value!!.id
+        viewModelScope.launch {
+            repository.changeMovieWatchLaterStatus(id, isWatchLater)
+        }
+    }
+
+    fun updateRatedStatus(isRated: Boolean, rating: Float) {
+        val id = _selectedMovieDetail.value!!.id
+        viewModelScope.launch {
+            repository.changeMovieRatedStatus(id, isRated, rating)
         }
     }
 

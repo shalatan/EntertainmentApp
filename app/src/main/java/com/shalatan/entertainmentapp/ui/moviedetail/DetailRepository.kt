@@ -18,16 +18,24 @@ class DetailRepository @Inject constructor(
         dao.insert(savedMovie)
     }
 
-    suspend fun updateMovie(savedMovie: SavedMovie) {
-        dao.update(savedMovie)
-    }
-
     suspend fun isMovieInWatchedList(movieId: Int): Int {
         return dao.isMovieInRatedList(movieId)
     }
 
     suspend fun isMovieInWatchLaterList(movieId: Int): Int {
         return dao.isMovieInWatchLaterList(movieId)
+    }
+
+    suspend fun changeMovieWatchLaterStatus(movieId: Int, isWatchLater: Boolean) {
+        dao.changeWatchLaterStatus(movieId, isWatchLater)
+    }
+
+    suspend fun changeMovieRatedStatus(movieId: Int, isWatchLater: Boolean, rating: Float) {
+        dao.changeRatedStatus(movieId, isWatchLater, rating)
+    }
+
+    suspend fun changeRecommendationConsideredStatus(movieId: Int, isRecommendationConsidered: Boolean) {
+        dao.changeRecommendationConsideredStatus(movieId, isRecommendationConsidered)
     }
 
     fun fetchCompleteMovieDataAsync(movieId: Int): Deferred<CompleteMovieDetail> {
@@ -37,6 +45,11 @@ class DetailRepository @Inject constructor(
     fun fetchSimilarMoviesDataAsync(movieId: Int): Deferred<MovieResponse> {
         return tmdbApiService.getRecommendationMoviesAsync(movieId, Constants.API_KEY, 1)
     }
+
+    suspend fun updateMovieRecommendationWeight(movieId: Int, rating: Float) {
+        dao.updateMovieRecommendationWeight(movieId, rating)
+    }
+
 }
 
 

@@ -1,7 +1,5 @@
 package com.shalatan.entertainmentapp
 
-import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -86,13 +84,13 @@ fun bindPoster(bigImageView: ImageView, imgUrl: String?) {
     }
 }
 
-@BindingAdapter("adultChecker")
-fun adultCheck(view: View, adult: Boolean) {
-    Log.e("Testing Adult Check : ", adult.toString())
-    if (adult) {
-        view.setBackgroundResource(R.drawable.adult_true)
-    } else {
-        view.setBackgroundResource(R.drawable.adult_false)
-    }
-}
+//@BindingAdapter("adultChecker")
+//fun adultCheck(view: View, adult: Boolean) {
+//    Log.e("Testing Adult Check : ", adult.toString())
+//    if (adult) {
+//        view.setBackgroundResource(R.drawable.adult_true)
+//    } else {
+//        view.setBackgroundResource(R.drawable.adult_false)
+//    }
+//}
 

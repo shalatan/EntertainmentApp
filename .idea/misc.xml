@@ -7,8 +7,10 @@
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable-xxxhdpi/adult_false.xml" value="0.1905" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable-xxxhdpi/app_icon.xml" value="0.1905" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/adult_true.xml" value="0.1905" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/bg_rating_bar.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/custom_watch_later_button.xml" value="0.1775" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_broken_image.xml" value="0.1775" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_clapper_close.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_clapper_open.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_more_vert_24.xml" value="0.1775" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_watch_later_false.xml" value="0.1775" />
@@ -19,6 +21,9 @@
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/outline_saved_search_20.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/outline_saved_search_24.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/overview_fab.xml" value="0.2125" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/rating_empty.xml" value="0.2125" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/rating_fill.xml" value="0.2125" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/rating_half.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/recycler_view_divider.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/watch_later_default.xml" value="0.1775" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/watched_default.xml" value="0.2125" />

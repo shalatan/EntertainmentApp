@@ -1,21 +1,17 @@
 package com.shalatan.entertainmentapp.ui.moviedetail.poster
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-//import com.github.piasy.biv.BigImageViewer
-//import com.github.piasy.biv.loader.glide.GlideImageLoader
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentPosterBinding
 
 class PosterFragment : Fragment() {
 
-    lateinit var posterViewModel: PosterViewModel
+    private lateinit var posterViewModel: PosterViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +24,9 @@ class PosterFragment : Fragment() {
 
 
         val posterURL = PosterFragmentArgs.fromBundle(requireArguments()).posterURL
-        Log.e("RECV URL", posterURL)
         val posterViewModelFactory = PosterViewModelFactory(posterURL, application)
         posterViewModel =
-            ViewModelProvider(this, posterViewModelFactory).get(PosterViewModel::class.java)
+            ViewModelProvider(this, posterViewModelFactory)[PosterViewModel::class.java]
         binding.posterViewModel = posterViewModel
 
         binding.posterMenu.setOnClickListener {
@@ -39,7 +34,7 @@ class PosterFragment : Fragment() {
         }
 
         //show snackbar when wallpaper is set successfully
-        posterViewModel.posterSetAsWallpaperSnackbarEvent.observe(viewLifecycleOwner, Observer {
+        posterViewModel.posterSetAsWallpaperSnackbarEvent.observe(viewLifecycleOwner) {
             if (it == true) {
                 Snackbar.make(
                     requireActivity().findViewById(android.R.id.content),
@@ -48,7 +43,7 @@ class PosterFragment : Fragment() {
                 ).show()
                 posterViewModel.doneShowingSnackbar()
             }
-        })
+        }
         return binding.root
     }
 

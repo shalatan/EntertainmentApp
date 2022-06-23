@@ -4,7 +4,6 @@ import android.app.Application
 import android.app.WallpaperManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,8 +12,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.shalatan.entertainmentapp.utils.Constants
 
-class PosterViewModel(val app: Application, val posterPath: String) : AndroidViewModel(app) {
-
+class PosterViewModel(val app: Application, private val posterPath: String) : AndroidViewModel(app) {
 
     private val _posterURL = MutableLiveData<String>()
     val posterURL: LiveData<String>
@@ -39,12 +37,10 @@ class PosterViewModel(val app: Application, val posterPath: String) : AndroidVie
     }
 
     /**
-     * set the position'th element of backdrops as wallpaper and trigger snackbar
+     * set the current position element of backdrops as wallpaper and trigger snackbar
      */
     fun setImageAsWallpaper(poster: String?) {
-        Log.e("PVM1", _posterSetAsWallpaperSnackbarEvent.value.toString())
         val fullUrl = Constants.IMG_BASE_URL_O + poster
-        Log.e("PVM1", fullUrl)
         Glide.with(app)
             .asBitmap()
             .load(fullUrl)
@@ -55,7 +51,6 @@ class PosterViewModel(val app: Application, val posterPath: String) : AndroidVie
                 ) {
                     WallpaperManager.getInstance(app).setBitmap(resource)
                     _posterSetAsWallpaperSnackbarEvent.value = true
-                    Log.e("PosterViewModel : ", _posterSetAsWallpaperSnackbarEvent.value.toString())
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {}
