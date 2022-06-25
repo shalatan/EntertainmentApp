@@ -31,16 +31,11 @@ class SavedContentViewModel @Inject constructor(private val repository: SavedCon
     /**
      * Remove movie from watch later movies list
      */
-    fun removeFromWatchLater(position: Int) {
-        viewModelScope.launch {
-            deleteWatchLaterMovie(position)
-        }
-    }
-
-    private suspend fun deleteWatchLaterMovie(position: Int) {
+    fun deleteWatchLaterMovie(position: Int) {
         viewModelScope.launch {
             watchLaterMovies.value?.get(position)?.let {
-                repository.deleteMovieFromDatabase(it)
+                repository.changeMovieWatchLaterStatus(it.Id, isWatchLater = false)
+//                repository.deleteMovieFromDatabase(it)
             }
         }
     }
@@ -48,16 +43,10 @@ class SavedContentViewModel @Inject constructor(private val repository: SavedCon
     /**
      * Remove movie from watched movies list
      */
-    fun removeFromWatched(position: Int) {
-        viewModelScope.launch {
-            deleteWatchedMovie(position)
-        }
-    }
-
-    private suspend fun deleteWatchedMovie(position: Int) {
+    fun deleteWatchedMovie(position: Int) {
         viewModelScope.launch {
             watchedMovies.value?.get(position)?.let {
-                repository.deleteMovieFromDatabase(it)
+                repository.changeMovieRatedStatus(it.Id, isRated = false, 0f)
             }
         }
     }

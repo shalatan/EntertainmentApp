@@ -100,12 +100,24 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:maxLines="1"
+                    android:text="@{viewModel.completeMovieDetail.overview}"
                     android:textAlignment="viewStart"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
                     app:layout_constraintTop_toBottomOf="@+id/raw_synopsis"
                     tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque semper volutpat libero at pharetra. Praesent eros purus, tempor non sodales sed, feugiat vitae massa. Ut id commodo metus, sit amet dapibus purus. Nam ligula metus, tincidunt non magna at, cursus tempor ligula." />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/raw_synopsis_read_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/read_more"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@id/rated_layout"
+                    app:layout_constraintTop_toBottomOf="@id/movie_overview" />
 
                 <LinearLayout
                     android:id="@+id/watch_later_layout"
@@ -130,7 +142,6 @@
                         android:layout_marginTop="4dp"
                         android:text="Watch List" />
                 </LinearLayout>
-
 
                 <RatingBar
                     android:id="@+id/movie_rating_bar"

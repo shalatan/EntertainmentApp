@@ -46,6 +46,18 @@
                 app:layout_constraintStart_toEndOf="@+id/saved_movie_poster"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="MOVIE NAME" />
+
+            <RatingBar
+                android:id="@+id/movie_rating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:numStars="5"
+                android:rating="@{savedMovie.rating}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

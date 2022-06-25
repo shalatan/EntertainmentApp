@@ -52,7 +52,6 @@ class OverviewFragment : Fragment() {
             )
         )
 
-
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
 

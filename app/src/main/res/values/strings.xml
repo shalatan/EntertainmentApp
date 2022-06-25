@@ -12,5 +12,6 @@
     <string name="open_menu">Open Menu</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="cd_movie_cast_profile">Movie Cast Profile</string>
+    <string name="read_more"><b><u>Read More</u></b></string>
 
 </resources>

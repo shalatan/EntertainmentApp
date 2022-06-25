@@ -40,9 +40,11 @@ class NavigationIconClickListener @JvmOverloads internal constructor(
 
         if (menuView.visibility == View.INVISIBLE) {
             menuView.visibility = View.VISIBLE
+            sheet.isNestedScrollingEnabled = false
         } else {
             menuView.visibility = View.INVISIBLE
             sheet.isClickable = true
+            sheet.isNestedScrollingEnabled = true
         }
 
         // Cancel the existing animations
@@ -52,8 +54,7 @@ class NavigationIconClickListener @JvmOverloads internal constructor(
 
         updateIcon(view)
 
-        val translateY =
-            height - context.resources.getDimensionPixelSize(R.dimen.shr_product_grid_reveal_height)
+        val translateY = height - context.resources.getDimensionPixelSize(R.dimen.shr_product_grid_reveal_height)
 
         val animator = ObjectAnimator.ofFloat(
             sheet,

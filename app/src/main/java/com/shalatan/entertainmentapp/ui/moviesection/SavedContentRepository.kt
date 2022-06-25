@@ -15,8 +15,12 @@ class SavedContentRepository @Inject constructor(private val dao: MovieDAO) {
         return dao.getAllWatchLaterMovies()
     }
 
-    suspend fun deleteMovieFromDatabase(savedMovie: SavedMovie) {
-        dao.delete(savedMovie)
+    suspend fun changeMovieWatchLaterStatus(movieId: Int, isWatchLater: Boolean) {
+        dao.changeWatchLaterStatus(movieId, isWatchLater)
+    }
+
+    suspend fun changeMovieRatedStatus(movieId: Int, isRated: Boolean, rating: Float) {
+        dao.changeRatedStatus(movieId, isRated, rating)
     }
 }
 
