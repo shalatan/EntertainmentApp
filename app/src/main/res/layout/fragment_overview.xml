@@ -93,7 +93,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="14dp"
                     android:text="Now Playing Movies"
-                    android:textSize="28sp"
+                    android:textSize="@dimen/high_emphasis_text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Top Rated Movies"
-                    android:textSize="28sp"
+                    android:textSize="@dimen/high_emphasis_text"
                     app:layout_constraintStart_toStartOf="@+id/now_playing_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/margin_line_1" />
 
@@ -183,7 +183,7 @@
                     android:layout_marginTop="16dp"
                     android:paddingBottom="2dp"
                     android:text="Popular Movies"
-                    android:textSize="28sp"
+                    android:textSize="@dimen/high_emphasis_text"
                     app:layout_constraintStart_toStartOf="@+id/top_rated_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/margin_line_2" />
 
@@ -229,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Upcoming Movies"
-                    android:textSize="28sp"
+                    android:textSize="@dimen/high_emphasis_text"
                     app:layout_constraintStart_toStartOf="@+id/popular_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/margin_line_3" />
 
@@ -334,15 +334,15 @@
         <!--            app:layout_constraintBottom_toBottomOf="parent"-->
         <!--            app:layout_constraintEnd_toEndOf="parent" />-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/search_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="32dp"
-            android:elevation="8dp"
-            android:onClick="@{() -> viewModel.triggerSearchLayout()}"
-            app:srcCompat="@android:drawable/ic_menu_search" />
+        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--            android:id="@+id/search_fab"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="bottom|end"-->
+        <!--            android:layout_margin="32dp"-->
+        <!--            android:elevation="8dp"-->
+        <!--            android:onClick="@{() -> viewModel.triggerSearchLayout()}"-->
+        <!--            app:srcCompat="@android:drawable/ic_menu_search" />-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -10,8 +10,10 @@ import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.Cast
 import com.shalatan.entertainmentapp.model.Genre
 import com.shalatan.entertainmentapp.model.Movie
+import com.shalatan.entertainmentapp.model.Result
 import com.shalatan.entertainmentapp.ui.moviedetail.GenreAdapter
 import com.shalatan.entertainmentapp.ui.moviedetail.MovieCastAdapter
+import com.shalatan.entertainmentapp.ui.moviedetail.VideoAdapter
 import com.shalatan.entertainmentapp.ui.moviesection.SavedContentAdapter
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import com.shalatan.entertainmentapp.utils.Constants
@@ -43,7 +45,7 @@ fun bindFavouriteRecyclerView(recyclerView: RecyclerView, data: List<SavedMovie>
 @BindingAdapter("movieCastList")
 fun bindMovieCastRecyclerView(recyclerView: RecyclerView, data: List<Cast>?) {
     val movieCastAdapter = recyclerView.adapter as MovieCastAdapter
-    movieCastAdapter.submitList(data)
+    movieCastAdapter.submitList(data?.sortedByDescending { it.popularity })
 }
 
 @BindingAdapter("movieGenreList")
@@ -52,17 +54,40 @@ fun bindMovieGenreRecyclerView(recyclerView: RecyclerView, data: List<Genre>?) {
     movieGenreAdapter.submitList(data)
 }
 
+@BindingAdapter("movieVideoList")
+fun bindMovieVideoRecyclerView(recyclerView: RecyclerView, data: List<Result>?) {
+    val movieVideoAdapter = recyclerView.adapter as VideoAdapter
+    movieVideoAdapter.submitList(data)
+}
+
 /* Bind Images */
 
 //bind image into movie_item
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imgUrl: String?) {
     val fullUrl = Constants.IMG_BASE_URL + imgUrl
-//    fullUrl?.let{
     fullUrl.let {
         val imgUri = it.toUri().buildUpon().scheme("https").build()
         Glide.with(imageView.context)
             .load(imgUri)
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
+            )
+            .into(imageView)
+    }
+}
+
+//bind image into movie_item
+@BindingAdapter("bindCastImage")
+fun bindCastImage(imageView: ImageView, imgUrl: String?) {
+    val fullUrl = Constants.IMG_BASE_URL + imgUrl
+    fullUrl.let {
+        val imgUri = it.toUri().buildUpon().scheme("https").build()
+        Glide.with(imageView.context)
+            .load(imgUri)
+            .circleCrop()
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.loading_animation)

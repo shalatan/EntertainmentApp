@@ -22,7 +22,6 @@
             android:clickable="false"
             android:contentDescription="@string/cd_movie_poster"
             android:scaleType="center"
-            android:transitionName="poster"
             app:imageUrl="@{viewModel.selectedMovieDetail.posterPath}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -67,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@{viewModel.selectedMovieDetail.original_title}"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/high_emphasis_text"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
@@ -80,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="@{String.valueOf(viewModel.completeMovieDetail.vote_average)}"
-                    android:textSize="22sp"
+                    android:textSize="@dimen/mid_emphasis_text"
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
                     app:layout_constraintTop_toBottomOf="@+id/movie_name"
                     tools:text="6.9" />
@@ -91,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/synopsis"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/mid_emphasis_text"
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
                     app:layout_constraintTop_toBottomOf="@+id/movie_rating" />
 
@@ -103,7 +102,7 @@
                     android:maxLines="1"
                     android:text="@{viewModel.completeMovieDetail.overview}"
                     android:textAlignment="viewStart"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/low_emphasis_text"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
                     app:layout_constraintTop_toBottomOf="@+id/raw_synopsis"
@@ -115,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="@string/read_more"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/low_emphasis_text"
                     app:layout_constraintEnd_toEndOf="@id/rated_layout"
                     app:layout_constraintTop_toBottomOf="@id/movie_overview" />
 
@@ -140,7 +139,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Watch List" />
+                        android:text="Watch List"
+                        android:textSize="@dimen/low_emphasis_text" />
                 </LinearLayout>
 
                 <RatingBar
@@ -175,7 +175,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Rate" />
+                        android:text="Rate"
+                        android:textSize="@dimen/low_emphasis_text" />
                 </LinearLayout>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -184,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Cast"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/mid_emphasis_text"
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
                     app:layout_constraintTop_toBottomOf="@+id/movie_overview" />
 
@@ -206,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Posters"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/mid_emphasis_text"
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
                     app:layout_constraintTop_toBottomOf="@+id/movie_cast_recycler_view" />
 
@@ -219,14 +220,35 @@
                     app:layout_constraintTop_toBottomOf="@+id/raw_poster_section" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/raw_video_section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Videos"
+                    android:textSize="@dimen/mid_emphasis_text"
+                    app:layout_constraintStart_toStartOf="@+id/startGuideline"
+                    app:layout_constraintTop_toBottomOf="@id/movie_poster_view_pager" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/movie_video_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:minHeight="40dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/raw_video_section"
+                    tools:listitem="@layout/item_genre" />
+
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/movie_similar_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Similar Movies"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/mid_emphasis_text"
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
-                    app:layout_constraintTop_toBottomOf="@id/movie_poster_view_pager" />
+                    app:layout_constraintTop_toBottomOf="@id/movie_video_recycler_view" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/movie_similar_recycler_view"

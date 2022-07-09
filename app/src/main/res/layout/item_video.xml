@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="genre"
-            type="com.shalatan.entertainmentapp.model.Genre" />
+            name="video"
+            type="com.shalatan.entertainmentapp.model.Result" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -27,8 +27,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="2dp"
             android:gravity="center"
-            android:text="@{genre.name}"
-            android:textSize="@dimen/low_emphasis_text"
+            android:text="@{video.type}"
+            android:textSize="18sp"
             tools:text="Action Drama" />
     </com.google.android.material.card.MaterialCardView>
 </layout>

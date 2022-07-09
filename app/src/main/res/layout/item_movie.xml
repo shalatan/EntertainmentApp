@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:text="@{movie.title}"
-                android:textSize="18sp"
+                android:textSize="@dimen/low_emphasis_text"
                 tools:text="Movie Title" />
 
         </LinearLayout>

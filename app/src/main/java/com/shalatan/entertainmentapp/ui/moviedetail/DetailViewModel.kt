@@ -6,6 +6,7 @@ import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.net.SocketTimeoutException
 import javax.inject.Inject
 
@@ -46,6 +47,8 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie
                 _recommendedMovies.value = similarMovies.await().movies
+                Timber.tag("ABCD Contains Video : ").d(completeMovie.video.toString())
+                Timber.tag("ABCD Video : ").d(completeMovie.videos.toString())
             } catch (exception: SocketTimeoutException) {
                 Log.e("Error fetching movie timeout", "Hi")
             } catch (t: Throwable) {

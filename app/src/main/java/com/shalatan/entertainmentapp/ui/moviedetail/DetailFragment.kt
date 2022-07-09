@@ -1,51 +1,57 @@
 package com.shalatan.entertainmentapp.ui.moviedetail
 
-import android.R.attr.name
 import android.os.Bundle
 import android.text.Html
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.shalatan.entertainmentapp.MainViewModel
 import com.shalatan.entertainmentapp.NavGraphDirections
+import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
-import com.shalatan.entertainmentapp.utils.CustomViews
 import dagger.hilt.android.AndroidEntryPoint
-
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     val viewModel: DetailViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     lateinit var movie: Movie
     lateinit var binding: FragmentDetailBinding
     private lateinit var movieWatchedIcon: ImageView
     private lateinit var movieWatchLaterIcon: ImageView
     private lateinit var movieOverviewReadMoreTextView: TextView
-    private lateinit var movieOverviewTextView:TextView
+    private lateinit var movieOverviewTextView: TextView
     private var isRated = false
     private var isWatchLater = false
 
-    val stringReadLess = "<b><u>Read Less</u></b>"
-    val stringReadMore = "<b><u>Read Less</u></b>"
+    private val stringReadLess = "<b><u>Read Less</u></b>"
+    private val stringReadMore = "<b><u>Read Less</u></b>"
+    private val youtubeUrl = "https://www.youtube.com/watch?v="
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie
         viewModel.fetchMovieData(movie)
         viewModel.isMovieSavedInWatchList(movie.id)
+
+        bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
+        bottomNavigationView.visibility = View.GONE
     }
 
     override fun onCreateView(
@@ -54,10 +60,8 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.explode)
-
         binding = FragmentDetailBinding.inflate(inflater)
+        binding.moviePoster.transitionName = movie.title.toString()
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         movieWatchedIcon = binding.ratedLayoutImage
@@ -73,7 +77,8 @@ class DetailFragment : Fragment() {
                 movieOverviewReadMoreTextView.text = Html.fromHtml(stringReadMore)
             } else {
                 movieOverviewTextView.maxLines = Integer.MAX_VALUE
-                movieOverviewReadMoreTextView.text = Html.fromHtml(stringReadLess)            }
+                movieOverviewReadMoreTextView.text = Html.fromHtml(stringReadLess)
+            }
             isTextViewFull = !isTextViewFull
         }
 
@@ -84,7 +89,7 @@ class DetailFragment : Fragment() {
         })
         val moviePosterViewPager = binding.moviePosterViewPager
         moviePosterViewPager.adapter = postersAdapter
-        CustomViews().setUpPosterViewPager(moviePosterViewPager, requireActivity())
+        setUpPosterViewPager(moviePosterViewPager)
 
         //movie cast
         val movieCastRecyclerView = binding.movieCastRecyclerView
@@ -95,8 +100,25 @@ class DetailFragment : Fragment() {
         val genreAdapter = GenreAdapter()
         binding.movieGenreRecyclerView.adapter = genreAdapter
 
+        //movie video
+        val videoAdapter = VideoAdapter(VideoAdapter.OnClickListener {
+//            val videoLink = youtubeUrl + it.key
+//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoLink))
+//            intent.apply {
+//                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                setPackage("com.google.android.youtube")
+//                startActivity(this)
+//            }
+            val directions = DetailFragmentDirections.actionDetailFragmentToVideosFragment(it)
+            findNavController().navigate(directions)
+        })
+        binding.movieVideoRecyclerView.adapter = videoAdapter
+
         //if there's no backdrop images, remove the poster view pager else submit the data
         viewModel.completeMovieDetail.observe(viewLifecycleOwner) {
+            val videos = it.videos?.results
+            Timber.tag("ABCD VIDEOS IN FRAG : ").d(videos.toString())
+            videoAdapter.submitList(videos)
             if (it.images?.backdrops.isNullOrEmpty()) {
                 binding.moviePosterViewPager.visibility = View.GONE
             } else {
@@ -164,22 +186,53 @@ class DetailFragment : Fragment() {
     }
 
     private fun markMovieAsWatchLaterTrue() {
-        movieWatchLaterIcon.setImageResource(com.shalatan.entertainmentapp.R.drawable.ic_watch_later_true)
+        movieWatchLaterIcon.setImageResource(R.drawable.ic_watch_later_true)
         isWatchLater = true
     }
 
     private fun markMovieAsWatchLaterFalse() {
         isWatchLater = false
-        movieWatchLaterIcon.setImageResource(com.shalatan.entertainmentapp.R.drawable.ic_watch_later_false)
+        movieWatchLaterIcon.setImageResource(R.drawable.ic_watch_later_false)
     }
 
     private fun markMovieAsRatedTrue() {
         isRated = true
-        movieWatchedIcon.setImageResource(com.shalatan.entertainmentapp.R.drawable.ic_watched_true)
+        movieWatchedIcon.setImageResource(R.drawable.ic_watched_true)
     }
 
     private fun markMovieAsRatedFalse() {
         isRated = false
-        movieWatchedIcon.setImageResource(com.shalatan.entertainmentapp.R.drawable.ic_watched_false)
+        movieWatchedIcon.setImageResource(R.drawable.ic_watched_false)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        bottomNavigationView.visibility = View.VISIBLE
+    }
+
+    /**
+     * function to make view pager view multiple items
+     */
+    private fun setUpPosterViewPager(moviePosterViewPager: ViewPager2) {
+        with(moviePosterViewPager) {
+            clipToPadding = false
+            clipChildren = false
+            offscreenPageLimit = 3
+        }
+        val pageMarginPx = 20 * resources.displayMetrics.density
+        val offsetPx = 30 * resources.displayMetrics.density
+        moviePosterViewPager.setPageTransformer { page, position ->
+            val viewPager = page.parent.parent as ViewPager2
+            val offset = position * -(2 * offsetPx + pageMarginPx)
+            if (viewPager.orientation == ViewPager2.ORIENTATION_HORIZONTAL) {
+                if (ViewCompat.getLayoutDirection(viewPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+                    page.translationX = -offset
+                } else {
+                    page.translationX = offset
+                }
+            } else {
+                page.translationY = offset
+            }
+        }
     }
 }

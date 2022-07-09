@@ -2,4 +2,8 @@
 <resources>
     <dimen name="shr_product_grid_reveal_height">560dp</dimen>
 
+    <dimen name="high_emphasis_text">24sp</dimen>
+    <dimen name="mid_emphasis_text">20sp</dimen>
+    <dimen name="low_emphasis_text">16sp</dimen>
+
 </resources>

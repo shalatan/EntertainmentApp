@@ -24,12 +24,12 @@
     <fragment
         android:id="@+id/watchedMoviesFragment"
         android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchedMoviesFragment"
-        tools:layout="@layout/fragment_watched_movies"/>
+        tools:layout="@layout/fragment_watched_movies" />
 
     <fragment
         android:id="@+id/watchLaterMoviesFragment"
         android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchLaterMoviesFragment"
-        tools:layout="@layout/fragment_watch_later_movies"/>
+        tools:layout="@layout/fragment_watch_later_movies" />
 
     <fragment
         android:id="@+id/detailFragment"
@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_detailFragment_to_posterFragment"
             app:destination="@id/posterFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_videosFragment"
+            app:destination="@id/videosFragment" />
     </fragment>
 
     <fragment
@@ -52,6 +55,24 @@
             app:argType="string" />
     </fragment>
 
-    <action android:id="@+id/action_global_detailFragment" app:destination="@id/detailFragment" /><action android:id="@+id/action_global_watchLaterMoviesFragment" app:destination="@id/watchLaterMoviesFragment"/><action android:id="@+id/action_global_watchedMoviesFragment" app:destination="@id/watchedMoviesFragment"/>
+    <action
+        android:id="@+id/action_global_detailFragment"
+        app:destination="@id/detailFragment" />
+    <action
+        android:id="@+id/action_global_watchLaterMoviesFragment"
+        app:destination="@id/watchLaterMoviesFragment" />
+    <action
+        android:id="@+id/action_global_watchedMoviesFragment"
+        app:destination="@id/watchedMoviesFragment" />
+
+    <fragment
+        android:id="@+id/videosFragment"
+        android:name="com.shalatan.entertainmentapp.ui.moviedetail.videos.VideosFragment"
+        android:label="VideosFragment"
+        tools:layout="@layout/fragment_videos">
+        <argument
+            android:name="selectedVideo"
+            app:argType="com.shalatan.entertainmentapp.model.Result" />
+    </fragment>
 
 </navigation>
