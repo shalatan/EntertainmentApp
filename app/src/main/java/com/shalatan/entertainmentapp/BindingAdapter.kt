@@ -16,6 +16,7 @@ import com.shalatan.entertainmentapp.ui.moviedetail.MovieCastAdapter
 import com.shalatan.entertainmentapp.ui.moviedetail.VideoAdapter
 import com.shalatan.entertainmentapp.ui.moviesection.SavedContentAdapter
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
+import com.shalatan.entertainmentapp.ui.recommendation.RecommendationMovieAdapter
 import com.shalatan.entertainmentapp.utils.Constants
 
 /* Bind List Views */

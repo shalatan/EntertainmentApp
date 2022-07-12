@@ -27,13 +27,14 @@
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/recycler_view_divider.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/watch_later_default.xml" value="0.1775" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/watched_default.xml" value="0.2125" />
-        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/favourite_item.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_detail.xml" value="0.2" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_movie_grid.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_overview.xml" value="0.13900273224043716" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_poster.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_recommendation.xml" value="0.1875" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_search.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_videos.xml" value="0.176953125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_watch_later_movies.xml" value="0.1" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_watched_movies.xml" value="0.1875" />
@@ -42,6 +43,7 @@
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_genre.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_movie.xml" value="0.264" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_movie_landscape.xml" value="0.1875" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_recommended_movie.xml" value="0.18169398907103826" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_video.xml" value="0.17008196721311475" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_view_pager_poster.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1875" />

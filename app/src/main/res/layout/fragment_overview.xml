@@ -14,67 +14,67 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/backdrop_menu_list"
-            style="@style/Widget.Shrine.Backdrop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingTop="?attr/actionBarSize"
-            android:visibility="invisible">
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/backdrop_menu_list"-->
+        <!--            style="@style/Widget.Shrine.Backdrop"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:gravity="center_horizontal"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:paddingTop="?attr/actionBarSize"-->
+        <!--            android:visibility="invisible">-->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/series_section"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Switch to Series Section"
-                android:textSize="18sp" />
+        <!--            <com.google.android.material.textview.MaterialTextView-->
+        <!--                android:id="@+id/series_section"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="16dp"-->
+        <!--                android:text="Switch to Series Section"-->
+        <!--                android:textSize="18sp" />-->
 
-            <View
-                android:layout_width="76dp"
-                android:layout_height="0.8dp"
-                android:layout_margin="16dp"
-                android:background="@color/design_default_color_on_primary"
-                android:backgroundTint="#CC0000" />
+        <!--            <View-->
+        <!--                android:layout_width="76dp"-->
+        <!--                android:layout_height="0.8dp"-->
+        <!--                android:layout_margin="16dp"-->
+        <!--                android:background="@color/design_default_color_on_primary"-->
+        <!--                android:backgroundTint="#CC0000" />-->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/watched_movies"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Watched Movies"
-                android:textSize="18sp" />
+        <!--            <com.google.android.material.textview.MaterialTextView-->
+        <!--                android:id="@+id/watched_movies"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="My Watched Movies"-->
+        <!--                android:textSize="18sp" />-->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/watch_later_movies"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="My Watch Later Movies"
-                android:textSize="18sp" />
-        </LinearLayout>
+        <!--            <com.google.android.material.textview.MaterialTextView-->
+        <!--                android:id="@+id/watch_later_movies"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="16dp"-->
+        <!--                android:text="My Watch Later Movies"-->
+        <!--                android:textSize="18sp" />-->
+        <!--        </LinearLayout>-->
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <!--        <com.google.android.material.appbar.AppBarLayout-->
+        <!--            android:id="@+id/appBarLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent">-->
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/app_bar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                app:layout_scrollFlags="scroll|enterAlways|snap"
-                app:navigationIcon="@drawable/ic_clapper_open"
-                app:title="Movies Hex"
-                app:titleCentered="true" />
-            <!--            app:titleTextColor="@color/white_smoke"-->
-        </com.google.android.material.appbar.AppBarLayout>
+        <!--            <com.google.android.material.appbar.MaterialToolbar-->
+        <!--                android:id="@+id/app_bar"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="?attr/actionBarSize"-->
+        <!--                android:paddingStart="12dp"-->
+        <!--                android:paddingEnd="12dp"-->
+        <!--                app:layout_scrollFlags="scroll|enterAlways|snap"-->
+        <!--                app:navigationIcon="@drawable/ic_clapper_open"-->
+        <!--                app:title="Movies Hex"-->
+        <!--                app:titleCentered="true" />-->
+        <!--            &lt;!&ndash;            app:titleTextColor="@color/white_smoke"&ndash;&gt;-->
+        <!--        </com.google.android.material.appbar.AppBarLayout>-->
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/movie_scroll_view"

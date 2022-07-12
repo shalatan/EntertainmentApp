@@ -89,4 +89,6 @@
     <color name="light_on_primary_container">#280847</color>
     <color name="light_secondary">#ff5d00</color>
     <color name="light_background">#f0e0c6</color>
+
+    <color name="transparent">#00000000</color>
 </resources>

@@ -1,22 +1,13 @@
 package com.shalatan.entertainmentapp.ui.overview
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.NavGraphDirections
-import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
-import com.shalatan.entertainmentapp.utils.NavigationIconClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +17,7 @@ class OverviewFragment : Fragment() {
 
     private var searchBoxOpen = false
     private lateinit var binding: FragmentOverviewBinding
-    private lateinit var backdropMenuList: LinearLayout
+//    private lateinit var backdropMenuList: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,20 +28,20 @@ class OverviewFragment : Fragment() {
         binding = FragmentOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        backdropMenuList = binding.backdropMenuList
+//        backdropMenuList = binding.backdropMenuList
 
         // Set up the tool bar
-        (activity as AppCompatActivity).setSupportActionBar(binding.appBar)
-        binding.appBar.setNavigationOnClickListener(
-            NavigationIconClickListener(
-                backdropMenuList,
-                activity as AppCompatActivity,
-                binding.movieScrollView,
-                AccelerateDecelerateInterpolator(),
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_open),
-                ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_close)
-            )
-        )
+//        (activity as AppCompatActivity).setSupportActionBar(binding.appBar)
+//        binding.appBar.setNavigationOnClickListener(
+//            NavigationIconClickListener(
+//                backdropMenuList,
+//                activity as AppCompatActivity,
+//                binding.movieScrollView,
+//                AccelerateDecelerateInterpolator(),
+//                ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_open),
+//                ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_close)
+//            )
+//        )
 
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
@@ -112,17 +103,17 @@ class OverviewFragment : Fragment() {
             }
         })
 
-        binding.watchLaterMovies.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchLaterMoviesFragment())
-        }
-
-        binding.watchedMovies.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchedMoviesFragment())
-        }
-
-        binding.seriesSection.setOnClickListener {
-            Snackbar.make(it, "Coming Soon !!", Snackbar.LENGTH_SHORT).show()
-        }
+//        binding.watchLaterMovies.setOnClickListener {
+//            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchLaterMoviesFragment())
+//        }
+//
+//        binding.watchedMovies.setOnClickListener {
+//            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchedMoviesFragment())
+//        }
+//
+//        binding.seriesSection.setOnClickListener {
+//            Snackbar.make(it, "Coming Soon !!", Snackbar.LENGTH_SHORT).show()
+//        }
 
         //observe the fab buttons click handled in viewModel to retail the state
         viewModel.openSearchBox.observe(viewLifecycleOwner, Observer {
@@ -131,11 +122,6 @@ class OverviewFragment : Fragment() {
             } else {
                 openTheSearchBox()
             }
-        })
-
-        //hide the soft keyboard automatically from screen when data is ready to display in searchRecyclerView
-        viewModel.searchedMovies.observe(viewLifecycleOwner, Observer {
-            binding.searchEditText.hideKeyboard()
         })
         return binding.root
     }
@@ -159,13 +145,5 @@ class OverviewFragment : Fragment() {
         binding.movieScrollView.post {
             binding.movieScrollView.fullScroll(View.FOCUS_DOWN)
         }
-    }
-
-    /**
-     * hide soft-keyboard
-     */
-    fun View.hideKeyboard() {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 }

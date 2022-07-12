@@ -11,6 +11,7 @@
 
         <item name="colorSurface">@color/black</item>
         <item name="android:colorBackground">@color/black</item>
+        <item name="bottom_nav_color">@color/black</item>
 
 
     </style>

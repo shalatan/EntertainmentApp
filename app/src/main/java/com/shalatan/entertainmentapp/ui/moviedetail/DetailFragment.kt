@@ -22,7 +22,6 @@ import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -117,7 +116,6 @@ class DetailFragment : Fragment() {
         //if there's no backdrop images, remove the poster view pager else submit the data
         viewModel.completeMovieDetail.observe(viewLifecycleOwner) {
             val videos = it.videos?.results
-            Timber.tag("ABCD VIDEOS IN FRAG : ").d(videos.toString())
             videoAdapter.submitList(videos)
             if (it.images?.backdrops.isNullOrEmpty()) {
                 binding.moviePosterViewPager.visibility = View.GONE

@@ -15,5 +15,6 @@
     <string name="read_more"><b><u>Read More</u></b></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recommended_movies_for_you">RECOMMENDED MOVIES\nFOR YOU</string>
 
 </resources>

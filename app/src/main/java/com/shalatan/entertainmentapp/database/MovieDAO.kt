@@ -18,6 +18,10 @@ interface MovieDAO {
     @Query("SELECT * FROM saved_movies_table WHERE isWatchLater = 1")
     fun getAllWatchLaterMovies(): LiveData<List<SavedMovie>>
 
+    //get all unrated(unwatched) movies
+    @Query("SELECT * FROM saved_movies_table WHERE isRated = 0 ORDER BY recommendationWeight DESC")
+    fun getAllRecommendedMovies(): LiveData<List<SavedMovie>>
+
     @Query("UPDATE saved_movies_table SET isWatchLater = :isWatchLater WHERE Id = :id")
     suspend fun changeWatchLaterStatus(id: Int, isWatchLater: Boolean)
 

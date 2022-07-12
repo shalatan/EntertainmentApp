@@ -8,18 +8,7 @@
     <fragment
         android:id="@+id/overviewFragment"
         android:name="com.shalatan.entertainmentapp.ui.overview.OverviewFragment"
-        tools:layout="@layout/fragment_overview">
-        <action
-            android:id="@+id/action_overviewFragment_to_watchedMoviesFragment"
-            app:destination="@id/watchedMoviesFragment" />
-        <action
-            android:id="@+id/action_overviewFragment_to_watchLaterMoviesFragment"
-            app:destination="@id/watchLaterMoviesFragment" />
-        <!--            app:enterAnim="@anim/slide_in_right"-->
-        <!--            app:exitAnim="@anim/slide_out_left"-->
-        <!--            app:popEnterAnim="@anim/slide_in_left"-->
-        <!--            app:popExitAnim="@anim/slide_out_right" />-->
-    </fragment>
+        tools:layout="@layout/fragment_overview" />
 
     <fragment
         android:id="@+id/watchedMoviesFragment"
@@ -74,5 +63,15 @@
             android:name="selectedVideo"
             app:argType="com.shalatan.entertainmentapp.model.Result" />
     </fragment>
+    <fragment
+        android:id="@+id/recommendationFragment"
+        android:name="com.shalatan.entertainmentapp.ui.recommendation.RecommendationFragment"
+        android:label="RecommendationFragment"
+        tools:layout="@layout/fragment_recommendation" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.shalatan.entertainmentapp.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" />
 
 </navigation>

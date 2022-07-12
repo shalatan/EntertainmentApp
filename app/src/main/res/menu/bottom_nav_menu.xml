@@ -11,12 +11,12 @@
         android:icon="@drawable/ic_watched_false"
         android:title="WatchLists" />
     <item
-        android:id="@+id/watchLaterMoviesFragment"
+        android:id="@+id/searchFragment"
         android:enabled="true"
         android:icon="@drawable/ic_watched_false"
         android:title="Search" />
     <item
-        android:id="@+id/page_4"
+        android:id="@+id/recommendationFragment"
         android:enabled="true"
         android:icon="@drawable/ic_watched_false"
         android:title="Recommendation" />

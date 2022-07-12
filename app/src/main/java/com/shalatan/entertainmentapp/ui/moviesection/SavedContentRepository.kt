@@ -15,6 +15,10 @@ class SavedContentRepository @Inject constructor(private val dao: MovieDAO) {
         return dao.getAllWatchLaterMovies()
     }
 
+    fun getAllRecommendedMovies(): LiveData<List<SavedMovie>> {
+        return dao.getAllRecommendedMovies()
+    }
+
     suspend fun changeMovieWatchLaterStatus(movieId: Int, isWatchLater: Boolean) {
         dao.changeWatchLaterStatus(movieId, isWatchLater)
     }
