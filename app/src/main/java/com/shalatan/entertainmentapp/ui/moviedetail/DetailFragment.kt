@@ -14,7 +14,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.shalatan.entertainmentapp.MainViewModel
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
@@ -28,7 +27,6 @@ class DetailFragment : Fragment() {
 
     val viewModel: DetailViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
-    private lateinit var bottomNavigationView: BottomNavigationView
 
     lateinit var movie: Movie
     lateinit var binding: FragmentDetailBinding
@@ -48,9 +46,6 @@ class DetailFragment : Fragment() {
         movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie
         viewModel.fetchMovieData(movie)
         viewModel.isMovieSavedInWatchList(movie.id)
-
-        bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
-        bottomNavigationView.visibility = View.GONE
     }
 
     override fun onCreateView(
@@ -201,11 +196,6 @@ class DetailFragment : Fragment() {
     private fun markMovieAsRatedFalse() {
         isRated = false
         movieWatchedIcon.setImageResource(R.drawable.ic_watched_false)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        bottomNavigationView.visibility = View.VISIBLE
     }
 
     /**

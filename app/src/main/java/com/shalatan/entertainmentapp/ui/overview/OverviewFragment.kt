@@ -15,7 +15,6 @@ class OverviewFragment : Fragment() {
 
     val viewModel: OverviewViewModel by viewModels()
 
-    private var searchBoxOpen = false
     private lateinit var binding: FragmentOverviewBinding
 //    private lateinit var backdropMenuList: LinearLayout
 
@@ -42,6 +41,19 @@ class OverviewFragment : Fragment() {
 //                ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_close)
 //            )
 //        )
+
+        binding.searchFab.setOnClickListener {
+            findNavController().navigate(NavGraphDirections.actionGlobalSearchFragment())
+        }
+        binding.watchedMoviesCard.setOnClickListener {
+            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchedMoviesFragment())
+        }
+        binding.watchLaterMoviesCard.setOnClickListener {
+            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchLaterMoviesFragment())
+        }
+        binding.recommendedMoviesCard.setOnClickListener {
+            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToRecommendationFragment())
+        }
 
         viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
@@ -92,58 +104,12 @@ class OverviewFragment : Fragment() {
             viewModel.displayMovieDetails(it)
         })
 
-        binding.searchRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
-            viewModel.displayMovieDetails(it)
-        })
-
         viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner, Observer {
             if (null != it) {
                 this.findNavController().navigate(NavGraphDirections.actionGlobalDetailFragment(it))
                 viewModel.displayMovieDetailsComplete()
             }
         })
-
-//        binding.watchLaterMovies.setOnClickListener {
-//            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchLaterMoviesFragment())
-//        }
-//
-//        binding.watchedMovies.setOnClickListener {
-//            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchedMoviesFragment())
-//        }
-//
-//        binding.seriesSection.setOnClickListener {
-//            Snackbar.make(it, "Coming Soon !!", Snackbar.LENGTH_SHORT).show()
-//        }
-
-        //observe the fab buttons click handled in viewModel to retail the state
-        viewModel.openSearchBox.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                closeTheSearchBox()
-            } else {
-                openTheSearchBox()
-            }
-        })
         return binding.root
-    }
-
-    /**
-     * make necessary changes in UI when fab is clicked to close the search section
-     */
-    private fun closeTheSearchBox() {
-        binding.searchBarLinearLayout.visibility = View.GONE
-        binding.searchRecyclerView.visibility = View.GONE
-        searchBoxOpen = !searchBoxOpen
-    }
-
-    /**
-     * make necessary changes in UI when fab is clicked to open the search section
-     */
-    private fun openTheSearchBox() {
-        binding.searchBarLinearLayout.visibility = View.VISIBLE
-        binding.searchRecyclerView.visibility = View.VISIBLE
-        searchBoxOpen = !searchBoxOpen
-        binding.movieScrollView.post {
-            binding.movieScrollView.fullScroll(View.FOCUS_DOWN)
-        }
     }
 }

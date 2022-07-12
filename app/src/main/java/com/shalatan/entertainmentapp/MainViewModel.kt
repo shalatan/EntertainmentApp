@@ -3,16 +3,12 @@ package com.shalatan.entertainmentapp
 import androidx.lifecycle.*
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.Movie
-import com.shalatan.entertainmentapp.ui.moviedetail.DetailRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
-@HiltViewModel
-class MainViewModel @Inject constructor(private val repository: DetailRepository) :
+class MainViewModel :
     ViewModel() {
 
     /**
@@ -40,10 +36,10 @@ class MainViewModel @Inject constructor(private val repository: DetailRepository
                             recommendationWeight = 0,
                             rating = 0f
                         )
-                    repository.insertMovie(savedMovie)
-                    repository.updateMovieRecommendationWeight(movieId = id, rating = rating)
+//                    repository.insertMovie(savedMovie)
+//                    repository.updateMovieRecommendationWeight(movieId = id, rating = rating)
                 }
-                repository.changeRecommendationConsideredStatus(currentMovieId, true)
+//                repository.changeRecommendationConsideredStatus(currentMovieId, true)
             }
         }
     }

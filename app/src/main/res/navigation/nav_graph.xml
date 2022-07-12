@@ -8,7 +8,17 @@
     <fragment
         android:id="@+id/overviewFragment"
         android:name="com.shalatan.entertainmentapp.ui.overview.OverviewFragment"
-        tools:layout="@layout/fragment_overview" />
+        tools:layout="@layout/fragment_overview">
+        <action
+            android:id="@+id/action_overviewFragment_to_recommendationFragment"
+            app:destination="@id/recommendationFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_watchLaterMoviesFragment"
+            app:destination="@id/watchLaterMoviesFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_watchedMoviesFragment"
+            app:destination="@id/watchedMoviesFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/watchedMoviesFragment"
@@ -47,12 +57,6 @@
     <action
         android:id="@+id/action_global_detailFragment"
         app:destination="@id/detailFragment" />
-    <action
-        android:id="@+id/action_global_watchLaterMoviesFragment"
-        app:destination="@id/watchLaterMoviesFragment" />
-    <action
-        android:id="@+id/action_global_watchedMoviesFragment"
-        app:destination="@id/watchedMoviesFragment" />
 
     <fragment
         android:id="@+id/videosFragment"
@@ -73,5 +77,8 @@
         android:name="com.shalatan.entertainmentapp.ui.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
+    <action
+        android:id="@+id/action_global_searchFragment"
+        app:destination="@id/searchFragment" />
 
 </navigation>

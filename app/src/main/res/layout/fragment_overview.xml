@@ -55,26 +55,25 @@
         <!--                android:textSize="18sp" />-->
         <!--        </LinearLayout>-->
 
-        <!--        <com.google.android.material.appbar.AppBarLayout-->
-        <!--            android:id="@+id/appBarLayout"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent">-->
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!--            <com.google.android.material.appbar.MaterialToolbar-->
-        <!--                android:id="@+id/app_bar"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="?attr/actionBarSize"-->
-        <!--                android:paddingStart="12dp"-->
-        <!--                android:paddingEnd="12dp"-->
-        <!--                app:layout_scrollFlags="scroll|enterAlways|snap"-->
-        <!--                app:navigationIcon="@drawable/ic_clapper_open"-->
-        <!--                app:title="Movies Hex"-->
-        <!--                app:titleCentered="true" />-->
-        <!--            &lt;!&ndash;            app:titleTextColor="@color/white_smoke"&ndash;&gt;-->
-        <!--        </com.google.android.material.appbar.AppBarLayout>-->
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:navigationIcon="@drawable/ic_clapper_open"
+                app:title="Movies Hex"
+                app:titleCentered="true" />
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/movie_scroll_view"
@@ -85,6 +84,59 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/watched_movies_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/watch_later_movies_card"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/watch_later_movies_card">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:gravity="center"
+                        android:text=" My Watched\n Movies"
+                        android:textSize="@dimen/low_emphasis_text" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/watch_later_movies_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toStartOf="@id/recommended_movies_card"
+                    app:layout_constraintStart_toEndOf="@id/watched_movies_card"
+                    app:layout_constraintTop_toBottomOf="@id/popular_recycler_view">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:gravity="center"
+                        android:text="My Watch Later\n Movies"
+                        android:textSize="@dimen/low_emphasis_text" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/recommended_movies_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/watch_later_movies_card"
+                    app:layout_constraintTop_toTopOf="@id/watch_later_movies_card">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:gravity="center"
+                        android:text="Recommended\n Movies"
+                        android:textSize="@dimen/low_emphasis_text" />
+                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/now_playing_text_view"
@@ -211,7 +263,6 @@
                     app:layout_constraintStart_toStartOf="@+id/popular_recycler_view"
                     app:layout_constraintTop_toTopOf="@+id/popular_recycler_view" />
 
-
                 <View
                     android:id="@+id/margin_line_3"
                     android:layout_width="180dp"
@@ -231,7 +282,7 @@
                     android:text="Upcoming Movies"
                     android:textSize="@dimen/high_emphasis_text"
                     app:layout_constraintStart_toStartOf="@+id/popular_text_view"
-                    app:layout_constraintTop_toBottomOf="@+id/margin_line_3" />
+                    app:layout_constraintTop_toBottomOf="@+id/watch_later_movies_card" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/upcoming_recycler_view"
@@ -257,7 +308,6 @@
                     app:layout_constraintStart_toStartOf="@+id/upcoming_recycler_view"
                     app:layout_constraintTop_toTopOf="@+id/upcoming_recycler_view" />
 
-
                 <View
                     android:id="@+id/margin_line_4"
                     android:layout_width="180dp"
@@ -269,80 +319,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/upcoming_recycler_view" />
 
-                <LinearLayout
-                    android:id="@+id/search_bar_linear_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/margin_line_4">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_weight="8"
-                        android:hint="Search">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/search_edit_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/search_button"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="2"
-                        android:onClick="@{() -> viewModel.findMoviesForSearchText(searchEditText.getText().toString())}"
-                        android:text="Find" />
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/search_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:minHeight="240dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@+id/search_bar_linear_layout"
-                    app:listData="@{viewModel.searchedMovies}"
-                    app:spanCount="3"
-                    tools:listitem="@layout/item_movie" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/search_fab"-->
-        <!--            android:layout_width="54dp"-->
-        <!--            android:layout_height="54dp"-->
-        <!--            android:layout_marginEnd="36dp"-->
-        <!--            android:layout_marginBottom="36dp"-->
-        <!--            android:elevation="16dp"-->
-        <!--            android:onClick="@{() -> viewModel.triggerSearchLayout()}"-->
-        <!--            android:scaleType="centerCrop"-->
-        <!--            android:src="@drawable/outline_saved_search_24"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent" />-->
-
-        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--            android:id="@+id/search_fab"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_gravity="bottom|end"-->
-        <!--            android:layout_margin="32dp"-->
-        <!--            android:elevation="8dp"-->
-        <!--            android:onClick="@{() -> viewModel.triggerSearchLayout()}"-->
-        <!--            app:srcCompat="@android:drawable/ic_menu_search" />-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/search_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            app:srcCompat="@android:drawable/ic_menu_search" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

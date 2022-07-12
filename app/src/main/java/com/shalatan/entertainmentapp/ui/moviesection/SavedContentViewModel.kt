@@ -35,7 +35,6 @@ class SavedContentViewModel @Inject constructor(private val repository: SavedCon
         viewModelScope.launch {
             watchLaterMovies.value?.get(position)?.let {
                 repository.changeMovieWatchLaterStatus(it.Id, isWatchLater = false)
-//                repository.deleteMovieFromDatabase(it)
             }
         }
     }

@@ -34,12 +34,9 @@ class RecommendationFragment : Fragment() {
     val viewModel: RecommendationViewModel by viewModels()
     private lateinit var binding: FragmentRecommendationBinding
     private lateinit var recommendedMovies: List<SavedMovie>
-    private lateinit var bottomNavigationView: BottomNavigationView
 
     private var backgroundColor = 0
     private var textColor = 0
-
-    private var isDarkModeActive: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +45,6 @@ class RecommendationFragment : Fragment() {
         binding = FragmentRecommendationBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
-        bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation)
 
         val recommendationAdapter =
             RecommendationMovieAdapter(RecommendationMovieAdapter.OnClickListener {
@@ -127,10 +122,5 @@ class RecommendationFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         CustomViews().changeStatusBarColor(R.attr.bottom_nav_color, requireActivity())
-//        if (isDarkModeActive) {
-//            bottomNavigationView.setBackgroundColor(R.color.black)
-//        } else {
-//            bottomNavigationView.setBackgroundColor(R.color.light_background)
-//        }
     }
 }

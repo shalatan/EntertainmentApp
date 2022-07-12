@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,10 +18,7 @@ import javax.inject.Inject
 class OverviewViewModel @Inject constructor(private val repository: OverviewRepository) :
     ViewModel() {
 
-    // The internal MutableLiveData String that stores the most recent response status
     private val _status = MutableLiveData<String>()
-
-    // The external immutable LiveData for the status String
     val status: LiveData<String>
         get() = _status
 
@@ -40,32 +38,16 @@ class OverviewViewModel @Inject constructor(private val repository: OverviewRepo
     val upcomingMovies: LiveData<List<Movie>>
         get() = _upcomingMovies
 
-    private val _searchedMovies = MutableLiveData<List<Movie>>()
-    val searchedMovies: LiveData<List<Movie>>
-        get() = _searchedMovies
-
     private val _navigateToSelectedMovie = MutableLiveData<Movie?>()
     val navigateToSelectedMovie: LiveData<Movie?>
         get() = _navigateToSelectedMovie
 
-    private val _navigateToSelectedMovieListGrid = MutableLiveData<List<Movie>>()
-    val navigateToSelectedMovieListGrid: LiveData<List<Movie>>
-        get() = _navigateToSelectedMovieListGrid
-
-    private val _openSearchBox = MutableLiveData<Boolean>()
-    val openSearchBox: LiveData<Boolean>
-        get() = _openSearchBox
-
-    private val viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
     init {
         fetchMoviesData()
-        _openSearchBox.value = true
     }
 
     private fun fetchMoviesData() {
-        coroutineScope.launch {
+        viewModelScope.launch {
             val topMovies = repository.getTopRatedMoviesAsync()
             val popularMovies = repository.getPopularMoviesAsync()
             val nowPlayingMovies = repository.getNowPlayingMoviesAsync()
@@ -96,34 +78,4 @@ class OverviewViewModel @Inject constructor(private val repository: OverviewRepo
     fun displayMovieDetailsComplete() {
         _navigateToSelectedMovie.value = null
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
-    /**
-     * fetch searched movies
-     */
-    fun findMoviesForSearchText(search: String) {
-        coroutineScope.launch {
-            val getSearchMoviesDeferred =
-                repository.getSearchedMovieAsync(Constants.API_KEY, search)
-            try {
-                _searchedMovies.value = getSearchMoviesDeferred.await().movies
-            } catch (t: Throwable) {
-                Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
-                Log.e("Movie Name : ", search)
-                _status.value = t.message
-            }
-        }
-    }
-
-    /**
-     * trigger to openSearchBox to observe
-     */
-    fun triggerSearchLayout() {
-        _openSearchBox.value = _openSearchBox.value != true
-    }
-
 }
