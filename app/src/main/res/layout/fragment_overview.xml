@@ -14,47 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--        <LinearLayout-->
-        <!--            android:id="@+id/backdrop_menu_list"-->
-        <!--            style="@style/Widget.Shrine.Backdrop"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:gravity="center_horizontal"-->
-        <!--            android:orientation="vertical"-->
-        <!--            android:paddingTop="?attr/actionBarSize"-->
-        <!--            android:visibility="invisible">-->
-
-        <!--            <com.google.android.material.textview.MaterialTextView-->
-        <!--                android:id="@+id/series_section"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginTop="16dp"-->
-        <!--                android:text="Switch to Series Section"-->
-        <!--                android:textSize="18sp" />-->
-
-        <!--            <View-->
-        <!--                android:layout_width="76dp"-->
-        <!--                android:layout_height="0.8dp"-->
-        <!--                android:layout_margin="16dp"-->
-        <!--                android:background="@color/design_default_color_on_primary"-->
-        <!--                android:backgroundTint="#CC0000" />-->
-
-        <!--            <com.google.android.material.textview.MaterialTextView-->
-        <!--                android:id="@+id/watched_movies"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="My Watched Movies"-->
-        <!--                android:textSize="18sp" />-->
-
-        <!--            <com.google.android.material.textview.MaterialTextView-->
-        <!--                android:id="@+id/watch_later_movies"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginTop="16dp"-->
-        <!--                android:text="My Watch Later Movies"-->
-        <!--                android:textSize="18sp" />-->
-        <!--        </LinearLayout>-->
-
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
@@ -263,16 +222,6 @@
                     app:layout_constraintStart_toStartOf="@+id/popular_recycler_view"
                     app:layout_constraintTop_toTopOf="@+id/popular_recycler_view" />
 
-                <View
-                    android:id="@+id/margin_line_3"
-                    android:layout_width="180dp"
-                    android:layout_height="0.8dp"
-                    android:layout_margin="16dp"
-                    android:background="@color/design_default_color_on_primary"
-                    android:backgroundTint="@color/lighter_grey"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/popular_recycler_view" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/upcoming_text_view"

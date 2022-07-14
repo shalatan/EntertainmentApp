@@ -16,7 +16,6 @@ class OverviewFragment : Fragment() {
     val viewModel: OverviewViewModel by viewModels()
 
     private lateinit var binding: FragmentOverviewBinding
-//    private lateinit var backdropMenuList: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,20 +26,6 @@ class OverviewFragment : Fragment() {
         binding = FragmentOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-//        backdropMenuList = binding.backdropMenuList
-
-        // Set up the tool bar
-//        (activity as AppCompatActivity).setSupportActionBar(binding.appBar)
-//        binding.appBar.setNavigationOnClickListener(
-//            NavigationIconClickListener(
-//                backdropMenuList,
-//                activity as AppCompatActivity,
-//                binding.movieScrollView,
-//                AccelerateDecelerateInterpolator(),
-//                ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_open),
-//                ContextCompat.getDrawable(requireContext(), R.drawable.ic_clapper_close)
-//            )
-//        )
 
         binding.searchFab.setOnClickListener {
             findNavController().navigate(NavGraphDirections.actionGlobalSearchFragment())

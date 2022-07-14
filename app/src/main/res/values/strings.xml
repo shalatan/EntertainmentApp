@@ -15,6 +15,10 @@
     <string name="read_more"><b><u>Read More</u></b></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="recommended_movies_for_you">RECOMMENDED MOVIES\nFOR YOU</string>
+    <string name="fragment_rec_title">RECOMMENDED MOVIES\nFOR YOU</string>
+    <string name="fragment_rec_content">Recommended Movies For You Will Be Shown Here. Recommendation Is Based on Your Previously Rated Movies, So Rate Movies Smarty ;)</string>
+    <string name="fragment_watch_later_content">YOUR WATCHLIST MOVIES WILL BE SHOWN HERE !! \n\n SWIPE MOVIE LEFT TO REMOVE THEM FROM LIST</string>
+    <string name="fragment_watched_title">MY WATCHED MOVIES</string>
+    <string name="fragment_watched_content">YOUR RATED MOVIES WILL BE SHOWN HERE. \n ADD NOW !! \n\n SWIPE MOVIE LEFT TO REMOVE THEM FROM LIST</string>
 
 </resources>

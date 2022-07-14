@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
@@ -43,17 +42,24 @@ class RecommendationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRecommendationBinding.inflate(inflater)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
 
         val recommendationAdapter =
             RecommendationMovieAdapter(RecommendationMovieAdapter.OnClickListener {
                 findNavController().navigate(NavGraphDirections.actionGlobalDetailFragment(it))
             })
+
         viewModel.recommendationMovies.observe(viewLifecycleOwner) {
-            recommendedMovies = it
-            recommendationAdapter.submitList(recommendedMovies)
+            if (it.isNullOrEmpty()) {
+                binding.recyclerView.visibility = View.GONE
+                binding.savedContentText.visibility = View.VISIBLE
+            } else {
+                binding.recyclerView.visibility = View.VISIBLE
+                binding.savedContentText.visibility = View.GONE
+                recommendedMovies = it
+                recommendationAdapter.submitList(recommendedMovies)
+            }
         }
+
         binding.recyclerView.apply {
             set3DItem(true)
             setAlpha(true)
@@ -117,10 +123,5 @@ class RecommendationFragment : Fragment() {
                 textColor = palette.getLightVibrantColor(R.attr.colorOnSurface)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        CustomViews().changeStatusBarColor(R.attr.bottom_nav_color, requireActivity())
     }
 }

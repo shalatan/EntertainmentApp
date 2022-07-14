@@ -2,8 +2,10 @@ package com.shalatan.entertainmentapp.ui.moviedetail
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.shalatan.entertainmentapp.database.DatabaseRepository
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.*
+import com.shalatan.entertainmentapp.network.NetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -11,7 +13,10 @@ import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val repository: DetailRepository) :
+class DetailViewModel @Inject constructor(
+    private val repository: DatabaseRepository,
+    private val networkRepository: NetworkRepository
+) :
     ViewModel() {
 
     private val _selectedMovieDetail = MutableLiveData<Movie>()
@@ -41,8 +46,8 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
 
     private fun fetchCurrentMovieDetails(movie: Movie) {
         viewModelScope.launch {
-            val getCompleteMovieDetail = repository.fetchCompleteMovieDataAsync(movie.id)
-            val similarMovies = repository.fetchSimilarMoviesDataAsync(movie.id)
+            val getCompleteMovieDetail = networkRepository.fetchCompleteMovieDataAsync(movie.id)
+            val similarMovies = networkRepository.fetchSimilarMoviesDataAsync(movie.id)
             try {
                 val completeMovie = getCompleteMovieDetail.await()
                 _completeMovieDetail.value = completeMovie

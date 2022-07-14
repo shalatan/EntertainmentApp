@@ -20,19 +20,32 @@
             android:id="@+id/raw_recommended_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="24dp"
-            android:gravity="center_horizontal"
-            android:text="@string/recommended_movies_for_you"
+            android:gravity="center"
+            android:text="@string/fragment_rec_title"
             android:textSize="@dimen/high_emphasis_text"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/saved_content_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="@string/fragment_rec_content"
+            android:textSize="@dimen/mid_emphasis_text"
+            android:textStyle="italic"
+            android:visibility="gone" />
+
         <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
             android:id="@+id/recycler_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,6 +53,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_recommended_movie" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
