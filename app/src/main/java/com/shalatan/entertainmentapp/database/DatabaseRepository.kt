@@ -28,8 +28,12 @@ class DatabaseRepository @Inject constructor(private val dao: MovieDAO) {
         dao.updateMovieRecommendationWeight(movieId, rating)
     }
 
-    fun getAllWatchedMovies(): LiveData<List<SavedMovie>> {
-        return dao.getAllWatchedMovies()
+    fun getAllRatedMovies(): LiveData<List<SavedMovie>> {
+        return dao.getAllRatedMovies()
+    }
+
+    suspend fun getAllRatedMoviesList(): List<SavedMovie> {
+        return dao.getAllRatedMoviesList()
     }
 
     fun getAllWatchLaterMovies(): LiveData<List<SavedMovie>> {
@@ -48,9 +52,14 @@ class DatabaseRepository @Inject constructor(private val dao: MovieDAO) {
         dao.changeRatedStatus(movieId, isRated, rating)
     }
 
-    suspend fun getHighestRecommendationWeight(): Int {
-        return dao.getHighest()
+    suspend fun clearResidueMovies() {
+        dao.clearResidueMoviesFromDatabase()
     }
+
+    suspend fun clearRecommendationWeightForWatchLaterMovies() {
+        dao.clearRecommendationWeightOfWatchLaterMovies()
+    }
+
 }
 
 

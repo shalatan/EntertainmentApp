@@ -6,14 +6,13 @@ import com.shalatan.entertainmentapp.database.DatabaseRepository
 import com.shalatan.entertainmentapp.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SavedContentViewModel @Inject constructor(private val repository: DatabaseRepository) :
     ViewModel() {
 
-    val watchedMovies = repository.getAllWatchedMovies()
+    val watchedMovies = repository.getAllRatedMovies()
     val watchLaterMovies = repository.getAllWatchLaterMovies()
     val recommendationMovies = repository.getAllRecommendedMovies()
 
@@ -21,14 +20,12 @@ class SavedContentViewModel @Inject constructor(private val repository: Database
     val navigateToSelectedMovie: LiveData<Movie?>
         get() = _navigateToSelectedMovie
 
+    /**
+     * update the global variable 'highest', so recommendation percentage can be calculated
+     * inside bindingAdapter.kt
+     */
     fun updateHighestRecommendationWeight() {
-        var highest = 0
-        viewModelScope.launch {
-            highest = repository.getHighestRecommendationWeight()
-            MyApplication.highest = highest
-            Timber.tag("ABCD").d("VM Highest = $highest")
-            Timber.tag("ABCD").d("MA Highest = ${MyApplication.highest}")
-        }
+        MyApplication.highest = recommendationMovies.value?.get(0)?.recommendationWeight ?: 0
     }
 
     /**

@@ -57,7 +57,8 @@ class DetailFragment : Fragment() {
         binding = FragmentDetailBinding.inflate(inflater)
         binding.moviePoster.transitionName = movie.title.toString()
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
+
         movieWatchedIcon = binding.ratedLayoutImage
         movieWatchLaterIcon = binding.watchLaterLayoutImage
         movieOverviewReadMoreTextView = binding.rawSynopsisReadMore

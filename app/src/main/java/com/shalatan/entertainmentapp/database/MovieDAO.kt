@@ -13,14 +13,23 @@ interface MovieDAO {
     suspend fun update(savedMovie: SavedMovie)
 
     @Query("SELECT * FROM saved_movies_table WHERE isRated = 1")
-    fun getAllWatchedMovies(): LiveData<List<SavedMovie>>
+    fun getAllRatedMovies(): LiveData<List<SavedMovie>>
+
+    @Query("SELECT * FROM saved_movies_table WHERE isRated = 1")
+    suspend fun getAllRatedMoviesList(): List<SavedMovie>
 
     @Query("SELECT * FROM saved_movies_table WHERE isWatchLater = 1")
     fun getAllWatchLaterMovies(): LiveData<List<SavedMovie>>
 
-    //get all unrated(unwatched) movies
+    //get all recommended movies i.e. unrated(unwatched) movies
     @Query("SELECT * FROM saved_movies_table WHERE isRated = 0 ORDER BY recommendationWeight DESC")
     fun getAllRecommendedMovies(): LiveData<List<SavedMovie>>
+
+    @Query("DELETE FROM saved_movies_table WHERE isRated = 0 AND isWatchLater = 0")
+    suspend fun clearResidueMoviesFromDatabase()
+
+    @Query("UPDATE saved_movies_table SET recommendationWeight = 0 WHERE isWatchLater = 1")
+    suspend fun clearRecommendationWeightOfWatchLaterMovies()
 
     @Query("UPDATE saved_movies_table SET isWatchLater = :isWatchLater WHERE Id = :id")
     suspend fun changeWatchLaterStatus(id: Int, isWatchLater: Boolean)
@@ -42,10 +51,4 @@ interface MovieDAO {
 
     @Query("SELECT count(*)!=0 FROM saved_movies_table WHERE Id = :uid AND isWatchLater = 1")
     suspend fun isMovieInWatchLaterList(uid: Int): Int
-
-    @Query("DELETE FROM saved_movies_table")
-    suspend fun clear()
-
-    @Query("SELECT MAX(recommendationWeight) FROM saved_movies_table WHERE isRated = 0")
-    suspend fun getHighest(): Int
 }

@@ -19,7 +19,7 @@
     <string name="fragment_rec_content">Recommended Movies For You Will Be Shown Here. Recommendation Is Based on Your Previously Rated Movies, So Rate Movies Smarty ;)</string>
 
     <string name="fragment_rec_dialog_title">How recommendation works?</string>
-    <string name="fragment_rec_dialog_content">Movies are recommended based on your previously rated movies and the rating given to them.\n\nTry Refreshing</string>
+    <string name="fragment_rec_dialog_content">Movies are recommended based on your previously rated movies and the rating given to them.\nHence, Rate movies smartly !\n\nUpdates automatically with each new rated movie, but can be Refreshed for better performance</string>
     <string name="fragment_rec_dialog_positive_button">OK</string>
     <string name="fragment_rec_dialog_refresh_button">Refresh</string>
 

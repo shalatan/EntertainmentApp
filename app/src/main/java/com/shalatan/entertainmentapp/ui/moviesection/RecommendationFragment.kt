@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.shalatan.entertainmentapp.MainViewModel
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.SavedMovie
@@ -18,6 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class RecommendationFragment : Fragment() {
 
     val viewModel: SavedContentViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
+
     private lateinit var binding: FragmentRecommendationBinding
     private lateinit var recommendedMovies: List<SavedMovie>
 
@@ -51,23 +55,23 @@ class RecommendationFragment : Fragment() {
             } else {
                 binding.recyclerView.visibility = View.VISIBLE
                 binding.savedContentText.visibility = View.GONE
+                viewModel.updateHighestRecommendationWeight()
             }
         }
-
-        viewModel.updateHighestRecommendationWeight()
 
         binding.recInfo.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(resources.getString(R.string.fragment_rec_dialog_title))
                 .setMessage(resources.getString(R.string.fragment_rec_dialog_content))
                 .setNeutralButton(resources.getString(R.string.fragment_rec_dialog_refresh_button)) { dialog, which ->
-
+                    mainViewModel.refreshRecommendations()
                 }
                 .setPositiveButton(resources.getString(R.string.fragment_rec_dialog_positive_button)) { dialog, which ->
                     dialog.cancel()
                 }
                 .show()
         }
+//        viewModel.updateHighestRecommendationWeight()
 
 //        binding.recyclerView.apply {
 //            set3DItem(true)
