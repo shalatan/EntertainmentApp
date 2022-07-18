@@ -14,5 +14,5 @@ data class SavedMovie(
     var isRated: Boolean = false,
     var rating: Float = 0f,
     var isRecommendationConsidered: Boolean = false,
-    var recommendationWeight: Int = -1
+    var recommendationWeight: Int = 0
 )

@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="savedMovie"
             type="com.shalatan.entertainmentapp.database.SavedMovie" />
@@ -56,6 +58,16 @@
                 android:layout_marginBottom="16dp"
                 android:numStars="5"
                 android:rating="@{savedMovie.rating}"
+                android:visibility="@{savedMovie.rated==true?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.daimajia.numberprogressbar.NumberProgressBar
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                app:setUpRec="@{savedMovie}"
+                android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

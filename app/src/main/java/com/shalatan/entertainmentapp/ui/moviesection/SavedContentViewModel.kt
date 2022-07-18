@@ -1,10 +1,12 @@
 package com.shalatan.entertainmentapp.ui.moviesection
 
 import androidx.lifecycle.*
+import com.shalatan.entertainmentapp.MyApplication
 import com.shalatan.entertainmentapp.database.DatabaseRepository
 import com.shalatan.entertainmentapp.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -13,10 +15,21 @@ class SavedContentViewModel @Inject constructor(private val repository: Database
 
     val watchedMovies = repository.getAllWatchedMovies()
     val watchLaterMovies = repository.getAllWatchLaterMovies()
+    val recommendationMovies = repository.getAllRecommendedMovies()
 
     private val _navigateToSelectedMovie = MutableLiveData<Movie?>()
     val navigateToSelectedMovie: LiveData<Movie?>
         get() = _navigateToSelectedMovie
+
+    fun updateHighestRecommendationWeight() {
+        var highest = 0
+        viewModelScope.launch {
+            highest = repository.getHighestRecommendationWeight()
+            MyApplication.highest = highest
+            Timber.tag("ABCD").d("VM Highest = $highest")
+            Timber.tag("ABCD").d("MA Highest = ${MyApplication.highest}")
+        }
+    }
 
     /**
      * to navigate to clicked movie detail fragment

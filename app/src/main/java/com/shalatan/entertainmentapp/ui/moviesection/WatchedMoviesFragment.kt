@@ -30,7 +30,7 @@ class WatchedMoviesFragment : Fragment() {
         val binding = FragmentWatchedMoviesBinding.inflate(inflater)
 
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.savedContentRecyclerView.adapter =
             SavedContentAdapter(SavedContentAdapter.OnClickListener {

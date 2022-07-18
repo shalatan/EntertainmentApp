@@ -7,6 +7,10 @@ import timber.log.Timber
 @HiltAndroidApp
 class MyApplication : Application() {
 
+    companion object {
+        var highest = 0
+    }
+
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) {

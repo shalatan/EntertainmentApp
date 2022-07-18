@@ -17,13 +17,17 @@ class DatabaseRepository @Inject constructor(private val dao: MovieDAO) {
         return dao.isMovieInWatchLaterList(movieId)
     }
 
-    suspend fun changeRecommendationConsideredStatus(movieId: Int, isRecommendationConsidered: Boolean) {
+    suspend fun changeRecommendationConsideredStatus(
+        movieId: Int,
+        isRecommendationConsidered: Boolean
+    ) {
         dao.changeRecommendationConsideredStatus(movieId, isRecommendationConsidered)
     }
 
     suspend fun updateMovieRecommendationWeight(movieId: Int, rating: Float) {
         dao.updateMovieRecommendationWeight(movieId, rating)
     }
+
     fun getAllWatchedMovies(): LiveData<List<SavedMovie>> {
         return dao.getAllWatchedMovies()
     }
@@ -42,6 +46,10 @@ class DatabaseRepository @Inject constructor(private val dao: MovieDAO) {
 
     suspend fun changeMovieRatedStatus(movieId: Int, isRated: Boolean, rating: Float) {
         dao.changeRatedStatus(movieId, isRated, rating)
+    }
+
+    suspend fun getHighestRecommendationWeight(): Int {
+        return dao.getHighest()
     }
 }
 

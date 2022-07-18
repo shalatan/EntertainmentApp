@@ -15,6 +15,12 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val repository: DatabaseRepository) :
     ViewModel() {
 
+    var maxRec = 0
+
+    init {
+        maxRec = 19
+    }
+
     /**
      * Insert recommended movies(db will ignore insertion if duplicate happens) and then increase
      * each movies recommendationWeight with the rating given

@@ -9,6 +9,7 @@ import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.databinding.ItemRecommendedMovieBinding
 import com.shalatan.entertainmentapp.model.Movie
 
+//not using for now
 class RecommendationMovieAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<SavedMovie, RecommendationMovieAdapter.RecommendedMovieViewHolder>(DiffCallBack) {
 

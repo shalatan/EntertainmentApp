@@ -1,42 +1,32 @@
 package com.shalatan.entertainmentapp
 
+import android.graphics.Color
+import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.daimajia.numberprogressbar.NumberProgressBar
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.Cast
 import com.shalatan.entertainmentapp.model.Genre
 import com.shalatan.entertainmentapp.model.Movie
-import com.shalatan.entertainmentapp.model.Result
 import com.shalatan.entertainmentapp.ui.moviedetail.GenreAdapter
 import com.shalatan.entertainmentapp.ui.moviedetail.MovieCastAdapter
-import com.shalatan.entertainmentapp.ui.moviedetail.VideoAdapter
 import com.shalatan.entertainmentapp.ui.moviesection.SavedContentAdapter
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
-import com.shalatan.entertainmentapp.ui.recommendation.RecommendationMovieAdapter
 import com.shalatan.entertainmentapp.utils.Constants
 
-/* Bind List Views */
-
-//bind recycler view adapter for fragment_overview
+//bind recycler view adapter for network movies list
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
     val adapter = recyclerView.adapter as MovieAdapter
     adapter.submitList(data)
-//    adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 }
 
-//bind recycler view adapter for fragment_overview
-//@BindingAdapter("landscapeListData")
-//fun bindLandscapeRecyclerView(recyclerView: RecyclerView, data: List<Movie>?) {
-//    val adapter = recyclerView.adapter as LandscapeMovieAdapter
-//    adapter.submitList(data)
-//}
-
-//bind recycler view adapter for fragments_(watched/watch_later)_movies
+//bind recycler view adapter for local database movies list
 @BindingAdapter("savedContent")
 fun bindFavouriteRecyclerView(recyclerView: RecyclerView, data: List<SavedMovie>?) {
     val adapter = recyclerView.adapter as SavedContentAdapter
@@ -55,10 +45,29 @@ fun bindMovieGenreRecyclerView(recyclerView: RecyclerView, data: List<Genre>?) {
     movieGenreAdapter.submitList(data)
 }
 
-@BindingAdapter("movieVideoList")
-fun bindMovieVideoRecyclerView(recyclerView: RecyclerView, data: List<Result>?) {
-    val movieVideoAdapter = recyclerView.adapter as VideoAdapter
-    movieVideoAdapter.submitList(data)
+@BindingAdapter("setUpRec")
+fun bindMovieRecommendationPercentage(
+    progressBar: NumberProgressBar,
+    savedMovie: SavedMovie
+) {
+    if (savedMovie.isRated) {
+        progressBar.visibility = View.GONE
+    } else {
+        progressBar.visibility = View.VISIBLE
+        val highestWeight = MyApplication.highest.toFloat()
+        val currentWeight = savedMovie.recommendationWeight.toFloat()
+        val percentage: Float = (currentWeight / highestWeight) * 100
+        progressBar.progress = percentage.toInt()
+        val color: Int = if (percentage > 70) {
+            Color.GREEN
+        } else if (percentage > 50) {
+            Color.YELLOW
+        } else {
+            Color.RED
+        }
+        progressBar.reachedBarColor = color
+        progressBar.setProgressTextColor(color)
+    }
 }
 
 /* Bind Images */
@@ -71,24 +80,6 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
         val imgUri = it.toUri().buildUpon().scheme("https").build()
         Glide.with(imageView.context)
             .load(imgUri)
-            .apply(
-                RequestOptions()
-                    .placeholder(R.drawable.loading_animation)
-                    .error(R.drawable.ic_broken_image)
-            )
-            .into(imageView)
-    }
-}
-
-//bind image into movie_item
-@BindingAdapter("bindCastImage")
-fun bindCastImage(imageView: ImageView, imgUrl: String?) {
-    val fullUrl = Constants.IMG_BASE_URL + imgUrl
-    fullUrl.let {
-        val imgUri = it.toUri().buildUpon().scheme("https").build()
-        Glide.with(imageView.context)
-            .load(imgUri)
-            .circleCrop()
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.loading_animation)

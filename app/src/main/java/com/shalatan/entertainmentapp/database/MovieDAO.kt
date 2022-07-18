@@ -45,4 +45,7 @@ interface MovieDAO {
 
     @Query("DELETE FROM saved_movies_table")
     suspend fun clear()
+
+    @Query("SELECT MAX(recommendationWeight) FROM saved_movies_table WHERE isRated = 0")
+    suspend fun getHighest(): Int
 }

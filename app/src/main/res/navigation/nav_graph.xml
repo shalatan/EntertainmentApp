@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/recommendationFragment"
-        android:name="com.shalatan.entertainmentapp.ui.recommendation.RecommendationFragment"
+        android:name="com.shalatan.entertainmentapp.ui.moviesection.RecommendationFragment"
         android:label="RecommendationFragment"
         tools:layout="@layout/fragment_recommendation" />
     <fragment
