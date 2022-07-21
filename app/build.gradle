@@ -116,7 +116,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     // Video
-    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.0.1'
+//    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.0.1'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'androidx.palette:palette-ktx:1.0.0'

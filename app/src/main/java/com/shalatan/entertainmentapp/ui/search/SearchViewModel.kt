@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.network.NetworkRepository
-import com.shalatan.entertainmentapp.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,7 +21,7 @@ class SearchViewModel @Inject constructor(private val repository: NetworkReposit
 
     fun makeQuery(query: String) {
         viewModelScope.launch {
-            val searchMovieDeferred = repository.getSearchedMovieAsync(Constants.API_KEY, query)
+            val searchMovieDeferred = repository.getSearchedMovieAsync(query)
             try {
                 _searchedMovies.value = searchMovieDeferred.await().movies
             } catch (t: Throwable) {

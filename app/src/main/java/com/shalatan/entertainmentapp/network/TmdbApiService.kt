@@ -8,30 +8,26 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-//movies list - https://api.themoviedb.org/3/movie/popular?api_key={api_key}
-//complete movie details - https://api.themoviedb.org/3/movie/216015?api_key={api_key}&append_to_response=videos,images,reviews
-//search - https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher
-
 interface TmdbApiService {
 
     //add region
-    @GET("3/movie/now_playing?api_key=ea9a49ebf2b74721a75aae271ebd3036")
+    @GET("3/movie/now_playing")
     fun getNowPlayingMoviesAsync(
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
-    @GET("3/movie/popular?api_key=ea9a49ebf2b74721a75aae271ebd3036")
+    @GET("3/movie/popular")
     fun getPopularMoviesAsync(
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
-    @GET("3/movie/top_rated?api_key=ea9a49ebf2b74721a75aae271ebd3036")
+    @GET("3/movie/top_rated")
     fun getTopRatedMoviesAsync(
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
     //add region
-    @GET("3/movie/upcoming?api_key=ea9a49ebf2b74721a75aae271ebd3036")
+    @GET("3/movie/upcoming")
     fun getUpcomingMoviesAsync(
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
@@ -39,21 +35,18 @@ interface TmdbApiService {
     @GET("3/movie/{movieId}")
     fun getCompleteMovieDetailAsync(
         @Path("movieId") movieID: Int,
-        @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("append_to_response") atr: String = Constants.VIR
     ): Deferred<CompleteMovieDetail>
 
     @GET("3/search/movie")
     fun getSearchedMovieAsync(
-        @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("query") search: String
     ): Deferred<MovieResponse>
 
     //add region
-    @GET("3/movie/{movieId}/recommendations?api_key=ea9a49ebf2b74721a75aae271ebd3036")
+    @GET("3/movie/{movieId}/recommendations")
     fun getRecommendationMoviesAsync(
         @Path("movieId") movieID: Int,
-        @Query("api_key") apiKey: String = Constants.API_KEY,
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 }

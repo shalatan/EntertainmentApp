@@ -1,6 +1,7 @@
 package com.shalatan.entertainmentapp.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.shalatan.entertainmentapp.network.RequestInterceptor
 import com.shalatan.entertainmentapp.network.TmdbApiService
 import com.shalatan.entertainmentapp.utils.Constants
 import com.squareup.moshi.Moshi
@@ -31,6 +32,7 @@ object NetworkModule {
     @Singleton
     fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder().apply {
+            addInterceptor(RequestInterceptor())
             connectTimeout(30, TimeUnit.SECONDS)
             readTimeout(20, TimeUnit.SECONDS)
             writeTimeout(25, TimeUnit.SECONDS)
@@ -41,7 +43,6 @@ object NetworkModule {
     @Singleton
     fun provideRetrofitInstance(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder()
-//            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .baseUrl(Constants.BASE_URL)

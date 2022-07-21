@@ -1,5 +1,7 @@
 package com.shalatan.entertainmentapp.ui.moviedetail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -97,15 +99,15 @@ class DetailFragment : Fragment() {
 
         //movie video
         val videoAdapter = VideoAdapter(VideoAdapter.OnClickListener {
-//            val videoLink = youtubeUrl + it.key
-//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoLink))
-//            intent.apply {
-//                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                setPackage("com.google.android.youtube")
-//                startActivity(this)
-//            }
-            val directions = DetailFragmentDirections.actionDetailFragmentToVideosFragment(it)
-            findNavController().navigate(directions)
+            val videoLink = youtubeUrl + it.key
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoLink))
+            intent.apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                setPackage("com.google.android.youtube")
+                startActivity(this)
+            }
+//            val directions = DetailFragmentDirections.actionDetailFragmentToVideosFragment(it)
+//            findNavController().navigate(directions)
         })
         binding.movieVideoRecyclerView.adapter = videoAdapter
 

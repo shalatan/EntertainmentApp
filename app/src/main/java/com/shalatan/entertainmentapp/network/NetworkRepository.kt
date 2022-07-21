@@ -24,16 +24,16 @@ class NetworkRepository @Inject constructor(private val tmdbApiService: TmdbApiS
         return tmdbApiService.getUpcomingMoviesAsync(1)
     }
 
-    fun getSearchedMovieAsync(apiKey: String, query: String): Deferred<MovieResponse> {
-        return tmdbApiService.getSearchedMovieAsync(apiKey, query)
+    fun getSearchedMovieAsync(query: String): Deferred<MovieResponse> {
+        return tmdbApiService.getSearchedMovieAsync(query)
     }
 
     fun fetchCompleteMovieDataAsync(movieId: Int): Deferred<CompleteMovieDetail> {
-        return tmdbApiService.getCompleteMovieDetailAsync(movieId, Constants.API_KEY, Constants.VIR)
+        return tmdbApiService.getCompleteMovieDetailAsync(movieId, Constants.VIR)
     }
 
     fun fetchSimilarMoviesDataAsync(movieId: Int): Deferred<MovieResponse> {
-        return tmdbApiService.getRecommendationMoviesAsync(movieId, Constants.API_KEY, 1)
+        return tmdbApiService.getRecommendationMoviesAsync(movieId, 1)
     }
 }
 
