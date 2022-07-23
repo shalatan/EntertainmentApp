@@ -8,10 +8,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentPosterBinding
+import com.shalatan.entertainmentapp.databinding.FragmentSearchBinding
 
 class PosterFragment : Fragment() {
 
     private lateinit var posterViewModel: PosterViewModel
+
+    private var _binding: FragmentPosterBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,8 +23,8 @@ class PosterFragment : Fragment() {
     ): View {
 
         val application = requireNotNull(activity).application
-//        BigImageViewer.initialize(GlideImageLoader.with(application))
-        val binding = FragmentPosterBinding.inflate(inflater)
+
+        _binding = FragmentPosterBinding.inflate(inflater)
 
 
         val posterURL = PosterFragmentArgs.fromBundle(requireArguments()).posterURL
@@ -56,9 +60,6 @@ class PosterFragment : Fragment() {
         inflater.inflate(R.menu.poster_menu, popup.menu)
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-//                R.id.save -> {
-//                    Snackbar.make(v.rootView, "Coming Soon !!", Snackbar.LENGTH_SHORT).show()
-//                }
                 R.id.wallpaper -> {
                     Snackbar.make(v.rootView, "Please Wait !!", Snackbar.LENGTH_SHORT).show()
                     posterViewModel.setImageAsWallpaper(poster)
@@ -69,4 +70,8 @@ class PosterFragment : Fragment() {
         popup.show()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

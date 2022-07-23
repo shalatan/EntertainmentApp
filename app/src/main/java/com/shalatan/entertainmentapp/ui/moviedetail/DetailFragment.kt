@@ -30,8 +30,11 @@ class DetailFragment : Fragment() {
     val viewModel: DetailViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
 
+    private var _binding: FragmentDetailBinding? = null
+    private val binding get() = _binding!!
+
     lateinit var movie: Movie
-    lateinit var binding: FragmentDetailBinding
+
     private lateinit var movieWatchedIcon: ImageView
     private lateinit var movieWatchLaterIcon: ImageView
     private lateinit var movieOverviewReadMoreTextView: TextView
@@ -56,7 +59,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentDetailBinding.inflate(inflater)
+        _binding = FragmentDetailBinding.inflate(inflater)
         binding.moviePoster.transitionName = movie.title.toString()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -225,5 +228,10 @@ class DetailFragment : Fragment() {
                 page.translationY = offset
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

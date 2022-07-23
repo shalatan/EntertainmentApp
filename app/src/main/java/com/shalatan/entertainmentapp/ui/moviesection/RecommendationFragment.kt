@@ -13,6 +13,7 @@ import com.shalatan.entertainmentapp.MainViewModel
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.SavedMovie
+import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 import com.shalatan.entertainmentapp.databinding.FragmentRecommendationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +23,9 @@ class RecommendationFragment : Fragment() {
     val viewModel: SavedContentViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
 
-    private lateinit var binding: FragmentRecommendationBinding
+    private var _binding: FragmentRecommendationBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var recommendedMovies: List<SavedMovie>
 
     private var backgroundColor = 0
@@ -32,7 +35,7 @@ class RecommendationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRecommendationBinding.inflate(inflater)
+        _binding = FragmentRecommendationBinding.inflate(inflater)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -106,6 +109,11 @@ class RecommendationFragment : Fragment() {
 //        }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 //    private suspend fun setUpBackgroundColor(imgBitmap: Bitmap) {

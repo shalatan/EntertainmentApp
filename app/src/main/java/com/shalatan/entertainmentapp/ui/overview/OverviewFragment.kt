@@ -15,7 +15,8 @@ class OverviewFragment : Fragment() {
 
     val viewModel: OverviewViewModel by viewModels()
 
-    private lateinit var binding: FragmentOverviewBinding
+    private var _binding: FragmentOverviewBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +24,7 @@ class OverviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentOverviewBinding.inflate(inflater)
+        _binding = FragmentOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -96,5 +97,10 @@ class OverviewFragment : Fragment() {
             }
         })
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

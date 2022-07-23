@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
+import com.shalatan.entertainmentapp.databinding.FragmentRecommendationBinding
 import com.shalatan.entertainmentapp.databinding.FragmentWatchedMoviesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,11 +24,14 @@ class WatchedMoviesFragment : Fragment() {
 
     val viewModel: SavedContentViewModel by viewModels()
 
+    private var _binding: FragmentWatchedMoviesBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
 
-        val binding = FragmentWatchedMoviesBinding.inflate(inflater)
+        _binding = FragmentWatchedMoviesBinding.inflate(inflater)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -81,5 +85,10 @@ class WatchedMoviesFragment : Fragment() {
             }
         }).attachToRecyclerView(binding.savedContentRecyclerView)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

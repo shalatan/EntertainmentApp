@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.databinding.FragmentSearchBinding
+import com.shalatan.entertainmentapp.databinding.FragmentWatchedMoviesBinding
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,14 +20,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     val viewModel: SearchViewModel by viewModels()
-    private lateinit var binding: FragmentSearchBinding
+
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var searchEditText: TextInputLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchBinding.inflate(inflater)
+        _binding = FragmentSearchBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -50,6 +54,11 @@ class SearchFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     /**
