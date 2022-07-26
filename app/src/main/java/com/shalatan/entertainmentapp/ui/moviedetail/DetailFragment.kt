@@ -23,6 +23,7 @@ import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -45,6 +46,7 @@ class DetailFragment : Fragment() {
     private val stringReadLess = "<b><u>Read Less</u></b>"
     private val stringReadMore = "<b><u>Read Less</u></b>"
     private val youtubeUrl = "https://www.youtube.com/watch?v="
+    private val whereToWatchUrl = "https://www.themoviedb.org/movie/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +82,15 @@ class DetailFragment : Fragment() {
                 movieOverviewReadMoreTextView.text = Html.fromHtml(stringReadLess)
             }
             isTextViewFull = !isTextViewFull
+        }
+
+        //where to watch
+        binding.whereToWatchText.setOnClickListener {
+            val url = whereToWatchUrl+movie.id+"/watch"
+            Timber.d("ABCD $url")
+            val uri = Uri.parse(url)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
         }
 
         //movie poster

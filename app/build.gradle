@@ -6,6 +6,7 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id("dagger.hilt.android.plugin")
 }
+apply plugin: 'com.google.firebase.crashlytics'
 
 def apikeyPropertiesFile = rootProject.file("apikey.properties")
 def apikeyProperties = new Properties()
@@ -32,6 +33,11 @@ android {
     }
     buildTypes {
         release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -115,11 +121,15 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     // Video
-//    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.0.1'
+    // implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.0.1'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'androidx.palette:palette-ktx:1.0.0'
 
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
 
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 }

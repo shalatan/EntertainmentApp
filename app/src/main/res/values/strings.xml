@@ -14,14 +14,14 @@
     <string name="cd_movie_cast_profile">Movie Cast Profile</string>
     <string name="read_more"><b><u>Read More</u></b></string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fragment_rec_title">RECOMMENDED\nMOVIES FOR YOU</string>
     <string name="fragment_rec_content">Recommended Movies For You Will Be Shown Here. Recommendation Is Based on Your Previously Rated Movies, So Rate Movies Smarty ;)</string>
-
     <string name="fragment_rec_dialog_title">How recommendation works?</string>
     <string name="fragment_rec_dialog_content">Movies are recommended based on your previously rated movies and the rating given to them.\nHence, Rate movies smartly !\n\nUpdates automatically with each new rated movie, but can be Refreshed for better performance</string>
     <string name="fragment_rec_dialog_positive_button">OK</string>
     <string name="fragment_rec_dialog_refresh_button">Refresh</string>
+
+    <string name="fragment_where_to_watch"><u>Where to watch?</u></string>
 
     <string name="fragment_watch_later_content">YOUR WATCHLIST MOVIES WILL BE SHOWN HERE !! \n\n SWIPE MOVIE LEFT TO REMOVE THEM FROM LIST</string>
     <string name="fragment_watched_title">MY WATCHED MOVIES</string>

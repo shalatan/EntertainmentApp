@@ -49,6 +49,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/where_to_watch_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/fragment_where_to_watch"
+                    android:textSize="@dimen/low_emphasis_text"
+                    app:layout_constraintBottom_toTopOf="@id/movie_genre_recycler_view"
+                    app:layout_constraintEnd_toEndOf="@id/endGuideline" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/movie_genre_recycler_view"
                     android:layout_width="match_parent"

@@ -48,8 +48,7 @@ class DetailViewModel @Inject constructor(
             val getCompleteMovieDetail = networkRepository.fetchCompleteMovieDataAsync(movie.id)
             val similarMovies = networkRepository.fetchSimilarMoviesDataAsync(movie.id)
             try {
-                val completeMovie = getCompleteMovieDetail.await()
-                _completeMovieDetail.value = completeMovie
+                _completeMovieDetail.value = getCompleteMovieDetail.await()
                 _recommendedMovies.value = similarMovies.await().movies
             } catch (exception: SocketTimeoutException) {
                 Log.e("Error fetching movie timeout", "Hi")
@@ -109,5 +108,4 @@ class DetailViewModel @Inject constructor(
             repository.changeMovieRatedStatus(id, isRated, rating)
         }
     }
-
 }

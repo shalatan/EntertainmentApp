@@ -11,6 +11,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -33,6 +34,7 @@ object NetworkModule {
     fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder().apply {
             addInterceptor(RequestInterceptor())
+            addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
             connectTimeout(30, TimeUnit.SECONDS)
             readTimeout(20, TimeUnit.SECONDS)
             writeTimeout(25, TimeUnit.SECONDS)
