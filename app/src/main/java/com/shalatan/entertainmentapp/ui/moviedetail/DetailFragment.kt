@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.TextView
 import androidx.core.view.ViewCompat
@@ -16,6 +17,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.shalatan.entertainmentapp.MainViewModel
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
@@ -33,8 +35,11 @@ class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
-
     lateinit var movie: Movie
+
+    private lateinit var materialAlertDialogBuilder: MaterialAlertDialogBuilder
+    private lateinit var customAlertDialogView: View
+    private lateinit var ratingBar: RatingBar
 
     private lateinit var movieWatchedIcon: ImageView
     private lateinit var movieWatchLaterIcon: ImageView
@@ -42,6 +47,7 @@ class DetailFragment : Fragment() {
     private lateinit var movieOverviewTextView: TextView
     private var isRated = false
     private var isWatchLater = false
+    private var recommendedMovies = emptyList<Movie>()
 
     private val stringReadLess = "<b><u>Read Less</u></b>"
     private val stringReadMore = "<b><u>Read Less</u></b>"
@@ -71,6 +77,8 @@ class DetailFragment : Fragment() {
         movieOverviewReadMoreTextView = binding.rawSynopsisReadMore
         movieOverviewTextView = binding.movieOverview
 
+        materialAlertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
+
         //movie overview
         var isTextViewFull = false
         movieOverviewReadMoreTextView.setOnClickListener {
@@ -86,7 +94,7 @@ class DetailFragment : Fragment() {
 
         //where to watch
         binding.whereToWatchText.setOnClickListener {
-            val url = whereToWatchUrl+movie.id+"/watch"
+            val url = whereToWatchUrl + movie.id + "/watch"
             Timber.d("ABCD $url")
             val uri = Uri.parse(url)
             val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -129,11 +137,17 @@ class DetailFragment : Fragment() {
         viewModel.completeMovieDetail.observe(viewLifecycleOwner) {
             val videos = it.videos?.results
             videoAdapter.submitList(videos)
+            Timber.d("ABCD Cast Data ${it.credits?.cast?.size}")
+            Timber.d("ABCD Posters Data ${it.images?.backdrops?.size}")
             if (it.images?.backdrops.isNullOrEmpty()) {
                 binding.moviePosterViewPager.visibility = View.GONE
             } else {
                 postersAdapter.submitList(it.images?.backdrops)
             }
+        }
+
+        viewModel.recommendedMovies.observe(viewLifecycleOwner) {
+            recommendedMovies = it
         }
 
         binding.watchLaterLayout.setOnClickListener {
@@ -147,28 +161,14 @@ class DetailFragment : Fragment() {
             }
         }
 
-        var recommendedMovies = emptyList<Movie>()
-        viewModel.recommendedMovies.observe(viewLifecycleOwner) {
-            recommendedMovies = it
-        }
-
-        val ratingBar = binding.movieRatingBar
         binding.ratedLayout.setOnClickListener {
             if (isRated) {
                 viewModel.updateRatedStatus(isRated = false, rating = 0f)
                 markMovieAsRatedFalse()
             } else {
-                ratingBar.visibility = View.VISIBLE
-                ratingBar.onRatingBarChangeListener =
-                    OnRatingBarChangeListener { rb, rating, fromUser ->
-                        if (fromUser) {
-                            viewModel.addMovieToWatchList(isWatchLater = false, isRated = true)
-                            viewModel.updateRatedStatus(isRated = true, rating = rating)
-                            mainViewModel.recommendMovie(movie.id, recommendedMovies, rating)
-                            rb.visibility = View.INVISIBLE
-                        }
-                    }
-                markMovieAsRatedTrue()
+                customAlertDialogView = LayoutInflater.from(requireContext())
+                    .inflate(R.layout.custom_rating_dialog, null, false)
+                launchCustomAlertDialogBox()
             }
         }
 
@@ -193,6 +193,23 @@ class DetailFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    private fun launchCustomAlertDialogBox() {
+        ratingBar = customAlertDialogView.findViewById(R.id.rating_bar)
+        materialAlertDialogBuilder.setView(customAlertDialogView)
+            .setPositiveButton("Done") { dialog, _ ->
+                val rating = ratingBar.rating
+                viewModel.addMovieToWatchList(isWatchLater = false, isRated = true)
+                viewModel.updateRatedStatus(isRated = true, rating = rating)
+                mainViewModel.recommendMovie(movie.id, recommendedMovies, rating)
+                markMovieAsRatedTrue()
+                dialog.dismiss()
+            }
+            .setNegativeButton("Close") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun markMovieAsWatchLaterTrue() {

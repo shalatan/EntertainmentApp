@@ -153,17 +153,6 @@
                         android:textSize="@dimen/low_emphasis_text" />
                 </LinearLayout>
 
-                <RatingBar
-                    android:id="@+id/movie_rating_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:numStars="5"
-                    android:rating="3.5"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@id/rated_layout"
-                    app:layout_constraintEnd_toEndOf="@id/rated_layout" />
-
                 <LinearLayout
                     android:id="@+id/rated_layout"
                     android:layout_width="wrap_content"
@@ -204,6 +193,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:minHeight="140dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/raw_cast_section"
