@@ -23,10 +23,19 @@
             android:layout_height="0dp"
             android:layout_margin="8dp"
             android:layout_weight="1"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
             tools:itemCount="25"
             tools:listitem="@layout/item_movie" />
+
+        <ImageView
+            android:id="@+id/empty_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/favourite_empty_image"
+            android:visibility="visible" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/search_text_field"

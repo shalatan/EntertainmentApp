@@ -5,9 +5,9 @@
 </p>
 
 <p align="center">  
-Movies Hex is a movie guide which recommends trending and upcoming movies and more information about them like rating, overview, cast, posters (which can be directly used as wallpapers).
+Movies Hex is a movie guide app built using TMDB API, shows latest and trending movies, and all the information related to them like Synopsis, Rating, Cast, Posters, Trailers, Similar Movies etc.
 <br>
-Movies hex also supports creation of watchlists like 'Watch Later Movies' and 'Watched Movies'
+Users can also mark movies as Watch-Later or Watched with the rating, which is stored locally and used to Recommend Movies based on those ratings.
 </p>
 </br>
 
@@ -22,6 +22,7 @@ Movies hex also supports creation of watchlists like 'Watch Later Movies' and 'W
 - Minimum SDK level 24
 - Single activity Appication using [Navigation Component](https://developer.android.com/guide/navigation) to navigate between fragments
 - 100% [Kotlin](https://kotlinlang.org/) based, [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+- Hilt for Dependency Injection
 - JetPack
   - LiveData - Notify Domain Layer data to views.
   - LifeCycle - dispose of observing data when lifecycle state changes.
@@ -35,15 +36,9 @@ Movies hex also supports creation of watchlists like 'Watch Later Movies' and 'W
 - [Moshi](https://github.com/square/moshi/) - A modern JSON Parsing Library for Kotlin and Java
 - [Room](https://developer.android.com/training/data-storage/room) - To Save Data in Local Database
 - [Glide](https://github.com/bumptech/glide) - For Loading Images
-- [BigImageViewer](https://github.com/Piasy/BigImageViewer) - For Zoomable Images
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
 - [Motion Layout](https://developer.android.com/training/constraint-layout/motionlayout) - To implement motions in fragments
 - [ReflectionView](https://github.com/sparrow007/CarouselRecyclerview) - For Reflective Image Views
-
-# MAD Score
-![alt text](gallery/summary.png)
-![alt text](gallery/kotlin.png)
-![alt text](gallery/jetpack.png)
 
 # Architecture
 Movies Kex is based on MVVM architecture and repository pattern.

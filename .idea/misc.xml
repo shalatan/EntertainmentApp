@@ -13,6 +13,7 @@
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_clapper_close.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_clapper_open.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_help.xml" value="0.2335" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_info.xml" value="0.2125" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_more_vert_24.xml" value="0.1775" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_watch_later_false.xml" value="0.1775" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/drawable/ic_watch_later_true.xml" value="0.2125" />
@@ -32,10 +33,10 @@
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/font/libre_font_family.xml" value="0.2791666666666667" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/custom_rating_dialog.xml" value="0.20425724637681159" />
-        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/favourite_item.xml" value="0.6" />
-        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_detail.xml" value="0.264" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/favourite_item.xml" value="0.1716485507246377" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_detail.xml" value="0.1" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_movie_grid.xml" value="0.1875" />
-        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_overview.xml" value="0.176" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_overview.xml" value="0.1" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_poster.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_recommendation.xml" value="0.264" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_search.xml" value="0.1875" />
@@ -43,7 +44,7 @@
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_watch_later_movies.xml" value="0.1" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_watched_movies.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/fragment_watched_series.xml" value="0.1875" />
-        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_cast.xml" value="0.1875" />
+        <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_cast.xml" value="0.4" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_genre.xml" value="0.1875" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_movie.xml" value="0.264" />
         <entry key="..\:/Android/GIthub Projects/EntertainmentApp/app/src/main/res/layout/item_movie_landscape.xml" value="0.1875" />
@@ -59,5 +60,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

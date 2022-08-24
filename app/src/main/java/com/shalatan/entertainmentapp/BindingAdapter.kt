@@ -94,20 +94,14 @@ fun bindImage(imageView: ImageView, imgUrl: String?) {
 fun bindPoster(bigImageView: ImageView, imgUrl: String?) {
     val fullUrl = Constants.IMG_BASE_URL_O + imgUrl
     fullUrl.let {
-//        bigImageView.showImage(Uri.parse(fullUrl))
         Glide.with(bigImageView.context)
             .load(fullUrl)
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image)
+            )
             .into(bigImageView)
     }
 }
-
-//@BindingAdapter("adultChecker")
-//fun adultCheck(view: View, adult: Boolean) {
-//    Log.e("Testing Adult Check : ", adult.toString())
-//    if (adult) {
-//        view.setBackgroundResource(R.drawable.adult_true)
-//    } else {
-//        view.setBackgroundResource(R.drawable.adult_false)
-//    }
-//}
 

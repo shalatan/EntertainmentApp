@@ -51,6 +51,8 @@ class SearchFragment : Fragment() {
         searchRecyclerView.adapter = adapter
         viewModel.searchedMovies.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            binding.emptyImage.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
         }
 
         return binding.root

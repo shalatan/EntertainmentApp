@@ -26,8 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--        <com.github.piasy.biv.view.BigImageView-->
-        <ImageView
+        <com.jsibbold.zoomage.ZoomageView
             android:id="@+id/movie_poster"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

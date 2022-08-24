@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="24dp"
             android:gravity="center_horizontal"
-            android:text="MY WATCH LIST"
+            android:text="@string/fragment_watch_later_title"
             android:textSize="@dimen/high_emphasis_text"
             android:textStyle="bold" />
 

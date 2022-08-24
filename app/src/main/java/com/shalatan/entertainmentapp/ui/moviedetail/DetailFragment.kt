@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
-import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
@@ -57,6 +56,7 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie
+        Timber.d("ABCD POSTER ${movie.posterPath}")
         viewModel.fetchMovieData(movie)
         viewModel.isMovieSavedInWatchList(movie.id)
     }
@@ -68,7 +68,7 @@ class DetailFragment : Fragment() {
     ): View {
 
         _binding = FragmentDetailBinding.inflate(inflater)
-        binding.moviePoster.transitionName = movie.title.toString()
+//        binding.moviePoster.transitionName = movie.title.toString()
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -137,12 +137,11 @@ class DetailFragment : Fragment() {
         viewModel.completeMovieDetail.observe(viewLifecycleOwner) {
             val videos = it.videos?.results
             videoAdapter.submitList(videos)
-            Timber.d("ABCD Cast Data ${it.credits?.cast?.size}")
-            Timber.d("ABCD Posters Data ${it.images?.backdrops?.size}")
             if (it.images?.backdrops.isNullOrEmpty()) {
                 binding.moviePosterViewPager.visibility = View.GONE
             } else {
                 postersAdapter.submitList(it.images?.backdrops)
+                moviePosterViewPager.currentItem = 1
             }
         }
 

@@ -41,8 +41,8 @@ class SavedContentAdapter(private val onClickListener: OnClickListener) :
         holder.itemView.setOnClickListener {
             val movie = Movie(
                 id = savedMovie.Id,
-                posterPath = savedMovie.moviePoster!!,
-                original_title = savedMovie.movieTitle!!
+                posterPath = savedMovie.moviePoster,
+                original_title = savedMovie.movieTitle
             )
             (onClickListener.onClick(movie))
         }

@@ -12,5 +12,6 @@ data class Result(
     val name: String?,
     val site: String?,
     val size: Int?,
-    val type: String?
+    val type: String?,
+    val official: Boolean?
 ) : Parcelable

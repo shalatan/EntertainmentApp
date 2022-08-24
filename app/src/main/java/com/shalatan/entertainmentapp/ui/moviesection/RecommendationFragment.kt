@@ -13,7 +13,6 @@ import com.shalatan.entertainmentapp.MainViewModel
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.SavedMovie
-import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 import com.shalatan.entertainmentapp.databinding.FragmentRecommendationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
