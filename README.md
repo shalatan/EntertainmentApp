@@ -4,12 +4,14 @@
 <a href="https://play.google.com/store/apps/details?id=com.shalatan.entertainmentapp" target="_blank"> <img src="https://raw.githubusercontent.com/Shalatan/EntertainmentApp/master/gallery/play-store-badge.svg?token=AKRVCBOLTCHDEUKJB2KB2HLAPWV4E" alt="android" width="400" height="40"> </a>
 </p>
 
-<p align="center">  
-Movies Hex is a movie guide app built using TMDB API, shows latest and trending movies, and all the information related to them like Synopsis, Rating, Cast, Posters, Trailers, Similar Movies etc.
+<p align="center">
+Movies Hex demonstrates modern Android Developement with 100% Kotlin, Hilt, Coroutines, Live Data, Jetpack (ROOM, ViewModel), based on MVVM Architecture and Repository Pattern. 
+</br>
+</br>
+About App: Movies Hex is a movie guide app built using TMDB API, shows latest and trending movies, and all the information related to them like Synopsis, Rating, Cast, Posters, Trailers, Similar Movies etc.
 <br>
 Users can also mark movies as Watch-Later or Watched with the rating, which is stored locally and used to Recommend Movies based on those ratings.
 </p>
-</br>
 
 # Screenshots
 <p align="center">
