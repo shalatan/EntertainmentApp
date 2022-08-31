@@ -32,13 +32,13 @@ android {
             keyPassword 'shalatan@14'
         }
     }
-    compileSdkVersion 32
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.shalatan.entertainmentapp"
         minSdkVersion 24
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 4                   //doesn't shows on playStore
         versionName "1.100"            //visible on playStore
 
@@ -76,14 +76,14 @@ android {
 
 dependencies {
 
-    def room_version = "2.4.2"
-    def lifecycle_version = "2.5.0"
+    def room_version = "2.4.3"
+    def lifecycle_version = "2.5.1"
     def retrofit_version = "2.9.0"
-    def coroutines_version = "1.6.3"
+    def coroutines_version = "1.6.4"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.21"
     implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -95,7 +95,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.5.1"
 
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
@@ -116,12 +116,12 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
 
     // Moshi
-    implementation 'com.squareup.moshi:moshi:1.11.0'
+    implementation 'com.squareup.moshi:moshi:1.13.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.11.0'
 
     // Navigation Components
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
@@ -133,7 +133,7 @@ dependencies {
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 
     //Hilt
-    implementation("com.google.dagger:hilt-android:2.42")
+    implementation("com.google.dagger:hilt-android:2.43.2")
     kapt("com.google.dagger:hilt-android-compiler:2.42")
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
