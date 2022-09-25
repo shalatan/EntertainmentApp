@@ -80,6 +80,7 @@ dependencies {
     def lifecycle_version = "2.5.1"
     def retrofit_version = "2.9.0"
     def coroutines_version = "1.6.4"
+    def navigation_version = "2.5.2"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.6.21"
     implementation 'androidx.core:core-ktx:1.8.0'
@@ -120,8 +121,8 @@ dependencies {
     implementation 'com.squareup.moshi:moshi-kotlin:1.11.0'
 
     // Navigation Components
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
