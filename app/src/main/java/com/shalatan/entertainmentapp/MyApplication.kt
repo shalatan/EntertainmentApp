@@ -9,6 +9,7 @@ class MyApplication : Application() {
 
     companion object {
         var highest = 0
+        const val LOG = "app_log"
     }
 
     override fun onCreate() {

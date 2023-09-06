@@ -16,6 +16,11 @@ interface TmdbApiService {
         @Query("page") page: Int = 1
     ): Deferred<MovieResponse>
 
+    @GET("3/movie/now_playing")
+    suspend fun getNowPlayingMovies(
+        @Query("page") page: Int = 1
+    ): MovieResponse
+
     @GET("3/movie/popular")
     fun getPopularMoviesAsync(
         @Query("page") page: Int = 1

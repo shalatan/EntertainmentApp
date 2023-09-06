@@ -118,8 +118,8 @@
                     android:visibility="invisible"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/now_playing_text_view"
-                    app:listData="@{viewModel.nowPlayingMovies}"
                     tools:listitem="@layout/item_movie" />
+<!--                app:listData="@{viewModel.nowPlayingMovies}"-->
 
                 <ImageView
                     android:id="@+id/now_playing_progress_bar"

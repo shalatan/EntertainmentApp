@@ -4,16 +4,27 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class OverviewFragment : Fragment() {
 
     val viewModel: OverviewViewModel by viewModels()
+
+    companion object {
+        const val LOG = "app_log"
+    }
 
     private var _binding: FragmentOverviewBinding? = null
     private val binding get() = _binding!!
@@ -28,6 +39,12 @@ class OverviewFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+        val nowPlayingMovieAdapter = MovieAdapter(MovieAdapter.OnClickListener {
+            viewModel.displayMovieDetails(it)
+        })
+        val nowPlayingRecyclerView = binding.nowPlayingRecyclerView
+        nowPlayingRecyclerView.adapter = nowPlayingMovieAdapter
+
         binding.searchFab.setOnClickListener {
             findNavController().navigate(NavGraphDirections.actionGlobalSearchFragment())
         }
@@ -41,14 +58,29 @@ class OverviewFragment : Fragment() {
             findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToRecommendationFragment())
         }
 
-        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
-            if (it.isNullOrEmpty()) {
-
-            } else {
-                binding.nowPlayingRecyclerView.visibility = View.VISIBLE
-                binding.nowPlayingProgressBar.visibility = View.GONE
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.nowPlayingMoviesFlow.collect {
+                Timber.d("$LOG collectedMovies1: $it")
+                nowPlayingMovieAdapter.submitList(it)
             }
-        })
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.getNowPlayingMovies().collect {
+                    Timber.d("$LOG collectedMovies2: $it")
+                    nowPlayingMovieAdapter.submitList(it.movies)
+                }
+            }
+        }
+
+//        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
+//            if (it.isNullOrEmpty()) {
+//
+//            } else {
+//                binding.nowPlayingRecyclerView.visibility = View.VISIBLE
+//                binding.nowPlayingProgressBar.visibility = View.GONE
+//            }
+//        })
         viewModel.topRatedMovies.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
 
