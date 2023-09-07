@@ -34,7 +34,7 @@ class NetworkRepository @Inject constructor(private val tmdbApiService: TmdbApiS
         return tmdbApiService.getSearchedMovieAsync(query)
     }
 
-    fun fetchCompleteMovieDataAsync(movieId: Int): Deferred<CompleteMovieDetail> {
+    suspend fun fetchCompleteMovieDataAsync(movieId: Int): Deferred<CompleteMovieDetail> {
         return tmdbApiService.getCompleteMovieDetailAsync(movieId, Constants.VIR)
     }
 

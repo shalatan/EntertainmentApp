@@ -53,10 +53,10 @@ class OverviewViewModel @Inject constructor(private val repository: NetworkRepos
 
     init {
         fetchMoviesData()
-        fetchMoviesUsingFlow()
+//        fetchMoviesUsingFlow()
     }
 
-    fun getNowPlayingMovies() = repository.getNowPlayingMovies()
+//    fun getNowPlayingMovies() = repository.getNowPlayingMovies()
 
     private fun fetchMoviesUsingFlow() {
         viewModelScope.launch {
@@ -67,7 +67,7 @@ class OverviewViewModel @Inject constructor(private val repository: NetworkRepos
                 }
                 .collect {
                     _nowPlayingMoviesFlow.value = it.movies
-                    Timber.d("$LOG nowPlayingMovies: ${_nowPlayingMoviesFlow.value}")
+                    Timber.d("$LOG OVM collectedMovies: ${_nowPlayingMoviesFlow.value.size}")
                 }
         }
     }

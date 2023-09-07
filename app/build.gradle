@@ -5,11 +5,10 @@ plugins {
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
     id("dagger.hilt.android.plugin")
-    id 'com.google.gms.google-services'
-}
+    }
 //apply plugin: 'com.google.firebase.crashlytics'
 
-def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyPropertiesFile = rootProject.file("local.properties")
 def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
@@ -17,20 +16,20 @@ android {
     lint {
         baseline = file("lint-baseline.xml")
     }
-    signingConfigs {
-        debug {
-            storeFile file('E:\\Android\\PlayStore KeyStore\\Keystore.jks')
-            storePassword 'shalatan@14'
-            keyAlias 'moviesHex'
-            keyPassword 'shalatan@14'
-        }
-        release {
-            storeFile file('E:\\Android\\PlayStore KeyStore\\Keystore.jks')
-            storePassword 'shalatan@14'
-            keyAlias 'moviesHex'
-            keyPassword 'shalatan@14'
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            storeFile file('E:\\Android\\PlayStore KeyStore\\Keystore.jks')
+//            storePassword 'shalatan@14'
+//            keyAlias 'moviesHex'
+//            keyPassword 'shalatan@14'
+//        }
+//        release {
+//            storeFile file('E:\\Android\\PlayStore KeyStore\\Keystore.jks')
+//            storePassword 'shalatan@14'
+//            keyAlias 'moviesHex'
+//            keyPassword 'shalatan@14'
+//        }
+//    }
 
     defaultConfig {
         applicationId "com.shalatan.entertainmentapp"
@@ -43,7 +42,6 @@ android {
         buildConfigField("String", "TMDB_API", apikeyProperties['TMDB_API'])
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.debug
     }
     buildFeatures {
         viewBinding true

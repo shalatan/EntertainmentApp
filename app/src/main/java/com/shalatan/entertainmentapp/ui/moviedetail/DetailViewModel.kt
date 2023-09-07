@@ -40,7 +40,7 @@ class DetailViewModel @Inject constructor(
 
     fun fetchMovieData(movie: Movie) {
         _selectedMovieDetail.value = movie
-        fetchCurrentMovieDetails(movie)
+//        fetchCurrentMovieDetails(movie)
     }
 
     private fun fetchCurrentMovieDetails(movie: Movie) {

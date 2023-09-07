@@ -38,7 +38,7 @@ interface TmdbApiService {
     ): Deferred<MovieResponse>
 
     @GET("3/movie/{movieId}")
-    fun getCompleteMovieDetailAsync(
+    suspend fun getCompleteMovieDetailAsync(
         @Path("movieId") movieID: Int,
         @Query("append_to_response") atr: String = Constants.VIR
     ): Deferred<CompleteMovieDetail>

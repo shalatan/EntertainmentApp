@@ -115,7 +115,7 @@
                     android:layout_marginTop="16dp"
                     android:minHeight="240dp"
                     android:orientation="horizontal"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/now_playing_text_view"
                     tools:listitem="@layout/item_movie" />

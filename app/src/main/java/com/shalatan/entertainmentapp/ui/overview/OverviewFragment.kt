@@ -58,29 +58,26 @@ class OverviewFragment : Fragment() {
             findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToRecommendationFragment())
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.nowPlayingMoviesFlow.collect {
-                Timber.d("$LOG collectedMovies1: $it")
-                nowPlayingMovieAdapter.submitList(it)
-            }
-        }
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.getNowPlayingMovies().collect {
-                    Timber.d("$LOG collectedMovies2: $it")
-                    nowPlayingMovieAdapter.submitList(it.movies)
+            viewModel.nowPlayingMoviesFlow.collect {
+                if (it.isNullOrEmpty()) {
+
+                } else {
+                    Timber.d("$LOG OF collectedMovies1: ${it.size}")
+                    nowPlayingMovieAdapter.submitList(it)
+                    Timber.d("$LOG OF adapterItems: ${nowPlayingMovieAdapter.currentList.size}")
+                    binding.nowPlayingRecyclerView.visibility = View.VISIBLE
+                    binding.nowPlayingProgressBar.visibility = View.GONE
                 }
             }
         }
-
-//        viewModel.nowPlayingMovies.observe(viewLifecycleOwner, Observer {
-//            if (it.isNullOrEmpty()) {
-//
-//            } else {
-//                binding.nowPlayingRecyclerView.visibility = View.VISIBLE
-//                binding.nowPlayingProgressBar.visibility = View.GONE
+//        lifecycleScope.launch {
+//            viewModel.getNowPlayingMovies().collect {
+//                Timber.d("$LOG OF collectedMovies2: ${it.movies.size}")
+//                    nowPlayingMovieAdapter.submitList(it.movies)
 //            }
-//        })
+//        }
+
         viewModel.topRatedMovies.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
 
@@ -104,10 +101,6 @@ class OverviewFragment : Fragment() {
                 binding.upcomingRecyclerView.visibility = View.VISIBLE
                 binding.upcomingProgressBar.visibility = View.GONE
             }
-        })
-
-        binding.nowPlayingRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
-            viewModel.displayMovieDetails(it)
         })
 
         binding.popularRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
