@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.databinding.FragmentSearchBinding
-import com.shalatan.entertainmentapp.databinding.FragmentWatchedMoviesBinding
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -49,10 +50,13 @@ class SearchFragment : Fragment() {
             findNavController().navigate(NavGraphDirections.actionGlobalDetailFragment(it))
         })
         searchRecyclerView.adapter = adapter
-        viewModel.searchedMovies.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-            binding.emptyImage.visibility = View.GONE
-            binding.recyclerView.visibility = View.VISIBLE
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.searchedMoviesFlow.collect {
+                adapter.submitList(it)
+                binding.emptyImage.visibility = View.GONE
+                binding.recyclerView.visibility = View.VISIBLE
+            }
         }
 
         return binding.root

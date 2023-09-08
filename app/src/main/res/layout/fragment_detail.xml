@@ -67,7 +67,6 @@
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/invisible"
-                    app:movieGenreList="@{viewModel.completeMovieDetail.genres}"
                     tools:listitem="@layout/item_genre" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -88,11 +87,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@{String.valueOf(viewModel.completeMovieDetail.vote_average)}"
+                    android:text="4.5"
                     android:textSize="@dimen/mid_emphasis_text"
                     app:layout_constraintStart_toStartOf="@+id/startGuideline"
                     app:layout_constraintTop_toBottomOf="@+id/movie_name"
                     tools:text="6.9" />
+                <!--                android:text="@{String.valueOf(viewModel.completeMovieDetailFlow.vote_average)}"-->
+
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/raw_synopsis"
@@ -110,7 +111,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:maxLines="1"
-                    android:text="@{viewModel.completeMovieDetail.overview}"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/low_emphasis_text"
                     app:layout_constraintEnd_toEndOf="@id/endGuideline"
@@ -197,8 +197,8 @@
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/raw_cast_section"
-                    app:movieCastList="@{viewModel.completeMovieDetail.credits.cast}"
                     tools:listitem="@layout/item_cast" />
+                <!--                TODO pass data above-->
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/raw_poster_section"
@@ -258,7 +258,6 @@
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@+id/movie_similar_text_view"
-                    app:listData="@{viewModel.recommendedMovies}"
                     tools:listitem="@layout/item_movie" />
 
                 <TextView

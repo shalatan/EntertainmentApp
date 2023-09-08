@@ -14,20 +14,27 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.shalatan.entertainmentapp.MainViewModel
+import com.shalatan.entertainmentapp.MyApplication
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
+
+    companion object {
+        const val LOG = MyApplication.LOG
+    }
 
     val viewModel: DetailViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
@@ -56,9 +63,9 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie
-        Timber.d("ABCD POSTER ${movie.posterPath}")
+        Timber.d("$LOG POSTER ${movie.posterPath}")
         viewModel.fetchMovieData(movie)
-        viewModel.isMovieSavedInWatchList(movie.id)
+//        viewModel.isMovieSavedInWatchList(movie.id)
     }
 
     override fun onCreateView(
@@ -128,25 +135,42 @@ class DetailFragment : Fragment() {
                 setPackage("com.google.android.youtube")
                 startActivity(this)
             }
-//            val directions = DetailFragmentDirections.actionDetailFragmentToVideosFragment(it)
-//            findNavController().navigate(directions)
         })
         binding.movieVideoRecyclerView.adapter = videoAdapter
 
-        //if there's no backdrop images, remove the poster view pager else submit the data
-        viewModel.completeMovieDetail.observe(viewLifecycleOwner) {
-            val videos = it.videos?.results
-            videoAdapter.submitList(videos)
-            if (it.images?.backdrops.isNullOrEmpty()) {
-                binding.moviePosterViewPager.visibility = View.GONE
-            } else {
-                postersAdapter.submitList(it.images?.backdrops)
-                moviePosterViewPager.currentItem = 1
+        //similar movies
+        val similarMoviesAdapter = MovieAdapter(MovieAdapter.OnClickListener {
+            findNavController().navigate(NavGraphDirections.actionGlobalDetailFragment(it))
+        })
+        binding.movieSimilarRecyclerView.adapter = similarMoviesAdapter
+
+        lifecycleScope.launch {
+            viewModel.completeMovieDetailFlow.collect { movieDetail ->
+                Timber.d("$LOG completeMovieDetail $movieDetail")
+                if (movieDetail != null) {
+                    //genre
+                    genreAdapter.submitList(movieDetail.genres)
+                    //overview
+                    val movieOverview = movieDetail.overview
+                    binding.movieOverview.text = movieOverview
+                    //cast
+                    movieCastAdapter.submitList(movieDetail.credits?.cast?.sortedByDescending {
+                        it.popularity
+                    })
+                    //posters
+                    postersAdapter.submitList(movieDetail.images?.backdrops)
+                    moviePosterViewPager.currentItem = 1
+                    //videos
+                    val videos = movieDetail.videos?.results
+                    videoAdapter.submitList(videos)
+                }
             }
         }
 
-        viewModel.recommendedMovies.observe(viewLifecycleOwner) {
-            recommendedMovies = it
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.recommendedMoviesFlow.collect {
+                similarMoviesAdapter.submitList(it)
+            }
         }
 
         binding.watchLaterLayout.setOnClickListener {
@@ -187,10 +211,6 @@ class DetailFragment : Fragment() {
             }
         }
 
-        binding.movieSimilarRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
-            findNavController().navigate(NavGraphDirections.actionGlobalDetailFragment(it))
-        })
-
         return binding.root
     }
 
@@ -201,7 +221,7 @@ class DetailFragment : Fragment() {
                 val rating = ratingBar.rating
                 viewModel.addMovieToWatchList(isWatchLater = false, isRated = true)
                 viewModel.updateRatedStatus(isRated = true, rating = rating)
-                mainViewModel.recommendMovie(movie.id, recommendedMovies, rating)
+//                mainViewModel.recommendMovie(movie.id, recommendedMovies, rating)
                 markMovieAsRatedTrue()
                 dialog.dismiss()
             }

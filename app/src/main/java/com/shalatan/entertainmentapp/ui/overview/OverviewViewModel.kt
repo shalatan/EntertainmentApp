@@ -28,35 +28,25 @@ class OverviewViewModel @Inject constructor(private val repository: NetworkRepos
     val status: LiveData<String>
         get() = _status
 
-    private val _nowPlayingMovies = MutableLiveData<List<Movie>>()
-    val nowPlayingMovies: LiveData<List<Movie>>
-        get() = _nowPlayingMovies
-
     private val _nowPlayingMoviesFlow = MutableStateFlow<List<Movie>>(value = emptyList())
     val nowPlayingMoviesFlow: StateFlow<List<Movie>> = _nowPlayingMoviesFlow
 
-    private val _popularMovies = MutableLiveData<List<Movie>>()
-    val popularMovies: LiveData<List<Movie>>
-        get() = _popularMovies
+    private val _popularMoviesFlow = MutableStateFlow<List<Movie>>(value = emptyList())
+    val popularMoviesFlow: StateFlow<List<Movie>> = _popularMoviesFlow
 
-    private val _topRatedMovies = MutableLiveData<List<Movie>>()
-    val topRatedMovies: LiveData<List<Movie>>
-        get() = _topRatedMovies
+    private val _topRatedMoviesFlow = MutableStateFlow<List<Movie>>(value = emptyList())
+    val topRatedMoviesFlow: StateFlow<List<Movie>> = _topRatedMoviesFlow
 
-    private val _upcomingMovies = MutableLiveData<List<Movie>>()
-    val upcomingMovies: LiveData<List<Movie>>
-        get() = _upcomingMovies
+    private val _upcomingMoviesFlow = MutableStateFlow<List<Movie>>(value = emptyList())
+    val upcomingMoviesFlow: StateFlow<List<Movie>> = _upcomingMoviesFlow
 
     private val _navigateToSelectedMovie = MutableLiveData<Movie?>()
     val navigateToSelectedMovie: LiveData<Movie?>
         get() = _navigateToSelectedMovie
 
     init {
-        fetchMoviesData()
-//        fetchMoviesUsingFlow()
+        fetchMoviesUsingFlow()
     }
-
-//    fun getNowPlayingMovies() = repository.getNowPlayingMovies()
 
     private fun fetchMoviesUsingFlow() {
         viewModelScope.launch {
@@ -67,29 +57,38 @@ class OverviewViewModel @Inject constructor(private val repository: NetworkRepos
                 }
                 .collect {
                     _nowPlayingMoviesFlow.value = it.movies
-                    Timber.d("$LOG OVM collectedMovies: ${_nowPlayingMoviesFlow.value.size}")
+                }
+
+            repository.getPopularMovies()
+                .flowOn(Dispatchers.IO)
+                .catch {
+                    Timber.d("$LOG exception: $it")
+                }
+                .collect {
+                    _popularMoviesFlow.value = it.movies
+                }
+            repository.getTopRatedMovies()
+                .flowOn(Dispatchers.IO)
+                .catch {
+                    Timber.d("$LOG exception: $it")
+                }
+                .collect {
+                    _topRatedMoviesFlow.value = it.movies
+                }
+
+            repository.getUpcomingMovies()
+                .flowOn(Dispatchers.IO)
+                .catch {
+                    Timber.d("$LOG exception: $it")
+                }
+                .collect {
+                    _upcomingMoviesFlow.value = it.movies
                 }
         }
     }
 
-    private fun fetchMoviesData() {
-        viewModelScope.launch {
-            val topMovies = repository.getTopRatedMoviesAsync()
-            val popularMovies = repository.getPopularMoviesAsync()
-            val nowPlayingMovies = repository.getNowPlayingMoviesAsync()
-            val upcomingMovies = repository.getUpcomingMoviesAsync()
-            try {
-                _topRatedMovies.value = topMovies.await().movies
-                _popularMovies.value = popularMovies.await().movies
-                _nowPlayingMovies.value = nowPlayingMovies.await().movies
-                _upcomingMovies.value = upcomingMovies.await().movies
-            } catch (t: Throwable) {
-                _status.value = "Failure" + t.message
-            }
-        }
-    }
-
     fun displayMovieDetails(movie: Movie) {
+        Timber.e("$LOG clicked: ${movie.title}")
         _navigateToSelectedMovie.value = movie
     }
 

@@ -1,14 +1,19 @@
 package com.shalatan.entertainmentapp.ui.moviedetail
 
-import android.util.Log
 import androidx.lifecycle.*
+import com.shalatan.entertainmentapp.MyApplication
 import com.shalatan.entertainmentapp.database.DatabaseRepository
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.*
 import com.shalatan.entertainmentapp.network.NetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import java.net.SocketTimeoutException
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,17 +23,17 @@ class DetailViewModel @Inject constructor(
 ) :
     ViewModel() {
 
+    private val LOG = MyApplication.LOG
+
     private val _selectedMovieDetail = MutableLiveData<Movie>()
     val selectedMovieDetail: LiveData<Movie>
         get() = _selectedMovieDetail
 
-    private val _completeMovieDetail = MutableLiveData<CompleteMovieDetail>()
-    val completeMovieDetail: LiveData<CompleteMovieDetail>
-        get() = _completeMovieDetail
+    private val _completeMovieDetailFlow = MutableStateFlow<CompleteMovieDetail?>(value = null)
+    val completeMovieDetailFlow: StateFlow<CompleteMovieDetail?> = _completeMovieDetailFlow
 
-    private val _recommendedMovies = MutableLiveData<List<Movie>>()
-    val recommendedMovies: LiveData<List<Movie>>
-        get() = _recommendedMovies
+    private val _recommendedMoviesFlow = MutableStateFlow<List<Movie>>(emptyList())
+    val recommendedMoviesFlow: StateFlow<List<Movie>> = _recommendedMoviesFlow
 
     private val _isMovieExistInWatchedList = MutableLiveData<Boolean>()
     val isMovieExistInWatchedList: LiveData<Boolean>
@@ -41,20 +46,30 @@ class DetailViewModel @Inject constructor(
     fun fetchMovieData(movie: Movie) {
         _selectedMovieDetail.value = movie
 //        fetchCurrentMovieDetails(movie)
+        fetchCompleteMovieData(movie)
     }
 
-    private fun fetchCurrentMovieDetails(movie: Movie) {
+    private fun fetchCompleteMovieData(movie: Movie) {
+        Timber.d("$LOG completeMovieDetail Id: ${movie.id}")
         viewModelScope.launch {
-            val getCompleteMovieDetail = networkRepository.fetchCompleteMovieDataAsync(movie.id)
-            val similarMovies = networkRepository.fetchSimilarMoviesDataAsync(movie.id)
-            try {
-                _completeMovieDetail.value = getCompleteMovieDetail.await()
-                _recommendedMovies.value = similarMovies.await().movies
-            } catch (exception: SocketTimeoutException) {
-                Log.e("Error fetching movie timeout", "Hi")
-            } catch (t: Throwable) {
-                Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
-            }
+            networkRepository.getMovieCompleteData(movieId = movie.id)
+                .flowOn(Dispatchers.IO)
+                .catch {
+                    Timber.d("$LOG exception: $it")
+                }
+                .collect {
+                    _completeMovieDetailFlow.value = it
+                    Timber.d("$LOG completeMovieDetail: $it")
+                }
+            networkRepository.getSimilarMovies(movieId = movie.id)
+                .flowOn(Dispatchers.IO)
+                .catch {
+                    Timber.d("$LOG exception: $it")
+                }
+                .collect {
+                    _recommendedMoviesFlow.value = it.movies
+                    Timber.d("$LOG similarMovies: ${it.movies.size}")
+                }
         }
     }
 

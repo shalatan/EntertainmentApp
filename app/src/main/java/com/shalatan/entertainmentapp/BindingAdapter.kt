@@ -33,18 +33,6 @@ fun bindFavouriteRecyclerView(recyclerView: RecyclerView, data: List<SavedMovie>
     adapter.submitList(data)
 }
 
-@BindingAdapter("movieCastList")
-fun bindMovieCastRecyclerView(recyclerView: RecyclerView, data: List<Cast>?) {
-    val movieCastAdapter = recyclerView.adapter as MovieCastAdapter
-    movieCastAdapter.submitList(data?.sortedByDescending { it.popularity })
-}
-
-@BindingAdapter("movieGenreList")
-fun bindMovieGenreRecyclerView(recyclerView: RecyclerView, data: List<Genre>?) {
-    val movieGenreAdapter = recyclerView.adapter as GenreAdapter
-    movieGenreAdapter.submitList(data)
-}
-
 @BindingAdapter("setUpRec")
 fun bindMovieRecommendationPercentage(
     progressBar: NumberProgressBar,

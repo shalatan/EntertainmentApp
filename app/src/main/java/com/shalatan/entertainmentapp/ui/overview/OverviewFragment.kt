@@ -30,20 +30,12 @@ class OverviewFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
 
         _binding = FragmentOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
-        val nowPlayingMovieAdapter = MovieAdapter(MovieAdapter.OnClickListener {
-            viewModel.displayMovieDetails(it)
-        })
-        val nowPlayingRecyclerView = binding.nowPlayingRecyclerView
-        nowPlayingRecyclerView.adapter = nowPlayingMovieAdapter
 
         binding.searchFab.setOnClickListener {
             findNavController().navigate(NavGraphDirections.actionGlobalSearchFragment())
@@ -58,62 +50,81 @@ class OverviewFragment : Fragment() {
             findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToRecommendationFragment())
         }
 
+        val nowPlayingMovieAdapter = MovieAdapter(MovieAdapter.OnClickListener {
+            viewModel.displayMovieDetails(it)
+        })
+        val nowPlayingRecyclerView = binding.nowPlayingRecyclerView
+        nowPlayingRecyclerView.adapter = nowPlayingMovieAdapter
+
         lifecycleScope.launch {
             viewModel.nowPlayingMoviesFlow.collect {
-                if (it.isNullOrEmpty()) {
+                if (it.isEmpty()) {
 
                 } else {
-                    Timber.d("$LOG OF collectedMovies1: ${it.size}")
                     nowPlayingMovieAdapter.submitList(it)
-                    Timber.d("$LOG OF adapterItems: ${nowPlayingMovieAdapter.currentList.size}")
+                    Timber.e("$LOG nowPlayingMovies: ${it.size}")
                     binding.nowPlayingRecyclerView.visibility = View.VISIBLE
                     binding.nowPlayingProgressBar.visibility = View.GONE
                 }
             }
         }
-//        lifecycleScope.launch {
-//            viewModel.getNowPlayingMovies().collect {
-//                Timber.d("$LOG OF collectedMovies2: ${it.movies.size}")
-//                    nowPlayingMovieAdapter.submitList(it.movies)
-//            }
-//        }
 
-        viewModel.topRatedMovies.observe(viewLifecycleOwner, Observer {
-            if (it.isNullOrEmpty()) {
-
-            } else {
-                binding.topRatedRecyclerView.visibility = View.VISIBLE
-                binding.topRatedProgressBar.visibility = View.GONE
-            }
-        })
-        viewModel.popularMovies.observe(viewLifecycleOwner, Observer {
-            if (it.isNullOrEmpty()) {
-
-            } else {
-                binding.popularRecyclerView.visibility = View.VISIBLE
-                binding.popularProgressBar.visibility = View.GONE
-            }
-        })
-        viewModel.upcomingMovies.observe(viewLifecycleOwner, Observer {
-            if (it.isNullOrEmpty()) {
-
-            } else {
-                binding.upcomingRecyclerView.visibility = View.VISIBLE
-                binding.upcomingProgressBar.visibility = View.GONE
-            }
-        })
-
-        binding.popularRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
+        val popularMovieAdapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })
+        val popularRecyclerView = binding.popularRecyclerView
+        popularRecyclerView.adapter = popularMovieAdapter
 
-        binding.topRatedRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
+        lifecycleScope.launch {
+            viewModel.popularMoviesFlow.collect {
+                if (it.isEmpty()) {
+
+                } else {
+                    popularMovieAdapter.submitList(it)
+                    Timber.e("$LOG popularMovies: ${it.size}")
+                    binding.popularRecyclerView.visibility = View.VISIBLE
+                    binding.popularProgressBar.visibility = View.GONE
+                }
+            }
+        }
+
+        val upcomingMovieAdapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })
+        val upcomingMovieRecyclerView = binding.upcomingRecyclerView
+        upcomingMovieRecyclerView.adapter = upcomingMovieAdapter
 
-        binding.upcomingRecyclerView.adapter = MovieAdapter(MovieAdapter.OnClickListener {
+        lifecycleScope.launch {
+            viewModel.upcomingMoviesFlow.collect {
+                if (it.isEmpty()) {
+
+                } else {
+                    upcomingMovieAdapter.submitList(it)
+                    Timber.e("$LOG upcomingMovies: ${it.size}")
+                    binding.upcomingRecyclerView.visibility = View.VISIBLE
+                    binding.upcomingProgressBar.visibility = View.GONE
+                }
+            }
+        }
+
+        val topRatedMovieAdapter = MovieAdapter(MovieAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })
+        val topRatedRecyclerView = binding.topRatedRecyclerView
+        topRatedRecyclerView.adapter = topRatedMovieAdapter
+
+        lifecycleScope.launch {
+            viewModel.topRatedMoviesFlow.collect {
+                if (it.isEmpty()) {
+
+                } else {
+                    topRatedMovieAdapter.submitList(it)
+                    Timber.e("$LOG topRatedMovies: ${it.size}")
+                    binding.topRatedRecyclerView.visibility = View.VISIBLE
+                    binding.topRatedProgressBar.visibility = View.GONE
+                }
+            }
+        }
 
         viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner, Observer {
             if (null != it) {

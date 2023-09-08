@@ -26,32 +26,32 @@ class MainViewModel @Inject constructor(
      * Step 4 - Get Similar Movies From API For Each Rated Movie
      * Step 5 - call the recommendedMovie() For Each Similar Movie
      */
-    fun refreshRecommendations() {
-        CoroutineScope(Dispatchers.IO).launch {
-            //step1
-            databaseRepository.clearResidueMovies()
-            //step2
-            databaseRepository.clearRecommendationWeightForWatchLaterMovies()
-            //step3
-            val watchedMovies = databaseRepository.getAllRatedMoviesList()
-            for (movie in watchedMovies) {
-                val movieId = movie.Id
-                val recommendedMoviesDeferred =
-                    networkRepository.fetchSimilarMoviesDataAsync(movieId)
-                try {
-                    //step4
-                    val recommendedMovies = recommendedMoviesDeferred.await().movies
-                    //step5
-                    recommendMovie(movieId, recommendedMovies, movie.rating)
-                } catch (t: Throwable) {
-                    Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
-                }
-            }
-            val newRecommendedMovies = databaseRepository.getAllRecommendedMovies().value
-            val highest = newRecommendedMovies?.get(0)?.recommendationWeight ?: 0
-            MyApplication.highest = highest
-        }
-    }
+//    fun refreshRecommendations() {
+//        CoroutineScope(Dispatchers.IO).launch {
+//            //step1
+//            databaseRepository.clearResidueMovies()
+//            //step2
+//            databaseRepository.clearRecommendationWeightForWatchLaterMovies()
+//            //step3
+//            val watchedMovies = databaseRepository.getAllRatedMoviesList()
+//            for (movie in watchedMovies) {
+//                val movieId = movie.Id
+//                val recommendedMoviesDeferred =
+//                    networkRepository.fetchSimilarMoviesDataAsync(movieId)
+//                try {
+//                    //step4
+//                    val recommendedMovies = recommendedMoviesDeferred.await().movies
+//                    //step5
+//                    recommendMovie(movieId, recommendedMovies, movie.rating)
+//                } catch (t: Throwable) {
+//                    Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
+//                }
+//            }
+//            val newRecommendedMovies = databaseRepository.getAllRecommendedMovies().value
+//            val highest = newRecommendedMovies?.get(0)?.recommendationWeight ?: 0
+//            MyApplication.highest = highest
+//        }
+//    }
 
     /**
      * Insert the recommended movie(db will ignore insertion if duplicate happens) and then increase

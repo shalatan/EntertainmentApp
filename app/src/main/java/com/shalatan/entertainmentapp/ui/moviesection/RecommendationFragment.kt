@@ -66,7 +66,8 @@ class RecommendationFragment : Fragment() {
                 .setTitle(resources.getString(R.string.fragment_rec_dialog_title))
                 .setMessage(resources.getString(R.string.fragment_rec_dialog_content))
                 .setNeutralButton(resources.getString(R.string.fragment_rec_dialog_refresh_button)) { dialog, which ->
-                    mainViewModel.refreshRecommendations()
+                    //TODO later
+//                    mainViewModel.refreshRecommendations()
                 }
                 .setPositiveButton(resources.getString(R.string.fragment_rec_dialog_positive_button)) { dialog, which ->
                     dialog.cancel()
