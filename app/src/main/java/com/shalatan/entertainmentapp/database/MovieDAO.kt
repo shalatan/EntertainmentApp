@@ -1,6 +1,5 @@
 package com.shalatan.entertainmentapp.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -13,20 +12,20 @@ interface MovieDAO {
     fun update(savedMovie: SavedMovie)
 
     @Query("SELECT * FROM saved_movies_table WHERE isRated = 1")
-    fun getAllRatedMovies(): LiveData<List<SavedMovie>>
+    fun getAllRatedMovies(): List<SavedMovie>
 
     @Query("SELECT * FROM saved_movies_table WHERE isRated = 1")
-     fun getAllRatedMoviesList(): List<SavedMovie>
+    fun getAllRatedMoviesList(): List<SavedMovie>
 
     @Query("SELECT * FROM saved_movies_table WHERE isWatchLater = 1")
-    fun getAllWatchLaterMovies(): LiveData<List<SavedMovie>>
+    fun getAllWatchLaterMovies(): List<SavedMovie>
 
     //get all recommended movies i.e. unrated(unwatched) movies
     @Query("SELECT * FROM saved_movies_table WHERE isRated = 0 ORDER BY recommendationWeight DESC")
-    fun getAllRecommendedMovies(): LiveData<List<SavedMovie>>
+    fun getAllRecommendedMovies(): List<SavedMovie>
 
     @Query("DELETE FROM saved_movies_table WHERE isRated = 0 AND isWatchLater = 0")
-     fun clearResidueMoviesFromDatabase()
+    fun clearResidueMoviesFromDatabase()
 
     @Query("UPDATE saved_movies_table SET recommendationWeight = 0 WHERE isWatchLater = 1")
     fun clearRecommendationWeightOfWatchLaterMovies()

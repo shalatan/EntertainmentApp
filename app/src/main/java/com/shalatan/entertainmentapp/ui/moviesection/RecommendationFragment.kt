@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.shalatan.entertainmentapp.MainViewModel
@@ -15,6 +16,7 @@ import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.databinding.FragmentRecommendationBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecommendationFragment : Fragment() {
@@ -30,6 +32,11 @@ class RecommendationFragment : Fragment() {
     private var backgroundColor = 0
     private var textColor = 0
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.fetchWatchLaterMovies(fromRecommendation = true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,9 +46,11 @@ class RecommendationFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.recyclerView.adapter = SavedContentAdapter(SavedContentAdapter.OnClickListener {
+        val recyclerView = binding.recyclerView
+        val savedContentAdapter = SavedContentAdapter(SavedContentAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)
         })
+        recyclerView.adapter = savedContentAdapter
 
         viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner) {
             if (it != null) {
@@ -50,14 +59,17 @@ class RecommendationFragment : Fragment() {
             }
         }
 
-        viewModel.recommendationMovies.observe(viewLifecycleOwner) {
-            if (it.isNullOrEmpty()) {
-                binding.recyclerView.visibility = View.GONE
-                binding.savedContentText.visibility = View.VISIBLE
-            } else {
-                binding.recyclerView.visibility = View.VISIBLE
-                binding.savedContentText.visibility = View.GONE
-                viewModel.updateHighestRecommendationWeight()
+        lifecycleScope.launch {
+            viewModel.savedMoviesFlow.collect {
+                if (it.isNullOrEmpty()) {
+                    recyclerView.visibility = View.GONE
+                    binding.savedContentText.visibility = View.VISIBLE
+                } else {
+                    savedContentAdapter.submitList(it)
+                    recyclerView.visibility = View.VISIBLE
+                    binding.savedContentText.visibility = View.GONE
+//                    viewModel.updateHighestRecommendationWeight()
+                }
             }
         }
 

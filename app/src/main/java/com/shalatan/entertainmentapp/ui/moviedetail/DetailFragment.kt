@@ -26,6 +26,7 @@ import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -175,11 +176,15 @@ class DetailFragment : Fragment() {
 
         binding.watchLaterLayout.setOnClickListener {
             if (isWatchLater) {
-                viewModel.updateWatchLaterStatus(!isWatchLater)
+                lifecycleScope.launch {
+                    viewModel.updateWatchLaterStatus(!isWatchLater)
+                }
                 markMovieAsWatchLaterFalse()
             } else {
                 viewModel.addMovieToWatchList(isRated = false, isWatchLater = true)
-                viewModel.updateWatchLaterStatus(!isWatchLater)
+                lifecycleScope.launch(Dispatchers.IO) {
+                    viewModel.updateWatchLaterStatus(!isWatchLater)
+                }
                 markMovieAsWatchLaterTrue()
             }
         }
@@ -219,7 +224,9 @@ class DetailFragment : Fragment() {
         materialAlertDialogBuilder.setView(customAlertDialogView)
             .setPositiveButton("Done") { dialog, _ ->
                 val rating = ratingBar.rating
-                viewModel.addMovieToWatchList(isWatchLater = false, isRated = true)
+                lifecycleScope.launch {
+                    viewModel.addMovieToWatchList(isWatchLater = false, isRated = true)
+                }
                 viewModel.updateRatedStatus(isRated = true, rating = rating)
 //                mainViewModel.recommendMovie(movie.id, recommendedMovies, rating)
                 markMovieAsRatedTrue()

@@ -1,11 +1,11 @@
 package com.shalatan.entertainmentapp.database
 
-import androidx.lifecycle.LiveData
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class DatabaseRepository @Inject constructor(private val dao: MovieDAO) {
 
-    suspend fun insertMovie(savedMovie: SavedMovie) {
+    fun insertMovie(savedMovie: SavedMovie) {
         dao.insert(savedMovie)
     }
 
@@ -28,27 +28,27 @@ class DatabaseRepository @Inject constructor(private val dao: MovieDAO) {
         dao.updateMovieRecommendationWeight(movieId, rating)
     }
 
-    fun getAllRatedMovies(): LiveData<List<SavedMovie>> {
-        return dao.getAllRatedMovies()
-    }
-
     suspend fun getAllRatedMoviesList(): List<SavedMovie> {
         return dao.getAllRatedMoviesList()
     }
 
-    fun getAllWatchLaterMovies(): LiveData<List<SavedMovie>> {
-        return dao.getAllWatchLaterMovies()
+    fun getAllRatedMovies() = flow {
+        emit(dao.getAllRatedMovies())
     }
 
-    fun getAllRecommendedMovies(): LiveData<List<SavedMovie>> {
-        return dao.getAllRecommendedMovies()
+    fun getAllWatchLaterMovies() = flow {
+        emit(dao.getAllWatchLaterMovies())
     }
 
-    suspend fun changeMovieWatchLaterStatus(movieId: Int, isWatchLater: Boolean) {
+    fun getAllRecommendedMovies() = flow {
+        emit(dao.getAllRecommendedMovies())
+    }
+
+    fun changeMovieWatchLaterStatus(movieId: Int, isWatchLater: Boolean) {
         dao.changeWatchLaterStatus(movieId, isWatchLater)
     }
 
-    suspend fun changeMovieRatedStatus(movieId: Int, isRated: Boolean, rating: Float) {
+    fun changeMovieRatedStatus(movieId: Int, isRated: Boolean, rating: Float) {
         dao.changeRatedStatus(movieId, isRated, rating)
     }
 

@@ -77,7 +77,7 @@ class DetailViewModel @Inject constructor(
      * add or replace existing data of movie to database with isWatchlater value true
      */
     fun addMovieToWatchList(isRated: Boolean, isWatchLater: Boolean) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val id = _selectedMovieDetail.value!!.id
             val poster = _selectedMovieDetail.value?.posterPath
             val name = _selectedMovieDetail.value?.original_title
@@ -110,7 +110,7 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun updateWatchLaterStatus(isWatchLater: Boolean) {
+    suspend fun updateWatchLaterStatus(isWatchLater: Boolean) {
         val id = _selectedMovieDetail.value!!.id
         viewModelScope.launch {
             repository.changeMovieWatchLaterStatus(id, isWatchLater)
