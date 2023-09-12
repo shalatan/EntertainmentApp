@@ -6,7 +6,7 @@ import androidx.room.*
 interface MovieDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(savedMovie: SavedMovie)
+    suspend fun insert(savedMovie: SavedMovie)
 
     @Update
     fun update(savedMovie: SavedMovie)
@@ -14,6 +14,7 @@ interface MovieDAO {
     @Query("SELECT * FROM saved_movies_table WHERE isRated = 1")
     fun getAllRatedMovies(): List<SavedMovie>
 
+    //TODO delete
     @Query("SELECT * FROM saved_movies_table WHERE isRated = 1")
     fun getAllRatedMoviesList(): List<SavedMovie>
 
@@ -31,23 +32,23 @@ interface MovieDAO {
     fun clearRecommendationWeightOfWatchLaterMovies()
 
     @Query("UPDATE saved_movies_table SET isWatchLater = :isWatchLater WHERE Id = :id")
-    fun changeWatchLaterStatus(id: Int, isWatchLater: Boolean)
+    suspend fun changeWatchLaterStatus(id: Int, isWatchLater: Boolean)
 
     @Query("UPDATE saved_movies_table SET isRated = :isRated, rating = :rating WHERE Id = :id")
-    fun changeRatedStatus(id: Int, isRated: Boolean, rating: Float)
+    suspend fun changeRatedStatus(id: Int, isRated: Boolean, rating: Float)
 
     @Query("UPDATE saved_movies_table SET isRecommendationConsidered = :isRecommendationConsidered WHERE Id = :id")
     fun changeRecommendationConsideredStatus(id: Int, isRecommendationConsidered: Boolean)
 
     @Query("UPDATE saved_movies_table SET recommendationWeight = recommendationWeight+:rating WHERE ID = :id")
-    fun updateMovieRecommendationWeight(id: Int, rating: Float)
+    suspend fun updateMovieRecommendationWeight(id: Int, rating: Float)
 
     @Delete
     fun delete(savedMovie: SavedMovie)
 
     @Query("SELECT count(*)!=0 FROM saved_movies_table WHERE Id = :uid AND isRated = 1")
-    fun isMovieInRatedList(uid: Int): Int
+    suspend fun isMovieInRatedList(uid: Int): Int
 
     @Query("SELECT count(*)!=0 FROM saved_movies_table WHERE Id = :uid AND isWatchLater = 1")
-    fun isMovieInWatchLaterList(uid: Int): Int
+    suspend fun isMovieInWatchLaterList(uid: Int): Int
 }

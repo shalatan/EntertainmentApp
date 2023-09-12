@@ -1,6 +1,5 @@
 package com.shalatan.entertainmentapp
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.shalatan.entertainmentapp.database.DatabaseRepository
 import com.shalatan.entertainmentapp.database.SavedMovie
@@ -9,8 +8,12 @@ import com.shalatan.entertainmentapp.network.NetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
+
+const val TAG = "app_log"
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -25,33 +28,50 @@ class MainViewModel @Inject constructor(
      * Step 3 - Get All Rated Movies By User From Database
      * Step 4 - Get Similar Movies From API For Each Rated Movie
      * Step 5 - call the recommendedMovie() For Each Similar Movie
+     * Step 6 - Update the highestRec Weight
      */
-//    fun refreshRecommendations() {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            //step1
-//            databaseRepository.clearResidueMovies()
-//            //step2
-//            databaseRepository.clearRecommendationWeightForWatchLaterMovies()
-//            //step3
-//            val watchedMovies = databaseRepository.getAllRatedMoviesList()
-//            for (movie in watchedMovies) {
-//                val movieId = movie.Id
-//                val recommendedMoviesDeferred =
-//                    networkRepository.fetchSimilarMoviesDataAsync(movieId)
-//                try {
-//                    //step4
-//                    val recommendedMovies = recommendedMoviesDeferred.await().movies
-//                    //step5
-//                    recommendMovie(movieId, recommendedMovies, movie.rating)
-//                } catch (t: Throwable) {
-//                    Log.e("Error Fetching Complete Movie Detail : ", t.message.toString())
-//                }
-//            }
-//            val newRecommendedMovies = databaseRepository.getAllRecommendedMovies().value
-//            val highest = newRecommendedMovies?.get(0)?.recommendationWeight ?: 0
-//            MyApplication.highest = highest
-//        }
-//    }
+    fun refreshRecommendations() {
+        CoroutineScope(Dispatchers.IO).launch {
+            //step1
+            databaseRepository.clearResidueMovies()
+            //step2
+            databaseRepository.clearRecommendationWeightForWatchLaterMovies()
+            //step3
+            var ratedMovies = emptyList<SavedMovie>()
+            databaseRepository.getAllRatedMovies()
+                .catch {
+                    Timber.e("$TAG errorFetchingRatedMovies: $it")
+                }
+                .collect {
+                    ratedMovies = it
+                    Timber.d("$TAG fetchedRatedMoviesFromDB: ${ratedMovies.size}")
+                }
+            for (movie in ratedMovies) {
+                val movieId = movie.Id
+                networkRepository.getSimilarMovies(movieId)
+                    .catch {
+                        Timber.e("$TAG errorFetchingSimilarMovies for ${movie.movieTitle}: $it")
+                    }
+                    .collect {
+                        //step4
+                        val recommendedMovies = it.movies
+                        Timber.d("$TAG fetchedSimilarMoviesFromNetwork: ${recommendedMovies.size}")
+                        //step5
+                        recommendMovie(movieId, recommendedMovies, movie.rating)
+                    }
+            }
+            //step6
+            databaseRepository.getAllRecommendedMovies()
+                .catch {
+                    Timber.e("$TAG errorFetchingRecommendedMovies $it")
+                }
+                .collect {
+                    val highest = it[0].recommendationWeight ?: 0
+                    Timber.d("$TAG fetchedNewRecommendedMovies: ${it.size}, highest: $highest")
+                    MyApplication.highest = highest
+                }
+        }
+    }
 
     /**
      * Insert the recommended movie(db will ignore insertion if duplicate happens) and then increase

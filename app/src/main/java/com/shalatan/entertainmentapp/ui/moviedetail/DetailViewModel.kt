@@ -45,7 +45,6 @@ class DetailViewModel @Inject constructor(
 
     fun fetchMovieData(movie: Movie) {
         _selectedMovieDetail.value = movie
-//        fetchCurrentMovieDetails(movie)
         fetchCompleteMovieData(movie)
     }
 
@@ -77,7 +76,7 @@ class DetailViewModel @Inject constructor(
      * add or replace existing data of movie to database with isWatchlater value true
      */
     fun addMovieToWatchList(isRated: Boolean, isWatchLater: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Main) {
             val id = _selectedMovieDetail.value!!.id
             val poster = _selectedMovieDetail.value?.posterPath
             val name = _selectedMovieDetail.value?.original_title
@@ -107,10 +106,12 @@ class DetailViewModel @Inject constructor(
             val isMovieWatchLater = repository.isMovieInWatchLaterList(movieId)
             _isMovieExistInWatchedList.value = isMovieWatched != 0
             _isMovieExistInWatchLaterList.value = isMovieWatchLater != 0
+            Timber.d("$LOG rated: ${_isMovieExistInWatchedList.value}")
+            Timber.d("$LOG watchLater: ${_isMovieExistInWatchLaterList.value}")
         }
     }
 
-    suspend fun updateWatchLaterStatus(isWatchLater: Boolean) {
+    fun updateWatchLaterStatus(isWatchLater: Boolean) {
         val id = _selectedMovieDetail.value!!.id
         viewModelScope.launch {
             repository.changeMovieWatchLaterStatus(id, isWatchLater)

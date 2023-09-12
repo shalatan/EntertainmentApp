@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class DatabaseRepository @Inject constructor(private val dao: MovieDAO) {
 
-    fun insertMovie(savedMovie: SavedMovie) {
+    suspend fun insertMovie(savedMovie: SavedMovie) {
         dao.insert(savedMovie)
     }
 
@@ -28,10 +28,6 @@ class DatabaseRepository @Inject constructor(private val dao: MovieDAO) {
         dao.updateMovieRecommendationWeight(movieId, rating)
     }
 
-    suspend fun getAllRatedMoviesList(): List<SavedMovie> {
-        return dao.getAllRatedMoviesList()
-    }
-
     fun getAllRatedMovies() = flow {
         emit(dao.getAllRatedMovies())
     }
@@ -44,11 +40,11 @@ class DatabaseRepository @Inject constructor(private val dao: MovieDAO) {
         emit(dao.getAllRecommendedMovies())
     }
 
-    fun changeMovieWatchLaterStatus(movieId: Int, isWatchLater: Boolean) {
+    suspend fun changeMovieWatchLaterStatus(movieId: Int, isWatchLater: Boolean) {
         dao.changeWatchLaterStatus(movieId, isWatchLater)
     }
 
-    fun changeMovieRatedStatus(movieId: Int, isRated: Boolean, rating: Float) {
+    suspend fun changeMovieRatedStatus(movieId: Int, isRated: Boolean, rating: Float) {
         dao.changeRatedStatus(movieId, isRated, rating)
     }
 

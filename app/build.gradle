@@ -72,7 +72,7 @@ android {
 
 dependencies {
 
-    def room_version = "2.5.2"
+    def room_version = "2.6.0-beta01"
     def lifecycle_version = "2.6.1"
     def retrofit_version = "2.9.0"
     def coroutines_version = "1.7.1"

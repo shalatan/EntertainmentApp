@@ -10,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -33,46 +32,31 @@ class SavedContentViewModel @Inject constructor(private val repository: Database
      * update the global variable 'highest', so recommendation percentage can be calculated
      * inside bindingAdapter.kt
      */
-//    fun updateHighestRecommendationWeight() {
-//        MyApplication.highest = recommendationMovies.value?.get(0)?.recommendationWeight ?: 0
-//    }
+    fun updateHighestRecommendationWeight() {
+        val highest = _savedMoviesFlow.value[0].recommendationWeight
+        Timber.d("$LOG currentHighestRecWeight: $highest")
+        MyApplication.highest = highest
+    }
 
     fun fetchWatchLaterMovies(
         fromWatchLater: Boolean = false,
         fromWatched: Boolean = false,
         fromRecommendation: Boolean = false
     ) {
-        viewModelScope.launch {
-            if (fromWatched) {
+        val a = when (true) {
+            fromWatchLater -> repository.getAllWatchLaterMovies()
+            fromWatched -> repository.getAllRatedMovies()
+            fromRecommendation -> repository.getAllRecommendedMovies()
+            else -> {
                 repository.getAllRatedMovies()
-                    .flowOn(Dispatchers.IO)
-                    .catch {
-                        Timber.d("$LOG exception: $it")
-                    }
-                    .collect {
-                        _savedMoviesFlow.value = it
-                        Timber.d("$LOG ratedMovies: ${it.size}")
-                    }
-            } else if (fromWatchLater) {
-                repository.getAllWatchLaterMovies()
-                    .flowOn(Dispatchers.IO)
-                    .catch {
-                        Timber.d("$LOG exception: $it")
-                    }
-                    .collect {
-                        _savedMoviesFlow.value = it
-                        Timber.d("$LOG watchLaterMovies: ${it.size}")
-                    }
-            } else if (fromRecommendation) {
-                repository.getAllRecommendedMovies()
-                    .flowOn(Dispatchers.IO)
-                    .catch {
-                        Timber.d("$LOG exception: $it")
-                    }
-                    .collect {
-                        _savedMoviesFlow.value = it
-                        Timber.d("$LOG recommendedMovies: ${it.size}")
-                    }
+            }
+        }
+        viewModelScope.launch {
+            a.flowOn(Dispatchers.IO).catch {
+                Timber.d("$LOG exception: $it")
+            }.collect {
+                _savedMoviesFlow.value = it
+                Timber.d("$LOG ratedMovies: ${it.size}")
             }
         }
     }

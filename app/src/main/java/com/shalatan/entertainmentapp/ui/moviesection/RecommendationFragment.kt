@@ -68,7 +68,7 @@ class RecommendationFragment : Fragment() {
                     savedContentAdapter.submitList(it)
                     recyclerView.visibility = View.VISIBLE
                     binding.savedContentText.visibility = View.GONE
-//                    viewModel.updateHighestRecommendationWeight()
+                    viewModel.updateHighestRecommendationWeight()
                 }
             }
         }
@@ -79,7 +79,7 @@ class RecommendationFragment : Fragment() {
                 .setMessage(resources.getString(R.string.fragment_rec_dialog_content))
                 .setNeutralButton(resources.getString(R.string.fragment_rec_dialog_refresh_button)) { dialog, which ->
                     //TODO later
-//                    mainViewModel.refreshRecommendations()
+                    mainViewModel.refreshRecommendations()
                 }
                 .setPositiveButton(resources.getString(R.string.fragment_rec_dialog_positive_button)) { dialog, which ->
                     dialog.cancel()

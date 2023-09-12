@@ -66,7 +66,7 @@ class DetailFragment : Fragment() {
         movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie
         Timber.d("$LOG POSTER ${movie.posterPath}")
         viewModel.fetchMovieData(movie)
-//        viewModel.isMovieSavedInWatchList(movie.id)
+        viewModel.isMovieSavedInWatchList(movie.id)
     }
 
     override fun onCreateView(
@@ -170,6 +170,7 @@ class DetailFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.recommendedMoviesFlow.collect {
+                recommendedMovies = it
                 similarMoviesAdapter.submitList(it)
             }
         }
@@ -181,8 +182,8 @@ class DetailFragment : Fragment() {
                 }
                 markMovieAsWatchLaterFalse()
             } else {
-                viewModel.addMovieToWatchList(isRated = false, isWatchLater = true)
-                lifecycleScope.launch(Dispatchers.IO) {
+                lifecycleScope.launch(Dispatchers.Main) {
+                    viewModel.addMovieToWatchList(isRated = false, isWatchLater = true)
                     viewModel.updateWatchLaterStatus(!isWatchLater)
                 }
                 markMovieAsWatchLaterTrue()
@@ -228,7 +229,7 @@ class DetailFragment : Fragment() {
                     viewModel.addMovieToWatchList(isWatchLater = false, isRated = true)
                 }
                 viewModel.updateRatedStatus(isRated = true, rating = rating)
-//                mainViewModel.recommendMovie(movie.id, recommendedMovies, rating)
+                mainViewModel.recommendMovie(movie.id, recommendedMovies, rating)
                 markMovieAsRatedTrue()
                 dialog.dismiss()
             }
