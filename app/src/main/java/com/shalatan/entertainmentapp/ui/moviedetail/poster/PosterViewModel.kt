@@ -11,24 +11,22 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.shalatan.entertainmentapp.utils.Constants
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
-class PosterViewModel(val app: Application, private val posterPath: String) : AndroidViewModel(app) {
+class PosterViewModel(val app: Application, private val posterPath: String) :
+    AndroidViewModel(app) {
 
     private val _posterURL = MutableLiveData<String>()
     val posterURL: LiveData<String>
         get() = _posterURL
 
-    private var _posterSetAsWallpaperSnackbarEvent = MutableLiveData<Boolean>()
-    private var _posterSavedSnackbarEvent = MutableLiveData<Boolean>()
+    private var _posterSetAsWallpaperSnackbarEvent = MutableStateFlow<Boolean>(value = false)
 
-    val posterSetAsWallpaperSnackbarEvent: LiveData<Boolean>
-        get() = _posterSetAsWallpaperSnackbarEvent
-    val posterSavedSnackbarEvent: LiveData<Boolean>
-        get() = _posterSavedSnackbarEvent
+    val posterSetAsWallpaperSnackbarEvent: StateFlow<Boolean> = _posterSetAsWallpaperSnackbarEvent
 
     fun doneShowingSnackbar() {
         _posterSetAsWallpaperSnackbarEvent.value = false
-        _posterSavedSnackbarEvent.value = false
     }
 
 
@@ -41,13 +39,9 @@ class PosterViewModel(val app: Application, private val posterPath: String) : An
      */
     fun setImageAsWallpaper(poster: String?) {
         val fullUrl = Constants.IMG_BASE_URL_O + poster
-        Glide.with(app)
-            .asBitmap()
-            .load(fullUrl)
-            .into(object : CustomTarget<Bitmap>() {
+        Glide.with(app).asBitmap().load(fullUrl).into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(
-                    resource: Bitmap,
-                    transition: Transition<in Bitmap>?
+                    resource: Bitmap, transition: Transition<in Bitmap>?
                 ) {
                     WallpaperManager.getInstance(app).setBitmap(resource)
                     _posterSetAsWallpaperSnackbarEvent.value = true

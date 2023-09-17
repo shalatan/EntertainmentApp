@@ -5,10 +5,12 @@ import android.view.*
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentPosterBinding
 import com.shalatan.entertainmentapp.databinding.FragmentSearchBinding
+import kotlinx.coroutines.launch
 
 class PosterFragment : Fragment() {
 
@@ -38,16 +40,19 @@ class PosterFragment : Fragment() {
         }
 
         //show snackbar when wallpaper is set successfully
-        posterViewModel.posterSetAsWallpaperSnackbarEvent.observe(viewLifecycleOwner) {
-            if (it == true) {
-                Snackbar.make(
-                    requireActivity().findViewById(android.R.id.content),
-                    "ENJOY YOUR NEW WALLPAPER ;)",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                posterViewModel.doneShowingSnackbar()
+        viewLifecycleOwner.lifecycleScope.launch {
+            posterViewModel.posterSetAsWallpaperSnackbarEvent.collect {
+                if (it == true) {
+                    Snackbar.make(
+                        requireActivity().findViewById(android.R.id.content),
+                        "ENJOY YOUR NEW WALLPAPER ;)",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    posterViewModel.doneShowingSnackbar()
+                }
             }
         }
+
         return binding.root
     }
 

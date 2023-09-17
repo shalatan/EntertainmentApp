@@ -40,9 +40,8 @@ class OverviewViewModel @Inject constructor(private val repository: NetworkRepos
     private val _upcomingMoviesFlow = MutableStateFlow<List<Movie>>(value = emptyList())
     val upcomingMoviesFlow: StateFlow<List<Movie>> = _upcomingMoviesFlow
 
-    private val _navigateToSelectedMovie = MutableLiveData<Movie?>()
-    val navigateToSelectedMovie: LiveData<Movie?>
-        get() = _navigateToSelectedMovie
+    private val _navigateToSelectedMovie = MutableStateFlow<Movie?>(value = null)
+    val navigateToSelectedMovie: StateFlow<Movie?> = _navigateToSelectedMovie
 
     init {
         fetchMoviesUsingFlow()

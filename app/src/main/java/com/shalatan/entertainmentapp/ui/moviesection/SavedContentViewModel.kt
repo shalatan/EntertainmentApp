@@ -76,12 +76,15 @@ class SavedContentViewModel @Inject constructor(private val repository: Database
      * delete movie from saved directory
      */
     fun removeMovie(position: Int, fromWatchLater: Boolean = false, fromWatched: Boolean = false) {
+        Timber.d("$LOG removing movie")
         viewModelScope.launch {
             if (fromWatched) {
                 savedMoviesFlow.value[position].let {
+                    Timber.d("$LOG removing watched movie")
                     repository.changeMovieRatedStatus(it.Id, isRated = false, 0f)
                 }
             } else if (fromWatchLater) {
+                Timber.d("$LOG removing watchLater movie")
                 savedMoviesFlow.value[position].let {
                     repository.changeMovieWatchLaterStatus(it.Id, isWatchLater = false)
                 }

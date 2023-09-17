@@ -126,12 +126,15 @@ class OverviewFragment : Fragment() {
             }
         }
 
-        viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner, Observer {
-            if (null != it) {
-                this.findNavController().navigate(NavGraphDirections.actionGlobalDetailFragment(it))
-                viewModel.displayMovieDetailsComplete()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.navigateToSelectedMovie.collect {
+                if (null != it) {
+                    findNavController().navigate(NavGraphDirections.actionGlobalDetailFragment(it))
+                    viewModel.displayMovieDetailsComplete()
+                }
             }
-        })
+        }
+
         return binding.root
     }
 

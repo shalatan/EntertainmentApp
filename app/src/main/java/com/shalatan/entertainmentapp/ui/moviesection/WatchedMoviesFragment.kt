@@ -87,7 +87,7 @@ class WatchedMoviesFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.layoutPosition
-                viewModel.removeMovie(position)
+                viewModel.removeMovie(position, fromWatched = true)
             }
         }).attachToRecyclerView(recyclerView)
         return binding.root

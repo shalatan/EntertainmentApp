@@ -43,9 +43,6 @@ class RecommendationFragment : Fragment() {
     ): View {
         _binding = FragmentRecommendationBinding.inflate(inflater)
 
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-
         val recyclerView = binding.recyclerView
         val savedContentAdapter = SavedContentAdapter(SavedContentAdapter.OnClickListener {
             viewModel.displayMovieDetails(it)

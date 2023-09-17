@@ -66,7 +66,7 @@ class DetailFragment : Fragment() {
         movie = DetailFragmentArgs.fromBundle(requireArguments()).selectedMovie
         Timber.d("$LOG POSTER ${movie.posterPath}")
         viewModel.fetchMovieData(movie)
-        viewModel.isMovieSavedInWatchList(movie.id)
+//        viewModel.isMovieSavedInWatchList(movie.id)
     }
 
     override fun onCreateView(
