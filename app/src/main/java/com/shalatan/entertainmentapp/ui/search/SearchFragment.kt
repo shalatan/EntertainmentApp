@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.databinding.FragmentSearchBinding
+import com.shalatan.entertainmentapp.network.Response
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -32,8 +33,6 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchBinding.inflate(inflater)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
 
         searchEditText = binding.searchTextField
 
@@ -53,9 +52,11 @@ class SearchFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.searchedMoviesFlow.collect {
-                adapter.submitList(it)
-                binding.emptyImage.visibility = View.GONE
-                binding.recyclerView.visibility = View.VISIBLE
+                if (it is Response.Success) {
+                    adapter.submitList(it.data)
+                    binding.emptyImage.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                }
             }
         }
 

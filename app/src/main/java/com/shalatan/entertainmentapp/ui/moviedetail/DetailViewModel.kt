@@ -6,6 +6,7 @@ import com.shalatan.entertainmentapp.database.DatabaseRepository
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.*
 import com.shalatan.entertainmentapp.network.NetworkRepository
+import com.shalatan.entertainmentapp.network.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,10 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: DatabaseRepository,
-    private val networkRepository: NetworkRepository
-) :
-    ViewModel() {
+    private val repository: DatabaseRepository, private val networkRepository: NetworkRepository
+) : ViewModel() {
 
     private val LOG = MyApplication.LOG
 
@@ -29,11 +28,12 @@ class DetailViewModel @Inject constructor(
     val selectedMovieDetail: LiveData<Movie>
         get() = _selectedMovieDetail
 
-    private val _completeMovieDetailFlow = MutableStateFlow<CompleteMovieDetail?>(value = null)
-    val completeMovieDetailFlow: StateFlow<CompleteMovieDetail?> = _completeMovieDetailFlow
+    private val _completeMovieDetailFlow =
+        MutableStateFlow<Response<CompleteMovieDetail>>(value = Response.Loading)
+    val completeMovieDetailFlow: StateFlow<Response<CompleteMovieDetail>> = _completeMovieDetailFlow
 
-    private val _recommendedMoviesFlow = MutableStateFlow<List<Movie>>(emptyList())
-    val recommendedMoviesFlow: StateFlow<List<Movie>> = _recommendedMoviesFlow
+    private val _recommendedMoviesFlow = MutableStateFlow<Response<List<Movie>>>(Response.Loading)
+    val recommendedMoviesFlow: StateFlow<Response<List<Movie>>> = _recommendedMoviesFlow
 
     private val _isMovieExistInWatchedList = MutableLiveData<Boolean>()
     val isMovieExistInWatchedList: LiveData<Boolean>
@@ -49,26 +49,18 @@ class DetailViewModel @Inject constructor(
     }
 
     private fun fetchCompleteMovieData(movie: Movie) {
-        Timber.d("$LOG completeMovieDetail Id: ${movie.id}")
         viewModelScope.launch {
-            networkRepository.getMovieCompleteData(movieId = movie.id)
-                .flowOn(Dispatchers.IO)
+            networkRepository.getMovieCompleteData(movieId = movie.id).flowOn(Dispatchers.IO)
                 .catch {
-                    Timber.d("$LOG exception: $it")
+                    Timber.e("$LOG exception: $it")
+                }.collect {
+                    _completeMovieDetailFlow.value = Response.Success(it)
                 }
-                .collect {
-                    _completeMovieDetailFlow.value = it
-                    Timber.d("$LOG completeMovieDetail: $it")
-                }
-            networkRepository.getSimilarMovies(movieId = movie.id)
-                .flowOn(Dispatchers.IO)
-                .catch {
-                    Timber.d("$LOG exception: $it")
-                }
-                .collect {
-                    _recommendedMoviesFlow.value = it.movies
-                    Timber.d("$LOG similarMovies: ${it.movies.size}")
-                }
+            networkRepository.getSimilarMovies(movieId = movie.id).flowOn(Dispatchers.IO).catch {
+                Timber.e("$LOG exception: $it")
+            }.collect {
+                _recommendedMoviesFlow.value = Response.Success(it.movies)
+            }
         }
     }
 
@@ -81,18 +73,17 @@ class DetailViewModel @Inject constructor(
             val poster = _selectedMovieDetail.value?.posterPath
             val name = _selectedMovieDetail.value?.original_title
             val overview = _selectedMovieDetail.value?.overview
-            val savedMovie =
-                SavedMovie(
-                    Id = id,
-                    movieTitle = name,
-                    moviePoster = poster,
-                    movieOverview = overview,
-                    isRated = isRated,
-                    isWatchLater = isWatchLater,
-                    isRecommendationConsidered = false,
-                    recommendationWeight = 0,
-                    rating = 0f
-                )
+            val savedMovie = SavedMovie(
+                Id = id,
+                movieTitle = name,
+                moviePoster = poster,
+                movieOverview = overview,
+                isRated = isRated,
+                isWatchLater = isWatchLater,
+                isRecommendationConsidered = false,
+                recommendationWeight = 0,
+                rating = 0f
+            )
             repository.insertMovie(savedMovie)
         }
     }

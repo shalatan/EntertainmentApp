@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.shalatan.entertainmentapp.MyApplication
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.network.NetworkRepository
+import com.shalatan.entertainmentapp.network.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,8 +24,9 @@ class SearchViewModel @Inject constructor(private val repository: NetworkReposit
         const val LOG = MyApplication.LOG
     }
 
-    private val _searchedMoviesFlow = MutableStateFlow<List<Movie>>(emptyList())
-    val searchedMoviesFlow: StateFlow<List<Movie>> = _searchedMoviesFlow
+    private val _searchedMoviesFlow =
+        MutableStateFlow<Response<List<Movie>>>(value = Response.Loading)
+    val searchedMoviesFlow: StateFlow<Response<List<Movie>>> = _searchedMoviesFlow
 
     fun makeQuery(query: String) {
         viewModelScope.launch {
@@ -34,7 +36,7 @@ class SearchViewModel @Inject constructor(private val repository: NetworkReposit
                     Timber.d("$LOG exception: $it")
                 }
                 .collect {
-                    _searchedMoviesFlow.value = it.movies
+                    _searchedMoviesFlow.value = Response.Success(it.movies)
                 }
         }
     }

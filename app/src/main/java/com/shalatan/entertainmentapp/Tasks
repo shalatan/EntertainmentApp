@@ -1,0 +1,8 @@
+- ✅ Better Rating View
+- ✅ Include Movie Trailer Section
+- ✅ Refresh Recommendation Weight Option to 0 and re-calculate
+- ✅ Posters Not Loading Until Scrolled
+
+- ✅ Migrate LiveData to Flow
+- ✅ Use generic Response class for network calls
+TODO -> Remove Data Binding existence

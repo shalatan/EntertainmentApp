@@ -24,6 +24,7 @@ import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 import com.shalatan.entertainmentapp.model.Movie
+import com.shalatan.entertainmentapp.network.Response
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -146,23 +147,23 @@ class DetailFragment : Fragment() {
         binding.movieSimilarRecyclerView.adapter = similarMoviesAdapter
 
         lifecycleScope.launch {
-            viewModel.completeMovieDetailFlow.collect { movieDetail ->
-                Timber.d("$LOG completeMovieDetail $movieDetail")
-                if (movieDetail != null) {
+            viewModel.completeMovieDetailFlow.collect {
+                if (it is Response.Success) {
+                    val movieDetail = it.data
                     //genre
-                    genreAdapter.submitList(movieDetail.genres)
+                    genreAdapter.submitList(movieDetail?.genres)
                     //overview
-                    val movieOverview = movieDetail.overview
+                    val movieOverview = movieDetail?.overview
                     binding.movieOverview.text = movieOverview
                     //cast
-                    movieCastAdapter.submitList(movieDetail.credits?.cast?.sortedByDescending {
+                    movieCastAdapter.submitList(movieDetail?.credits?.cast?.sortedByDescending {
                         it.popularity
                     })
                     //posters
-                    postersAdapter.submitList(movieDetail.images?.backdrops)
+                    postersAdapter.submitList(movieDetail?.images?.backdrops)
                     moviePosterViewPager.currentItem = 1
                     //videos
-                    val videos = movieDetail.videos?.results
+                    val videos = movieDetail?.videos?.results
                     videoAdapter.submitList(videos)
                 }
             }
@@ -170,8 +171,13 @@ class DetailFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.recommendedMoviesFlow.collect {
-                recommendedMovies = it
-                similarMoviesAdapter.submitList(it)
+                if (it is Response.Success) {
+                    val similarMovies = it.data
+                    if (similarMovies != null) {
+                        recommendedMovies = similarMovies
+                        similarMoviesAdapter.submitList(similarMovies)
+                    }
+                }
             }
         }
 

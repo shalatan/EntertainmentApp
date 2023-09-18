@@ -4,18 +4,13 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
+import com.shalatan.entertainmentapp.network.Response
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class OverviewFragment : Fragment() {
@@ -58,13 +53,12 @@ class OverviewFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.nowPlayingMoviesFlow.collect {
-                if (it.isEmpty()) {
-
-                } else {
-                    nowPlayingMovieAdapter.submitList(it)
-                    Timber.e("$LOG nowPlayingMovies: ${it.size}")
-                    binding.nowPlayingRecyclerView.visibility = View.VISIBLE
-                    binding.nowPlayingProgressBar.visibility = View.GONE
+                if (it is Response.Success) {
+                    if (it.data!!.isNotEmpty()) {
+                        nowPlayingMovieAdapter.submitList(it.data)
+                        binding.nowPlayingRecyclerView.visibility = View.VISIBLE
+                        binding.nowPlayingProgressBar.visibility = View.GONE
+                    }
                 }
             }
         }
@@ -77,13 +71,12 @@ class OverviewFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.popularMoviesFlow.collect {
-                if (it.isEmpty()) {
-
-                } else {
-                    popularMovieAdapter.submitList(it)
-                    Timber.e("$LOG popularMovies: ${it.size}")
-                    binding.popularRecyclerView.visibility = View.VISIBLE
-                    binding.popularProgressBar.visibility = View.GONE
+                if (it is Response.Success) {
+                    if (it.data!!.isNotEmpty()) {
+                        popularMovieAdapter.submitList(it.data)
+                        binding.popularRecyclerView.visibility = View.VISIBLE
+                        binding.popularProgressBar.visibility = View.GONE
+                    }
                 }
             }
         }
@@ -96,13 +89,12 @@ class OverviewFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.upcomingMoviesFlow.collect {
-                if (it.isEmpty()) {
-
-                } else {
-                    upcomingMovieAdapter.submitList(it)
-                    Timber.e("$LOG upcomingMovies: ${it.size}")
-                    binding.upcomingRecyclerView.visibility = View.VISIBLE
-                    binding.upcomingProgressBar.visibility = View.GONE
+                if (it is Response.Success) {
+                    if (it.data!!.isNotEmpty()) {
+                        upcomingMovieAdapter.submitList(it.data)
+                        binding.upcomingRecyclerView.visibility = View.VISIBLE
+                        binding.upcomingProgressBar.visibility = View.GONE
+                    }
                 }
             }
         }
@@ -115,13 +107,12 @@ class OverviewFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.topRatedMoviesFlow.collect {
-                if (it.isEmpty()) {
-
-                } else {
-                    topRatedMovieAdapter.submitList(it)
-                    Timber.e("$LOG topRatedMovies: ${it.size}")
-                    binding.topRatedRecyclerView.visibility = View.VISIBLE
-                    binding.topRatedProgressBar.visibility = View.GONE
+                if (it is Response.Success) {
+                    if (it.data!!.isNotEmpty()) {
+                        topRatedMovieAdapter.submitList(it.data)
+                        binding.topRatedRecyclerView.visibility = View.VISIBLE
+                        binding.topRatedProgressBar.visibility = View.GONE
+                    }
                 }
             }
         }
