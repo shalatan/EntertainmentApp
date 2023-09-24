@@ -29,8 +29,6 @@ class OverviewFragment : Fragment() {
     ): View {
 
         _binding = FragmentOverviewBinding.inflate(inflater)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
 
         binding.searchFab.setOnClickListener {
             findNavController().navigate(NavGraphDirections.actionGlobalSearchFragment())

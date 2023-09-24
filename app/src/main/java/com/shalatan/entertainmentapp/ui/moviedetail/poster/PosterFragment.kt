@@ -37,7 +37,6 @@ class PosterFragment : Fragment() {
         val posterViewModelFactory = PosterViewModelFactory(posterURL, application)
         posterViewModel =
             ViewModelProvider(this, posterViewModelFactory)[PosterViewModel::class.java]
-        binding.posterViewModel = posterViewModel
 
         binding.posterMenu.setOnClickListener {
             showPosterPopUp(it, posterURL)

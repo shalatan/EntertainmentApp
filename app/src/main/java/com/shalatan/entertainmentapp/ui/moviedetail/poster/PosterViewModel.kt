@@ -22,13 +22,11 @@ class PosterViewModel(val app: Application, private val posterPath: String) :
         get() = _posterURL
 
     private var _posterSetAsWallpaperSnackbarEvent = MutableStateFlow<Boolean>(value = false)
-
     val posterSetAsWallpaperSnackbarEvent: StateFlow<Boolean> = _posterSetAsWallpaperSnackbarEvent
 
     fun doneShowingSnackbar() {
         _posterSetAsWallpaperSnackbarEvent.value = false
     }
-
 
     init {
         _posterURL.value = posterPath
