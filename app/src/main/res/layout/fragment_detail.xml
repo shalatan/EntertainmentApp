@@ -22,7 +22,6 @@
             android:clickable="false"
             android:contentDescription="@string/cd_movie_poster"
             android:scaleType="centerCrop"
-            app:imageUrl="@{viewModel.selectedMovieDetail.posterPath}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

@@ -26,6 +26,7 @@ import com.shalatan.entertainmentapp.databinding.FragmentDetailBinding
 import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.network.Response
 import com.shalatan.entertainmentapp.ui.overview.MovieAdapter
+import com.shalatan.entertainmentapp.utils.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -85,6 +86,8 @@ class DetailFragment : Fragment() {
         movieWatchLaterIcon = binding.watchLaterLayoutImage
         movieOverviewReadMoreTextView = binding.rawSynopsisReadMore
         movieOverviewTextView = binding.movieOverview
+
+        binding.moviePoster.loadImage(movie.posterPath)
 
         materialAlertDialogBuilder = MaterialAlertDialogBuilder(requireContext())
 

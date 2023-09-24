@@ -24,7 +24,6 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/cd_movie_poster"
             android:scaleType="center"
-            app:imageUrl="@{backdrop.file_path}"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyTheme.Image"
             tools:src="@tools:sample/backgrounds/scenic" />
     </androidx.constraintlayout.widget.ConstraintLayout>

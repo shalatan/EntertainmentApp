@@ -31,7 +31,6 @@
                 android:layout_marginStart="4dp"
                 android:contentDescription="@string/cd_movie_poster"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{savedMovie.moviePoster}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -64,9 +63,9 @@
 
             <com.daimajia.numberprogressbar.NumberProgressBar
                 android:layout_width="80dp"
+                android:id="@+id/saved_movie_progress_bar"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                app:setUpRec="@{savedMovie}"
                 android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

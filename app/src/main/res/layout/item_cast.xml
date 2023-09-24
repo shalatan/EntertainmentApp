@@ -32,7 +32,6 @@
                 android:contentDescription="@string/cd_movie_cast_profile"
                 android:padding="4dp"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{cast.profile_path}"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView

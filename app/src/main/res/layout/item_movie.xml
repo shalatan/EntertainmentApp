@@ -30,7 +30,6 @@
                 android:layout_height="180dp"
                 android:contentDescription="@string/cd_movie_poster"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{movie.posterPath}"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
             <TextView

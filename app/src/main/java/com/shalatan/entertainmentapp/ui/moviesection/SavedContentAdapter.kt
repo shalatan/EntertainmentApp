@@ -2,12 +2,21 @@ package com.shalatan.entertainmentapp.ui.moviesection
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.daimajia.numberprogressbar.NumberProgressBar
+import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.databinding.FavouriteItemBinding
 import com.shalatan.entertainmentapp.model.Movie
+import com.shalatan.entertainmentapp.utils.Constants
+import com.shalatan.entertainmentapp.utils.loadImage
+import com.shalatan.entertainmentapp.utils.loadMovieRating
 
 class SavedContentAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<SavedMovie, SavedContentAdapter.SavedContentViewHolder>(DiffCallBack) {
@@ -38,6 +47,13 @@ class SavedContentAdapter(private val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: SavedContentViewHolder, position: Int) {
         val savedMovie = getItem(position)
+        holder.itemView.findViewById<ImageView>(R.id.saved_movie_poster)
+            .loadImage(savedMovie.moviePoster)
+
+        holder.itemView.findViewById<NumberProgressBar>(R.id.saved_movie_progress_bar)
+            .loadMovieRating(savedMovie)
+        
+        //onClick
         holder.itemView.setOnClickListener {
             val movie = Movie(
                 id = savedMovie.Id,

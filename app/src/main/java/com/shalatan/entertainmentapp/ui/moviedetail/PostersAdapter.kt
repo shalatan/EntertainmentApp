@@ -2,11 +2,14 @@ package com.shalatan.entertainmentapp.ui.moviedetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.databinding.ItemViewPagerPosterBinding
 import com.shalatan.entertainmentapp.model.Backdrop
+import com.shalatan.entertainmentapp.utils.loadImage
 
 class PostersAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Backdrop, PostersAdapter.PosterViewHolder>(DiffCallBack) {
@@ -40,6 +43,10 @@ class PostersAdapter(private val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
         val backdrop = getItem(position)
+
+        holder.itemView.findViewById<ImageView>(R.id.view_pager_image)
+            .loadImage(backdrop.file_path)
+
         holder.itemView.setOnClickListener {
             (onClickListener.onCLick(backdrop.file_path))
         }
