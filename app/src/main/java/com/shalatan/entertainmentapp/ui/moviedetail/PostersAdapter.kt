@@ -17,7 +17,7 @@ class PostersAdapter(private val onClickListener: OnClickListener) :
     class PosterViewHolder(private val binding: ItemViewPagerPosterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(backdrop: Backdrop) {
-            binding.backdrop = backdrop
+            binding.viewPagerImage.loadImage(backdrop.file_path)
         }
     }
 
@@ -43,10 +43,6 @@ class PostersAdapter(private val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
         val backdrop = getItem(position)
-
-        holder.itemView.findViewById<ImageView>(R.id.view_pager_image)
-            .loadImage(backdrop.file_path)
-
         holder.itemView.setOnClickListener {
             (onClickListener.onCLick(backdrop.file_path))
         }

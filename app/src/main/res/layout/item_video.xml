@@ -1,34 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
 
-    <data>
+    style="@style/Widget.Material3.CardView.Outlined"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:elevation="2dp"
+    app:cardCornerRadius="14dp"
+    app:strokeWidth="2dp">
 
-        <variable
-            name="video"
-            type="com.shalatan.entertainmentapp.model.Result" />
-    </data>
-
-    <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.Material3.CardView.Outlined"
+    <TextView
+        android:id="@+id/item_video_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:elevation="2dp"
-        app:cardCornerRadius="14dp"
-        app:strokeWidth="2dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="2dp"
-            android:gravity="center"
-            android:text="@{video.type}"
-            android:textSize="18sp"
-            tools:text="Action Drama" />
-    </com.google.android.material.card.MaterialCardView>
-</layout>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="2dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        tools:text="Action Drama" />
+</com.google.android.material.card.MaterialCardView>

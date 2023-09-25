@@ -36,5 +36,5 @@
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/favourite_item" />
+        tools:listitem="@layout/item_saved_movie" />
 </LinearLayout>

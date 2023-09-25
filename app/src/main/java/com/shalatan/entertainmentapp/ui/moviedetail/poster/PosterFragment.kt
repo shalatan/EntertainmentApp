@@ -8,9 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.shalatan.entertainmentapp.R
-import com.shalatan.entertainmentapp.bindPoster
 import com.shalatan.entertainmentapp.databinding.FragmentPosterBinding
-import com.shalatan.entertainmentapp.databinding.FragmentSearchBinding
 import com.shalatan.entertainmentapp.utils.loadImage
 import kotlinx.coroutines.launch
 
@@ -27,9 +25,7 @@ class PosterFragment : Fragment() {
     ): View {
 
         val application = requireNotNull(activity).application
-
         _binding = FragmentPosterBinding.inflate(inflater)
-
         val posterURL = PosterFragmentArgs.fromBundle(requireArguments()).posterURL
 
         binding.moviePoster.loadImage(posterURL)
@@ -45,7 +41,7 @@ class PosterFragment : Fragment() {
         //show snackbar when wallpaper is set successfully
         viewLifecycleOwner.lifecycleScope.launch {
             posterViewModel.posterSetAsWallpaperSnackbarEvent.collect {
-                if (it == true) {
+                if (it) {
                     Snackbar.make(
                         requireActivity().findViewById(android.R.id.content),
                         "ENJOY YOUR NEW WALLPAPER ;)",

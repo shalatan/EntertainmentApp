@@ -14,7 +14,7 @@ class VideoAdapter(private val onClickListener: OnClickListener) :
     class VideoViewHolder(private val binding: ItemVideoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(result: Result) {
-            binding.video = result
+            binding.itemVideoTitle.text = result.name
         }
     }
 

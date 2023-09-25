@@ -27,7 +27,7 @@ fun ImageView.loadImage(imgUrl: String?) {
     }
 }
 
-fun NumberProgressBar.loadMovieRating(savedMovie: SavedMovie) {
+fun NumberProgressBar.loadMovieRecommendation(savedMovie: SavedMovie) {
     if (savedMovie.isRated) {
         this.visibility = View.GONE
     } else {
