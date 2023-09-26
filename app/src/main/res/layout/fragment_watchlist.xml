@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.compose.ui.platform.ComposeView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/compose_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+    <!--    android:id="@+id/raw_recommended_text"-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_gravity="center"-->
+    <!--    android:layout_marginTop="24dp"-->
+    <!--    android:gravity="center_horizontal"-->
+    <!--    android:text="@string/fragment_watched_title"-->
+    <!--    android:textSize="@dimen/high_emphasis_text"-->
+    <!--    android:textStyle="bold" />-->
+
+    <!--<TextView-->
+    <!--    android:id="@+id/saved_content_text"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:layout_margin="16dp"-->
+    <!--    android:gravity="center"-->
+    <!--    android:text="@string/fragment_watched_content"-->
+    <!--    android:textSize="@dimen/mid_emphasis_text"-->
+    <!--    android:textStyle="italic"-->
+    <!--    android:visibility="gone" />-->
+
+    <!--<androidx.recyclerview.widget.RecyclerView-->
+    <!--    android:id="@+id/saved_content_recycler_view"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:layout_margin="16dp"-->
+    <!--    android:layout_marginTop="16dp"-->
+    <!--    android:orientation="vertical"-->
+    <!--    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+    <!--    tools:listitem="@layout/item_saved_movie" />-->
+    <!--</LinearLayout>-->

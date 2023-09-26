@@ -1,10 +1,11 @@
-package com.shalatan.entertainmentapp.ui.moviesection
+package com.shalatan.entertainmentapp.ui.watchlist
 
 import androidx.lifecycle.*
 import com.shalatan.entertainmentapp.MyApplication
 import com.shalatan.entertainmentapp.database.DatabaseRepository
 import com.shalatan.entertainmentapp.database.SavedMovie
 import com.shalatan.entertainmentapp.model.Movie
+import com.shalatan.entertainmentapp.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,13 +17,16 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class SavedContentViewModel @Inject constructor(private val repository: DatabaseRepository) :
+class WatchlistViewModel @Inject constructor(private val repository: DatabaseRepository) :
     ViewModel() {
 
     private val LOG = MyApplication.LOG
 
     private val _savedMoviesFlow = MutableStateFlow<List<SavedMovie>>(emptyList())
     val savedMoviesFlow: StateFlow<List<SavedMovie>> = _savedMoviesFlow
+
+    private val _destinationHeading = MutableStateFlow("")
+    val destinationHeading: StateFlow<String> = _destinationHeading
 
     private val _navigateToSelectedMovie = MutableLiveData<Movie?>()
     val navigateToSelectedMovie: LiveData<Movie?>
@@ -39,14 +43,24 @@ class SavedContentViewModel @Inject constructor(private val repository: Database
     }
 
     fun fetchWatchLaterMovies(
-        fromWatchLater: Boolean = false,
-        fromWatched: Boolean = false,
-        fromRecommendation: Boolean = false
+        destination: String
     ) {
-        val a = when (true) {
-            fromWatchLater -> repository.getAllWatchLaterMovies()
-            fromWatched -> repository.getAllRatedMovies()
-            fromRecommendation -> repository.getAllRecommendedMovies()
+        val a = when (destination) {
+            Constants.DESTINATION_WATCH_LATER -> {
+                _destinationHeading.value = "Watch Later Movies"
+                repository.getAllWatchLaterMovies()
+            }
+
+            Constants.DESTINATION_WATCHED -> {
+                _destinationHeading.value = "Watched Movies"
+                repository.getAllRatedMovies()
+            }
+
+            Constants.DESTINATION_RECOMMENDATION -> {
+                _destinationHeading.value = "Recommended Movies"
+                repository.getAllRecommendedMovies()
+            }
+
             else -> {
                 repository.getAllRatedMovies()
             }

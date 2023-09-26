@@ -12,6 +12,10 @@ import com.shalatan.entertainmentapp.MyApplication
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.SavedMovie
 
+fun getFullUrl(imgUrl: String?): String {
+    return Constants.IMG_BASE_URL + imgUrl
+}
+
 fun ImageView.loadImage(imgUrl: String?) {
     val fullUrl = Constants.IMG_BASE_URL + imgUrl
     fullUrl.let {

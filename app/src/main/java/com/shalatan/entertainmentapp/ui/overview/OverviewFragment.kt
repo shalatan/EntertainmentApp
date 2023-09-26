@@ -9,13 +9,14 @@ import androidx.navigation.fragment.findNavController
 import com.shalatan.entertainmentapp.NavGraphDirections
 import com.shalatan.entertainmentapp.databinding.FragmentOverviewBinding
 import com.shalatan.entertainmentapp.network.Response
+import com.shalatan.entertainmentapp.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class OverviewFragment : Fragment() {
 
-    val viewModel: OverviewViewModel by viewModels()
+    private val viewModel: OverviewViewModel by viewModels()
 
     companion object {
         const val LOG = "app_log"
@@ -34,13 +35,25 @@ class OverviewFragment : Fragment() {
             findNavController().navigate(NavGraphDirections.actionGlobalSearchFragment())
         }
         binding.watchedMoviesCard.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchedMoviesFragment())
+            findNavController().navigate(
+                OverviewFragmentDirections.actionOverviewFragmentToWatchlistFragment(
+                    Constants.DESTINATION_WATCHED
+                )
+            )
         }
         binding.watchLaterMoviesCard.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToWatchLaterMoviesFragment())
+            findNavController().navigate(
+                OverviewFragmentDirections.actionOverviewFragmentToWatchlistFragment(
+                    Constants.DESTINATION_WATCH_LATER
+                )
+            )
         }
         binding.recommendedMoviesCard.setOnClickListener {
-            findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToRecommendationFragment())
+            findNavController().navigate(
+                OverviewFragmentDirections.actionOverviewFragmentToWatchlistFragment(
+                    Constants.DESTINATION_RECOMMENDATION
+                )
+            )
         }
 
         val nowPlayingMovieAdapter = MovieAdapter(MovieAdapter.OnClickListener {

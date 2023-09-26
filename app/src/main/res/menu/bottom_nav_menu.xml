@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_watched_false"
         android:title="Home" />
     <item
-        android:id="@+id/watchedMoviesFragment"
+        android:id="@+id/watchlistFragment"
         android:enabled="true"
         android:icon="@drawable/ic_watched_false"
         android:title="WatchLists" />

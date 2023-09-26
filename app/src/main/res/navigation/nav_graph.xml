@@ -10,25 +10,18 @@
         android:name="com.shalatan.entertainmentapp.ui.overview.OverviewFragment"
         tools:layout="@layout/fragment_overview">
         <action
-            android:id="@+id/action_overviewFragment_to_recommendationFragment"
-            app:destination="@id/recommendationFragment" />
-        <action
-            android:id="@+id/action_overviewFragment_to_watchLaterMoviesFragment"
-            app:destination="@id/watchLaterMoviesFragment" />
-        <action
-            android:id="@+id/action_overviewFragment_to_watchedMoviesFragment"
-            app:destination="@id/watchedMoviesFragment" />
+            android:id="@+id/action_overviewFragment_to_watchlistFragment"
+            app:destination="@id/watchlistFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/watchedMoviesFragment"
-        android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchedMoviesFragment"
-        tools:layout="@layout/fragment_watched_movies" />
-
-    <fragment
-        android:id="@+id/watchLaterMoviesFragment"
-        android:name="com.shalatan.entertainmentapp.ui.moviesection.WatchLaterMoviesFragment"
-        tools:layout="@layout/fragment_watch_later_movies" />
+        android:id="@+id/watchlistFragment"
+        android:name="com.shalatan.entertainmentapp.ui.watchlist.WatchlistFragment"
+        tools:layout="@layout/fragment_watchlist" >
+        <argument
+            android:name="destination"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/detailFragment"
@@ -40,9 +33,6 @@
         <action
             android:id="@+id/action_detailFragment_to_posterFragment"
             app:destination="@id/posterFragment" />
-        <action
-            android:id="@+id/action_detailFragment_to_videosFragment"
-            app:destination="@id/videosFragment" />
     </fragment>
 
     <fragment
@@ -58,20 +48,6 @@
         android:id="@+id/action_global_detailFragment"
         app:destination="@id/detailFragment" />
 
-    <fragment
-        android:id="@+id/videosFragment"
-        android:name="com.shalatan.entertainmentapp.ui.moviedetail.videos.VideosFragment"
-        android:label="VideosFragment"
-        tools:layout="@layout/fragment_videos">
-        <argument
-            android:name="selectedVideo"
-            app:argType="com.shalatan.entertainmentapp.model.Result" />
-    </fragment>
-    <fragment
-        android:id="@+id/recommendationFragment"
-        android:name="com.shalatan.entertainmentapp.ui.moviesection.RecommendationFragment"
-        android:label="RecommendationFragment"
-        tools:layout="@layout/fragment_recommendation" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.shalatan.entertainmentapp.ui.search.SearchFragment"
