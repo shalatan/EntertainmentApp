@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shalatan.entertainmentapp.databinding.FragmentWatchlistBinding
 import com.shalatan.entertainmentapp.ui.ui.theme.EntertainmentAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +54,27 @@ class WatchlistFragment : Fragment() {
                 }
             }
         }
+
+        viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner) {
+            if(it!=null){
+                findNavController().navigate(WatchlistFragmentDirections.actionGlobalDetailFragment(it!!))
+            }
+        }
+
         return binding.root
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.displayMovieDetailsCompleted()
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun WatchlistFragmentPreview() {
+        EntertainmentAppTheme {
+            SavedMoviesScreen()
+        }
     }
 
     @Composable
@@ -90,19 +111,14 @@ class WatchlistFragment : Fragment() {
                 SavedItem(
                     destination = destination,
                     savedMovie = item,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    onClick = {
+                        watchlistViewModel.displayMovieDetails(it)
+                    }
                 )
             }
         }
 
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun GreetingPreview3() {
-        EntertainmentAppTheme {
-            SavedMoviesScreen()
-        }
     }
 
     override fun onDestroyView() {

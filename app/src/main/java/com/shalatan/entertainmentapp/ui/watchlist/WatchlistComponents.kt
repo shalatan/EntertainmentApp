@@ -1,5 +1,6 @@
 package com.shalatan.entertainmentapp.ui.watchlist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.shalatan.entertainmentapp.R
 import com.shalatan.entertainmentapp.database.SavedMovie
+import com.shalatan.entertainmentapp.model.Movie
 import com.shalatan.entertainmentapp.utils.Constants
 import com.shalatan.entertainmentapp.utils.getFullUrl
 
@@ -31,16 +33,37 @@ import com.shalatan.entertainmentapp.utils.getFullUrl
 @Composable
 fun SavedItemPreview() {
     SavedItem(
-        Constants.DESTINATION_WATCHED,
-        savedMovie = SavedMovie(1, "abc", "/lyQBXzOQSuE59IsHyhrp0qIiPAz.jpg", "abc")
+        destination = Constants.DESTINATION_WATCHED,
+        savedMovie = SavedMovie(
+            1,
+            "abc",
+            "/lyQBXzOQSuE59IsHyhrp0qIiPAz.jpg",
+            "abc",
+        ),
+        onClick = {
+
+        }
     )
 }
 
 @Composable
-fun SavedItem(destination: String, savedMovie: SavedMovie, modifier: Modifier = Modifier) {
+fun SavedItem(
+    destination: String,
+    savedMovie: SavedMovie,
+    modifier: Modifier = Modifier,
+    onClick: (Movie) -> Unit
+) {
     Card(
         shape = CardDefaults.outlinedShape,
-        modifier = modifier
+        modifier = modifier.clickable {
+            onClick(
+                Movie(
+                    title = savedMovie.movieTitle,
+                    id = savedMovie.Id,
+                    posterPath = savedMovie.moviePoster
+                )
+            )
+        }
     ) {
         Row(
             modifier = Modifier
