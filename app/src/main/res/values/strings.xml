@@ -28,5 +28,6 @@
     <string name="fragment_watched_title">MY WATCHED MOVIES</string>
     <string name="fragment_watched_content">YOUR RATED MOVIES WILL BE SHOWN HERE !! \n\n SWIPE MOVIE LEFT TO REMOVE THEM FROM LIST</string>
     <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_activity_compose">ComposeActivity</string>
 
 </resources>

@@ -14,19 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EntertainmentApp">
         <activity
-            android:name=".ui.MainActivity2"
-            android:exported="false"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.EntertainmentApp" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".compose.ui.ComposeActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan">
+            android:label="@string/title_activity_compose"
+            android:theme="@style/Theme.EntertainmentApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 
