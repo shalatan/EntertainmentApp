@@ -2,7 +2,7 @@ package com.shalatan.entertainmentapp.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.shalatan.entertainmentapp.network.RequestInterceptor
-import com.shalatan.entertainmentapp.network.TmdbApiService
+import com.shalatan.entertainmentapp.network.ApiService
 import com.shalatan.entertainmentapp.utils.Constants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -34,10 +34,10 @@ object NetworkModule {
     fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder().apply {
             addInterceptor(RequestInterceptor())
-            addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
+            addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             connectTimeout(30, TimeUnit.SECONDS)
-            readTimeout(20, TimeUnit.SECONDS)
-            writeTimeout(25, TimeUnit.SECONDS)
+            readTimeout(30, TimeUnit.SECONDS)
+            writeTimeout(30, TimeUnit.SECONDS)
         }.build()
     }
 
@@ -54,7 +54,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideImageApiService(retrofit: Retrofit): TmdbApiService {
-        return retrofit.create(TmdbApiService::class.java)
+    fun provideImageApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }

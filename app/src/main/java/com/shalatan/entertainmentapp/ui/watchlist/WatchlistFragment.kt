@@ -55,11 +55,11 @@ class WatchlistFragment : Fragment() {
             }
         }
 
-        viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner) {
-            if(it!=null){
-                findNavController().navigate(WatchlistFragmentDirections.actionGlobalDetailFragment(it!!))
-            }
-        }
+//        viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner) {
+//            if(it!=null){
+//                findNavController().navigate(WatchlistFragmentDirections.actionGlobalDetailFragment(it!!))
+//            }
+//        }
 
         return binding.root
     }

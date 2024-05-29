@@ -1,2 +1,3 @@
-include ':app'
+include(":app")
+include(":base")
 rootProject.name = "Entertainment App"

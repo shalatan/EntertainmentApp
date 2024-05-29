@@ -13,26 +13,18 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.EntertainmentApp">
+<!--        android:name=".presentation.MoviesHexActivity"-->
         <activity
-            android:name=".compose.ui.ComposeActivity"
+            android:name=".presentation.MoviesHexActivity"
             android:exported="true"
-            android:label="@string/title_activity_compose"
+            android:label="@string/title_activity_movies_hex"
             android:theme="@style/Theme.EntertainmentApp">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustPan">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
         </activity>
     </application>
 

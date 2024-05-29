@@ -1,4 +1,4 @@
-package com.shalatan.entertainmentapp.compose.ui.theme
+package com.shalatan.entertainmentapp.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
