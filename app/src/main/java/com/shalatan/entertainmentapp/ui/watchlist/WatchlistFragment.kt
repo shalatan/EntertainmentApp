@@ -23,7 +23,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shalatan.entertainmentapp.databinding.FragmentWatchlistBinding
-import com.shalatan.entertainmentapp.ui.ui.theme.EntertainmentAppTheme
+//import com.shalatan.entertainmentapp.ui.ui.theme.EntertainmentAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,9 +49,9 @@ class WatchlistFragment : Fragment() {
 
         _binding = FragmentWatchlistBinding.inflate(inflater).apply {
             composeView.setContent {
-                EntertainmentAppTheme {
-                    SavedMoviesScreen()
-                }
+//                EntertainmentAppTheme {
+                SavedMoviesScreen()
+//                }
             }
         }
 
@@ -72,9 +72,9 @@ class WatchlistFragment : Fragment() {
     @Preview(showBackground = true)
     @Composable
     fun WatchlistFragmentPreview() {
-        EntertainmentAppTheme {
-            SavedMoviesScreen()
-        }
+//        EntertainmentAppTheme {
+        SavedMoviesScreen()
+//        }
     }
 
     @Composable

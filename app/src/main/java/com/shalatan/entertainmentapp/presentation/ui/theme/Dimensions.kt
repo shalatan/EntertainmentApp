@@ -4,6 +4,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 object Dimensions {
+    val spacing_440 = 440.dp
+
     val dimen_0 = 0.dp
     val dimen_0_5 = 0.5.dp
     val dimen_1 = 1.dp
@@ -32,6 +34,8 @@ object Dimensions {
     val dimen_60 = 60.dp
     val dimen_72 = 72.dp
     val dimen_100 = 100.dp
+    val dimen_140 = 140.dp
+    val dimen_180 = 180.dp
     val dimen_210 = 210.dp
     val dimen_240 = 240.dp
     val dimen_460 = 460.dp

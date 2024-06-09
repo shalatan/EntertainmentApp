@@ -135,8 +135,7 @@ dependencies {
     // Carousel Recycler View
     implementation 'com.github.sparrow007:carouselrecyclerview:1.0.0'
 
-    //Hilt
-    //hilt
+    // Hilt
     def hilt_version = "2.48"
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
@@ -162,6 +161,7 @@ dependencies {
     implementation 'androidx.compose.ui:ui-tooling-preview'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     implementation 'androidx.activity:activity-compose:1.9.0'
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
 
     //coil
     implementation("io.coil-kt:coil-compose:2.4.0")

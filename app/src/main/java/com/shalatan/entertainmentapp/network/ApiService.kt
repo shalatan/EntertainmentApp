@@ -15,6 +15,27 @@ interface ApiService {
         @Query("page") page: Int = 1
     ): Response<MovieResponse>
 
+    @GET("3/movie/popular")
+    suspend fun newGetPopularMovies(
+        @Query("page") page: Int = 1
+    ): Response<MovieResponse>
+
+    @GET("3/movie/upcoming")
+    suspend fun newGetUpcomingMovies(
+        @Query("page") page: Int = 1
+    ): Response<MovieResponse>
+
+    @GET("3/movie/top_rated")
+    suspend fun newGetTopRatedMovies(
+        @Query("page") page: Int = 1
+    ): Response<MovieResponse>
+
+    @GET("3/movie/{movieId}")
+    suspend fun newGetCompleteMovieDetail(
+        @Path("movieId") movieID: Int,
+        @Query("append_to_response") atr: String = Constants.VIR
+    ): Response<CompleteMovieDetail>
+
     @GET("3/movie/now_playing")
     suspend fun getNowPlayingMovies(
         @Query("page") page: Int = 1
