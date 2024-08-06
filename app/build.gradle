@@ -16,28 +16,28 @@ android {
     lint {
         baseline = file("lint-baseline.xml")
     }
-//    signingConfigs {
-//        debug {
-//            storeFile file('E:\\Android\\PlayStore KeyStore\\Keystore.jks')
-//            storePassword 'shalatan@14'
-//            keyAlias 'moviesHex'
-//            keyPassword 'shalatan@14'
-//        }
-//        release {
-//            storeFile file('E:\\Android\\PlayStore KeyStore\\Keystore.jks')
-//            storePassword 'shalatan@14'
-//            keyAlias 'moviesHex'
-//            keyPassword 'shalatan@14'
-//        }
-//    }
+    signingConfigs {
+        debug {
+            storeFile file('E:\\Android\\PlayStore KeyStore\\Keystore.jks')
+            storePassword 'shalatan@14'
+            keyAlias 'moviesHex'
+            keyPassword 'shalatan@14'
+        }
+        release {
+            storeFile file('E:\\Android\\PlayStore KeyStore\\Keystore.jks')
+            storePassword 'shalatan@14'
+            keyAlias 'moviesHex'
+            keyPassword 'shalatan@14'
+        }
+    }
 
     defaultConfig {
         applicationId "com.shalatan.entertainmentapp"
         minSdkVersion 24
         compileSdk 34
         targetSdkVersion 34
-        versionCode 4                   //doesn't shows on playStore
-        versionName "1.100"            //visible on playStore
+        versionCode 5                   //doesn't shows on playStore
+        versionName "1.2"            //visible on playStore
 
         buildConfigField("String", "TMDB_API", apikeyProperties['TMDB_API'])
 
@@ -51,6 +51,7 @@ android {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false

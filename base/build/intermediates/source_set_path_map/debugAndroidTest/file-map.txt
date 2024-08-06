@@ -1,0 +1,36 @@
+com.app.base.test.base-core-1.13.1-0 C:\Users\shalatan\.gradle\caches\transforms-3\08f7cc4f0af545e9cee3037361a059a5\transformed\core-1.13.1\res
+com.app.base.test.base-annotation-experimental-1.4.0-1 C:\Users\shalatan\.gradle\caches\transforms-3\0afb956263c7d668e4e9c8eeccf349ad\transformed\annotation-experimental-1.4.0\res
+com.app.base.test.base-lifecycle-livedata-core-ktx-2.8.0-2 C:\Users\shalatan\.gradle\caches\transforms-3\0c4c2d3706d48d8525caaff2c4e81f6c\transformed\lifecycle-livedata-core-ktx-2.8.0\res
+com.app.base.test.base-viewpager2-1.0.0-3 C:\Users\shalatan\.gradle\caches\transforms-3\27558c5724374151833f2b35c5417bec\transformed\viewpager2-1.0.0\res
+com.app.base.test.base-lifecycle-viewmodel-release-4 C:\Users\shalatan\.gradle\caches\transforms-3\28f713cbed41a3882652518e0875a89e\transformed\lifecycle-viewmodel-release\res
+com.app.base.test.base-material-1.12.0-5 C:\Users\shalatan\.gradle\caches\transforms-3\2f9f4a2a6ac4e2a0abf1f2cdfb8df4f9\transformed\material-1.12.0\res
+com.app.base.test.base-cardview-1.0.0-6 C:\Users\shalatan\.gradle\caches\transforms-3\33f66261e28570762ed12ad644c95c71\transformed\cardview-1.0.0\res
+com.app.base.test.base-appcompat-1.6.1-7 C:\Users\shalatan\.gradle\caches\transforms-3\34a4397cf7e2a6bedb76d3755aa8763c\transformed\appcompat-1.6.1\res
+com.app.base.test.base-startup-runtime-1.1.1-8 C:\Users\shalatan\.gradle\caches\transforms-3\377aad37eec8f5dd93e5115e95b7774b\transformed\startup-runtime-1.1.1\res
+com.app.base.test.base-lifecycle-viewmodel-savedstate-2.8.0-9 C:\Users\shalatan\.gradle\caches\transforms-3\3e09d40af1f48871759a4b279f65aee1\transformed\lifecycle-viewmodel-savedstate-2.8.0\res
+com.app.base.test.base-profileinstaller-1.3.1-10 C:\Users\shalatan\.gradle\caches\transforms-3\4076568eae77ca315f7a334bea91265c\transformed\profileinstaller-1.3.1\res
+com.app.base.test.base-recyclerview-1.1.0-11 C:\Users\shalatan\.gradle\caches\transforms-3\41156467c342748a9c2a78e38314ad2a\transformed\recyclerview-1.1.0\res
+com.app.base.test.base-savedstate-1.2.1-12 C:\Users\shalatan\.gradle\caches\transforms-3\464bbbe1c780168297abfa3f09be1fa3\transformed\savedstate-1.2.1\res
+com.app.base.test.base-appcompat-resources-1.6.1-13 C:\Users\shalatan\.gradle\caches\transforms-3\491c76cc33aae7ce5e4027be9091f281\transformed\appcompat-resources-1.6.1\res
+com.app.base.test.base-emoji2-1.2.0-14 C:\Users\shalatan\.gradle\caches\transforms-3\5fd74597ba2c49a58d4a663202e00882\transformed\emoji2-1.2.0\res
+com.app.base.test.base-activity-1.8.0-15 C:\Users\shalatan\.gradle\caches\transforms-3\6015b7e127d50b44a6d26e1a56d04a01\transformed\activity-1.8.0\res
+com.app.base.test.base-lifecycle-livedata-2.8.0-16 C:\Users\shalatan\.gradle\caches\transforms-3\6c3c0389e961f1cc5b83c2be35d58ff8\transformed\lifecycle-livedata-2.8.0\res
+com.app.base.test.base-lifecycle-viewmodel-ktx-2.8.0-17 C:\Users\shalatan\.gradle\caches\transforms-3\8d8118edab75e6c5735a8377eb8c98ee\transformed\lifecycle-viewmodel-ktx-2.8.0\res
+com.app.base.test.base-emoji2-views-helper-1.2.0-18 C:\Users\shalatan\.gradle\caches\transforms-3\a7e30a951c3a0d2bb4d63d9e315ed4cd\transformed\emoji2-views-helper-1.2.0\res
+com.app.base.test.base-core-ktx-1.13.1-19 C:\Users\shalatan\.gradle\caches\transforms-3\ac2ddd4c155f09f330876069a3fc3289\transformed\core-ktx-1.13.1\res
+com.app.base.test.base-lifecycle-livedata-core-2.8.0-20 C:\Users\shalatan\.gradle\caches\transforms-3\b7ca6e120bf105736897fdf67f52f3bc\transformed\lifecycle-livedata-core-2.8.0\res
+com.app.base.test.base-core-runtime-2.2.0-21 C:\Users\shalatan\.gradle\caches\transforms-3\bd819d7aea94f4ab1d2af1b03588f03c\transformed\core-runtime-2.2.0\res
+com.app.base.test.base-fragment-1.3.6-22 C:\Users\shalatan\.gradle\caches\transforms-3\bdde8d96962bdaf55cff2b53ddd44481\transformed\fragment-1.3.6\res
+com.app.base.test.base-drawerlayout-1.1.1-23 C:\Users\shalatan\.gradle\caches\transforms-3\c3b625cb95d9b851432aa273eb5f8445\transformed\drawerlayout-1.1.1\res
+com.app.base.test.base-core-1.5.0-24 C:\Users\shalatan\.gradle\caches\transforms-3\ceba8eeb2bc4854834c2b33a22fe1e8a\transformed\core-1.5.0\res
+com.app.base.test.base-coordinatorlayout-1.1.0-25 C:\Users\shalatan\.gradle\caches\transforms-3\d160f07d27bfc2f391779df59322c0d3\transformed\coordinatorlayout-1.1.0\res
+com.app.base.test.base-runtime-release-26 C:\Users\shalatan\.gradle\caches\transforms-3\e3542441a4e6115fedb5a8a468a4f4f6\transformed\runtime-release\res
+com.app.base.test.base-lifecycle-process-2.8.0-27 C:\Users\shalatan\.gradle\caches\transforms-3\e5e4de75b2c610b0e7ffcf75607f55dd\transformed\lifecycle-process-2.8.0\res
+com.app.base.test.base-lifecycle-runtime-release-28 C:\Users\shalatan\.gradle\caches\transforms-3\f1552fe95568e1e7acd25b62d17bbfd9\transformed\lifecycle-runtime-release\res
+com.app.base.test.base-constraintlayout-2.0.1-29 C:\Users\shalatan\.gradle\caches\transforms-3\fa28085e64005f83f0e70124a9e6ce7d\transformed\constraintlayout-2.0.1\res
+com.app.base.test.base-transition-1.5.0-30 C:\Users\shalatan\.gradle\caches\transforms-3\ffc18ca0ba38a62789a302779283177c\transformed\transition-1.5.0\res
+com.app.base.test.base-androidTest-31 E:\Android\Github Projects\EntertainmentApp\base\build\generated\res\resValues\androidTest\debug
+com.app.base.test.base-mergeDebugAndroidTestResources-32 E:\Android\Github Projects\EntertainmentApp\base\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.app.base.test.base-mergeDebugAndroidTestResources-33 E:\Android\Github Projects\EntertainmentApp\base\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.app.base.test.base-merged_res-34 E:\Android\Github Projects\EntertainmentApp\base\build\intermediates\merged_res\debugAndroidTest
+com.app.base.test.base-packaged_res-35 E:\Android\Github Projects\EntertainmentApp\base\build\intermediates\packaged_res\debug
