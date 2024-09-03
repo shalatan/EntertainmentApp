@@ -13,5 +13,3 @@
 .externalNativeBuild
 .cxx
 local.properties
-apiKey.properties
-/app/google-services.json

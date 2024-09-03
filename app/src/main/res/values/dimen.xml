@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="shr_product_grid_reveal_height">560dp</dimen>
-
-    <dimen name="high_emphasis_text">22sp</dimen>
-    <dimen name="mid_emphasis_text">18sp</dimen>
-    <dimen name="low_emphasis_text">14sp</dimen>
-
-</resources>

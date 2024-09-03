@@ -1,31 +1,3 @@
 <resources>
     <string name="app_name">Movies Hex</string>
-    <!-- TODO: Remove or change this placeholder text -->
-
-    <string name="cd_movie_poster">Movie Poster</string>
-
-    //DetailFragment
-    <string name="synopsis">Synopsis</string>
-    <string name="cd_add_to_watch_later">Add to Watch Later</string>
-    <string name="cd_add_to_watched">Add to Watched</string>
-
-    <string name="open_menu">Open Menu</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="cd_movie_cast_profile">Movie Cast Profile</string>
-    <string name="read_more"><b><u>Read More</u></b></string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="fragment_rec_title">RECOMMENDED\nMOVIES FOR YOU</string>
-    <string name="fragment_rec_content">Recommended Movies For You Will Be Shown Here.\nRecommendation is based on your previously rated movies, So Rate Movies Smarty ;)</string>
-    <string name="fragment_rec_dialog_title">How recommendation works?</string>
-    <string name="fragment_rec_dialog_content">Movies are recommended based on your previously rated movies and the rating given to them.\nHence, Rate Movies Precisely ;) !\n\nUpdates automatically with each new rated movie, but can be Refreshed to improve results</string>
-    <string name="fragment_rec_dialog_positive_button">OK</string>
-    <string name="fragment_rec_dialog_refresh_button">Refresh</string>
-
-    <string name="fragment_where_to_watch"><u>Where to watch?</u></string>
-
-    <string name="fragment_watch_later_title">MY WATCH LATER MOVIES</string>
-    <string name="fragment_watch_later_content">YOUR WATCHLIST MOVIES WILL BE SHOWN HERE !! \n\n SWIPE MOVIE LEFT TO REMOVE THEM FROM LIST</string>
-    <string name="fragment_watched_title">MY WATCHED MOVIES</string>
-    <string name="fragment_watched_content">YOUR RATED MOVIES WILL BE SHOWN HERE !! \n\n SWIPE MOVIE LEFT TO REMOVE THEM FROM LIST</string>
-
 </resources>
