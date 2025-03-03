@@ -1,4 +1,4 @@
-package com.shalatan.entertainmentapp.presentation.ui.theme
+package com.shalatan.entertainmentapp.theme
 
 import android.app.Activity
 import android.os.Build
